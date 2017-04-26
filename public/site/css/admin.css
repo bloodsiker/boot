@@ -1,0 +1,28 @@
+.md-sidenav-left {
+  max-width: 250px; }
+
+.active {
+  background-color: #ececec; }
+
+.md-chips .md-chip-input-container {
+  width: 100%; }
+
+.md-chips md-chip {
+  width: 100%; }
+
+md-chips.md-default-theme .md-chips .md-chip-input-container input, md-chips .md-chips .md-chip-input-container input {
+  width: 100%; }
+
+.dialog-picture {
+  max-height: none; }
+  .dialog-picture img {
+    max-width: 100%;
+    max-height: 100%; }
+
+md-input-container .md-errors-spacer {
+  min-height: 0px; }
+
+.sc-logo {
+  max-width: 100%; }
+
+/*# sourceMappingURL=admin.css.map */
