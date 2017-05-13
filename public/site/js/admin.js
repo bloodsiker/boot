@@ -8,6 +8,7 @@
         'ngMaterial',
         'underscore',
         'naif.base64',
+        'lr.upload',
         'chart.js'
     ]).config(function($mdThemingProvider, ChartJsProvider) {
 

@@ -10,7 +10,7 @@
             console.log(map);
         });
         $scope.selectedStreet = function (street) {
-            $scope.sc.street = street.id;
+            $scope.sc.street = street.address;
             $scope.sc.c1 = street.c1;
             $scope.sc.c2 = street.c2;
         };
@@ -29,7 +29,9 @@
 
         $scope.addSc = function (valid, sc) {
             if (valid) {
-                model.post('/add/service', sc)
+                model.post('/cabinet/add/service', sc).then(function (req) {
+                    window.location = '/cabinet/sc/' + req.data.sc_id;
+                })
             }
         };
     }

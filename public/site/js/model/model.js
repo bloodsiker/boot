@@ -17,5 +17,12 @@
                 data: data
             })
         };
+        this.put = function (url, data) {
+            return $http({
+                method: 'put',
+                url: url,
+                data: data
+            })
+        };
     }
 })();

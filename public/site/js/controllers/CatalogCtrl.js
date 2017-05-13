@@ -9,8 +9,9 @@
 
             _.mapObject(success.data, function (index) {
                 index.radius = true;
-                index.start_time = parseInt(index.start_time.replace(":", ""));
-                index.end_time = parseInt(index.end_time.replace(":", ""));
+                console.log(index.start_time);
+                // index.start_time = parseInt(index.start_time.replace(":", ""));
+                // index.end_time = parseInt(index.end_time.replace(":", ""));
                 var brands = [];
                 _.mapObject(index.manufacturers, function (el) {
                     brands.push(el.manufacturer)

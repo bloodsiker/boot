@@ -7,18 +7,25 @@
     function RefactorScController($scope, model, _, $mdToast, $mdDialog) {
         var url = window.location.pathname.slice(8);
         $scope.scLogo = [];
-        model.get(url).then(function (success) {
-            $scope.sc = success.data;
-            brands(success.data);
-        });
-        $scope.saveSc = function (valid) {
+
+        function getModel(){
+            model.get(url).then(function (success) {
+                $scope.sc = success.data;
+                brands(success.data);
+            });
+        }
+        getModel();
+        $scope.saveSc = function (valid, sc) {
             if (valid) {
 
-                $mdToast.show($mdToast.simple().position('right bottom').textContent('Сохранено!'));
-
-                // model.post(url, sc).then(function () {
-                //     $mdToast.show($mdToast.simple().position('right bottom').textContent('Сохранено!'));
-                // });
+                //$mdToast.show($mdToast.simple().position('right bottom').textContent('Сохранено!'));
+                //var url = 'hug';
+                //console.log($scope.sc);
+                $scope.sc.street.address ? $scope.sc.street = $scope.sc.street.address : '';
+                model.put('/cabinet' + url + '/update', $scope.sc).then(function (res) {
+                    console.log(res);
+                    $mdToast.show($mdToast.simple().position('right bottom').textContent('Сохранено!'));
+                });
             } else {
                 console.log('Массивы идентичны');
             }
@@ -35,6 +42,25 @@
                 service_center_id: sc_id
             };
         };
+
+        $scope.week_days = ['пн', 'вт', 'ср', 'чт', 'пт', 'сб', 'вс'];
+        $scope.times_start = [
+            '06:00', '06:30',
+            '07:00', '07:30',
+            '08:00', '08:30',
+            '09:00', '09:30',
+            '10:00', '10:30',
+            '11:00', '11:30'
+        ];
+
+        $scope.times_end = [
+            '17:00', '17:30',
+            '18:00', '18:30',
+            '19:00', '19:30',
+            '20:00', '20:30',
+            '21:00', '21:30',
+            '22:00', '22:30'
+        ];
 
         function brands(sc) {
 
@@ -73,8 +99,10 @@
                 $scope.toggleAll = function() {
                     if ($scope.selected.length === $scope.items.length) {
                         $scope.selected = [];
+                        $scope.sc.manufacturers = [];
                     } else if ($scope.selected.length === 0 || $scope.selected.length > 0) {
                         $scope.selected = $scope.items.slice(0);
+                        $scope.sc.manufacturers = $scope.selected;
                     }
                 };
             }
@@ -230,11 +258,12 @@
                 },
                 controller: addPersonalController
             });
-            function addPersonalController($scope, $mdDialog, sc_id, model) {
+            function addPersonalController($scope, $rootScope, $mdDialog, sc_id, model) {
                 $scope.newPersonalPhoto = [];
                 $scope.addPersonal = function (valid, name, info, photo) {
+                    console.log($rootScope);
                     if (valid) {
-                        model.post('...', {
+                        model.post('/cabinet' + url + '/add-personal', {
                             service_center_id: sc_id,
                             name: name,
                             info: info,
@@ -242,7 +271,8 @@
                                 data: photo
                             }
                         }).then(function (success) {
-                            $scope.sc.personal = success.data; // принимаю новый массив персонала
+                            getModel();
+
                             $mdDialog.hide();
                         });
 
