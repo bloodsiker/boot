@@ -16,7 +16,7 @@
                     <md-input-container flex>
                         <label>Город</label>
                         <md-select name="city" ng-model="sc.city" required>
-                            <md-option ng-if="$index == 0" ng-repeat="item in cities"
+                            <md-option ng-if="item.id == 1" ng-repeat="item in cities"
                                        value="@{{item.id}}">@{{ item.city_name }}</md-option>
                         </md-select>
                         <div ng-messages="scForm.city.$error">

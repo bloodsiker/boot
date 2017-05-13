@@ -9,7 +9,7 @@
         @foreach($service_centers as $service)
             <md-list-item ng-click="null"
                           href="{{ route('cabinet.service',  ['id' => $service->id]) }}"
-                          class="{{ active('cabinet/service/' . $service->id) }}">
+                          class="{{ active('cabinet/sc/' . $service->id) }}">
                 <p>{{ $service->service_name }}</p>
             </md-list-item>
         @endforeach

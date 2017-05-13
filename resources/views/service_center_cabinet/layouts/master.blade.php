@@ -59,6 +59,7 @@
 
 
 <script src="{{ asset('site/vendor/angular-base64-upload/dist/angular-base64-upload.js') }}"></script>
+<script src="{{ asset('site/vendor/angular-upload/angular-upload.min.js') }}"></script>
 
 <!--==============================MAP=====================-->
 <script src="http://maps.google.com/maps/api/js?key=AIzaSyDdycmfIt4XbYlFLw5138RsuKNLb_yUFA4&language=RU"></script>

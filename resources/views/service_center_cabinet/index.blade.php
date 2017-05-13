@@ -30,7 +30,7 @@
                                     <md-input-container flex>
                                         <label>Город</label>
                                         <md-select name="city" ng-model="sc.city_id" required>
-                                            <md-option ng-if="$index == 0" ng-repeat="item in cities"
+                                            <md-option ng-if="item.id == 1" ng-repeat="item in cities"
                                                        value="@{{item.id}}">@{{ item.city_name }}</md-option>
                                         </md-select>
                                         <div ng-messages="ReqForm.city.$error">
@@ -70,12 +70,62 @@
                                                      md-floating-label="Улица, площадь, шоссе.."
                                                      md-selected-item="sc.street"
                                                      md-min-length="1"
-                                                     md-selected-item-change="selectedStreet(selectStreet)"
+                                                     md-selected-item-change="selectedStreet(item.address)"
                                                      md-items="item in streets | filter: {'address': searchText} "
                                                      md-search-text="searchText"
                                                      md-item-text="item.address">
                                         <span>@{{ item.address }}</span>
                                     </md-autocomplete>
+
+                                </div>
+
+                                <div layout="row">
+
+                                    <md-input-container flex-gt-xs="25" class="md-block">
+                                        <label>Начало недели</label>
+                                        <md-select name="start_day" ng-model="sc.start_day" required>
+                                            <md-option ng-repeat="day in week_days"
+                                                       value="@{{day}}">@{{ day }}</md-option>
+                                        </md-select>
+                                        <div ng-messages="ReqForm.metro.$error">
+                                            <div ng-message="required">Это поле обязательное для ввода.
+                                            </div>
+                                        </div>
+                                    </md-input-container>
+                                    <md-input-container flex-gt-xs="25" class="md-block">
+                                        <label>Конец недели</label>
+                                        <md-select name="end_day" ng-model="sc.end_day" required>
+                                            <md-option ng-repeat="day in week_days"
+                                                       value="@{{day}}">@{{ day }}</md-option>
+                                        </md-select>
+                                        <div ng-messages="ReqForm.metro.$error">
+                                            <div ng-message="required">Это поле обязательное для ввода.
+                                            </div>
+                                        </div>
+                                    </md-input-container>
+                                    <md-input-container flex-gt-xs="25" class="md-block">
+                                        <label>Начало дня</label>
+                                        <md-select name="end_day" ng-model="sc.end_time" required>
+                                            <md-option ng-repeat="time in times_start"
+                                                       value="@{{time}}">@{{ time }}</md-option>
+                                        </md-select>
+                                        <div ng-messages="ReqForm.metro.$error">
+                                            <div ng-message="required">Это поле обязательное для ввода.
+                                            </div>
+                                        </div>
+                                    </md-input-container>
+                                    <md-input-container flex-gt-xs="25" class="md-block">
+                                        <label>Конец дня</label>
+                                        <md-select name="end_day" ng-model="sc.start_time" required>
+                                            <md-option ng-repeat="time in times_end"
+                                                       value="@{{time}}">@{{ time }}</md-option>
+                                        </md-select>
+                                        <div ng-messages="ReqForm.metro.$error">
+                                            <div ng-message="required">Это поле обязательное для ввода.
+                                            </div>
+                                        </div>
+                                    </md-input-container>
+
 
                                 </div>
                                 <div flex></div>
@@ -290,7 +340,7 @@
                                         </md-input-container>
                                         <span flex></span>
                                         <md-input-container class="md-block">
-                                            <input type="number" placeholder="Цена" step="0.01" ng-model="item.price"
+                                            <input type="text" placeholder="Цена" ng-model="item.price"
                                                    required>
                                         </md-input-container>
                                         <md-button type="button" ng-click="deletePrice(sc, $index)"
@@ -326,7 +376,7 @@
                                 <div flex></div>
                                 <div layout="row">
                                     <span flex></span>
-                                    <md-button type="submit" ng-click="saveSc(scForm.$valid, sc)" class="md-primary
+                                    <md-button type="submit" ng-click="saveSc(true, sc)" class="md-primary
                                     md-raised">Сохранить
                                     </md-button>
                                 </div>

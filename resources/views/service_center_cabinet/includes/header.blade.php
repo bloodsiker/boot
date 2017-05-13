@@ -15,7 +15,7 @@
             </md-button>
         </md-menu-item>
         <md-menu-item>
-            <md-button ng-click="null">
+            <md-button ng-href="{{ route('cabinet.logout') }}" ng-click="null">
                 <md-icon>exit_to_app</md-icon>
                 Logout
             </md-button>
