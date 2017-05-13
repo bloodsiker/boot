@@ -83,6 +83,12 @@ class CabinetController extends Controller
         return response()->json(['sc_id' => $sc->id], 200);
     }
 
+    /**
+     * Edit sc cabinet
+     * @param Request $request
+     * @param $id
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function putUpdateService(Request $request, $id)
     {
         $sc = ServiceCenter::find($id);
@@ -144,6 +150,11 @@ class CabinetController extends Controller
     }
 
 
+    /**
+     * @param Request $request
+     * @param $id
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function postAddPersonalService(Request $request, $id)
     {
         $sc = ServiceCenter::find($id);
@@ -153,7 +164,6 @@ class CabinetController extends Controller
         $path = '/sc_uploads/avatars/' . $png_url;
         Storage::disk('public')->put('/sc_uploads/avatars/' . $png_url, base64_decode($file));
 
-
         $arr = [
             'service_center_id' => $sc->id,
             'name' => $request->name,
@@ -162,8 +172,6 @@ class CabinetController extends Controller
         ];
         DB::table('service_center_personal')->insert($arr);
         return response()->json([$arr], 200);
-
-
     }
 
     /**
