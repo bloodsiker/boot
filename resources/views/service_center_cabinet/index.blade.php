@@ -105,7 +105,7 @@
                                     </md-input-container>
                                     <md-input-container flex-gt-xs="25" class="md-block">
                                         <label>Начало дня</label>
-                                        <md-select name="end_day" ng-model="sc.end_time" required>
+                                        <md-select name="start_time" ng-model="sc.start_time" required>
                                             <md-option ng-repeat="time in times_start"
                                                        value="@{{time}}">@{{ time }}</md-option>
                                         </md-select>
@@ -116,7 +116,7 @@
                                     </md-input-container>
                                     <md-input-container flex-gt-xs="25" class="md-block">
                                         <label>Конец дня</label>
-                                        <md-select name="end_day" ng-model="sc.start_time" required>
+                                        <md-select name="end_time" ng-model="sc.end_time" required>
                                             <md-option ng-repeat="time in times_end"
                                                        value="@{{time}}">@{{ time }}</md-option>
                                         </md-select>

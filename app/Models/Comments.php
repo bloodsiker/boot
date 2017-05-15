@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Support\Facades\DB;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 
 class Comments extends Model
@@ -15,12 +16,15 @@ class Comments extends Model
     /**
      * Рейтинг для внутреней страницы сервисного центра
      * @param $id
-     * @param $type || all or total
+     * @param string $type || all or total
      * @return array
      */
     public static function rating($id, $type = 'all')
     {
-        $rating = parent::where([['service_center_id', $id],['status', '=', '1']])->select('r_total_rating', 'r_quality_of_work', 'r_deadlines', 'r_compliance_cost', 'r_price_quality', 'r_service')->get();
+        $rating = parent::where([['service_center_id', $id],['status', '=', '1']])
+            ->select('r_total_rating', 'r_quality_of_work', 'r_deadlines', 'r_compliance_cost', 'r_price_quality', 'r_service')
+            ->get();
+
         if(count($rating) > 0){
             $i = 0;
             $r_total_rating = 0;

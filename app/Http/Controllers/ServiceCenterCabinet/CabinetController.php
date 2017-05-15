@@ -4,7 +4,7 @@ namespace App\Http\Controllers\ServiceCenterCabinet;
 
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Storage;
-use Intervention\Image\Facades\Image;
+use Intervention\Image\ImageManagerStatic as Image;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Http\Request;
 use App\Models\ServiceCenter;
@@ -98,6 +98,10 @@ class CabinetController extends Controller
         $sc->city_id = $request->city_id;
         $sc->metro_id = $request->metro_id;
         $sc->district_id = $request->district_id;
+        $sc->start_day = $request->start_day;
+        $sc->end_day = $request->end_day;
+        $sc->start_time = $request->start_time;
+        $sc->end_time = $request->end_time;
         $sc->address = 'Украина, ' . $request->city['city_name'] . ', ' . $request->street;
         $sc->street = $request->street;
         $sc->c1 = $request->c1;
@@ -160,18 +164,20 @@ class CabinetController extends Controller
         $sc = ServiceCenter::find($id);
 
         $file = $request->avatar['data']['base64'];
-        $png_url = "perfil-" . time() . ".jpg";
-        $path = '/sc_uploads/avatars/' . $png_url;
-        Storage::disk('public')->put('/sc_uploads/avatars/' . $png_url, base64_decode($file));
+        $img_name = str_random() . '-' . $sc->service_name . ".jpg";
+        $path = '/sc_uploads/avatars/' . $img_name;
+        Storage::disk('public')->put($path, base64_decode($file));
 
-        $arr = [
+        Image::make(public_path() . $path)->resize(500, 500)->save(public_path() . $path);
+
+        $sc_personal = [
             'service_center_id' => $sc->id,
             'name' => $request->name,
             'info' => $request->info,
             'avatar' => $path
         ];
-        DB::table('service_center_personal')->insert($arr);
-        return response()->json([$arr], 200);
+        DB::table('service_center_personal')->insert($sc_personal);
+        return response()->json([$sc_personal], 200);
     }
 
     /**
