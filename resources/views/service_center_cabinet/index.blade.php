@@ -238,7 +238,7 @@
                     <h1 class="md-display-1">Фотографии, сертификаты и лицензии</h1>
                     <div layout="row" layout-wrap flex>
                         <md-card flex="20" ng-repeat="item in sc.service_photo">
-                            <img ng-src="@{{item.file_name}}"
+                            <img ng-src="@{{item.path + item.file_name}}"
                                  class="md-card-image"
                                  alt="@{{'Фото ' + sc.service_name}}">
                             <md-card-footer>
@@ -259,7 +259,7 @@
                     <md-divider></md-divider>
                     <div layout="row" layout-wrap flex>
                         <md-card flex="20" ng-repeat="item in sc.licenses">
-                            <img ng-src="@{{item.file_name}}"
+                            <img ng-src="@{{item.path + item.file_name}}"
                                  class="md-card-image"
                                  alt="@{{'Лицензия '+sc.service_name}}">
                             <md-card-footer>
@@ -279,7 +279,7 @@
                     <md-divider></md-divider>
                     <div layout="row" layout-wrap flex>
                         <md-card flex="20" ng-repeat="item in sc.certificate">
-                            <img ng-src="@{{item.file_name}}"
+                            <img ng-src="@{{ item.path + item.file_name}}"
                                  class="md-card-image"
                                  alt="@{{'Сертификат '+sc.service_name}}">
                             <md-card-footer>
@@ -396,7 +396,7 @@
                     <h1 class="md-display-1">Команда сервиса</h1>
                     <div layout="row" layout-wrap flex>
                         <md-card flex="20" ng-repeat="item in sc.personal">
-                            <img ng-src="@{{item.avatar}}"
+                            <img ng-src="@{{item.path + item.avatar}}"
                                  class="md-card-image"
                                  alt="@{{item.name}}">
 

@@ -10,6 +10,10 @@ use App\Http\Controllers\Controller;
 
 class CatalogController extends Controller
 {
+
+    /**
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function getIndex()
     {
         $service_center = ServiceCenter::all();
@@ -27,10 +31,15 @@ class CatalogController extends Controller
         return response()->json($service_center, 200);
     }
 
+
+    /**
+     * @param $id
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function getServiceCenter($id)
     {
         $service_center = ServiceCenter::find($id);
-        $service_center->load('city', 'metro', 'district', 'tags', 'manufacturers', 'advantages', 'price', 'personal', 'certificate', 'service_photo');
+        $service_center->load('city', 'metro', 'district', 'tags', 'manufacturers', 'advantages', 'price', 'personal', 'service_photo');
         $service_center['count_clients'] = UserRequest::count_request($id);
         $service_center['total_rating'] = Comments::rating($id, 'total');
         $service_center['total_comments'] = Comments::count_comment($id);

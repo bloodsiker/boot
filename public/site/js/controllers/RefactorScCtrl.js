@@ -151,7 +151,7 @@
                 $scope.addPhoto = function (valid, type, photo) {
                     console.log(type);
                     if (valid) {
-                        model.post('/url', {
+                        model.post('/cabinet' + url + '/add-photo', {
                             sc_id: sc_id,
                             type:type,
                             photo: {data: photo}

@@ -16,7 +16,9 @@ class ServiceCenterPhotoTable extends Migration
         Schema::create('service_center_photo', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('service_center_id')->unsigned();
+            $table->string('path');
             $table->string('file_name');
+            $table->string('type');
 
             $table->foreign('service_center_id')
                 ->references('id')->on('service_centers')
