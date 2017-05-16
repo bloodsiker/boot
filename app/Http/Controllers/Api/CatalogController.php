@@ -2,32 +2,31 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Models\Comments;
-use App\Models\ServiceCenter;
-use App\Models\UserRequest;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Repositories\ServiceCenter\ServiceCenterRepositoryInterface;
 
 class CatalogController extends Controller
 {
+    /**
+     * @var ServiceCenterRepositoryInterface
+     */
+    private $sc;
+
+    /**
+     * CatalogController constructor.
+     * @param ServiceCenterRepositoryInterface $sc
+     */
+    public function __construct(ServiceCenterRepositoryInterface $sc)
+    {
+        $this->sc = $sc;
+    }
 
     /**
      * @return \Illuminate\Http\JsonResponse
      */
     public function getIndex()
     {
-        $service_center = ServiceCenter::all();
-        $service_center->load('city', 'metro', 'district', 'tags', 'manufacturers');
-        $service_center->map(function ($comment) {
-            $comment['comments'] = Comments::count_comment($comment->id);
-            return $comment;
-        });
-        $service_center->map(function ($rating) {
-            $total_rating = Comments::rating($rating->id, 'total');
-            $rating['rating'] = $total_rating;
-            return $rating;
-        });
-        //dd($service_center);
+        $service_center = $this->sc->getAllServiceCenter();
         return response()->json($service_center, 200);
     }
 
@@ -38,12 +37,7 @@ class CatalogController extends Controller
      */
     public function getServiceCenter($id)
     {
-        $service_center = ServiceCenter::find($id);
-        $service_center->load('city', 'metro', 'district', 'tags', 'manufacturers', 'advantages', 'price', 'personal', 'service_photo');
-        $service_center['count_clients'] = UserRequest::count_request($id);
-        $service_center['total_rating'] = Comments::rating($id, 'total');
-        $service_center['total_comments'] = Comments::count_comment($id);
-        //dd($service_center);
+        $service_center = $this->sc->find($id);
         return response()->json($service_center, 200);
     }
 

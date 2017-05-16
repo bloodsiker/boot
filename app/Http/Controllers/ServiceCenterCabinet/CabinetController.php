@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\ServiceCenterCabinet;
 
+use App\Repositories\ServiceCenter\ServiceCenterRepositoryInterface;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Storage;
 use Intervention\Image\ImageManagerStatic as Image;
@@ -15,6 +16,15 @@ use App\Http\Controllers\Controller;
 class CabinetController extends Controller
 {
     protected $loginPath = '/service-center/login';
+    /**
+     * @var ServiceCenterRepositoryInterface
+     */
+    private $sc;
+
+    public function __construct(ServiceCenterRepositoryInterface $sc)
+    {
+        $this->sc = $sc;
+    }
 
     /**
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
@@ -44,11 +54,9 @@ class CabinetController extends Controller
     {
         $service_centers = Auth::user()->service_centers;
         if($service_centers->whereIn('id', $id)->isEmpty()){
-            echo "<script>alert('access denied')</script>";
-            return redirect()->route('cabinet.dashboard');
+            return redirect()->back()->with(['message' => 'У вас нету доступа для управлением этим сервисным центром']);
         }
-        $service = ServiceCenter::find($id);
-        //dd($service);
+        //$service = ServiceCenter::find($id);
         return view('service_center_cabinet.index', compact('service_centers'));
     }
 
@@ -69,18 +77,8 @@ class CabinetController extends Controller
      */
     public function postAddService(Request $request)
     {
-        $sc = new ServiceCenter();
-        $sc->service_name = $request->name;
-        $sc->user_id = Auth::id();
-        $sc->city_id = $request->city;
-        $sc->metro_id = $request->metro;
-        $sc->district_id = $request->district;
-        $sc->street = $request->street;
-        $sc->c1 = $request->c1;
-        $sc->c2 = $request->c2;
-        $sc->created_at = Carbon::now();
-        $sc->save();
-        return response()->json(['sc_id' => $sc->id], 200);
+        $service_center = $this->sc->addServiceCenter($request);
+        return response()->json(['sc_id' => $service_center], 200);
     }
 
     /**
@@ -91,60 +89,33 @@ class CabinetController extends Controller
      */
     public function putUpdateService(Request $request, $id)
     {
-        $sc = ServiceCenter::find($id);
+        $service_center = $this->sc->find($id);
 
-        $sc->service_name = $request->service_name;
-        $sc->about = $request->about;
-        $sc->city_id = $request->city_id;
-        $sc->metro_id = $request->metro_id;
-        $sc->district_id = $request->district_id;
-        $sc->start_day = $request->start_day;
-        $sc->end_day = $request->end_day;
-        $sc->start_time = $request->start_time;
-        $sc->end_time = $request->end_time;
-        $sc->address = 'Украина, ' . $request->city['city_name'] . ', ' . $request->street;
-        $sc->street = $request->street;
-        $sc->c1 = $request->c1;
-        $sc->c2 = $request->c2;
-        $sc->updated_at = Carbon::now();
-        $sc->update();
+        // Основная информация
+        $this->sc->updateServiceCenter($request, $id);
 
-         //Преимущества
-        DB::table('service_center_advantages')->where('service_center_id', '=', $sc->id)->delete();
-        foreach ($request->advantages as $advantage){
-            DB::table('service_center_advantages')->insert(
-                [
-                    'service_center_id' => $sc->id,
-                    'advantages' => $advantage['advantages']
-                ]);
-        }
+        // Преимущества
+        $this->sc->updateAdvantages($request, $id);
 
-        //Теги
-        DB::table('service_center_vs_tags')->where('service_center_id', '=', $sc->id)->delete();
-        foreach ($request->tags as $tag){
-            DB::table('service_center_vs_tags')->insert(
-                [
-                    'service_center_id' => $sc->id,
-                    'tag' => $tag['tag']
-                ]);
-        }
+        // Теги
+        $this->sc->updateTags($request, $id);
 
          //Бренды
-        DB::table('service_center_vs_manufacturer')->where('service_center_id', '=', $sc->id)->delete();
+        DB::table('service_center_vs_manufacturer')->where('service_center_id', '=', $service_center->id)->delete();
         foreach ($request->manufacturers as $manufacturer){
             DB::table('service_center_vs_manufacturer')->insert(
                 [
-                    'service_center_id' => $sc->id,
+                    'service_center_id' => $service_center->id,
                     'manufacturer_id' => $manufacturer['id']
                 ]);
         }
 
         // Цены
-        DB::table('service_center_price')->where('service_center_id', '=', $sc->id)->delete();
+        DB::table('service_center_price')->where('service_center_id', '=', $service_center->id)->delete();
         foreach ($request->price as $price){
             DB::table('service_center_price')->insert(
                 [
-                    'service_center_id' => $sc->id,
+                    'service_center_id' => $service_center->id,
                     'title' => $price['title'],
                     'price' => $price['price']
                 ]);
