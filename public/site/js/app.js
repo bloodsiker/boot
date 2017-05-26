@@ -6,7 +6,7 @@
         'slick',
         'angular-rating',
         'angular.filter',
-        // 'underscore'
+        'underscore'
     ]);
 })();
 
