@@ -2,16 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="eea08daa-98dc-4f0e-a362-15e23181d6ab" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/deployment.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/webServers.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/Controllers/ServiceCenterCabinet/CabinetController.php" afterPath="$PROJECT_DIR$/app/Http/Controllers/ServiceCenterCabinet/CabinetController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Repositories/ServiceCenter/ServiceCenterRepository.php" afterPath="$PROJECT_DIR$/app/Repositories/ServiceCenter/ServiceCenterRepository.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Repositories/ServiceCenter/ServiceCenterRepositoryInterface.php" afterPath="$PROJECT_DIR$/app/Repositories/ServiceCenter/ServiceCenterRepositoryInterface.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/site/js/controllers/RefactorScCtrl.js" afterPath="$PROJECT_DIR$/public/site/js/controllers/RefactorScCtrl.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/site/js/model/model.js" afterPath="$PROJECT_DIR$/public/site/js/model/model.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/service_center_cabinet/index.blade.php" afterPath="$PROJECT_DIR$/resources/views/service_center_cabinet/index.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/site/includes/header.blade.php" afterPath="$PROJECT_DIR$/resources/views/site/includes/header.blade.php" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -23,21 +15,21 @@
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="RefactorScCtrl.js" pinned="false" current-in-tab="true">
+      <file leaf-file-name="RefactorScCtrl.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/public/site/js/controllers/RefactorScCtrl.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="350">
-              <caret line="229" column="45" lean-forward="false" selection-start-line="229" selection-start-column="45" selection-end-line="229" selection-end-column="45" />
+            <state relative-caret-position="281">
+              <caret line="164" column="27" lean-forward="true" selection-start-line="164" selection-start-column="27" selection-end-line="164" selection-end-column="27" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="index.blade.php" pinned="false" current-in-tab="false">
+      <file leaf-file-name="index.blade.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/resources/views/service_center_cabinet/index.blade.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="314">
-              <caret line="397" column="62" lean-forward="false" selection-start-line="397" selection-start-column="62" selection-end-line="397" selection-end-column="62" />
+            <state relative-caret-position="496">
+              <caret line="287" column="122" lean-forward="false" selection-start-line="287" selection-start-column="122" selection-end-line="287" selection-end-column="122" />
               <folding />
             </state>
           </provider>
@@ -86,9 +78,9 @@
         <option value="$PROJECT_DIR$/public/site/js/app.js" />
         <option value="$PROJECT_DIR$/resources/views/site/includes/header.blade.php" />
         <option value="$PROJECT_DIR$/public/site/js/model/model.js" />
-        <option value="$PROJECT_DIR$/resources/views/service_center_cabinet/index.blade.php" />
         <option value="$PROJECT_DIR$/public/site/css/admin.scss" />
         <option value="$PROJECT_DIR$/public/site/js/controllers/RefactorScCtrl.js" />
+        <option value="$PROJECT_DIR$/resources/views/service_center_cabinet/index.blade.php" />
       </list>
     </option>
   </component>
@@ -452,12 +444,12 @@
       <workItem from="1495445098432" duration="1720000" />
       <workItem from="1495781271627" duration="3231000" />
       <workItem from="1495786669655" duration="123000" />
-      <workItem from="1496042828346" duration="4112000" />
+      <workItem from="1496042828346" duration="5540000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="9186000" />
+    <option name="totallyTimeSpent" value="10614000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="48" y="-11" width="1553" height="912" extended-state="6" />
@@ -584,18 +576,18 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/public/site/css/admin.scss">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="42">
-          <caret line="3" column="16" lean-forward="false" selection-start-line="3" selection-start-column="16" selection-end-line="3" selection-end-column="16" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/public/site/css/admin.css">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/site/css/admin.scss">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="42">
+          <caret line="3" column="16" lean-forward="false" selection-start-line="3" selection-start-column="16" selection-end-line="3" selection-end-column="16" />
           <folding />
         </state>
       </provider>
@@ -608,18 +600,18 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/service_center_cabinet/index.blade.php">
+    <entry file="file://$PROJECT_DIR$/public/site/js/controllers/RefactorScCtrl.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="314">
-          <caret line="397" column="62" lean-forward="false" selection-start-line="397" selection-start-column="62" selection-end-line="397" selection-end-column="62" />
+        <state relative-caret-position="281">
+          <caret line="164" column="27" lean-forward="true" selection-start-line="164" selection-start-column="27" selection-end-line="164" selection-end-column="27" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/public/site/js/controllers/RefactorScCtrl.js">
+    <entry file="file://$PROJECT_DIR$/resources/views/service_center_cabinet/index.blade.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="350">
-          <caret line="229" column="45" lean-forward="false" selection-start-line="229" selection-start-column="45" selection-end-line="229" selection-end-column="45" />
+        <state relative-caret-position="496">
+          <caret line="287" column="122" lean-forward="false" selection-start-line="287" selection-start-column="122" selection-end-line="287" selection-end-column="122" />
           <folding />
         </state>
       </provider>

@@ -73,12 +73,14 @@
             function next(sc, brands) {
                 $scope.items = brands;
                 $scope.selected = sc.manufacturers;
+
                 $scope.toggle = function (item, list) {
                     var idx = _.findIndex(list, item);
                     if (idx > -1) {
                         list.splice(idx, 1);
                     }
                     else {
+
                         list.push(item);
                     }
                 };
@@ -149,15 +151,17 @@
             function addPhotoController($scope, $mdDialog, sc_id, model) {
                 $scope.file = [];
                 $scope.addPhoto = function (valid, type, photo) {
-                    console.log(type);
+                    // console.log(type);
                     if (valid) {
-                        model.post('/url', {
+                        model.post('/cabinet' + url + '/add-photo', {
                             sc_id: sc_id,
                             type:type,
                             photo: {data: photo}
                         }).then(function (success) {
-                            $scope.sc[type] = success.data; // принимаю новый массив фото, зависит от типа фото
+                            // $scope.sc[type] = success.data; // принимаю новый массив фото, зависит от типа фото
                             $mdDialog.hide();
+
+                            getModel();
                         });
                     }
                 };
@@ -167,9 +171,16 @@
 
             }
         };
-        $scope.deletePhoto = function (sc, arr, index) {
-            arr.splice(index, 1);
-            $scope.saveSc(true);
+        $scope.deletePhoto = function (photos, photo, index) {
+            // arr.splice(index, 1);
+            // $scope.saveSc(true);
+            // console.log(photos, photo, index);
+            model.delete('/cabinet' + url + '/delete-photo/'+photo.id).then(function (success) {
+                photos.splice(index, 1);
+                // getModel();
+                $mdDialog.hide();
+                $mdToast.show($mdToast.simple().position('right bottom').textContent('Удалено!'));
+            });
 
         };
         $scope.showPhoto = function(ev, photo) {
