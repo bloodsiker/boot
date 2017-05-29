@@ -80,7 +80,7 @@
                         list.splice(idx, 1);
                     }
                     else {
-
+                        console.log(item, list);
                         list.push(item);
                     }
                 };
@@ -101,7 +101,7 @@
                 $scope.toggleAll = function() {
                     if ($scope.selected.length === $scope.items.length) {
                         $scope.selected = [];
-                        $scope.sc.manufacturers = [];
+                        $scope.sc.manufacturers = $scope.selected;
                     } else if ($scope.selected.length === 0 || $scope.selected.length > 0) {
                         $scope.selected = $scope.items.slice(0);
                         $scope.sc.manufacturers = $scope.selected;

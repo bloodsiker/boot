@@ -3,7 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="eea08daa-98dc-4f0e-a362-15e23181d6ab" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/site/js/controllers/RefactorScCtrl.js" afterPath="$PROJECT_DIR$/public/site/js/controllers/RefactorScCtrl.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/service_center_cabinet/index.blade.php" afterPath="$PROJECT_DIR$/resources/views/service_center_cabinet/index.blade.php" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -15,17 +14,17 @@
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="RefactorScCtrl.js" pinned="false" current-in-tab="false">
+      <file leaf-file-name="RefactorScCtrl.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/public/site/js/controllers/RefactorScCtrl.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="281">
-              <caret line="164" column="27" lean-forward="true" selection-start-line="164" selection-start-column="27" selection-end-line="164" selection-end-column="27" />
+            <state relative-caret-position="561">
+              <caret line="103" column="66" lean-forward="false" selection-start-line="103" selection-start-column="66" selection-end-line="103" selection-end-column="66" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="index.blade.php" pinned="false" current-in-tab="true">
+      <file leaf-file-name="index.blade.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/resources/views/service_center_cabinet/index.blade.php">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="496">
@@ -79,8 +78,8 @@
         <option value="$PROJECT_DIR$/resources/views/site/includes/header.blade.php" />
         <option value="$PROJECT_DIR$/public/site/js/model/model.js" />
         <option value="$PROJECT_DIR$/public/site/css/admin.scss" />
-        <option value="$PROJECT_DIR$/public/site/js/controllers/RefactorScCtrl.js" />
         <option value="$PROJECT_DIR$/resources/views/service_center_cabinet/index.blade.php" />
+        <option value="$PROJECT_DIR$/public/site/js/controllers/RefactorScCtrl.js" />
       </list>
     </option>
   </component>
@@ -444,12 +443,12 @@
       <workItem from="1495445098432" duration="1720000" />
       <workItem from="1495781271627" duration="3231000" />
       <workItem from="1495786669655" duration="123000" />
-      <workItem from="1496042828346" duration="5540000" />
+      <workItem from="1496042828346" duration="5884000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="10614000" />
+    <option name="totallyTimeSpent" value="10958000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="48" y="-11" width="1553" height="912" extended-state="6" />
@@ -600,18 +599,18 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/public/site/js/controllers/RefactorScCtrl.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="281">
-          <caret line="164" column="27" lean-forward="true" selection-start-line="164" selection-start-column="27" selection-end-line="164" selection-end-column="27" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/resources/views/service_center_cabinet/index.blade.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="496">
           <caret line="287" column="122" lean-forward="false" selection-start-line="287" selection-start-column="122" selection-end-line="287" selection-end-column="122" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/site/js/controllers/RefactorScCtrl.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="561">
+          <caret line="103" column="66" lean-forward="false" selection-start-line="103" selection-start-column="66" selection-end-line="103" selection-end-column="66" />
           <folding />
         </state>
       </provider>
