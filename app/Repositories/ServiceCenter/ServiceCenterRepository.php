@@ -8,6 +8,8 @@ use App\Models\UserRequest;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
+use Intervention\Image\ImageManagerStatic as Image;
 
 class ServiceCenterRepository implements ServiceCenterRepositoryInterface
 {
@@ -184,6 +186,31 @@ class ServiceCenterRepository implements ServiceCenterRepositoryInterface
     }
 
 
+    public function addPersonal($requestData, $id)
+    {
+        $sc = ServiceCenter::find($id);
+
+        $file = $requestData->avatar['data']['base64'];
+        $img_name = str_random() . '-' . $sc->service_name . ".jpg";
+        Storage::makeDirectory('/sc_uploads/avatars/' . $sc->id);
+        $path = "/sc_uploads/avatars/{$sc->id}/";
+        $path_img = $path . $img_name;
+        Storage::disk('public')->put($path_img, base64_decode($file));
+
+        Image::make(public_path() . $path_img)->resize(300, 300)->save(public_path() . $path_img);
+
+        $sc_personal = [
+            'service_center_id' => $sc->id,
+            'name' => $requestData->name,
+            'info' => $requestData->info,
+            'path' => $path,
+            'avatar' => $img_name
+        ];
+        DB::table('service_center_personal')->insert($sc_personal);
+        return response()->json([$sc_personal], 200);
+    }
+
+
     /**
      * Delete personal from Service Center
      * @param $id
@@ -199,6 +226,40 @@ class ServiceCenterRepository implements ServiceCenterRepositoryInterface
             ->where('id', '=', $id_person)
             ->delete();
         return true;
+    }
+
+
+    public function addPhoto($requestData, $id)
+    {
+        $sc = ServiceCenter::find($id);
+
+        $file = $requestData->photo['data']['base64'];
+
+        $img_name = str_random() . '-' . $sc->service_name . ".jpg";
+        $img_mini = 'mini-' . $img_name;
+        Storage::makeDirectory("/sc_uploads/{$requestData->type}/{$sc->id}");
+        $path = "/sc_uploads/{$requestData->type}/{$sc->id}/";
+        $path_img = $path . $img_name;
+        $path_mini = $path . $img_mini;
+        Storage::disk('public')->put($path_img, base64_decode($file));
+        Storage::disk('public')->put($path_mini, base64_decode($file));
+
+        //Image::make(public_path() . $path_img)->resize(500, 500)->save(public_path() . $path_img);
+        Image::make(public_path() . $path_mini)->resize(300, 200)->save(public_path() . $path_mini);
+
+        $sc_photo = [
+            'service_center_id' => $sc->id,
+            'path' => $path,
+            'file_name' => $img_name,
+            'type' => $requestData->type
+        ];
+
+        DB::table('service_center_photo')->insert($sc_photo);
+
+        $sc_photo += [
+            'file_name_mini' => $img_mini
+        ];
+        return response()->json([$sc_photo], 200);
     }
 
 
@@ -218,4 +279,5 @@ class ServiceCenterRepository implements ServiceCenterRepositoryInterface
             ->delete();
         return true;
     }
+
 }

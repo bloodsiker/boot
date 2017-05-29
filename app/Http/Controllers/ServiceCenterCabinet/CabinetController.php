@@ -117,26 +117,7 @@ class CabinetController extends Controller
      */
     public function postAddPersonalService(Request $request, $id)
     {
-        $sc = ServiceCenter::find($id);
-
-        $file = $request->avatar['data']['base64'];
-        $img_name = str_random() . '-' . $sc->service_name . ".jpg";
-        Storage::makeDirectory('/sc_uploads/avatars/' . $sc->id);
-        $path = "/sc_uploads/avatars/{$sc->id}/";
-        $path_img = $path . $img_name;
-        Storage::disk('public')->put($path_img, base64_decode($file));
-
-        Image::make(public_path() . $path_img)->resize(500, 500)->save(public_path() . $path_img);
-
-        $sc_personal = [
-            'service_center_id' => $sc->id,
-            'name' => $request->name,
-            'info' => $request->info,
-            'path' => $path,
-            'avatar' => $img_name
-        ];
-        DB::table('service_center_personal')->insert($sc_personal);
-        return response()->json([$sc_personal], 200);
+        $this->sc->addPersonal($request, $id);
     }
 
 
@@ -147,27 +128,7 @@ class CabinetController extends Controller
      */
     public function postAddPhotoService(Request $request, $id)
     {
-        $sc = ServiceCenter::find($id);
-
-        $file = $request->photo['data']['base64'];
-
-        $img_name = str_random() . '-' . $sc->service_name . ".jpg";
-        Storage::makeDirectory("/sc_uploads/{$request->type}/{$sc->id}");
-        $path = "/sc_uploads/{$request->type}/{$sc->id}/";
-        $path_img = $path . $img_name;
-        Storage::disk('public')->put($path_img, base64_decode($file));
-
-        Image::make(public_path() . $path_img)->resize(500, 500)->save(public_path() . $path_img);
-
-        $sc_photo = [
-            'service_center_id' => $sc->id,
-            'path' => $path,
-            'file_name' => $img_name,
-            'type' => $request->type
-        ];
-
-        DB::table('service_center_photo')->insert($sc_photo);
-        return response()->json([$sc_photo], 200);
+        $this->sc->addPhoto($request, $id);
     }
 
 

@@ -21,7 +21,11 @@ interface ServiceCenterRepositoryInterface
 
     public function updatePrice($requestData, $id);
 
+    public function addPersonal($requestData, $id);
+
     public function deletePersonal($id, $id_person);
+
+    public function addPhoto($requestData, $id);
 
     public function deletePhoto($id, $id_photo);
 
