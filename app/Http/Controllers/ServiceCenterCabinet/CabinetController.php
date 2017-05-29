@@ -81,6 +81,18 @@ class CabinetController extends Controller
         return response()->json(['sc_id' => $service_center], 200);
     }
 
+
+    /**
+     * @param Request $request
+     * @param $id
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function postAddLogo(Request $request, $id)
+    {
+        $sc_logo = $this->sc->addLogo($request, $id);
+        return response()->json([$sc_logo], 200);
+    }
+
     /**
      * Edit sc cabinet
      * @param Request $request
@@ -117,7 +129,8 @@ class CabinetController extends Controller
      */
     public function postAddPersonalService(Request $request, $id)
     {
-        $this->sc->addPersonal($request, $id);
+        $sc_personal = $this->sc->addPersonal($request, $id);
+        return response()->json([$sc_personal], 200);
     }
 
 
@@ -128,7 +141,8 @@ class CabinetController extends Controller
      */
     public function postAddPhotoService(Request $request, $id)
     {
-        $this->sc->addPhoto($request, $id);
+        $sc_photo = $this->sc->addPhoto($request, $id);
+        return response()->json([$sc_photo], 200);
     }
 
 

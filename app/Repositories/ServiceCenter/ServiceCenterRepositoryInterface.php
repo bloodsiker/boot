@@ -11,6 +11,8 @@ interface ServiceCenterRepositoryInterface
 
     public function addServiceCenter($requestData);
 
+    public function addLogo($requestData, $id);
+
     public function updateServiceCenter($requestData, $id);
 
     public function updateAdvantages($requestData, $id);

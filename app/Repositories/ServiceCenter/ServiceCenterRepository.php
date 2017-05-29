@@ -68,6 +68,31 @@ class ServiceCenterRepository implements ServiceCenterRepositoryInterface
         return $sc->id;
     }
 
+
+    /**
+     * @param $requestData
+     * @param $id
+     * @return string
+     */
+    public function addLogo($requestData, $id)
+    {
+        $sc = ServiceCenter::find($id);
+
+        $file = $requestData->logo['base64'];
+        $img_name = $sc->service_name . '-' . $requestData->logo['filename'];
+        Storage::makeDirectory('/sc_uploads/logo/' . $sc->id);
+        $path = "/sc_uploads/logo/{$sc->id}/";
+        $path_img = $path . $img_name;
+        Storage::disk('public')->put($path_img, base64_decode($file));
+
+        Image::make(public_path() . $path_img)->resize(200, 100)->save(public_path() . $path_img);
+        $sc->logo = $path_img;
+        $sc->update();
+        return $sc->logo;
+    }
+
+
+
     /**
      * @param $requestData
      * @param $id
@@ -207,7 +232,7 @@ class ServiceCenterRepository implements ServiceCenterRepositoryInterface
             'avatar' => $img_name
         ];
         DB::table('service_center_personal')->insert($sc_personal);
-        return response()->json([$sc_personal], 200);
+        return $sc_personal;
     }
 
 
@@ -251,15 +276,12 @@ class ServiceCenterRepository implements ServiceCenterRepositoryInterface
             'service_center_id' => $sc->id,
             'path' => $path,
             'file_name' => $img_name,
+            'file_name_mini' => $img_mini,
             'type' => $requestData->type
         ];
 
         DB::table('service_center_photo')->insert($sc_photo);
-
-        $sc_photo += [
-            'file_name_mini' => $img_mini
-        ];
-        return response()->json([$sc_photo], 200);
+        return $sc_photo;
     }
 
 
@@ -279,5 +301,4 @@ class ServiceCenterRepository implements ServiceCenterRepositoryInterface
             ->delete();
         return true;
     }
-
 }
