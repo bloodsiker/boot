@@ -101,25 +101,10 @@ class CabinetController extends Controller
         $this->sc->updateTags($request, $id);
 
          //Бренды
-        DB::table('service_center_vs_manufacturer')->where('service_center_id', '=', $service_center->id)->delete();
-        foreach ($request->manufacturers as $manufacturer){
-            DB::table('service_center_vs_manufacturer')->insert(
-                [
-                    'service_center_id' => $service_center->id,
-                    'manufacturer_id' => $manufacturer['id']
-                ]);
-        }
+        $this->sc->updateManufacturer($request, $id);
 
         // Цены
-        DB::table('service_center_price')->where('service_center_id', '=', $service_center->id)->delete();
-        foreach ($request->price as $price){
-            DB::table('service_center_price')->insert(
-                [
-                    'service_center_id' => $service_center->id,
-                    'title' => $price['title'],
-                    'price' => $price['price']
-                ]);
-        }
+        $this->sc->updatePrice($request, $id);
 
         return response()->json(['res' => $request->all()], 200);
     }

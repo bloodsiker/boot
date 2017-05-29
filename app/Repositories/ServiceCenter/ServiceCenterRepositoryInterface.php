@@ -17,4 +17,8 @@ interface ServiceCenterRepositoryInterface
 
     public function updateTags($requestData, $id);
 
+    public function updateManufacturer($requestData, $id);
+
+    public function updatePrice($requestData, $id);
+
 }

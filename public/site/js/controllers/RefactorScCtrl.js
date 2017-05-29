@@ -151,7 +151,7 @@
                 $scope.addPhoto = function (valid, type, photo) {
                     console.log(type);
                     if (valid) {
-                        model.post('/cabinet' + url + '/add-photo', {
+                        model.post('/url', {
                             sc_id: sc_id,
                             type:type,
                             photo: {data: photo}
@@ -163,7 +163,7 @@
                 };
                 $scope.closeDialog = function() {
                     $mdDialog.hide();
-                }
+                };
 
             }
         };
@@ -192,10 +192,10 @@
                 $scope.photo = photo;
                 $scope.closeDialog = function() {
                     $mdDialog.hide();
-                }
+                };
 
             }
-        }
+        };
 
 
         // ======================== ЦЕНЫ ==========================
@@ -223,9 +223,17 @@
         // ======================== ПЕРСОНАЛ ==========================
         $scope.showAddPersonal = false;
 
-        $scope.deletePersonal = function (sc, index) {
-            sc.personal.splice(index, 1);
-            $scope.saveSc(true, sc);
+        $scope.deletePersonal = function (sc, index, idPerson) {
+
+
+            model.delete('/cabinet' + url + '/delete-personal/'+idPerson.id).then(function (success) {
+                sc.personal.splice(index, 1);
+                // getModel();
+                $mdDialog.hide();
+                $mdToast.show($mdToast.simple().position('right bottom').textContent('Удалено!'));
+            });
+
+            // $scope.saveSc(true, sc);
         };
         $scope.addPersonalDialog = function (ev, sc_id) {
             $mdDialog.show({

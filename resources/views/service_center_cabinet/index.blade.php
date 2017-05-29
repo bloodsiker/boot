@@ -395,7 +395,7 @@
                 <md-content class="md-padding" flex layout="column">
                     <h1 class="md-display-1">Команда сервиса</h1>
                     <div layout="row" layout-wrap flex>
-                        <md-card flex="20" ng-repeat="item in sc.personal">
+                        <md-card flex="20" class="delete-animate" ng-repeat="item in sc.personal">
                             <img ng-src="@{{item.path + item.avatar}}"
                                  class="md-card-image"
                                  alt="@{{item.name}}">
@@ -407,7 +407,7 @@
                                 </md-card-title-text>
                             </md-card-title>
                             <md-card-actions layout="row" layout-align="end center">
-                                <md-button ng-click="deletePersonal(sc, $index)">Удалить</md-button>
+                                <md-button ng-click="deletePersonal(sc, $index, item)">Удалить</md-button>
                             </md-card-actions>
                         </md-card>
                     </div>
