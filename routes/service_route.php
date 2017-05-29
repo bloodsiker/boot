@@ -8,6 +8,7 @@ Route::group(['middleware' => ['service.center']], function (){
     });
     Route::get('cabinet', 'ServiceCenterCabinet\CabinetController@getIndex')->name('cabinet');
     Route::get('cabinet/dashboard', 'ServiceCenterCabinet\CabinetController@getDashboard')->name('cabinet.dashboard');
+    Route::get('cabinet/settings', 'ServiceCenterCabinet\CabinetController@getSettings')->name('cabinet.settings');
     Route::get('cabinet/sc/{id}', 'ServiceCenterCabinet\CabinetController@getService')->name('cabinet.service')->where('id', '[0-9]+');
     Route::post('cabinet/sc/{id}/add-logo', 'ServiceCenterCabinet\CabinetController@postAddLogo')->name('cabinet.add.logo.service');
     Route::put ('cabinet/sc/{id}/update', 'ServiceCenterCabinet\CabinetController@putUpdateService')->name('cabinet.update.service')->where('id', '[0-9]+');

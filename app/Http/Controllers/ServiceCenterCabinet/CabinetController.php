@@ -36,6 +36,17 @@ class CabinetController extends Controller
         return view('service_center_cabinet.dashboard', compact('service_centers'));
     }
 
+
+    /**
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function getSettings()
+    {
+        $service_centers = Auth::user()->service_centers;
+        return view('service_center_cabinet.settings', compact('service_centers'));
+    }
+
+
     /**
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */

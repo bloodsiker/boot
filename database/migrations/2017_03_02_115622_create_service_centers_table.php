@@ -21,6 +21,10 @@ class CreateServiceCentersTable extends Migration
             $table->integer('metro_id')->unsigned()->default(0);
             $table->integer('district_id')->unsigned();
             $table->string('street');
+            $table->string('c1');
+            $table->string('c2');
+            $table->string('logo');
+            $table->string('logo');
             $table->timestamps();
 
             $table->foreign('user_id')
