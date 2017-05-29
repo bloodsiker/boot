@@ -4,7 +4,12 @@
     model.$inject = ['$http'];
     function model($http) {
 
-        var token = document.querySelector('meta[name="_token"]').content;
+
+       if (document.querySelector('meta[name="_token"]').content) {
+           var token = document.querySelector('meta[name="_token"]').content;
+       }  else {
+           alert('token not found');
+       }
 
 
         this.get = function (url) {

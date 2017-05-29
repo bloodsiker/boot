@@ -1,12 +1,23 @@
 (function () {
     angular.module('App')
-        .controller('RefactorScController', RefactorScController)
+        .controller('RefactorScController', RefactorScController);
 
     RefactorScController.$inject = ['$scope', 'model', '_', '$mdToast', '$mdDialog'];
 
     function RefactorScController($scope, model, _, $mdToast, $mdDialog) {
         var url = window.location.pathname.slice(8);
-        $scope.scLogo = [];
+
+        $scope.scLogo = null;
+        $scope.$watch('scLogo', function() {
+            $scope.visibleSaveLogo = true
+        });
+        $scope.addLogo = function (logo) {
+            $scope.visibleSaveLogo = false;
+            model.post('/cabinet' + url + '/add-logo', {logo: logo}).then(function (res) {
+                $mdToast.show($mdToast.simple().position('right bottom').textContent('Сохранено!'));
+            });
+        };
+
 
         function getModel(){
             model.get(url).then(function (success) {

@@ -18,10 +18,20 @@
                                         </div>
                                     </md-input-container>
                                     <div layout="column" layout-padding>
-                                        <div>
-                                            <img class="sc-logo" ng-src="@{{sc.logo ? '/site/img/'+sc.logo : 'http://fakeimg.pl/300/'}}" alt="@{{sc.service_name}}">
+                                        <label for="logoSc">
+                                            <div style="max-width: 200px; cursor: pointer; position: relative;">
+                                                <img ng-if="!scLogo" class="sc-logo" ng-src="@{{sc.logo ? '/site/img/'+sc.logo : 'http://fakeimg.pl/200x100/'}}" alt="@{{sc.service_name}}">
+                                                <img ng-if="scLogo" class="sc-logo" ng-src="@{{'data:'+scLogo.filetype+';base64,'+scLogo.base64}}" alt="@{{sc.service_name}}">
+                                                <span style="position: absolute; bottom: 8px; right: 5px;"><md-icon>add_a_photo</md-icon></span>
+                                            </div>
+
+                                        </label>
+                                        <input type="file" ng-hide="true" id="logoSc" ng-model="scLogo" accept="image/*" base-sixty-four-input>
+                                        <div layout="row"  layout-sm="column" ng-show="scLogo && visibleSaveLogo">
+                                            <md-button class="md-primary md-mini md-raised" ng-click="scLogo = null">Отмена</md-button>
+                                            <md-button class="md-primary md-mini md-raised " ng-click="addLogo(scLogo)">Сохранить</md-button>
                                         </div>
-                                        <input type="file" ng-model="scLogo" accept="image/*" base-sixty-four-input>
+
                                     </div>
 
                                 </div>
@@ -238,7 +248,7 @@
                     <h1 class="md-display-1">Фотографии, сертификаты и лицензии</h1>
                     <div layout="row" layout-wrap flex>
                         <md-card flex="20" ng-repeat="item in sc.service_photo" ng-if="item.type === 'service_photo'">
-                            <img ng-src="@{{item.path + item.file_name}}"
+                            <img ng-src="@{{item.path + item.file_name_mini}}"
                                  class="md-card-image"
                                  alt="@{{'Фото ' + sc.service_name}}">
                             <md-card-footer>
@@ -258,7 +268,7 @@
                     <md-divider></md-divider>
                     <div layout="row" layout-wrap flex>
                         <md-card flex="20" ng-repeat="item in sc.service_photo" ng-if="item.type === 'certificate'">
-                            <img ng-src="@{{item.path + item.file_name}}"
+                            <img ng-src="@{{item.path + item.file_name_mini}}"
                                  class="md-card-image"
                                  alt="@{{'Лицензия '+sc.service_name}}">
                             <md-card-footer>
@@ -278,7 +288,7 @@
                     <md-divider></md-divider>
                     <div layout="row" layout-wrap flex>
                         <md-card flex="20" ng-repeat="item in sc.service_photo" ng-if="item.type === 'licenses'">
-                            <img ng-src="@{{ item.path + item.file_name}}"
+                            <img ng-src="@{{ item.path + item.file_name_mini}}"
                                  class="md-card-image"
                                  alt="@{{'Сертификат '+sc.service_name}}">
                             <md-card-footer>
