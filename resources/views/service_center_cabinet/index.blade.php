@@ -20,7 +20,7 @@
                                     <div layout="column" layout-padding>
                                         <label for="logoSc">
                                             <div style="max-width: 200px; cursor: pointer; position: relative;">
-                                                <img ng-if="!scLogo" class="sc-logo" ng-src="@{{sc.logo ? '/site/img/'+sc.logo : 'http://fakeimg.pl/200x100/'}}" alt="@{{sc.service_name}}">
+                                                <img ng-if="!scLogo" class="sc-logo" ng-src="@{{sc.logo ? sc.logo : 'http://fakeimg.pl/200x100/'}}" alt="@{{sc.service_name}}">
                                                 <img ng-if="scLogo" class="sc-logo" ng-src="@{{'data:'+scLogo.filetype+';base64,'+scLogo.base64}}" alt="@{{sc.service_name}}">
                                                 <span style="position: absolute; bottom: 8px; right: 5px;"><md-icon>add_a_photo</md-icon></span>
                                             </div>
@@ -305,7 +305,7 @@
                             </md-card-footer>
                         </md-card>
                     </div>
-                    <md-button class="md-fab md-fab-top-right" ng-click="addPhotoDialog($event, sc.id)">
+                    <md-button class="md-fab md-fab-top-right" ng-click="addPhotoDialog($event, sc)">
                         <md-icon>add</md-icon>
                     </md-button>
                 </md-content>
@@ -420,7 +420,7 @@
                             </md-card-actions>
                         </md-card>
                     </div>
-                    <md-button class="md-fab md-fab-top-right" ng-click="addPersonalDialog($event, sc.id)">
+                    <md-button class="md-fab md-fab-top-right" ng-click="addPersonalDialog($event, sc)">
                         <md-icon>add</md-icon>
                     </md-button>
                 </md-content>
