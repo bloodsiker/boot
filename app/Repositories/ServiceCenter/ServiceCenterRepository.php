@@ -112,6 +112,7 @@ class ServiceCenterRepository implements ServiceCenterRepositoryInterface
                     'advantages' => $advantage['advantages']
                 ]);
         }
+        return true;
     }
 
 
@@ -132,5 +133,43 @@ class ServiceCenterRepository implements ServiceCenterRepositoryInterface
                     'tag' => $tag['tag']
                 ]);
         }
+        return true;
+    }
+
+
+    /**
+     * Бренды
+     * @param $requestData
+     * @param $id
+     */
+    public function updateManufacturer($requestData, $id)
+    {
+        $sc = ServiceCenter::find($id);
+
+        DB::table('service_center_vs_manufacturer')->where('service_center_id', '=', $sc->id)->delete();
+        foreach ($requestData->manufacturers as $manufacturer){
+            DB::table('service_center_vs_manufacturer')->insert(
+                [
+                    'service_center_id' => $sc->id,
+                    'manufacturer_id' => $manufacturer['id']
+                ]);
+        }
+        return true;
+    }
+
+    public function updatePrice($requestData, $id)
+    {
+        $sc = ServiceCenter::find($id);
+
+        DB::table('service_center_price')->where('service_center_id', '=', $sc->id)->delete();
+        foreach ($requestData->price as $price){
+            DB::table('service_center_price')->insert(
+                [
+                    'service_center_id' => $sc->id,
+                    'title' => $price['title'],
+                    'price' => $price['price']
+                ]);
+        }
+        return true;
     }
 }
