@@ -99,6 +99,7 @@ class ServiceCenterRepository implements ServiceCenterRepositoryInterface
      * Преимущества
      * @param $requestData
      * @param $id
+     * @return bool
      */
     public function updateAdvantages($requestData, $id)
     {
@@ -120,6 +121,7 @@ class ServiceCenterRepository implements ServiceCenterRepositoryInterface
      * Теги
      * @param $requestData
      * @param $id
+     * @return bool
      */
     public function updateTags($requestData, $id)
     {
@@ -141,6 +143,7 @@ class ServiceCenterRepository implements ServiceCenterRepositoryInterface
      * Бренды
      * @param $requestData
      * @param $id
+     * @return bool
      */
     public function updateManufacturer($requestData, $id)
     {
@@ -157,6 +160,13 @@ class ServiceCenterRepository implements ServiceCenterRepositoryInterface
         return true;
     }
 
+
+    /**
+     * Update price
+     * @param $requestData
+     * @param $id
+     * @return bool
+     */
     public function updatePrice($requestData, $id)
     {
         $sc = ServiceCenter::find($id);
@@ -170,6 +180,42 @@ class ServiceCenterRepository implements ServiceCenterRepositoryInterface
                     'price' => $price['price']
                 ]);
         }
+        return true;
+    }
+
+
+    /**
+     * Delete personal from Service Center
+     * @param $id
+     * @param $id_person
+     * @return bool
+     */
+    public function deletePersonal($id, $id_person)
+    {
+        $sc = ServiceCenter::find($id);
+
+        DB::table('service_center_personal')
+            ->where('service_center_id', '=', $sc->id)
+            ->where('id', '=', $id_person)
+            ->delete();
+        return true;
+    }
+
+
+    /**
+     * Delete photo from Service Center
+     * @param $id
+     * @param $id_photo
+     * @return bool
+     */
+    public function deletePhoto($id, $id_photo)
+    {
+        $sc = ServiceCenter::find($id);
+
+        DB::table('service_center_photo')
+            ->where('service_center_id', '=', $sc->id)
+            ->where('id', '=', $id_photo)
+            ->delete();
         return true;
     }
 }

@@ -171,15 +171,25 @@ class CabinetController extends Controller
     }
 
 
-
-    public function deletePersonalService(Request $request, $id, $id_person)
+    /**
+     * Delete personal from Service Center
+     * @param $id
+     * @param $id_person
+     */
+    public function deletePersonalService($id, $id_person)
     {
-        $sc = ServiceCenter::find($id);
+        $this->sc->deletePersonal($id, $id_person);
+    }
 
-        DB::table('service_center_personal')
-            ->where('id', '=', $id_person)
-            ->delete();
 
+    /**
+     * Delete photo from Service Center
+     * @param $id
+     * @param $id_photo
+     */
+    public function deletePhotoService($id, $id_photo)
+    {
+        $this->sc->deletePhoto($id, $id_photo);
     }
 
 
