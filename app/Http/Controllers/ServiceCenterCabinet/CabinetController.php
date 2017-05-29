@@ -170,6 +170,19 @@ class CabinetController extends Controller
         return response()->json([$sc_photo], 200);
     }
 
+
+
+    public function deletePersonalService(Request $request, $id, $id_person)
+    {
+        $sc = ServiceCenter::find($id);
+
+        DB::table('service_center_personal')
+            ->where('id', '=', $id_person)
+            ->delete();
+
+    }
+
+
     /**
      * Logout sc cabinet
      * @return \Illuminate\Http\RedirectResponse
