@@ -9,7 +9,7 @@
     </md-button>
     <md-menu-content width="4" ng-mouseleave="$mdMenu.close()">
         <md-menu-item>
-            <md-button ng-click="null">
+            <md-button ng-href="{{ route('cabinet.settings') }}" ng-click="null">
                 <md-icon>settings</md-icon>
                 Settings
             </md-button>

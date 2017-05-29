@@ -5,7 +5,7 @@
     function model($http) {
 
 
-       if (document.querySelector('meta[name="_token"]').content) {
+       if (document.querySelector('meta[name="_token"]') != null) {
            var token = document.querySelector('meta[name="_token"]').content;
        }  else {
            alert('token not found');
