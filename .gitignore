@@ -1,6 +1,6 @@
 /node_modules
 /vendor
-/.idea
+.idea/
 .env
 .env.example
 npm-debug.log.3162645094
