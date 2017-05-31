@@ -87,35 +87,16 @@
                                         <span>@{{ item.address }}</span>
                                     </md-autocomplete>
 
+
                                 </div>
 
-                                <div layout="row">
-
-                                    <md-input-container flex-gt-xs="25" class="md-block">
-                                        <label>Начало недели</label>
-                                        <md-select name="start_day" ng-model="sc.start_day" required>
-                                            <md-option ng-repeat="day in week_days"
-                                                       value="@{{day}}">@{{ day }}</md-option>
-                                        </md-select>
-                                        <div ng-messages="ReqForm.metro.$error">
-                                            <div ng-message="required">Это поле обязательное для ввода.
-                                            </div>
-                                        </div>
-                                    </md-input-container>
-                                    <md-input-container flex-gt-xs="25" class="md-block">
-                                        <label>Конец недели</label>
-                                        <md-select name="end_day" ng-model="sc.end_day" required>
-                                            <md-option ng-repeat="day in week_days"
-                                                       value="@{{day}}">@{{ day }}</md-option>
-                                        </md-select>
-                                        <div ng-messages="ReqForm.metro.$error">
-                                            <div ng-message="required">Это поле обязательное для ввода.
-                                            </div>
-                                        </div>
+                                <div layout="row" layout-align="end center" ng-repeat="day in sc.work_days track by $index">
+                                    <md-input-container flex-gt-xs="10" class="md-block">
+                                        <input type="text" ng-model="day.title" disabled>
                                     </md-input-container>
                                     <md-input-container flex-gt-xs="25" class="md-block">
                                         <label>Начало дня</label>
-                                        <md-select name="start_time" ng-model="sc.start_time" required>
+                                        <md-select name="start_time" ng-model="day.start_time" required>
                                             <md-option ng-repeat="time in times_start"
                                                        value="@{{time}}">@{{ time }}</md-option>
                                         </md-select>
@@ -126,7 +107,7 @@
                                     </md-input-container>
                                     <md-input-container flex-gt-xs="25" class="md-block">
                                         <label>Конец дня</label>
-                                        <md-select name="end_time" ng-model="sc.end_time" required>
+                                        <md-select name="end_time" ng-model="day.end_time" required>
                                             <md-option ng-repeat="time in times_end"
                                                        value="@{{time}}">@{{ time }}</md-option>
                                         </md-select>
@@ -135,6 +116,9 @@
                                             </div>
                                         </div>
                                     </md-input-container>
+                                    <md-checkbox flex ng-model="item.weekend">Выходной</md-checkbox>
+
+
 
 
                                 </div>

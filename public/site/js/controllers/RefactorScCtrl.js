@@ -9,7 +9,7 @@
 
         $scope.scLogo = null;
         $scope.$watch('scLogo', function() {
-            $scope.visibleSaveLogo = true
+            $scope.visibleSaveLogo = true;
         });
         $scope.addLogo = function (logo) {
             $scope.visibleSaveLogo = false;
@@ -21,6 +21,19 @@
 
         function getModel(){
             model.get(url).then(function (success) {
+
+                var work_days = {
+                    mon: { title: 'ПН', start_time: '', end_time: '', weekend: false},
+                    tue: { title: 'ВТ', start_time: '', end_time: '', weekend: false},
+                    wed: { title: 'СР', start_time: '', end_time: '', weekend: false},
+                    thu: { title: 'ЧТ', start_time: '', end_time: '', weekend: false},
+                    fri: { title: 'ПТ', start_time: '', end_time: '', weekend: false},
+                    sat: { title: 'СБ', start_time: '', end_time: '', weekend: false},
+                    sun: { title: 'НД', start_time: '', end_time: '', weekend: false}
+                };
+                if (!_.has(success.data, 'work_days')) {
+                    success.data.work_days =  work_days;
+                }
                 $scope.sc = success.data;
                 brands(success.data);
             });
@@ -54,6 +67,12 @@
             };
         };
 
+        $scope.work_days = {
+          mn: {
+              start_time: '',
+              end_time: ''
+          }
+        };
         $scope.week_days = ['пн', 'вт', 'ср', 'чт', 'пт', 'сб', 'вс'];
         $scope.times_start = [
             '06:00', '06:30',
