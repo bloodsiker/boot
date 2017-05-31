@@ -4,10 +4,10 @@
     <div flex layout="column">
         <form name="settingForm" action="#" method="post" ng-click="addSettingsSc($event, settingForm.$valid, settings)" flex layout="row" novalidate>
             <div flex="50" layout="column" layout-padding>
-                <div layout="row">
+                <div layout="row" >
                     <md-input-container flex>
                         <label>Email</label>
-                        <input type="email" name="login" ng-model="settings.login" required>
+                        <input type="email" ng-disabled="1" name="login" ng-init="settings.login='fdfd'" ng-model="settings.login" required>
                         <div ng-messages="settingForm.login.$error">
                             <div ng-message="required">Это поле обязательное для ввода.</div>
                         </div>
@@ -28,7 +28,7 @@
                             <div ng-message="required">Это поле обязательное для ввода.</div>
                         </div>
                         <div ng-if="settings.passFirst != settings.passLast" ng-messages="settings.passFirst != settings.passLast">
-                            <div>Подтвердите пароль.</div>
+                            <div>Пароли не совпадают</div>
                         </div>
                     </md-input-container>
                 </div>

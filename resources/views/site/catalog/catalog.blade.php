@@ -11,100 +11,100 @@
 
 @section('content')
 
-    <div class="search-catalog">
-        <div class="container">
+    <div style="position: relative;z-index: 2;background: #fff;">
+        <div class="container" style="position: relative;z-index: 2;">
+            <div class="search-catalog">
+                <!--======================================= INCLUDE SEARCH SC =======================================-->
+            @include('site.includes.search')
 
-            <!--======================================= INCLUDE SEARCH SC =======================================-->
-        @include('site.includes.search')
+            <!--=======================================SERVICE=====================================-->
 
-        <!--=======================================SERVICE=====================================-->
-
-            <div class="row">
-                <div class="col-xs-12 filters">
-                    <div uib-dropdown auto-close="outsideClick" is-open="openedService">
-                        <span class="filter-panel"
-                              uib-dropdown-toggle>
-                            Услуга <span class="glyphicon glyphicon-chevron-down"></span>
-                        </span>
-                        <div class="popover bottom fade in" style="top: 20px; left: 0;" uib-dropdown-menu
-                             ng-mouseleave="openedService =
-                        false">
-                            <div class="arrow" style="left: 30px;"></div>
-                            <div class="popover-inner">
-                                <div class="popover-content">
-                                    <div ng-repeat="item in [1,2,3,4,5,6,7,8]">
-                                        <label>
-                                            <input type="checkbox" ng-model="value1"> @{{ item }} Value
-                                        </label>
+                <div>
+                    <div class="filters">
+                        <div uib-dropdown auto-close="outsideClick" is-open="openedService">
+                            <span class="filter-panel"
+                                  uib-dropdown-toggle>
+                                Услуга <span class="glyphicon glyphicon-chevron-down"></span>
+                            </span>
+                            <div class="popover bottom fade in" style="top: 20px; left: 0;" uib-dropdown-menu
+                                 ng-mouseleave="openedService =
+                            false">
+                                <div class="arrow" style="left: 30px;"></div>
+                                <div class="popover-inner">
+                                    <div class="popover-content">
+                                        <div ng-repeat="item in [1,2,3,4,5,6,7,8]">
+                                            <label>
+                                                <input type="checkbox" ng-model="value1"> @{{ item }} Value
+                                            </label>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <!--=======================================TIME=======================================-->
+                        <!--=======================================TIME=======================================-->
 
-                    <div uib-dropdown auto-close="outsideClick" is-open="openedTime">
-                        <span class="filter-panel"
-                              uib-dropdown-toggle>
-                            Время работы <span class="glyphicon glyphicon-chevron-down"></span>
-                        </span>
+                        <div uib-dropdown auto-close="outsideClick" is-open="openedTime">
+                            <span class="filter-panel"
+                                  uib-dropdown-toggle>
+                                Время работы <span class="glyphicon glyphicon-chevron-down"></span>
+                            </span>
 
 
-                        <div class="popover bottom fade in"
-                             style="top: 20px"
-                             uib-dropdown-menu
-                             ng-mouseleave="openedTime = false"
-                             >
-                            <div class="arrow" style="left: 30px;"></div>
-                            <div class="popover-inner">
-                                <div class="row datapicker">
-                                    <div class="col-md-6">
-                                        <span>Начало дня</span>
-                                        <div uib-timepicker ng-model="start_time" show-spinners="false"
-                                             show-meridian="ismeridian"></div>
+                            <div class="popover bottom fade in"
+                                 style="top: 20px"
+                                 uib-dropdown-menu
+                                 ng-mouseleave="openedTime = false"
+                                 >
+                                <div class="arrow" style="left: 30px;"></div>
+                                <div class="popover-inner">
+                                    <div class="row datapicker">
+                                        <div class="col-md-6">
+                                            <span>Начало дня</span>
+                                            <div uib-timepicker ng-model="start_time" show-spinners="false"
+                                                 show-meridian="ismeridian"></div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <span>Конец дня</span>
+                                            <div uib-timepicker ng-model="end_time" show-spinners="false"
+                                                 show-meridian="ismeridian"></div>
+                                        </div>
                                     </div>
-                                    <div class="col-md-6">
-                                        <span>Конец дня</span>
-                                        <div uib-timepicker ng-model="end_time" show-spinners="false"
-                                             show-meridian="ismeridian"></div>
-                                    </div>
-                                </div>
-                                <button type="button" class="btn btn-danger" ng-click="clear_time()">Сбросить</button>
-                                <button class="btn btn-warning" ng-click="select_time(start_time, end_time)">Выбрать</button>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!--=======================================SERVICE MORE=======================================-->
-                    <div uib-dropdown auto-close="outsideClick" is-open="openedServiceMore">
-                        <span class="filter-panel"
-                              uib-dropdown-toggle>
-                            Дополнительные условия <span class="glyphicon glyphicon-chevron-down"></span>
-                        </span>
-                        <div class="popover bottom fade in" style="top: 20px;" uib-dropdown-menu
-                             ng-mouseleave="openedServiceMore =
-                        false">
-                            <div class="arrow"></div>
-                            <div class="popover-inner">
-                                <div class="popover-content">
-                                    <div ng-repeat="item in [1,2,3,4,5,6,7,8]">
-                                        <label>
-                                            <input type="checkbox" ng-model="value1"> @{{ item }} Value
-                                        </label>
-                                    </div>
+                                    <button type="button" class="btn btn-danger" ng-click="clear_time()">Сбросить</button>
+                                    <button class="btn btn-warning" ng-click="select_time(start_time, end_time)">Выбрать</button>
                                 </div>
                             </div>
                         </div>
-                    </div>
 
+                        <!--=======================================SERVICE MORE=======================================-->
+                        <div uib-dropdown auto-close="outsideClick" is-open="openedServiceMore">
+                            <span class="filter-panel"
+                                  uib-dropdown-toggle>
+                                Дополнительные условия <span class="glyphicon glyphicon-chevron-down"></span>
+                            </span>
+                            <div class="popover bottom fade in" style="top: 20px;" uib-dropdown-menu
+                                 ng-mouseleave="openedServiceMore =
+                            false">
+                                <div class="arrow"></div>
+                                <div class="popover-inner">
+                                    <div class="popover-content">
+                                        <div ng-repeat="item in [1,2,3,4,5,6,7,8]">
+                                            <label>
+                                                <input type="checkbox" ng-model="value1"> @{{ item }} Value
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-
     <!--=======================================CATALOG=======================================-->
 
-    <div class="container-fluid">
+    <div class="container">
 
         <div class="row">
             <div class="col-sm-6 col-xs-12">
@@ -113,14 +113,9 @@
                 <div class="row sort">
                     <div class="col-xs-12">
                     <span>Сортировать:
-                        <span ng-class="{active: activeSort == ''}" ng-click="order_event('')" class="sort-by active">по популярности <i
-                                    class="glyphicon glyphicon-sort-by-attributes-alt"></i></span>
-                        <span ng-class="{active: activeSort == 'rating'}" ng-click="order_event('rating')"
-                              class="sort-by">по рейтингу <i
-                                    class="glyphicon glyphicon-sort-by-attributes-alt"></i></span>
-                        <span ng-class="{active: activeSort == 'comments'}" ng-click="order_event('comments')"
-                              class="sort-by">по отзывам  <i
-                                    class="glyphicon glyphicon-sort-by-attributes-alt"></i></span>
+                        <span ng-class="{active: activeSort == ''}" ng-click="order_event('')" class="sort-by active">по популярности <i ng-if="activeSort == ''" class="glyphicon glyphicon-sort-by-attributes-alt"></i></span>
+                        <span ng-class="{active: activeSort == 'rating'}" ng-click="order_event('rating')" class="sort-by">по рейтингу <i ng-if="activeSort == 'rating'" class="glyphicon glyphicon-sort-by-attributes-alt"></i></span>
+                        <span ng-class="{active: activeSort == 'comments'}" ng-click="order_event('comments')" class="sort-by">по отзывам  <i ng-if="activeSort == 'comments'"  class="glyphicon glyphicon-sort-by-attributes-alt"></i></span>
                     </span>
                     </div>
                 </div>
@@ -132,7 +127,7 @@
                         <p>Оставьте свой телефон, мы перезвоним в течение 3 минут и <br> бесплатно подберем вам
                             идеальный
                             сервис-центр</p>
-                        <button class="btn btn-warning" data-toggle="modal" data-target="#help_modal">Подобрать</button>
+                        <button class="btn btn-black" data-toggle="modal" data-target="#help_modal">Подобрать</button>
                     </div>
                 </div>
                 <!--=======================end need help=======================-->
@@ -142,76 +137,38 @@
                     </div>
                 </div>
                 <!--=======================================CATALOG ITEM=======================================-->
-                @{{timeStartFilter}}
                 <div class="row catalog-item"
                      ng-repeat="item in catalog
                      |orderBy: order_by
-
                      | filterBy: ['street', 'metro.address', 'district.address']: addressFilter
                      | filterBy: ['radius'] : true
                      | filterBy: ['start_time'] : index.start_time <= timeStartFilter ? 'rg' : index.start_time
                      | filterBy: ['manufacturers']: manufacturerFilter as filtered_catalog">
 
-
-
-                    {{----}}
-                    {{--| filterBy: ['end_time'] : '20:00'--}}
-
-                    <div class="col-md-4 col-xs-12">
-                        <div class="title-sc visible-xs"><a ng-href="@{{ '/sc/'+item.id }}" ng-bind="item
-                        .service_name"></a></div>
-                        <img class="logo-cs" ng-src="@{{item.logo.length > 0 ? item.logo : 'site/img/logo-sc.png'}}"
-                             alt="@{{item.service_name}}">
-
+                    <div class="col-md-8">
+                        <a class="title-sc" ng-href="@{{ '/sc/'+item.id }}" ng-bind="item.service_name"></a>
                         <div class="info-sc">
                             <span class="glyphicon glyphicon-time"></span>
-                            <span class="text" ng-bind="item.work_time"></span>
-                        </div>
-                        <div class="info-sc">
+                            <span class="text" ng-bind="item.start_day+'-'+item.end_day+' c '+item.start_time+ ' по '+ item.end_time"></span>
+                            <br>
                             <span class="glyphicon glyphicon-map-marker"></span>
                             <span class="text" ng-bind="item.address"></span>
+                            <br>
+                            <span style="font-weight: 900;">M</span>
+                            <span class="text" ng-bind="item.metro.address"></span>
                         </div>
-                        <div class="info-sc" ng-if="item.metro">
-                            <span class="glyphicon glyphicon-magnet"></span>
-                            <span class="text" ng-bind="item.metro.address"></span></div>
-                        <button class="btn btn-warning hidden-xs"
-                                data-toggle="modal"
-                                data-target="#call_modal"
-                                ng-click="openScCall(item.id)">Связаться
-                        </button>
                     </div>
-                    <div class="col-md-6 col-xs-12">
-                        <div class="title-sc hidden-xs"><a ng-href="@{{ '/sc/'+item.id }}" ng-bind="item
-                        .service_name"></a></div>
-                        <div class="tag" ng-if="item.tags.length > 0" ng-repeat="tag in item.tags" ng-bind="tag.tag"></div>
-                        <button class="btn btn-warning visible-xs"
-                                data-toggle="modal"
-                                data-target="#call_modal"
-                                ng-click="openCall(item)">Связаться
-                        </button>
-                        <div class="visible-xs rating-end-comments-xs">
-                            <div class="rating-xs">
-                                <div><span class="glyphicon glyphicon-star"></span></div>
-                                <div class="count" ng-bind="item.rating | number"></div>
-                                <div>рейтинг</div>
-                            </div>
-                            <div class="comments-xs">
-                                <div><span class="glyphicon glyphicon-comment"></span></div>
-                                <div class="count" ng-bind="item.comments | number"></div>
-                                <div>отзывов</div>
-                            </div>
-                        </div>
+                    <div class="col-md-4" style="display: flex; flex-direction: column;">
+                        <img ng-if="item.logo" class="logo-cs" ng-src="@{{item.logo}}" alt="@{{item.service_name}}">
 
-                    </div>
-                    <div class="rating hidden-xs">
-                        <div><span class="glyphicon glyphicon-star"></span></div>
-                        <div class="count" ng-bind="item.rating | number"></div>
-                        <div>рейтинг</div>
-                    </div>
-                    <div class="comments hidden-xs">
-                        <div><span class="glyphicon glyphicon-comment"></span></div>
-                        <div class="count" ng-bind="item.comments | number"></div>
-                        <div>отзывов</div>
+                        <div style="flex: auto"></div>
+                        <rating value="item.rating" disabled max="5"></rating>
+                        <div class="text-right">
+                            <span class="glyphicon glyphicon-comment"></span>
+                            <span ng-bind="(item.comments | number) + ' отзывов'"></span>
+                        </div>
+                        <button class="btn btn-yellow" data-toggle="modal" data-target="#call_modal" ng-click="openScCall(item.id)">Связаться</button>
+
                     </div>
                 </div>
 
@@ -220,13 +177,9 @@
 
             </div>
             <div class="col-sm-6 hidden-xs catalog-map">
-
                 <ng-map id="map"
-                        data-spy="affix"
-                        ng-class="{fix_map: filtered_catalog.length <= 1}"
-                        data-offset-top="438"
-                        zoom-to-include-markers="auto"
-                >
+                        style="position: fixed; top: 0; width:inherit; z-index:1;"
+                        zoom-to-include-markers="auto">
 
                     <info-window id="foo">
                         <div ng-non-bindable="">

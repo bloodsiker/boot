@@ -2,35 +2,41 @@
 
 <hr>
 <div class="container">
-    <div class="row footer">
-        <div class="col-md-2">
-            <img src="{{ asset('site/img/logo.png') }}" alt="boot">
-            <br>
-            <span>© 2017 Fix.me. <br>
-             Все права защищены.</span>
+    <div class="footer">
+        <div class="row">
+            <div class="col-md-2">
+                <div class="logo-footer">
+                    <img src="{{ asset('site/img/logo.png') }}" alt="boot">
+                </div>
+            </div>
+            <div class="col-md-3">
+                <ul>
+                    <li><a href="{{ route('about') }} " class="{{ active('about') }}">О проекте</a></li>
+                    <li><a data-toggle="modal" data-target="#terms_modal">Пользовательское соглашение</a></li>
+                    <li><a href="{{ route('catalog') }}" class="{{ active('catalog') }}">Каталог сервис-центров</a></li>
+                </ul>
+            </div>
+            <div class="col-md-3">
+                <ul>
+                    <li><a href="{{ route('diagnostics') }} " class="{{ active('diagnostics') }}">Диагностика</a></li>
+                    <li><a data-toggle="modal" data-target="#help_modal">Помощь в подборе</a></li>
+                    <li><a href="{{ route('service.registration') }}">Регистрация сервис-центров</a></li>
+                </ul>
+            </div>
+            <div class="col-md-4">
+                <ul>
+                    {{--<li><a href="tel:0 800 256-357" class="phone"><i class="glyphicon glyphicon-phone"></i> 0 800--}}
+                            {{--256-357</a> <span>Звонки по Украине бесплатны</span></li>--}}
+                    <li><a href="mailTo:Support@fix.com" class="mail"><i class="glyphicon glyphicon-send"></i>
+                            info@boot.com.ua</a></li>
+                    <li><span class="time"><i class="glyphicon glyphicon-time"></i> Пн — Пт: c 9:00 до 18:00</span></li>
+                </ul>
+            </div>
         </div>
-        <div class="col-md-3">
-            <ul>
-                <li><a href="{{ route('about') }} " class="{{ active('about') }}">О проекте</a></li>
-                <li><a data-toggle="modal" data-target="#terms_modal">Пользовательское соглашение</a></li>
-                <li><a href="{{ route('catalog') }}" class="{{ active('catalog') }}">Каталог сервис-центров</a></li>
-            </ul>
-        </div>
-        <div class="col-md-3">
-            <ul>
-                <li><a href="{{ route('diagnostics') }} " class="{{ active('diagnostics') }}">Диагностика</a></li>
-                <li><a data-toggle="modal" data-target="#help_modal">Помощь в подборе</a></li>
-                <li><a href="{{ route('service.registration') }}">Регистрация сервис-центров</a></li>
-            </ul>
-        </div>
-        <div class="col-md-4">
-            <ul>
-                <li><a href="tel:0 800 256-357" class="phone"><i class="glyphicon glyphicon-phone"></i> 0 800
-                        256-357</a> <span>Звонки по Украине бесплатны</span></li>
-                <li><a href="mailTo:Support@fix.com" class="mail"><i class="glyphicon glyphicon-send"></i>
-                        Support@fix.com</a></li>
-                <li><span class="time"><i class="glyphicon glyphicon-time"></i> Пн — Пт: c 9:00 до 18:00</span></li>
-            </ul>
+        <div class="row">
+            <div class="col-md-12 text-center">
+                <span>© 2017 Boot.com.ua. Все права защищены.</span>
+            </div>
         </div>
     </div>
 </div>
@@ -130,8 +136,8 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-danger" data-dismiss="modal">Отмена</button>
-                    <button type="submit" class="btn btn-warning" ng-click="add_comment_btn(add_comment_form.$valid, add_comment)">Добавить</button>
+                    <button type="button" class="btn btn-black" data-dismiss="modal">Отмена</button>
+                    <button type="submit" class="btn btn-yellow" ng-click="add_comment_btn(add_comment_form.$valid, add_comment)">Добавить</button>
                 </div>
             </form>
         </div>
@@ -152,7 +158,7 @@
                 <h4>Комментарий добавлен</h4>
             </div>
             <div class="modal-footer">
-                <button type="button" style="width: 100%;" class="btn btn-danger" data-dismiss="modal">Понятно!</button>
+                <button type="button" style="width: 100%;" class="btn btn-black" data-dismiss="modal">Понятно!</button>
             </div>
         </div>
     </div>
@@ -173,7 +179,7 @@
                 <h4>С вами свяжутся в ближайшее время</h4>
             </div>
             <div class="modal-footer">
-                <button type="button" style="width: 100%;" class="btn btn-danger" data-dismiss="modal">Понятно!</button>
+                <button type="button" style="width: 100%;" class="btn btn-black" data-dismiss="modal">Понятно!</button>
             </div>
         </div>
     </div>
@@ -216,8 +222,8 @@
 
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-danger" data-dismiss="modal">Отмена</button>
-                    <button type="submit" class="btn btn-warning" ng-click="helpCall(help_form.$valid, client_name, client_phone)">
+                    <button type="button" class="btn btn-black" data-dismiss="modal">Отмена</button>
+                    <button type="submit" class="btn btn-yellow" ng-click="helpCall(help_form.$valid, client_name, client_phone)">
                         Связаться
                     </button>
                 </div>
@@ -253,8 +259,8 @@
 
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-danger" data-dismiss="modal">Отмена</button>
-                    <button type="submit" class="btn btn-warning" ng-click="scCall(call_form.$valid, client_name,
+                    <button type="button" class="btn btn-black" data-dismiss="modal">Отмена</button>
+                    <button type="submit" class="btn btn-yellow" ng-click="scCall(call_form.$valid, client_name,
                     client_phone, call_sc)">
                         Связаться
                     </button>
