@@ -1,12 +1,23 @@
 (function () {
     angular.module('App')
-        .controller('RefactorScController', RefactorScController)
+        .controller('RefactorScController', RefactorScController);
 
     RefactorScController.$inject = ['$scope', 'model', '_', '$mdToast', '$mdDialog'];
 
     function RefactorScController($scope, model, _, $mdToast, $mdDialog) {
         var url = window.location.pathname.slice(8);
-        $scope.scLogo = [];
+
+        $scope.scLogo = null;
+        $scope.$watch('scLogo', function() {
+            $scope.visibleSaveLogo = true
+        });
+        $scope.addLogo = function (logo) {
+            $scope.visibleSaveLogo = false;
+            model.post('/cabinet' + url + '/add-logo', {logo: logo}).then(function (res) {
+                $mdToast.show($mdToast.simple().position('right bottom').textContent('Сохранено!'));
+            });
+        };
+
 
         function getModel(){
             model.get(url).then(function (success) {
@@ -73,12 +84,14 @@
             function next(sc, brands) {
                 $scope.items = brands;
                 $scope.selected = sc.manufacturers;
+
                 $scope.toggle = function (item, list) {
                     var idx = _.findIndex(list, item);
                     if (idx > -1) {
                         list.splice(idx, 1);
                     }
                     else {
+                        console.log(item, list);
                         list.push(item);
                     }
                 };
@@ -99,7 +112,7 @@
                 $scope.toggleAll = function() {
                     if ($scope.selected.length === $scope.items.length) {
                         $scope.selected = [];
-                        $scope.sc.manufacturers = [];
+                        $scope.sc.manufacturers = $scope.selected;
                     } else if ($scope.selected.length === 0 || $scope.selected.length > 0) {
                         $scope.selected = $scope.items.slice(0);
                         $scope.sc.manufacturers = $scope.selected;
@@ -115,7 +128,7 @@
 
 
         // ======================== ГАЛЕРЕЯ ==========================
-        $scope.addPhotoDialog = function(ev, sc_id) {
+        $scope.addPhotoDialog = function(ev, sc) {
             $mdDialog.show({
                 targetEvent: ev,
                 template:
@@ -142,34 +155,49 @@
                 clickOutsideToClose:true,
                 fullscreen: true,
                 locals: {
-                    sc_id: sc_id
+                    sc: sc
                 },
                 controller: addPhotoController
             });
-            function addPhotoController($scope, $mdDialog, sc_id, model) {
+            function addPhotoController($scope, $mdDialog, sc, model) {
                 $scope.file = [];
                 $scope.addPhoto = function (valid, type, photo) {
-                    console.log(type);
+                    // console.log(type);
                     if (valid) {
                         model.post('/cabinet' + url + '/add-photo', {
-                            sc_id: sc_id,
-                            type:type,
+                            sc_id: sc.id,
+                            type: type,
                             photo: {data: photo}
                         }).then(function (success) {
-                            $scope.sc[type] = success.data; // принимаю новый массив фото, зависит от типа фото
+                            console.log(success);
+                            if (sc.service_photo) {
+                                sc.service_photo.push(success.data[0])
+                            } else {
+                                sc.service_photo = [];
+                                sc.service_photo.push(success.data[0]);
+                            }
+                            // getModel();
+
                             $mdDialog.hide();
                         });
                     }
                 };
                 $scope.closeDialog = function() {
                     $mdDialog.hide();
-                }
+                };
 
             }
         };
-        $scope.deletePhoto = function (sc, arr, index) {
-            arr.splice(index, 1);
-            $scope.saveSc(true);
+        $scope.deletePhoto = function (photos, photo, index) {
+            // arr.splice(index, 1);
+            // $scope.saveSc(true);
+            // console.log(photos, photo, index);
+            model.delete('/cabinet' + url + '/delete-photo/'+photo.id).then(function (success) {
+                photos.splice(index, 1);
+                // getModel();
+                $mdDialog.hide();
+                $mdToast.show($mdToast.simple().position('right bottom').textContent('Удалено!'));
+            });
 
         };
         $scope.showPhoto = function(ev, photo) {
@@ -192,10 +220,10 @@
                 $scope.photo = photo;
                 $scope.closeDialog = function() {
                     $mdDialog.hide();
-                }
+                };
 
             }
-        }
+        };
 
 
         // ======================== ЦЕНЫ ==========================
@@ -223,11 +251,19 @@
         // ======================== ПЕРСОНАЛ ==========================
         $scope.showAddPersonal = false;
 
-        $scope.deletePersonal = function (sc, index) {
-            sc.personal.splice(index, 1);
-            $scope.saveSc(true, sc);
+        $scope.deletePersonal = function (sc, index, idPerson) {
+
+
+            model.delete('/cabinet' + url + '/delete-personal/'+idPerson.id).then(function (success) {
+                sc.personal.splice(index, 1);
+                // getModel();
+                $mdDialog.hide();
+                $mdToast.show($mdToast.simple().position('right bottom').textContent('Удалено!'));
+            });
+
+            // $scope.saveSc(true, sc);
         };
-        $scope.addPersonalDialog = function (ev, sc_id) {
+        $scope.addPersonalDialog = function (ev, sc) {
             $mdDialog.show({
                 targetEvent: ev,
                 template:
@@ -254,24 +290,30 @@
                 clickOutsideToClose:true,
                 fullscreen: true,
                 locals: {
-                    sc_id: sc_id
+                    sc: sc
                 },
                 controller: addPersonalController
             });
-            function addPersonalController($scope, $rootScope, $mdDialog, sc_id, model) {
+            function addPersonalController($scope, $rootScope, $mdDialog, sc, model) {
                 $scope.newPersonalPhoto = [];
                 $scope.addPersonal = function (valid, name, info, photo) {
                     console.log($rootScope);
                     if (valid) {
                         model.post('/cabinet' + url + '/add-personal', {
-                            service_center_id: sc_id,
+                            service_center_id: sc.id,
                             name: name,
                             info: info,
                             avatar: {
                                 data: photo
                             }
                         }).then(function (success) {
-                            getModel();
+                            if (sc.personal) {
+                                sc.personal.push(success.data[0])
+                            } else {
+                                sc.personal = [];
+                                sc.personal.push(success.data[0]);
+                            }
+                            // getModel();
 
                             $mdDialog.hide();
                         });

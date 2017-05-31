@@ -170,7 +170,10 @@ class ServiceCenterRepository implements ServiceCenterRepositoryInterface
      * Бренды
      * @param $requestData
      * @param $id
+<<<<<<< HEAD
      * @return bool
+=======
+>>>>>>> 11cdfef1d77f9aaa1d74f974669e3de14da474a6
      */
     public function updateManufacturer($requestData, $id)
     {
@@ -187,6 +190,7 @@ class ServiceCenterRepository implements ServiceCenterRepositoryInterface
         return true;
     }
 
+<<<<<<< HEAD
 
     /**
      * Update price
@@ -194,6 +198,8 @@ class ServiceCenterRepository implements ServiceCenterRepositoryInterface
      * @param $id
      * @return bool
      */
+=======
+>>>>>>> 11cdfef1d77f9aaa1d74f974669e3de14da474a6
     public function updatePrice($requestData, $id)
     {
         $sc = ServiceCenter::find($id);
@@ -208,6 +214,7 @@ class ServiceCenterRepository implements ServiceCenterRepositoryInterface
                 ]);
         }
         return true;
+<<<<<<< HEAD
     }
 
 
@@ -300,5 +307,7 @@ class ServiceCenterRepository implements ServiceCenterRepositoryInterface
             ->where('id', '=', $id_photo)
             ->delete();
         return true;
+=======
+>>>>>>> 11cdfef1d77f9aaa1d74f974669e3de14da474a6
     }
 }

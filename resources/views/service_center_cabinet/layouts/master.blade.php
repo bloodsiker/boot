@@ -83,6 +83,7 @@
 <script src="{{ asset('site/js/controllers/AdminCtrl.js') }}"></script>
 <script src="{{ asset('site/js/controllers/AddScCtrl.js') }}"></script>
 <script src="{{ asset('site/js/controllers/RefactorScCtrl.js') }}"></script>
+<script src="{{ asset('site/js/controllers/SettingsScController.js') }}"></script>
 
 </body>
 </html>

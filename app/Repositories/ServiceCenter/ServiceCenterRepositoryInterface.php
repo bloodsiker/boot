@@ -23,6 +23,7 @@ interface ServiceCenterRepositoryInterface
 
     public function updatePrice($requestData, $id);
 
+<<<<<<< HEAD
     public function addPersonal($requestData, $id);
 
     public function deletePersonal($id, $id_person);
@@ -31,4 +32,6 @@ interface ServiceCenterRepositoryInterface
 
     public function deletePhoto($id, $id_photo);
 
+=======
+>>>>>>> 11cdfef1d77f9aaa1d74f974669e3de14da474a6
 }

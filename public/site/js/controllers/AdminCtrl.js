@@ -22,5 +22,12 @@
             $mdSidenav('side').toggle();
         };
 
+
+        $scope.addSettingsSc = function (event, valid, settings) {
+            valid && settings.passFirst == settings.passLast ? console.log('ok') :  event.preventDefault();
+
+
+        }
+
     }
 })();

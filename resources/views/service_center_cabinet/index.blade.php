@@ -18,10 +18,20 @@
                                         </div>
                                     </md-input-container>
                                     <div layout="column" layout-padding>
-                                        <div>
-                                            <img class="sc-logo" ng-src="@{{sc.logo ? '/site/img/'+sc.logo : 'http://fakeimg.pl/300/'}}" alt="@{{sc.service_name}}">
+                                        <label for="logoSc">
+                                            <div style="max-width: 200px; cursor: pointer; position: relative;">
+                                                <img ng-if="!scLogo" class="sc-logo" ng-src="@{{sc.logo ? sc.logo : 'http://fakeimg.pl/200x100/'}}" alt="@{{sc.service_name}}">
+                                                <img ng-if="scLogo" class="sc-logo" ng-src="@{{'data:'+scLogo.filetype+';base64,'+scLogo.base64}}" alt="@{{sc.service_name}}">
+                                                <span style="position: absolute; bottom: 8px; right: 5px;"><md-icon>add_a_photo</md-icon></span>
+                                            </div>
+
+                                        </label>
+                                        <input type="file" ng-hide="true" id="logoSc" ng-model="scLogo" accept="image/*" base-sixty-four-input>
+                                        <div layout="row"  layout-sm="column" ng-show="scLogo && visibleSaveLogo">
+                                            <md-button class="md-primary md-mini md-raised" ng-click="scLogo = null">Отмена</md-button>
+                                            <md-button class="md-primary md-mini md-raised " ng-click="addLogo(scLogo)">Сохранить</md-button>
                                         </div>
-                                        <input type="file" ng-model="scLogo" accept="image/*" base-sixty-four-input>
+
                                     </div>
 
                                 </div>
@@ -237,16 +247,15 @@
                 <md-content class="md-padding" flex layout="column">
                     <h1 class="md-display-1">Фотографии, сертификаты и лицензии</h1>
                     <div layout="row" layout-wrap flex>
-                        <md-card flex="20" ng-repeat="item in sc.service_photo">
-                            <img ng-src="@{{item.path + item.file_name}}"
+                        <md-card flex="20" ng-repeat="item in sc.service_photo" ng-if="item.type === 'service_photo'">
+                            <img ng-src="@{{item.path + item.file_name_mini}}"
                                  class="md-card-image"
                                  alt="@{{'Фото ' + sc.service_name}}">
                             <md-card-footer>
                                 <div layout="row">
                                     Фото
                                     <span flex></span>
-                                    <md-button class="md-icon-button" ng-click="deletePhoto(sc, sc.service_photo,
-                                    $index)">
+                                    <md-button class="md-icon-button" ng-click="deletePhoto(sc.service_photo, item, $index)">
                                         <md-icon>delete</md-icon>
                                     </md-button>
                                     <md-button class="md-icon-button" ng-click="showPhoto($event, item.path + item.file_name)">
@@ -258,18 +267,18 @@
                     </div>
                     <md-divider></md-divider>
                     <div layout="row" layout-wrap flex>
-                        <md-card flex="20" ng-repeat="item in sc.licenses">
-                            <img ng-src="@{{item.path + item.file_name}}"
+                        <md-card flex="20" ng-repeat="item in sc.service_photo" ng-if="item.type === 'certificate'">
+                            <img ng-src="@{{item.path + item.file_name_mini}}"
                                  class="md-card-image"
                                  alt="@{{'Лицензия '+sc.service_name}}">
                             <md-card-footer>
                                 <div layout="row">
                                     Лицензия
                                     <span flex></span>
-                                    <md-button class="md-icon-button" ng-click="deletePhoto(sc, sc.licenses, $index)">
+                                    <md-button class="md-icon-button" ng-click="deletePhoto(sc.service_photo, item, $index)">
                                         <md-icon>delete</md-icon>
                                     </md-button>
-                                    <md-button class="md-icon-button" ng-click="showPhoto($event, item.file_name)">
+                                    <md-button class="md-icon-button" ng-click="showPhoto($event, item.path + item.file_name)">
                                         <md-icon>zoom_in</md-icon>
                                     </md-button>
                                 </div>
@@ -278,25 +287,25 @@
                     </div>
                     <md-divider></md-divider>
                     <div layout="row" layout-wrap flex>
-                        <md-card flex="20" ng-repeat="item in sc.certificate">
-                            <img ng-src="@{{ item.path + item.file_name}}"
+                        <md-card flex="20" ng-repeat="item in sc.service_photo" ng-if="item.type === 'licenses'">
+                            <img ng-src="@{{ item.path + item.file_name_mini}}"
                                  class="md-card-image"
                                  alt="@{{'Сертификат '+sc.service_name}}">
                             <md-card-footer>
                                 <div layout="row">
                                     Сертификат
                                     <span flex></span>
-                                    <md-button class="md-icon-button" ng-click="deletePhoto(sc.id, sc.certificate, $index)">
+                                    <md-button class="md-icon-button" ng-click="deletePhoto(sc.service_photo, item, $index)">
                                         <md-icon>delete</md-icon>
                                     </md-button>
-                                    <md-button class="md-icon-button" ng-click="showPhoto($event, item.file_name)">
+                                    <md-button class="md-icon-button" ng-click="showPhoto($event, item.path + item.file_name)">
                                         <md-icon>zoom_in</md-icon>
                                     </md-button>
                                 </div>
                             </md-card-footer>
                         </md-card>
                     </div>
-                    <md-button class="md-fab md-fab-top-right" ng-click="addPhotoDialog($event, sc.id)">
+                    <md-button class="md-fab md-fab-top-right" ng-click="addPhotoDialog($event, sc)">
                         <md-icon>add</md-icon>
                     </md-button>
                 </md-content>
@@ -395,7 +404,7 @@
                 <md-content class="md-padding" flex layout="column">
                     <h1 class="md-display-1">Команда сервиса</h1>
                     <div layout="row" layout-wrap flex>
-                        <md-card flex="20" ng-repeat="item in sc.personal">
+                        <md-card flex="20" class="delete-animate" ng-repeat="item in sc.personal">
                             <img ng-src="@{{item.path + item.avatar}}"
                                  class="md-card-image"
                                  alt="@{{item.name}}">
@@ -407,11 +416,11 @@
                                 </md-card-title-text>
                             </md-card-title>
                             <md-card-actions layout="row" layout-align="end center">
-                                <md-button ng-click="deletePersonal(sc, $index)">Удалить</md-button>
+                                <md-button ng-click="deletePersonal(sc, $index, item)">Удалить</md-button>
                             </md-card-actions>
                         </md-card>
                     </div>
-                    <md-button class="md-fab md-fab-top-right" ng-click="addPersonalDialog($event, sc.id)">
+                    <md-button class="md-fab md-fab-top-right" ng-click="addPersonalDialog($event, sc)">
                         <md-icon>add</md-icon>
                     </md-button>
                 </md-content>

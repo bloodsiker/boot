@@ -1,12 +1,12 @@
 
-<div class="container">
-    <div class="row">
-        <div class="col-xs-12">
-            <div class="banner"></div>
-        </div>
-    </div>
-</div>
-<hr>
+{{--<div class="container">--}}
+    {{--<div class="row">--}}
+        {{--<div class="col-xs-12">--}}
+            {{--<div class="banner"></div>--}}
+        {{--</div>--}}
+    {{--</div>--}}
+{{--</div>--}}
+{{--<hr>--}}
 <div class="container">
     <div class="row top-bar">
         <div class="col-md-4 col-md-offset-3 col-xs-12">
