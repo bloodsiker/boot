@@ -227,6 +227,8 @@ class ServiceCenterRepository implements ServiceCenterRepositoryInterface
         $sc_personal = [
             'service_center_id' => $sc->id,
             'name' => $requestData->name,
+            'work_exp' => $requestData->work_exp,
+            'specialization' => $requestData->specialization,
             'info' => $requestData->info,
             'path' => $path,
             'avatar' => $img_name
