@@ -20,7 +20,7 @@ class ServiceCenterRepository implements ServiceCenterRepositoryInterface
     public function getAllServiceCenter()
     {
         $service_center = ServiceCenter::all();
-        $service_center->load('city', 'metro', 'district', 'tags', 'manufacturers');
+        $service_center->load('work_days', 'city', 'metro', 'district', 'tags', 'manufacturers');
         $service_center->map(function ($comment) {
             $comment['comments'] = Comments::count_comment($comment->id);
             return $comment;
@@ -41,7 +41,7 @@ class ServiceCenterRepository implements ServiceCenterRepositoryInterface
     public function find($id)
     {
         $service_center = ServiceCenter::find($id);
-        $service_center->load('city', 'metro', 'district', 'tags', 'manufacturers', 'advantages', 'price', 'personal', 'service_photo');
+        $service_center->load('work_days', 'city', 'metro', 'district', 'tags', 'manufacturers', 'advantages', 'price', 'personal', 'service_photo');
         $service_center['count_clients'] = UserRequest::count_request($id);
         $service_center['total_rating'] = Comments::rating($id, 'total');
         $service_center['total_comments'] = Comments::count_comment($id);
@@ -107,10 +107,10 @@ class ServiceCenterRepository implements ServiceCenterRepositoryInterface
         $sc->city_id = $requestData->city_id;
         $sc->metro_id = $requestData->metro_id;
         $sc->district_id = $requestData->district_id;
-        $sc->start_day = $requestData->start_day;
-        $sc->end_day = $requestData->end_day;
-        $sc->start_time = $requestData->start_time;
-        $sc->end_time = $requestData->end_time;
+//        $sc->start_day = $requestData->start_day;
+//        $sc->end_day = $requestData->end_day;
+//        $sc->start_time = $requestData->start_time;
+//        $sc->end_time = $requestData->end_time;
         $sc->address = 'Украина, ' . $requestData->city['city_name'] . ', ' . $requestData->street;
         $sc->street = $requestData->street;
         $sc->c1 = $requestData->c1;
@@ -118,6 +118,30 @@ class ServiceCenterRepository implements ServiceCenterRepositoryInterface
         $sc->updated_at = Carbon::now();
         $sc->update();
 
+        return true;
+    }
+
+    /**
+     * График работы
+     * @param $requestData
+     * @param $id
+     * @return bool
+     */
+    public function updateWorkingDays($requestData, $id)
+    {
+        $sc = ServiceCenter::find($id);
+
+        DB::table('service_working_days')->where('service_center_id', '=', $sc->id)->delete();
+        foreach ($requestData->work_days as $work_day){
+            DB::table('service_working_days')->insert(
+                [
+                    'service_center_id' => $sc->id,
+                    'title' => $work_day['title'],
+                    'start_time' => $work_day['start_time'],
+                    'end_time' => $work_day['end_time'],
+                    'weekend' => $work_day['weekend']
+                ]);
+        }
         return true;
     }
 

@@ -13,6 +13,8 @@ interface ServiceCenterRepositoryInterface
 
     public function addLogo($requestData, $id);
 
+    public function updateWorkingDays($requestData, $id);
+
     public function updateServiceCenter($requestData, $id);
 
     public function updateAdvantages($requestData, $id);

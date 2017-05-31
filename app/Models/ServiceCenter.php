@@ -101,10 +101,10 @@ class ServiceCenter extends Model
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-//    public function certificate()
-//    {
-//        return $this->hasMany('App\Models\Certificate', 'service_center_id', 'id');
-//    }
+    public function work_days()
+    {
+        return $this->hasMany('App\Models\WorkDays', 'service_center_id', 'id');
+    }
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany

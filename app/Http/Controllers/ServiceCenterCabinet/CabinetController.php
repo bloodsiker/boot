@@ -117,6 +117,9 @@ class CabinetController extends Controller
         // Основная информация
         $this->sc->updateServiceCenter($request, $id);
 
+        // Рабочий график
+        $this->sc->updateWorkingDays($request, $id);
+
         // Преимущества
         $this->sc->updateAdvantages($request, $id);
 
