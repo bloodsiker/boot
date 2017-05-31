@@ -17,7 +17,7 @@ class ServiceCenterPriceTable extends Migration
             $table->increments('id');
             $table->integer('service_center_id')->unsigned();
             $table->string('title');
-            $table->integer('price');
+            $table->decimal('price', 10, 2);
 
             $table->foreign('service_center_id')
                 ->references('id')->on('service_centers')
