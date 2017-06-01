@@ -15,7 +15,7 @@
                 <div layout="row">
                     <md-input-container flex>
                         <label>Город</label>
-                        <md-select name="city" ng-model="sc.city" required>
+                        <md-select name="city" ng-model="sc.city" ng-change="selectedCity()" required>
                             <md-option ng-if="item.id == 1" ng-repeat="item in cities"
                                        value="@{{item.id}}">@{{ item.city_name }}</md-option>
                         </md-select>
@@ -60,6 +60,10 @@
                                      md-item-text="item.address">
                         <span>@{{ item.address }}</span>
                     </md-autocomplete>
+                    <md-input-container flex-gt-xs="10" class="md-block">
+                        <label>Номер</label>
+                        <input type="text" ng-change="changeNumberH($event)" ng-model="sc.number_h">
+                    </md-input-container>
 
                 </div>
                 <div flex></div>

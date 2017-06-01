@@ -80,12 +80,16 @@
                                                      md-floating-label="Улица, площадь, шоссе.."
                                                      md-selected-item="sc.street"
                                                      md-min-length="1"
-                                                     md-selected-item-change="selectedStreet(item.address)"
+                                                     md-selected-item-change="selectedStreet(item)"
                                                      md-items="item in streets | filter: {'address': searchText} "
                                                      md-search-text="searchText"
                                                      md-item-text="item.address">
                                         <span>@{{ item.address }}</span>
                                     </md-autocomplete>
+                                    <md-input-container flex-gt-xs="10" class="md-block">
+                                        <label>Номер</label>
+                                        <input type="text" ng-change="changeNumberH($event)" ng-model="sc.number_h">
+                                    </md-input-container>
 
 
                                 </div>
@@ -96,30 +100,19 @@
                                     </md-input-container>
                                     <md-input-container flex-gt-xs="25" class="md-block">
                                         <label>Начало дня</label>
-                                        <md-select name="start_time" ng-model="day.start_time" required>
+                                        <md-select name="start_time" ng-model="day.start_time">
                                             <md-option ng-repeat="time in times_start"
                                                        value="@{{time}}">@{{ time }}</md-option>
                                         </md-select>
-                                        <div ng-messages="ReqForm.metro.$error">
-                                            <div ng-message="required">Это поле обязательное для ввода.
-                                            </div>
-                                        </div>
                                     </md-input-container>
                                     <md-input-container flex-gt-xs="25" class="md-block">
                                         <label>Конец дня</label>
-                                        <md-select name="end_time" ng-model="day.end_time" required>
+                                        <md-select name="end_time" ng-model="day.end_time">
                                             <md-option ng-repeat="time in times_end"
                                                        value="@{{time}}">@{{ time }}</md-option>
                                         </md-select>
-                                        <div ng-messages="ReqForm.metro.$error">
-                                            <div ng-message="required">Это поле обязательное для ввода.
-                                            </div>
-                                        </div>
                                     </md-input-container>
-                                    <md-checkbox flex ng-model="item.weekend">Выходной</md-checkbox>
-
-
-
+                                    <md-checkbox flex ng-model="day.weekend" ng-true-value="'1'" ng-false-value="'0'">Выходной</md-checkbox>
 
                                 </div>
                                 <div flex></div>

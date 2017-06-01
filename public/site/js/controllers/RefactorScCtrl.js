@@ -2,9 +2,9 @@
     angular.module('App')
         .controller('RefactorScController', RefactorScController);
 
-    RefactorScController.$inject = ['$scope', 'model', '_', '$mdToast', '$mdDialog'];
+    RefactorScController.$inject = ['$scope', '$http', 'model', '_', '$mdToast', '$mdDialog'];
 
-    function RefactorScController($scope, model, _, $mdToast, $mdDialog) {
+    function RefactorScController($scope, $http, model, _, $mdToast, $mdDialog) {
         var url = window.location.pathname.slice(8);
 
         $scope.scLogo = null;
@@ -19,18 +19,55 @@
         };
 
 
+
+
+        $scope.selectedStreet = function (street) {
+            if (_.has(street, 'address')) {
+                $scope.sc.street = street.address;
+                $scope.sc.c1 = street.c1;
+                $scope.sc.c2 = street.c2;
+            }
+
+        };
+        $scope.dragMap = function () {
+
+            $scope.sc.c1 = $scope.map.markers[0].position.lat();
+            $scope.sc.c2 = $scope.map.markers[0].position.lng();
+
+            $http({
+                method: 'get',
+                url: "https://maps.googleapis.com/maps/api/geocode/json?latlng="+$scope.sc.c1+','+$scope.sc.c2
+            }).then(function (success) {
+                $scope.sc.number_h = success.data.results[0].address_components[0].long_name;
+            });
+
+        };
+
+        $scope.changeNumberH = function () {
+            var n = $scope.sc.number_h;
+            $http({
+                method: 'get',
+                url: "https://maps.googleapis.com/maps/api/geocode/json?address=Днер,"+$scope.sc.street+','+n
+            }).then(function (success) {
+                $scope.sc.c1 = success.data.results[0].geometry.location.lat;
+                $scope.sc.c2 = success.data.results[0].geometry.location.lng;
+            });
+        };
+
+
+
         function getModel(){
             model.get(url).then(function (success) {
 
-                var work_days = {
-                    mon: { title: 'ПН', start_time: '', end_time: '', weekend: false},
-                    tue: { title: 'ВТ', start_time: '', end_time: '', weekend: false},
-                    wed: { title: 'СР', start_time: '', end_time: '', weekend: false},
-                    thu: { title: 'ЧТ', start_time: '', end_time: '', weekend: false},
-                    fri: { title: 'ПТ', start_time: '', end_time: '', weekend: false},
-                    sat: { title: 'СБ', start_time: '', end_time: '', weekend: false},
-                    sun: { title: 'НД', start_time: '', end_time: '', weekend: false}
-                };
+                var work_days = [
+                    { title: 'ПН', start_time: '', end_time: '', weekend: false},
+                    { title: 'ВТ', start_time: '', end_time: '', weekend: false},
+                    { title: 'СР', start_time: '', end_time: '', weekend: false},
+                    { title: 'ЧТ', start_time: '', end_time: '', weekend: false},
+                    { title: 'ПТ', start_time: '', end_time: '', weekend: false},
+                    { title: 'СБ', start_time: '', end_time: '', weekend: false},
+                    { title: 'НД', start_time: '', end_time: '', weekend: false}
+                ];
                 if (!_.has(success.data, 'work_days')) {
                     success.data.work_days =  work_days;
                 }
