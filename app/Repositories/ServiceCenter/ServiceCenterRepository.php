@@ -61,10 +61,22 @@ class ServiceCenterRepository implements ServiceCenterRepositoryInterface
         $sc->metro_id = $requestData->metro;
         $sc->district_id = $requestData->district;
         $sc->street = $requestData->street;
+        $sc->number_h = $requestData->number_h;
         $sc->c1 = $requestData->c1;
         $sc->c2 = $requestData->c2;
         $sc->created_at = Carbon::now();
         $sc->save();
+
+        foreach ($requestData->work_days as $work_day){
+            DB::table('service_working_days')->insert(
+                [
+                    'service_center_id' => $sc->id,
+                    'title' => $work_day['title'],
+                    'start_time' => $work_day['start_time'],
+                    'end_time' => $work_day['end_time'],
+                    'weekend' => $work_day['weekend']
+                ]);
+        }
         return $sc->id;
     }
 
@@ -113,6 +125,7 @@ class ServiceCenterRepository implements ServiceCenterRepositoryInterface
 //        $sc->end_time = $requestData->end_time;
         $sc->address = 'Украина, ' . $requestData->city['city_name'] . ', ' . $requestData->street;
         $sc->street = $requestData->street;
+        $sc->number_h = $requestData->number_h;
         $sc->c1 = $requestData->c1;
         $sc->c2 = $requestData->c2;
         $sc->updated_at = Carbon::now();
