@@ -221,72 +221,80 @@
             </md-tab>
             <md-tab label="Галерея">
 
-                <md-content class="md-padding" flex layout="column">
-                    <h1 class="md-display-1">Фотографии, сертификаты и лицензии</h1>
-                    <div layout="row" layout-wrap flex>
-                        <md-card flex="20" ng-repeat="item in sc.service_photo" ng-if="item.type === 'service_photo'">
-                            <img ng-src="@{{item.path + item.file_name_mini}}"
-                                 class="md-card-image"
-                                 alt="@{{'Фото ' + sc.service_name}}">
-                            <md-card-footer>
-                                <div layout="row">
-                                    Фото
-                                    <span flex></span>
-                                    <md-button class="md-icon-button" ng-click="deletePhoto(sc.service_photo, item, $index)">
-                                        <md-icon>delete</md-icon>
-                                    </md-button>
-                                    <md-button class="md-icon-button" ng-click="showPhoto($event, item.path + item.file_name)">
-                                        <md-icon>zoom_in</md-icon>
-                                    </md-button>
-                                </div>
-                            </md-card-footer>
-                        </md-card>
-                    </div>
-                    <md-divider></md-divider>
-                    <div layout="row" layout-wrap flex>
-                        <md-card flex="20" ng-repeat="item in sc.service_photo" ng-if="item.type === 'certificate'">
-                            <img ng-src="@{{item.path + item.file_name_mini}}"
-                                 class="md-card-image"
-                                 alt="@{{'Лицензия '+sc.service_name}}">
-                            <md-card-footer>
-                                <div layout="row">
-                                    Лицензия
-                                    <span flex></span>
-                                    <md-button class="md-icon-button" ng-click="deletePhoto(sc.service_photo, item, $index)">
-                                        <md-icon>delete</md-icon>
-                                    </md-button>
-                                    <md-button class="md-icon-button" ng-click="showPhoto($event, item.path + item.file_name)">
-                                        <md-icon>zoom_in</md-icon>
-                                    </md-button>
-                                </div>
-                            </md-card-footer>
-                        </md-card>
-                    </div>
-                    <md-divider></md-divider>
-                    <div layout="row" layout-wrap flex>
-                        <md-card flex="20" ng-repeat="item in sc.service_photo" ng-if="item.type === 'licenses'">
-                            <img ng-src="@{{ item.path + item.file_name_mini}}"
-                                 class="md-card-image"
-                                 alt="@{{'Сертификат '+sc.service_name}}">
-                            <md-card-footer>
-                                <div layout="row">
-                                    Сертификат
-                                    <span flex></span>
-                                    <md-button class="md-icon-button" ng-click="deletePhoto(sc.service_photo, item, $index)">
-                                        <md-icon>delete</md-icon>
-                                    </md-button>
-                                    <md-button class="md-icon-button" ng-click="showPhoto($event, item.path + item.file_name)">
-                                        <md-icon>zoom_in</md-icon>
-                                    </md-button>
-                                </div>
-                            </md-card-footer>
-                        </md-card>
-                    </div>
-                    <md-button class="md-fab md-fab-top-right" ng-click="addPhotoDialog($event, sc)">
-                        <md-icon>add</md-icon>
-                    </md-button>
-                </md-content>
+                <md-content layout-fill flex>
 
+                    <md-tabs layout-fill md-dynamic-height md-border-bottom>
+                        <md-tab label="Фотографии">
+                            <md-content layout-fill flex>
+                                <div layout="row" class="md-padding" layout-wrap flex>
+                                    <md-card ng-repeat="item in sc.service_photo" ng-if="item.type === 'service_photo'">
+                                        <img ng-src="@{{item.path + item.file_name_mini}}"
+                                             class="md-card-image"
+                                             alt="@{{'Фото ' + sc.service_name}}">
+                                        <md-card-footer>
+                                            <div layout="row">
+                                                <span flex></span>
+                                                <md-button class="md-icon-button" ng-click="deletePhoto(sc.service_photo, item, $index)">
+                                                    <md-icon>delete</md-icon>
+                                                </md-button>
+                                                <md-button class="md-icon-button" ng-click="showPhoto($event, item.path + item.file_name)">
+                                                    <md-icon>zoom_in</md-icon>
+                                                </md-button>
+                                            </div>
+                                        </md-card-footer>
+                                    </md-card>
+                                </div>
+                            </md-content>
+                        </md-tab>
+                        <md-tab label="Cертификаты">
+                            <md-content>
+                                <div layout="row" class="md-padding" layout-wrap flex>
+                                    <md-card ng-repeat="item in sc.service_photo" ng-if="item.type === 'certificate'">
+                                        <img ng-src="@{{item.path + item.file_name_mini}}"
+                                             class="md-card-image"
+                                             alt="@{{'Фото ' + sc.service_name}}">
+                                        <md-card-footer>
+                                            <div layout="row">
+                                                <span flex></span>
+                                                <md-button class="md-icon-button" ng-click="deletePhoto(sc.certificate, item, $index)">
+                                                    <md-icon>delete</md-icon>
+                                                </md-button>
+                                                <md-button class="md-icon-button" ng-click="showPhoto($event, item.path + item.file_name)">
+                                                    <md-icon>zoom_in</md-icon>
+                                                </md-button>
+                                            </div>
+                                        </md-card-footer>
+                                    </md-card>
+                                </div>
+                            </md-content>
+                        </md-tab>
+                        <md-tab label="Лицензии">
+                            <md-content>
+                                <div layout="row" class="md-padding" layout-wrap flex>
+                                    <md-card ng-repeat="item in sc.service_photo" ng-if="item.type === 'licenses'">
+                                        <img ng-src="@{{item.path + item.file_name_mini}}"
+                                             class="md-card-image"
+                                             alt="@{{'Фото ' + sc.service_name}}">
+                                        <md-card-footer>
+                                            <div layout="row">
+                                                <span flex></span>
+                                                <md-button class="md-icon-button" ng-click="deletePhoto(sc.licenses, item, $index)">
+                                                    <md-icon>delete</md-icon>
+                                                </md-button>
+                                                <md-button class="md-icon-button" ng-click="showPhoto($event, item.path + item.file_name)">
+                                                    <md-icon>zoom_in</md-icon>
+                                                </md-button>
+                                            </div>
+                                        </md-card-footer>
+                                    </md-card>
+                                </div>
+                            </md-content>
+                        </md-tab>
+                    </md-tabs>
+                </md-content>
+                <md-button class="md-fab md-fab-bottom-right" ng-click="addPhotoDialog($event, sc)">
+                    <md-icon>add</md-icon>
+                </md-button>
             </md-tab>
             <md-tab label="О компании" flex layout="column">
                 <md-content layout-fill flex layout="column">
