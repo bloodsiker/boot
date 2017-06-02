@@ -3,14 +3,8 @@
 namespace App\Http\Controllers\ServiceCenterCabinet;
 
 use App\Repositories\ServiceCenter\ServiceCenterRepositoryInterface;
-use Carbon\Carbon;
-use Illuminate\Support\Facades\Storage;
-use Intervention\Image\ImageManagerStatic as Image;
-use Illuminate\Support\Facades\Input;
 use Illuminate\Http\Request;
-use App\Models\ServiceCenter;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 
 class CabinetController extends Controller
@@ -31,9 +25,7 @@ class CabinetController extends Controller
      */
     public function getDashboard()
     {
-        $service_centers = Auth::user()->service_centers;
-        //dd($service_centers);
-        return view('service_center_cabinet.dashboard', compact('service_centers'));
+        return view('service_center_cabinet.dashboard');
     }
 
 
@@ -42,8 +34,7 @@ class CabinetController extends Controller
      */
     public function getSettings()
     {
-        $service_centers = Auth::user()->service_centers;
-        return view('service_center_cabinet.settings', compact('service_centers'));
+        return view('service_center_cabinet.settings');
     }
 
 
@@ -52,9 +43,7 @@ class CabinetController extends Controller
      */
     public function getIndex()
     {
-        //dd(Auth::user());
-        $service_centers = Auth::user()->service_centers;
-        return view('service_center_cabinet.index', compact('service_centers'));
+        return view('service_center_cabinet.index');
     }
 
     /**
@@ -68,7 +57,7 @@ class CabinetController extends Controller
             return redirect()->back()->with(['message' => 'У вас нету доступа для управлением этим сервисным центром']);
         }
         //$service = ServiceCenter::find($id);
-        return view('service_center_cabinet.index', compact('service_centers'));
+        return view('service_center_cabinet.index');
     }
 
     /**
@@ -76,9 +65,7 @@ class CabinetController extends Controller
      */
     public function getAddService()
     {
-        $service_centers = Auth::user()->service_centers;
-        //dd($service_centers);
-        return view('service_center_cabinet.add_service', compact('service_centers'));
+        return view('service_center_cabinet.add_service');
     }
 
     /**
@@ -112,8 +99,6 @@ class CabinetController extends Controller
      */
     public function putUpdateService(Request $request, $id)
     {
-        $service_center = $this->sc->find($id);
-
         // Основная информация
         $this->sc->updateServiceCenter($request, $id);
 
@@ -164,10 +149,12 @@ class CabinetController extends Controller
      * Delete personal from Service Center
      * @param $id
      * @param $id_person
+     * @return string
      */
     public function deletePersonalService($id, $id_person)
     {
         $this->sc->deletePersonal($id, $id_person);
+        return json_encode(["status" => 200]);
     }
 
 
@@ -175,10 +162,12 @@ class CabinetController extends Controller
      * Delete photo from Service Center
      * @param $id
      * @param $id_photo
+     * @return string
      */
     public function deletePhotoService($id, $id_photo)
     {
         $this->sc->deletePhoto($id, $id_photo);
+        return json_encode(["status" => 200]);
     }
 
 
