@@ -14,5 +14,9 @@ Route::group(['middleware' => 'admin'], function () {
 
         Route::get('/city', 'Admin\CityController@getIndex')->name('admin.city');
         Route::post('/city/create', 'Admin\CityController@postCityCreate')->name('admin.city.create');
+
+        Route::get('/pages', 'Admin\PageController@getIndex')->name('admin.pages');
+        Route::get('/page/edit/{id}', 'Admin\PageController@getEdit')->name('admin.page.edit');
+        Route::post('/page/edit/{id}', 'Admin\PageController@postEdit')->name('admin.page.edit');
     });
 });
