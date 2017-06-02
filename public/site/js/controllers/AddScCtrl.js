@@ -10,7 +10,6 @@
 
         });
         $scope.selectedStreet = function (street) {
-            console.log(street);
             $scope.sc.street = street.address;
             $scope.sc.c1 = street.c1;
             $scope.sc.c2 = street.c2;
@@ -25,13 +24,13 @@
             number_h: '',
             district: '',
             work_days: [
-                { title: 'ПН', start_time: '', end_time: '', weekend: false},
-                { title: 'ВТ', start_time: '', end_time: '', weekend: false},
-                { title: 'СР', start_time: '', end_time: '', weekend: false},
-                { title: 'ЧТ', start_time: '', end_time: '', weekend: false},
-                { title: 'ПТ', start_time: '', end_time: '', weekend: false},
-                { title: 'СБ', start_time: '', end_time: '', weekend: false},
-                { title: 'НД', start_time: '', end_time: '', weekend: false}
+                { title: 'ПН', start_time: '09:00', end_time: '19:00', weekend: false},
+                { title: 'ВТ', start_time: '09:00', end_time: '19:00', weekend: false},
+                { title: 'СР', start_time: '09:00', end_time: '19:00', weekend: false},
+                { title: 'ЧТ', start_time: '09:00', end_time: '19:00', weekend: false},
+                { title: 'ПТ', start_time: '09:00', end_time: '19:00', weekend: false},
+                { title: 'СБ', start_time: '10:00', end_time: '17:00', weekend: true},
+                { title: 'НД', start_time: '10:00', end_time: '17:00', weekend: true}
             ]
         };
         $scope.dragMap = function () {

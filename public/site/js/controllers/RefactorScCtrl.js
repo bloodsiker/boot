@@ -55,24 +55,73 @@
         };
 
 
+        $scope.week_days = ['пн', 'вт', 'ср', 'чт', 'пт', 'сб', 'вс'];
+        $scope.times_start = [
+            '06:00', '06:30',
+            '07:00', '07:30',
+            '08:00', '08:30',
+            '09:00', '09:30',
+            '10:00', '10:30',
+            '11:00', '11:30',
+            '12:00', '12:30',
+            '13:00', '13:30',
+            '14:00', '14:30'
+        ];
 
+        $scope.times_end = [
+            '14:00', '14:30',
+            '15:00', '15:30',
+            '16:00', '16:30',
+            '17:00', '17:30',
+            '18:00', '18:30',
+            '19:00', '19:30',
+            '20:00', '20:30',
+            '21:00', '21:30',
+            '22:00', '22:30'
+        ];
         function getModel(){
             model.get(url).then(function (success) {
 
                 var work_days = [
-                    { title: 'ПН', start_time: '', end_time: '', weekend: false},
-                    { title: 'ВТ', start_time: '', end_time: '', weekend: false},
-                    { title: 'СР', start_time: '', end_time: '', weekend: false},
-                    { title: 'ЧТ', start_time: '', end_time: '', weekend: false},
-                    { title: 'ПТ', start_time: '', end_time: '', weekend: false},
-                    { title: 'СБ', start_time: '', end_time: '', weekend: false},
-                    { title: 'НД', start_time: '', end_time: '', weekend: false}
+                    { title: 'ПН', start_time: '09:00', end_time: '19:00', weekend: false},
+                    { title: 'ВТ', start_time: '09:00', end_time: '19:00', weekend: false},
+                    { title: 'СР', start_time: '09:00', end_time: '19:00', weekend: false},
+                    { title: 'ЧТ', start_time: '09:00', end_time: '19:00', weekend: false},
+                    { title: 'ПТ', start_time: '09:00', end_time: '19:00', weekend: false},
+                    { title: 'СБ', start_time: '10:00', end_time: '17:00', weekend: '1'},
+                    { title: 'НД', start_time: '10:00', end_time: '17:00', weekend: '1'}
                 ];
                 if (!_.has(success.data, 'work_days')) {
                     success.data.work_days =  work_days;
                 }
                 $scope.sc = success.data;
                 brands(success.data);
+                model.get('/services').then(function (prices) {
+                    $scope.currency = ['ГРН', 'USD', 'EUR'];
+
+                    $scope.sc.price.map(function (scPrice) {
+                        if (scPrice.is_new == 1) {
+                            prices.data.push(scPrice);
+                        }
+                    });
+
+                    prices.data.map(function (price) {
+                        price.price = '';
+                        $scope.sc.price.map(function (scPrice) {
+                            if (scPrice.title === price.title) {
+                                price.price = parseFloat(scPrice.price);
+                                price.currency = scPrice.currency;
+                            } else {
+                                price.currency = 'ГРН';
+                            }
+                        });
+                    });
+
+                    console.log(prices.data);
+                    $scope.price_list = prices.data;
+                });
+
+
             });
         }
         getModel();
@@ -104,30 +153,6 @@
             };
         };
 
-        $scope.work_days = {
-          mn: {
-              start_time: '',
-              end_time: ''
-          }
-        };
-        $scope.week_days = ['пн', 'вт', 'ср', 'чт', 'пт', 'сб', 'вс'];
-        $scope.times_start = [
-            '06:00', '06:30',
-            '07:00', '07:30',
-            '08:00', '08:30',
-            '09:00', '09:30',
-            '10:00', '10:30',
-            '11:00', '11:30'
-        ];
-
-        $scope.times_end = [
-            '17:00', '17:30',
-            '18:00', '18:30',
-            '19:00', '19:30',
-            '20:00', '20:30',
-            '21:00', '21:30',
-            '22:00', '22:30'
-        ];
 
         function brands(sc) {
 
@@ -286,22 +311,40 @@
         $scope.newPriceTitle = '';
         $scope.newPriceCost = '';
         $scope.showAddPrice = false;
-        $scope.addPrice = function (valid, sc, title, price) {
+
+        $scope.addPrice = function (valid, sc, title, price, currency) {
             if (valid) {
-                sc.price.push({
-                    service_center_id: sc.id,
+                $scope.price_list.push({
                     title: title,
-                    price: price
+                    price: price,
+                    is_new: 1,
+                    currency: currency
                 });
                 $scope.newPriceTitle = '';
                 $scope.newPriceCost = '';
-                $scope.showAddPrice = false;
 
             }
         };
         $scope.deletePrice = function (sc, index) {
             sc.price.splice(index, 1);
         };
+
+        $scope.saveScPrice = function (valid, price_list) {
+            if (valid) {
+                price_list.map(function (key) {
+                    if (key.price) {
+                        $scope.sc.price.push({title: key.name, price: key.price, currency: key.currency});
+                    }
+                });
+                $scope.sc.street.address ? $scope.sc.street = $scope.sc.street.address : '';
+                model.put('/cabinet' + url + '/update', $scope.sc).then(function (res) {
+                    console.log(res);
+                    $mdToast.show($mdToast.simple().position('right bottom').textContent('Сохранено!'));
+                });
+            } else {
+                console.log('Массивы идентичны');
+            }
+        }
 
 
         // ======================== ПЕРСОНАЛ ==========================
@@ -322,27 +365,7 @@
         $scope.addPersonalDialog = function (ev, sc) {
             $mdDialog.show({
                 targetEvent: ev,
-                template:
-                '<md-dialog aria-label="Добавить фото">' +
-                '  <md-dialog-content layout-padding layout="column">'+
-                '      <form name="newPersonalForm" novalidate>'+
-                '           <input type="file" accept="image/*" aria-label="Фото" ng-model="newPersonalPhoto" base-sixty-four-input required>'+
-                '           <md-input-container class="md-block">'+
-                '               <input type="text" ng-model="newPersonalName" placeholder="ФИО" required>'+
-                '           </md-input-container>'+
-                '           <md-input-container class="md-block">'+
-                '               <input type="text" ng-model="newPersonalInfo" placeholder="Должность" required>'+
-                '           </md-input-container>'+
-                '           <div layout="row">' +
-                '               <md-button aria-label="Добавить фото" type="submit" ng-click="closeDialog()     ">Отмена</md-button>' +
-                '               <span flex></span>           ' +
-                '               <md-button type="submit" ng-click="addPersonal(newPersonalForm.$valid, newPersonalName, newPersonalInfo, newPersonalPhoto)">'+
-                '               Добавить'+
-                '               </md-button>' +
-                '            </div>'+
-                '               </form>'+
-                '  </md-dialog-content>' +
-                '</md-dialog>',
+                templateUrl: 'addPersonal.html',
                 clickOutsideToClose:true,
                 fullscreen: true,
                 locals: {
@@ -352,19 +375,21 @@
             });
             function addPersonalController($scope, $rootScope, $mdDialog, sc, model) {
                 $scope.newPersonalPhoto = [];
-                $scope.addPersonal = function (valid, name, info, photo) {
+                $scope.addPersonal = function (valid, name, info, work_exp, specialization, photo) {
                     console.log($rootScope);
                     if (valid) {
                         model.post('/cabinet' + url + '/add-personal', {
                             service_center_id: sc.id,
                             name: name,
                             info: info,
+                            work_exp:work_exp,
+                            specialization: specialization,
                             avatar: {
                                 data: photo
                             }
                         }).then(function (success) {
                             if (sc.personal) {
-                                sc.personal.push(success.data[0])
+                                sc.personal.push(success.data[0]);
                             } else {
                                 sc.personal = [];
                                 sc.personal.push(success.data[0]);
@@ -378,7 +403,7 @@
                 };
                 $scope.closeDialog = function() {
                     $mdDialog.hide();
-                }
+                };
 
             }
         };

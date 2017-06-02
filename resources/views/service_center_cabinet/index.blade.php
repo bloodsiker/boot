@@ -326,61 +326,51 @@
                     <div flex layout="row">
                         <div flex layout="column" layout-padding>
                             <h1 class="md-display-1">Примерная стоимость работ</h1>
-                            <form name="scForm" flex layout="column" novalidate>
                                 <md-list>
-                                    <md-list-item ng-repeat="item in sc.price" layout="row">
-                                        <md-input-container flex>
-                                            <input type="text" placeholder="Название" ng-model="item.title" required>
-                                        </md-input-container>
-                                        <span flex></span>
+                                    <md-list-item ng-repeat="price in price_list" layout="row">
+                                        <p ng-bind="price.title"></p>
                                         <md-input-container class="md-block">
-                                            <input type="text" placeholder="Цена" ng-model="item.price"
-                                                   required>
+                                            <input type="number" placeholder="Цена" number-to-string ng-model="price.price" step="0.01" >
                                         </md-input-container>
-                                        <md-button type="button" ng-click="deletePrice(sc, $index)"
-                                                   class="md-icon-button">
-                                            <md-icon>delete</md-icon>
-                                        </md-button>
+                                        <md-input-container flex="10" class="md-block">
+                                            <label>Валюта</label>
+                                            <md-select name="currency" ng-model="price.currency">
+                                                <md-option ng-repeat="time in currency" value="@{{time}}">@{{ time }}</md-option>
+                                            </md-select>
+                                        </md-input-container>
                                     </md-list-item>
 
 
-                                    <md-list-item ng-show="showAddPrice" layout="row">
-                                        <div flex layout="column">
-                                            <div layout="row">
-                                                <md-input-container flex>
-                                                    <input type="text" placeholder="Название" ng-model="newPriceTitle" required>
-                                                </md-input-container>
-                                                <span flex></span>
-                                                <md-input-container class="md-block">
-                                                    <input type="number" placeholder="Цена" step="0.01" ng-model="newPriceCost"
-                                                           required>
-                                                </md-input-container>
-                                            </div>
-                                            <div layout="row">
-                                                <span flex></span>
-                                                <md-button type="button" ng-click="addPrice(scForm.$valid, sc, newPriceTitle,newPriceCost)" class="md-primary md-raised">
-                                                    Добавить
-                                                </md-button>
-                                            </div>
-                                        </div>
-
+                                    <md-list-item layout="row">
+                                        <form name="addPriceForm" flex layout="row" layout-align="end end" novalidate>
+                                            <md-input-container flex>
+                                                <input type="text" placeholder="Добавить услугу" ng-model="newPriceTitle" required>
+                                            </md-input-container>
+                                            <span flex></span>
+                                            <md-input-container class="md-block">
+                                                <input type="number" placeholder="Цена" step="0.01" ng-model="newPriceCost" required>
+                                            </md-input-container>
+                                            <md-input-container flex="10" class="md-block">
+                                                <label>Валюта</label>
+                                                <md-select name="currency" ng-model="newPriceCurrency">
+                                                    <md-option ng-selected="@{{$first}}" ng-repeat="time in currency" value="@{{time}}">@{{ time }}</md-option>
+                                                </md-select>
+                                            </md-input-container>
+                                            <md-button type="button" ng-click="addPrice(addPriceForm.$valid, sc, newPriceTitle, newPriceCost, newPriceCurrency)" class="md-primary md-raised">
+                                                Добавить
+                                            </md-button>
+                                        </form>
                                     </md-list-item>
-
                                 </md-list>
                                 <div flex></div>
                                 <div layout="row">
                                     <span flex></span>
-                                    <md-button type="submit" ng-click="saveSc(true, sc)" class="md-primary
+                                    <md-button type="submit" ng-click="saveScPrice(true, price_list)" class="md-primary
                                     md-raised">Сохранить
                                     </md-button>
                                 </div>
-                            </form>
                         </div>
                     </div>
-                    <md-button class="md-fab md-fab-top-right" ng-click="showAddPrice = true">
-                        <md-icon>add</md-icon>
-                    </md-button>
-
                 </md-content>
             </md-tab>
 
@@ -414,6 +404,40 @@
         </md-tabs>
     </div>
 
+    <script type="text/ng-template" id="addPersonal.html">
+        <md-dialog aria-label="Добавить фото">
+            <md-dialog-content layout-padding layout="column">
+                 <form name="newPersonalForm" novalidate>
+                     <label style="cursor: pointer; position: relative;">
+                         <img src="http://fakeimg.pl/300x300/" alt="add personal">
+                         <span style="position: absolute; bottom: 8px; right: 5px;"><md-icon>add_a_photo</md-icon></span>
+                         <input type="file" ng-hide="true" accept="image/*" aria-label="Фото" ng-model="newPersonalPhoto" base-sixty-four-input required>
+                     </label>
+
+
+                    <md-input-container class="md-block">
+                        <input type="text" ng-model="newPersonalName" placeholder="ФИО" required>
+                    </md-input-container>
+                    <md-input-container class="md-block">
+                        <input type="text" ng-model="newPersonalInfo" placeholder="Должность">
+                    </md-input-container>
+                     <md-input-container class="md-block">
+                        <input type="text" ng-model="newPersonalWorkExp" placeholder="Специализация">
+                    </md-input-container>
+                     <md-input-container class="md-block">
+                        <input type="text" ng-model="newPersonalSpecialization" placeholder="Опыт работы">
+                    </md-input-container>
+                         <div layout="row">
+                                <md-button aria-label="Добавить фото" type="submit" ng-click="closeDialog()">Отмена</md-button>
+                           <span flex></span>
+                            <md-button type="submit" ng-click="addPersonal(newPersonalForm.$valid, newPersonalName, newPersonalInfo, newPersonalWorkExp, newPersonalSpecialization,  newPersonalPhoto)">
+                               Добавить
+                           </md-button>
+                     </div>
+                </form>
+                </md-dialog-content>
+            </md-dialog>
+    </script>
 
 
 
