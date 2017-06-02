@@ -241,13 +241,21 @@ class ServiceCenterRepository implements ServiceCenterRepositoryInterface
                 [
                     'service_center_id' => $sc->id,
                     'title' => $price['title'],
-                    'price' => $price['price']
+                    'price' => $price['price'],
+                    'currency' => $price['currency'],
+                    'is_new' => $price['is_new']
                 ]);
         }
         return true;
     }
 
 
+    /**
+     * Add personal
+     * @param $requestData
+     * @param $id
+     * @return array
+     */
     public function addPersonal($requestData, $id)
     {
         $sc = ServiceCenter::find($id);

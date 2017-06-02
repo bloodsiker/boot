@@ -13,7 +13,7 @@ class ServicesController extends Controller
      */
     public function getServices()
     {
-        $services = Services::select(['id', 'name'])->where('enable', 1)->get();
+        $services = Services::select(['id', 'title'])->where('enable', 1)->get();
         return response()->json($services, 200);
     }
 }
