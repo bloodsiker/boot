@@ -3,7 +3,7 @@ namespace PHPSTORM_META {
 
    /**
     * PhpStorm Meta file, to provide autocomplete information for PhpStorm
-    * Generated on 2017-05-13.
+    * Generated on 2017-06-06.
     *
     * @author Barry vd. Heuvel <barryvdh@gmail.com>
     * @see https://github.com/barryvdh/laravel-ide-helper
@@ -40,9 +40,11 @@ namespace PHPSTORM_META {
             'view.finder' instanceof \Illuminate\View\FileViewFinder,
             'view.engine.resolver' instanceof \Illuminate\View\Engines\EngineResolver,
             'active' instanceof \Watson\Active\Active,
+            'image' instanceof \Intervention\Image\ImageManager,
             'command.ide-helper.generate' instanceof \Barryvdh\LaravelIdeHelper\Console\GeneratorCommand,
             'command.ide-helper.models' instanceof \Barryvdh\LaravelIdeHelper\Console\ModelsCommand,
             'command.ide-helper.meta' instanceof \Barryvdh\LaravelIdeHelper\Console\MetaCommand,
+            'App\Repositories\ServiceCenter\ServiceCenterRepositoryInterface' instanceof \App\Repositories\ServiceCenter\ServiceCenterRepository,
             'blade.compiler' instanceof \Illuminate\View\Compilers\BladeCompiler,
             'cache' instanceof \Illuminate\Cache\CacheManager,
             'cache.store' instanceof \Illuminate\Cache\Repository,
@@ -161,9 +163,11 @@ namespace PHPSTORM_META {
             'view.finder' instanceof \Illuminate\View\FileViewFinder,
             'view.engine.resolver' instanceof \Illuminate\View\Engines\EngineResolver,
             'active' instanceof \Watson\Active\Active,
+            'image' instanceof \Intervention\Image\ImageManager,
             'command.ide-helper.generate' instanceof \Barryvdh\LaravelIdeHelper\Console\GeneratorCommand,
             'command.ide-helper.models' instanceof \Barryvdh\LaravelIdeHelper\Console\ModelsCommand,
             'command.ide-helper.meta' instanceof \Barryvdh\LaravelIdeHelper\Console\MetaCommand,
+            'App\Repositories\ServiceCenter\ServiceCenterRepositoryInterface' instanceof \App\Repositories\ServiceCenter\ServiceCenterRepository,
             'blade.compiler' instanceof \Illuminate\View\Compilers\BladeCompiler,
             'cache' instanceof \Illuminate\Cache\CacheManager,
             'cache.store' instanceof \Illuminate\Cache\Repository,
@@ -282,9 +286,11 @@ namespace PHPSTORM_META {
             'view.finder' instanceof \Illuminate\View\FileViewFinder,
             'view.engine.resolver' instanceof \Illuminate\View\Engines\EngineResolver,
             'active' instanceof \Watson\Active\Active,
+            'image' instanceof \Intervention\Image\ImageManager,
             'command.ide-helper.generate' instanceof \Barryvdh\LaravelIdeHelper\Console\GeneratorCommand,
             'command.ide-helper.models' instanceof \Barryvdh\LaravelIdeHelper\Console\ModelsCommand,
             'command.ide-helper.meta' instanceof \Barryvdh\LaravelIdeHelper\Console\MetaCommand,
+            'App\Repositories\ServiceCenter\ServiceCenterRepositoryInterface' instanceof \App\Repositories\ServiceCenter\ServiceCenterRepository,
             'blade.compiler' instanceof \Illuminate\View\Compilers\BladeCompiler,
             'cache' instanceof \Illuminate\Cache\CacheManager,
             'cache.store' instanceof \Illuminate\Cache\Repository,
@@ -403,9 +409,11 @@ namespace PHPSTORM_META {
             'view.finder' instanceof \Illuminate\View\FileViewFinder,
             'view.engine.resolver' instanceof \Illuminate\View\Engines\EngineResolver,
             'active' instanceof \Watson\Active\Active,
+            'image' instanceof \Intervention\Image\ImageManager,
             'command.ide-helper.generate' instanceof \Barryvdh\LaravelIdeHelper\Console\GeneratorCommand,
             'command.ide-helper.models' instanceof \Barryvdh\LaravelIdeHelper\Console\ModelsCommand,
             'command.ide-helper.meta' instanceof \Barryvdh\LaravelIdeHelper\Console\MetaCommand,
+            'App\Repositories\ServiceCenter\ServiceCenterRepositoryInterface' instanceof \App\Repositories\ServiceCenter\ServiceCenterRepository,
             'blade.compiler' instanceof \Illuminate\View\Compilers\BladeCompiler,
             'cache' instanceof \Illuminate\Cache\CacheManager,
             'cache.store' instanceof \Illuminate\Cache\Repository,
