@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\ServiceCenterCabinet;
 
+use App\Models\User;
 use App\Repositories\ServiceCenter\ServiceCenterRepositoryInterface;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -35,6 +36,15 @@ class CabinetController extends Controller
     public function getSettings()
     {
         return view('service_center_cabinet.settings');
+    }
+
+
+    /**
+     * @param Request $request
+     */
+    public function postSettings(Request $request)
+    {
+        return $this->sc->updateSetting($request);
     }
 
 

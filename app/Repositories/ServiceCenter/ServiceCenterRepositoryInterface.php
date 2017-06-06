@@ -9,6 +9,8 @@ interface ServiceCenterRepositoryInterface
 
     public function find($id);
 
+    public function updateSetting($requestData);
+
     public function addServiceCenter($requestData);
 
     public function addLogo($requestData, $id);

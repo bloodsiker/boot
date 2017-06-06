@@ -4,6 +4,7 @@ namespace App\Repositories\ServiceCenter;
 
 use App\Models\Comments;
 use App\Models\ServiceCenter;
+use App\Models\User;
 use App\Models\UserRequest;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
@@ -47,6 +48,37 @@ class ServiceCenterRepository implements ServiceCenterRepositoryInterface
         $service_center['total_comments'] = Comments::count_comment($id);
         return $service_center;
     }
+
+    /**
+     * @param $requestData
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function updateSetting($requestData)
+    {
+        $user = User::find(Auth::id());
+        if(isset($requestData->email)){
+            if(Auth::user()->email == $requestData->email){
+                return redirect()->back()->with(['message' => 'Действующий и новый email идентичные!']);
+            }
+            if(User::where('email', $requestData->email)->first()){
+                return redirect()->back()->with(['message' => 'Email ' . $requestData->email . ' занят!']);
+            }
+            $user->email = $requestData->email;
+            if($user->change_email == 1){
+                return redirect()->back()->with(['message' => 'Вы не можете изменить email более одного раза!']);
+            }
+            $user->change_email = 1;
+        }
+        $user->name = $requestData->name;
+
+        if(isset($requestData->passFirst) && !empty($requestData->passFirst)){
+            $user->password = bcrypt($requestData->passFirst);
+        }
+        if($user->update()){
+            return redirect()->back()->with(['message' => 'Изменение успешно сохранены']);
+        }
+    }
+
 
     /**
      * @param $requestData
