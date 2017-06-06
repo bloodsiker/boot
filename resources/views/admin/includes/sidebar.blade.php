@@ -30,6 +30,13 @@
             </span>
             </a>
         </li>
+        <li>
+            <a href="{{ route('admin.street') }}">
+                <i class="fa fa-street-view"></i> <span>Улицы</span>
+                <span class="pull-right-container">
+            </span>
+            </a>
+        </li>
         <li class="treeview">
             <a href="#">
                 <i class="fa fa-files-o"></i>
