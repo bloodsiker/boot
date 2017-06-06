@@ -256,7 +256,7 @@
                                         <md-card-footer>
                                             <div layout="row">
                                                 <span flex></span>
-                                                <md-button class="md-icon-button" ng-click="deletePhoto(sc.certificate, item, $index)">
+                                                <md-button class="md-icon-button" ng-click="deletePhoto(sc.service_photo, item, $index)">
                                                     <md-icon>delete</md-icon>
                                                 </md-button>
                                                 <md-button class="md-icon-button" ng-click="showPhoto($event, item.path + item.file_name)">
@@ -278,7 +278,7 @@
                                         <md-card-footer>
                                             <div layout="row">
                                                 <span flex></span>
-                                                <md-button class="md-icon-button" ng-click="deletePhoto(sc.licenses, item, $index)">
+                                                <md-button class="md-icon-button" ng-click="deletePhoto(sc.service_photo, item, $index)">
                                                     <md-icon>delete</md-icon>
                                                 </md-button>
                                                 <md-button class="md-icon-button" ng-click="showPhoto($event, item.path + item.file_name)">
@@ -403,6 +403,35 @@
             </md-tab>
         </md-tabs>
     </div>
+
+
+
+    <script type="text/ng-template" id="addGallery.html">
+
+    <md-dialog aria-label="Добавить фото">
+        <md-dialog-content layout-padding>
+             <form name="adPhotoForm" novalidate>
+                 <label style="cursor: pointer; position: relative;">
+                     <img src="http://fakeimg.pl/300x300/?text=Foto" alt="add personal" >
+                     <span style="position: absolute; bottom: 8px; right: 5px;"><md-icon>add_a_photo</md-icon></span>
+                     <input type="file" ng-hide="true" accept="image/*" aria-label="Фото" ng-model="file" base-sixty-four-input required>
+                 </label>
+                 <md-select ng-model="type" aria-label="Тип фото" required>
+                                       <md-option selected value="service_photo">Фото</md-option>
+                                      <md-option value="certificate">Сертификат</md-option>
+                                      <md-option value="licenses">Лицензия</md-option>
+                              </md-select>
+
+                     <div layout="row">
+                            <md-button aria-label="Добавить фото" type="submit" ng-click="closeDialog()">Отмена</md-button>
+                    <span flex></span>
+                           <md-button aria-label="Добавить фото" type="submit" ng-click="addPhoto(adPhotoForm.$valid, type, file)">Добавить</md-button>
+                           </div>
+                      </form>
+              </md-dialog-content>
+        </md-dialog>
+
+    </script>
 
     <script type="text/ng-template" id="addPersonal.html">
         <md-dialog aria-label="Добавить фото">

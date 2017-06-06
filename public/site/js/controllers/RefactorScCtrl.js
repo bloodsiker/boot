@@ -212,27 +212,7 @@
         $scope.addPhotoDialog = function(ev, sc) {
             $mdDialog.show({
                 targetEvent: ev,
-                template:
-                '<md-dialog aria-label="Добавить фото">' +
-                '  <md-dialog-content layout-padding>'+
-                '      <form name="adPhotoForm" novalidate>' +
-                '           <md-select ng-model="type" aria-label="Тип фото" required>' +
-                '                   <md-option selected value="service_photo">Фото</md-option>' +
-                '                   <md-option value="certificate">Сертификат</md-option>' +
-                '                   <md-option value="licenses">Лицензия</md-option>        ' +
-                '           </md-select>' +
-                '           <label>' +
-                '               <input type="file" accept="image/*" aria-label="Фото" ng-model="file" base-sixty-four-input' +
-                ' required> ' +
-                '           </label>    ' +
-                '      <div layout="row">' +
-                '        <md-button aria-label="Добавить фото" type="submit" ng-click="closeDialog()">Отмена</md-button>  ' +
-                '<span flex></span>' +
-                '       <md-button aria-label="Добавить фото" type="submit" ng-click="addPhoto(adPhotoForm.$valid, type, file)">Добавить</md-button>' +
-                '       </div>' +
-                '       </form>'+
-                '  </md-dialog-content>' +
-                '</md-dialog>',
+                templateUrl: 'addGallery.html',
                 clickOutsideToClose:true,
                 fullscreen: true,
                 locals: {
