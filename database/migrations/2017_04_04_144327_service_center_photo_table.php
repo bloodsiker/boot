@@ -18,6 +18,7 @@ class ServiceCenterPhotoTable extends Migration
             $table->integer('service_center_id')->unsigned();
             $table->string('path');
             $table->string('file_name');
+            $table->string('file_name_mini');
             $table->string('type');
 
             $table->foreign('service_center_id')

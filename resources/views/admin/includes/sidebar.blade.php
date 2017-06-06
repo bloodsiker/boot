@@ -17,6 +17,13 @@
         </li>
         <li class="header">MAIN NAVIGATION</li>
         <li>
+            <a href="{{ route('admin.pages') }}">
+                <i class="fa fa-th"></i> <span>Страницы</span>
+                <span class="pull-right-container">
+            </span>
+            </a>
+        </li>
+        <li>
             <a href="{{ route('admin.city') }}">
                 <i class="fa fa-th"></i> <span>Города</span>
                 <span class="pull-right-container">

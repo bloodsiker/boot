@@ -7,7 +7,7 @@
     <title>My AngularJS App</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
+    <meta name="_token"  content="{{ csrf_token() }}">
 
     <link rel="stylesheet" href="{{ asset('site/vendor/angular-material/angular-material.min.css') }}">
     <link rel="stylesheet" href="{{ asset('site/css/admin.css') }}">
