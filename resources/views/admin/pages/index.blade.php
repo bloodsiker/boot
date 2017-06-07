@@ -17,8 +17,7 @@
 
                 <div class="box">
                     <div class="box-header">
-                        <h3 class="box-title">Таблица странц на сайте</h3>
-                        <a href="" class="btn btn-primary pull-right"><i class="fa fa-plus"></i> Добавить</a>
+                        <h3 class="box-title">Список странц на сайте</h3>
                     </div>
                     <!-- /.box-header -->
                     <div class="box-body">
@@ -27,10 +26,8 @@
                             <tr>
                                 <th>ID</th>
                                 <th>Название</th>
-                                <th>Title</th>
                                 <th>Slug</th>
                                 <th>Статус</th>
-                                <th width="50px"></th>
                                 <th width="50px"></th>
                             </tr>
                             </thead>
@@ -39,11 +36,10 @@
                                 <tr>
                                     <td>{{ $page->id }}</td>
                                     <td>{{ $page->name }}</td>
-                                    <td>{{ $page->title }}</td>
                                     <td>{{ $page->slug }}</td>
-                                    <td>{{ $page->enabled }}</td>
+                                    <td>{{ \App\Models\Page::availabilityStatus($page->enabled) }}</td>
                                     <td style="text-align: center;"><a href="/admin-panel/page/edit/{{ $page->id }}"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a></td>
-                                    <td></td>
+
                                 </tr>
                             @endforeach
                             </tbody>
@@ -51,10 +47,8 @@
                             <tr>
                                 <th>ID</th>
                                 <th>Название</th>
-                                <th>Title</th>
                                 <th>Slug</th>
                                 <th>Статус</th>
-                                <th></th>
                                 <th></th>
                             </tr>
                             </tfoot>

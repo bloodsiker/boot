@@ -21,6 +21,7 @@ class CreatePagesTable extends Migration
             $table->string('slug');
             $table->text('content');
             $table->boolean('enabled')->default(1);
+            $table->boolean('is_content')->default(0);
         });
     }
 

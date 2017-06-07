@@ -180,6 +180,7 @@ return [
         App\Providers\RouteServiceProvider::class,
         App\Providers\ServiceCenterServiceProvider::class,
         App\Providers\ViewComposerServiceProvider::class,
+        App\Providers\AdminPanelComposer::class,
 
     ],
 

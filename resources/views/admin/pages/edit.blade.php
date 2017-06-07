@@ -39,10 +39,12 @@
                                 <input type="text" class="form-control" name="slug" id="slug" value="{{ $page->slug }}" disabled>
                             </div>
 
-                            <div class="form-group">
-                                <label for="content">Content</label>
-                                <textarea name="content" id="content" cols="30" rows="10">{{ $page->content }}</textarea>
-                            </div>
+                            @if($page->is_content == 1)
+                                <div class="form-group">
+                                    <label for="content">Content</label>
+                                    <textarea name="content" id="content" cols="30" rows="10">{{ $page->content }}</textarea>
+                                </div>
+                            @endif
                         </div>
 
                         <!-- /.box-body -->

@@ -14,9 +14,33 @@ class Page extends Model
     public $timestamps = false;
 
 
+    /**
+     * @param Builder $builder
+     * @return $this
+     */
     public static function scopeEnabled(Builder $builder)
     {
         return $builder
             ->where('enabled', 1);
+    }
+
+
+    /**
+     * @param $status
+     * @return string
+     */
+    public static function availabilityStatus($status)
+    {
+        switch ($status)
+        {
+            case 1:
+                return 'Включена';
+                break;
+            case 0:
+                return 'Выключена';
+                break;
+            default:
+                return 'Включена';
+        }
     }
 }

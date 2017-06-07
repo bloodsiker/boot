@@ -8,12 +8,20 @@ use App\Http\Controllers\Controller;
 
 class PageController extends Controller
 {
+
+    /**
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function getIndex()
     {
         $pages = Page::all();
         return view('admin.pages.index', compact('pages'));
     }
 
+    /**
+     * @param $id
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function getEdit($id)
     {
         $page = Page::find($id);
@@ -32,12 +40,10 @@ class PageController extends Controller
         $page->content = $request->content;
         $page->enabled = $request->enabled;
 
-        $message = 'Ошибка при редактировании страници';
         if($page->update()){
-            $message = 'Содержание страницы обновленно!';
-            return redirect()->route('admin.pages')->with(['message' => $message]);
+            return redirect()->route('admin.pages')->with(['message' => 'Содержание страницы обновленно!']);
         }
-        return redirect()->back()->with(['message' => $message]);
+        return redirect()->back()->with(['message' => 'Ошибка при редактировании страници']);
 
     }
 }
