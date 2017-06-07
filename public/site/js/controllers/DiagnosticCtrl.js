@@ -49,6 +49,7 @@
                 $scope.problems_description = success.data;
                 $scope.results = false;
                 $scope.activeTab = 2;
+                $scope.problem_description_check = '';
             });
         };
 
@@ -65,7 +66,7 @@
                 headers: { 'X-CSRF-TOKEN': token },
             }).then(function (success) {
                 $scope.results = success.data;
-                $scope.problem_description_check = '';
+
 
             });
         };
