@@ -445,16 +445,16 @@
 
 
                     <md-input-container class="md-block">
-                        <input type="text" ng-model="newPersonalName" placeholder="ФИО" required>
+                        <input type="text" ng-model="newPersonalName" placeholder="ФИО (Иванов Иван Иванович)" required>
                     </md-input-container>
                     <md-input-container class="md-block">
-                        <input type="text" ng-model="newPersonalInfo" placeholder="Должность">
+                        <input type="text" ng-model="newPersonalInfo" placeholder="Должность (Старший мастер)">
                     </md-input-container>
                      <md-input-container class="md-block">
-                        <input type="text" ng-model="newPersonalWorkExp" placeholder="Специализация">
+                        <input type="text" ng-model="newPersonalSpecialization" placeholder="Специализация (Мастер по ремонту смартфонов)">
                     </md-input-container>
                      <md-input-container class="md-block">
-                        <input type="text" ng-model="newPersonalSpecialization" placeholder="Опыт работы">
+                        <input type="text" ng-model="newPersonalWorkExp" placeholder="Опыт работы (10 лет)">
                     </md-input-container>
                          <div layout="row">
                                 <md-button aria-label="Добавить фото" type="submit" ng-click="closeDialog()">Отмена</md-button>

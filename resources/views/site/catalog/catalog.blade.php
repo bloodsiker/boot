@@ -149,7 +149,25 @@
                         <a class="title-sc" ng-href="@{{ '/sc/'+item.id }}" ng-bind="item.service_name"></a>
                         <div class="info-sc">
                             <span class="glyphicon glyphicon-time"></span>
-                            <span class="text" ng-bind="item.start_day+'-'+item.end_day+' c '+item.start_time+ ' по '+ item.end_time"></span>
+                            <span class="text" ng-bind="'Сегодня: c '+ item.work_days[week_day-1].start_time+' по '+item.work_days[week_day-1].end_time"></span>
+
+                            <span uib-dropdown auto-close="outsideClick" is-open="openedServiceMore">
+                            <span style="font-size: 10px; cursor: pointer;" uib-dropdown-toggle>Посмотреть все</span>
+                                <div class="popover bottom fade in" style="top: 20px;" uib-dropdown-menu>
+                                    <div style="left: 20px;" class="arrow"></div>
+                                    <div class="popover-inner">
+                                        <div class="popover-content" ng-mouseleave="openedServiceMore = false">
+                                            <ul>
+                                                <li style="list-style: none;"
+                                                    ng-repeat="work in item.work_days"
+                                                    ng-style="{'font-weight': $index == week_day-1 ? '900' : 'normal', color: $index == week_day-1 ? '#000' : ''}"
+                                                    ng-bind="work.title + ' ' + (work.weekend == 1 ? 'выходной' : work.start_time + ' - '+ work.end_time)"></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </span>
+
                             <br>
                             <span class="glyphicon glyphicon-map-marker"></span>
                             <span class="text" ng-bind="item.address"></span>

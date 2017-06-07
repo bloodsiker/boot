@@ -769,7 +769,7 @@ span.icon {
 
 .page-sc {
   padding-top: 10px;
-  color: #666666;
+  color: #333;
   h1 {
     color: #2e2e2e;
   }
@@ -805,7 +805,7 @@ span.icon {
       color: #333333;
     }
   }
-  .btn {
+  .btn-call {
     margin-top: 20px;
     margin-bottom: 30px;
     padding-right: 30px;
@@ -897,6 +897,7 @@ span.icon {
     .certificate-item {
       cursor: pointer;
       margin-top: 10px;
+
     }
   }
   .personal-sc {
@@ -909,6 +910,7 @@ span.icon {
       p {
         font-size: 12px;
         padding-right: 50px;
+        margin: 0;
       }
       img {
         -webkit-border-radius: 50%;

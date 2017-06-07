@@ -14,7 +14,7 @@
                 // index.end_time = parseInt(index.end_time.replace(":", ""));
                 var brands = [];
                 _.mapObject(index.manufacturers, function (el) {
-                    brands.push(el.manufacturer)
+                    brands.push(el.manufacturer);
                 });
                 index.manufacturers = brands.toString();
             });
@@ -24,6 +24,9 @@
 
             console.log($rootScope.catalog);
         });
+
+        var date_now = new Date ();
+        $scope.week_day = date_now.getDay();
 
         // ================= MAP
 

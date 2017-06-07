@@ -23,7 +23,13 @@
                 </div>
                 <div class="row">
                     <div class="col-xs-12">
-                        <div class="info-sc"><span><i class="glyphicon glyphicon-time"></i> Время работы:</span> <span class="text" ng-bind="service_center.work_time"></span> <span>работает еще 5 ч 0 м</span></div>
+                        <div class="info-sc"><i class="glyphicon glyphicon-time"></i> <span class="text" style="font-size: 18px;" ng-bind="'Сегодня: c '+ service_center.work_days[week_day-1].start_time+' по '+service_center.work_days[week_day-1].end_time"></span></div>
+                        <ul style="margin-left: 17px;">
+                            <li style="list-style: none;"
+                                ng-repeat="work in service_center.work_days"
+                                ng-style="{'font-weight': $index == week_day-1 ? '900' : 'normal', color: $index == week_day-1 ? '#000' : ''}"
+                                ng-bind="work.title + ' ' + (work.weekend == 1 ? 'выходной' : work.start_time + ' - '+ work.end_time)"></li>
+                        </ul>
                         <div class="info-sc"><span><i class="glyphicon glyphicon-map-marker"></i> Адрес:</span>
                             <span class="text" ng-bind="service_center.address"></span>
                         </div>
@@ -33,7 +39,7 @@
                 </div>
                 <div class="row callback">
                     <div class="col-md-4">
-                        <button class="btn btn-warning"
+                        <button class="btn btn-yellow btn-call"
                                 data-toggle="modal"
                                 data-target="#call_modal"
                                 ng-click="openScCall(service_center)">
@@ -56,7 +62,7 @@
                     </div>
                     <div class="col-md-2 comments">
                         <div class="count" ng-bind="service_center.total_comments"></div>
-                        <div>отзыва</div>
+                        <div>отзывов</div>
                     </div>
                 </div>
             </div>
@@ -114,31 +120,34 @@
             </div>
             <div class="col-md-6">
                 <!--=======================================PHOTOS=======================================-->
-                <h3 ng-if="service_center.service_photo">Фотографии</h3>
+                <h3>Фотографии</h3>
                 <div class="row photos">
-                    <div ng-repeat="item in service_center.service_photo">
+                    <div ng-if="photo.type === 'service_photo'" ng-repeat="photo in service_center.service_photo">
                         <div class="clearfix" ng-if="$index % 3 == 0"></div>
                         <div class="col-md-4" >
                             <img class="photo-item"
                                  alt="@{{service_center.service_name}}"
                                  data-toggle="modal"
                                  data-target="#photoModal"
-                                 ng-click="openPhoto(item.file_name)"
-                                 ng-src="@{{item.file_name}}">
+                                 ng-click="openPhoto(photo.path +photo.file_name)"
+                                 ng-src="@{{photo.path +photo.file_name_mini}}">
                         </div>
                     </div>
                 </div>
                 <hr>
                 <!--=======================================CERTIFICATE=======================================-->
-                <h3 ng-if="service_center.certificate">Сертификаты и лицензии</h3>
-                <div class="row certificate" ng-if="service_center.certificate">
-                    <div class="col-md-4" ng-repeat="item in service_center.certificate">
-                        <img class="certificate-item"
-                             alt="@{{service_center.service_name}}"
-                             data-toggle="modal"
-                             data-target="#photoModal"
-                             ng-click="openPhoto(item.file_name)"
-                             ng-src="@{{item.file_name}}">
+                <h3>Сертификаты и лицензии</h3>
+                <div class="row certificate">
+                    <div ng-if="photo.type !== 'service_photo'" ng-repeat="photo in service_center.service_photo">
+                        <div class="clearfix" ng-if="$index % 3 == 0"></div>
+                        <div class="col-md-4" >
+                            <img class="photo-item"
+                                 alt="@{{service_center.service_name}}"
+                                 data-toggle="modal"
+                                 data-target="#photoModal"
+                                 ng-click="openPhoto(photo.path + photo.file_name)"
+                                 ng-src="@{{photo.path + photo.file_name_mini}}">
+                        </div>
                     </div>
                 </div>
             </div>
@@ -157,63 +166,65 @@
                         autoplay=true
 
                 >
-                    <div class="slick-item" ng-repeat="item in service_center.personal">
-                        <img ng-src="@{{ item.avatar }}" alt="@{{item.name}}" align="left"/>
-                        <h4 ng-bind="item.name"></h4>
-                        <p ng-bind="item.info"></p>
+                    <div class="slick-item" ng-repeat="person in service_center.personal">
+                        <img ng-src="@{{ person.path + person.avatar }}" alt="@{{person.name}}" align="left"/>
+                        <h4 ng-bind="person.name"></h4>
+                        <p ng-if="person.info" ng-bind="person.info"></p>
+                        <p ng-if="person.specialization" ng-bind="person.specialization"></p>
+                        <p ng-if="person.work_exp" ng-bind="'Стаж: '+person.work_exp"></p>
                     </div>
-                    <div class="slick-item" ng-repeat="item in service_center.personal">
-                        <img ng-src="@{{ item.avatar }}" alt="@{{item.name}}" align="left"/>
-                        <h4 ng-bind="item.name"></h4>
-                        <p ng-bind="item.info"></p>
-                    </div>
+
                 </slick>
             </div>
         </div>
         <hr>
-        <div class="row comments-section">
-            <div class="col-md-10">
-                <h3>Отзывы</h3>
-                <span ng-bind="'Вот что говорят клиенты об ' + service_center.title"></span>
+        <div class="row">
+            <div class="comments-section">
+                <div class="col-md-10">
+                    <h3>Отзывы</h3>
+                    <span ng-bind="'Вот что говорят клиенты об ' + service_center.title"></span>
+                </div>
+                <div class="col-md-2 text-right">
+                    <button class="btn btn-yellow" data-toggle="modal" data-target="#add_comment_modal">Написать отзыв</button>
+                </div>
             </div>
-            <div class="col-md-2 text-right">
-                <button class="btn btn-warning" data-toggle="modal" data-target="#add_comment_modal">Написать отзыв</button>
-            </div>
-
             <!--=======================================HEADER COMMENTS=======================================-->
-            <div class="col-md-12 comments-header">
-                <div class="row text-center">
-                    <div class="col-md-2">
-                        <div class="total-comments" ng-bind="comments.list.length +' отзыва'"></div>
-                        <rating value="comments.header.r_total_rating" max="5"></rating>
-                        <div class="total-count"><span class="count" ng-bind="comments.header.r_total_rating"></span>/<span>5</span></div>
-                    </div>
-                    <div class="col-md-2">
-                        <div class="text-rating">Качество работ</div>
-                        <rating value="comments.header.r_quality_of_work" max="5"></rating>
-                        <div class="count-rating"><span class="count" ng-bind="comments.header.r_quality_of_work"></span><span>/5</span></div>
-                    </div>
-                    <div class="col-md-2">
-                        <div class="text-rating">Соблюдение сроков</div>
-                        <rating value="comments.header.r_deadlines" max="5"></rating>
-                        <div class="count-rating"><span class="count" ng-bind="comments.header.r_deadlines"></span><span>/5</span></div>
-                    </div>
-                    <div class="col-md-2">
-                        <div class="text-rating">Соблюдение стоимости</div>
-                        <rating value="comments.header.r_compliance_cost" max="5"></rating>
-                        <div class="count-rating"><span class="count" ng-bind="comments.header.r_compliance_cost"></span><span>/5</span></div>
-                    </div>
-                    <div class="col-md-2">
-                        <div class="text-rating">Цена/качество</div>
-                        <rating value="comments.header.r_price_quality" max="5"></rating>
-                        <div class="count-rating"><span class="count" ng-bind="comments.header.r_price_quality"></span><span>/5</span></div>
-                    </div>
-                    <div class="col-md-2">
-                        <div class="text-rating">Обслуживание</div>
-                        <rating value="comments.header.r_service" max="5"></rating>
-                        <div class="count-rating"><span class="count" ng-bind="comments.header.r_service"></span><span>/5</span></div>
+            <div class="col-md-12">
+                <div class="comments-header">
+                    <div class="row text-center">
+                        <div class="col-md-2">
+                            <div class="total-comments" ng-bind="comments.list.length +' отзыва'"></div>
+                            <rating value="comments.header.r_total_rating" max="5"></rating>
+                            <div class="total-count"><span class="count" ng-bind="comments.header.r_total_rating"></span>/<span>5</span></div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="text-rating">Качество работ</div>
+                            <rating value="comments.header.r_quality_of_work" max="5"></rating>
+                            <div class="count-rating"><span class="count" ng-bind="comments.header.r_quality_of_work"></span><span>/5</span></div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="text-rating">Соблюдение сроков</div>
+                            <rating value="comments.header.r_deadlines" max="5"></rating>
+                            <div class="count-rating"><span class="count" ng-bind="comments.header.r_deadlines"></span><span>/5</span></div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="text-rating">Соблюдение стоимости</div>
+                            <rating value="comments.header.r_compliance_cost" max="5"></rating>
+                            <div class="count-rating"><span class="count" ng-bind="comments.header.r_compliance_cost"></span><span>/5</span></div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="text-rating">Цена/качество</div>
+                            <rating value="comments.header.r_price_quality" max="5"></rating>
+                            <div class="count-rating"><span class="count" ng-bind="comments.header.r_price_quality"></span><span>/5</span></div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="text-rating">Обслуживание</div>
+                            <rating value="comments.header.r_service" max="5"></rating>
+                            <div class="count-rating"><span class="count" ng-bind="comments.header.r_service"></span><span>/5</span></div>
+                        </div>
                     </div>
                 </div>
+
             </div>
             <!--=======================================COMMENTS LIST=======================================-->
             <div class="col-md-12">

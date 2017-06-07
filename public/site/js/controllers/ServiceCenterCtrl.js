@@ -23,6 +23,8 @@
         });
 
 
+        var date_now = new Date ();
+        $scope.week_day = date_now.getDay();
 
         // ================= ADD COMMENT =====================
 
