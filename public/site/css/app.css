@@ -834,45 +834,68 @@ img {
 .diagnostics {
   margin-top: 30px;
   margin-bottom: 100px;
-  overflow: hidden; }
-  .diagnostics .diagnostics-header {
-    background-color: #e4eeff; }
-    .diagnostics .diagnostics-header .step.active {
-      display: inline-block;
-      color: #ffffff;
-      border: 1px solid #5c79ab;
-      background-color: #7c9dd8;
-      width: 100%; }
-    .diagnostics .diagnostics-header .step {
-      color: #5774a6;
-      padding: 10px;
-      position: relative;
-      margin-left: -15px;
-      margin-right: -15px; }
-    .diagnostics .diagnostics-header .line {
-      font-size: 45px;
-      font-family: 'LatoLight'; }
-    .diagnostics .diagnostics-header .step-count {
-      font-size: 40px;
-      display: inline-block;
-      font-family: 'LatoLight';
-      margin-right: 10px; }
-    .diagnostics .diagnostics-header .title-step {
+  min-height: 70vh; }
+  .diagnostics .phone-img {
+    width: 150px; }
+  .diagnostics .tablet-img {
+    width: 200px; }
+  .diagnostics .laptop-img {
+    width: 320px; }
+  .diagnostics .select-type.active {
+    background: #ffca13;
+    padding: 20px;
+    border-radius: 5px; }
+  .diagnostics .select-type {
+    cursor: pointer; }
+    .diagnostics .select-type img {
+      margin-bottom: 10px; }
+    .diagnostics .select-type span {
+      transition: 0.5s;
+      padding: 5px;
+      border-radius: 5px;
       font-size: 16px;
-      display: inline-block;
       font-family: 'LatoLight';
-      font-weight: 700;
-      margin-left: 10px; }
-  .diagnostics .diagnostics-body {
-    padding-top: 100px;
-    padding-bottom: 100px;
-    border-left: 1px solid #dbe7fb;
-    border-right: 1px solid #dbe7fb;
-    background-color: #f5f9ff; }
-    .diagnostics .diagnostics-body h3 {
-      margin: 0; }
-  .diagnostics .diagnostics-footer .btn {
-    width: 100%; }
+      font-weight: 700; }
+    .diagnostics .select-type span.active {
+      background: #ffca13; }
+    .diagnostics .select-type:hover span {
+      background: #cecece; }
+  .diagnostics .check {
+    transition: 0.5s;
+    padding: 5px;
+    border-radius: 5px;
+    cursor: pointer; }
+    .diagnostics .check:hover {
+      background: #cecece; }
+  .diagnostics .check.active {
+    background: #ffca13; }
+  .diagnostics .tab-head {
+    white-space: nowrap; }
+  .diagnostics .circle-index {
+    font-size: 24px;
+    background: #666;
+    color: #fff;
+    padding: 10px 15px;
+    border-radius: 50%; }
+  .diagnostics .nav-item.disabled a {
+    cursor: default !important; }
+  .diagnostics .nav-tabs.nav-justified > li > a {
+    border: none; }
+  .diagnostics .nav-tabs.nav-justified {
+    border-bottom: 1px solid; }
+  .diagnostics .nav-tabs.nav-justified > .active > a,
+  .diagnostics .nav-tabs.nav-justified > .active > a:focus,
+  .diagnostics .nav-tabs.nav-justified > .active > a:hover {
+    border: none; }
+    .diagnostics .nav-tabs.nav-justified > .active > a .circle-index,
+    .diagnostics .nav-tabs.nav-justified > .active > a:focus .circle-index,
+    .diagnostics .nav-tabs.nav-justified > .active > a:hover .circle-index {
+      background: #000; }
+  .diagnostics .diagnostics-footer {
+    margin-top: 20px;
+    position: absolute;
+    width: 100%;
+    bottom: 0; }
 
 .photo-show {
   background-color: transparent;
