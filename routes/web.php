@@ -18,7 +18,7 @@ Route::group(['middleware' => ['web']], function (){
     Route::get('about', 'SiteController@getAbout')->name('about');
     Route::get('support', 'SiteController@getSupport')->name('support');
     Route::get('diagnostics', 'DiagnosticsController@getIndex')->name('diagnostics');
-    Route::get('diagnostic', 'DiagnosticsController@getDiagnostic')->name('diagnostic');
+    Route::post('diagnostic', 'DiagnosticsController@postDiagnostic')->name('diagnostic');
 
     Route::get('catalog', 'CatalogController@getIndex')->name('catalog');
     Route::get('sc/{id}', 'CatalogController@getServiceCenter')->name('sc');
