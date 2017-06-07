@@ -65,6 +65,7 @@
                 headers: { 'X-CSRF-TOKEN': token },
             }).then(function (success) {
                 $scope.results = success.data;
+                $scope.problem_description_check = '';
 
             });
         };
