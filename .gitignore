@@ -1,7 +1,7 @@
 /node_modules
 /vendor
 /.idea
-/.idea/*
+.idea/workspace.xml
 .env
 .env.example
 .gitattributes

@@ -51,6 +51,9 @@
             <div class="navbar-custom-menu">
                 <ul class="nav navbar-nav">
                     <!-- User Account: style can be found in dropdown.less -->
+                    <li class="bg-blue">
+                        <a href="{{ route('main') }}">На сайт <i class="fa fa-sign-out"></i></a>
+                    </li>
                     <li class="dropdown user user-menu">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                             <span class="hidden-xs">{{ Auth::user()->name }}</span>
@@ -84,13 +87,10 @@
                                     <a href="#" class="btn btn-default btn-flat">Профиль</a>
                                 </div>
                                 <div class="pull-right">
-                                    <a href="#" class="btn btn-default btn-flat">Выход</a>
+                                    <a href="{{ route('admin.logout') }}" class="btn btn-default btn-flat">Выход</a>
                                 </div>
                             </li>
                         </ul>
-                    </li>
-                    <li>
-                        <a href="{{ route('admin.logout') }}">Выход <i class="fa fa-sign-out"></i></a>
                     </li>
                 </ul>
             </div>
