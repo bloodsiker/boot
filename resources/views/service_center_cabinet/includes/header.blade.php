@@ -1,7 +1,7 @@
 <md-button hide-gt-md class="md-icon-button" ng-click="openSideMenu()">
     <md-icon>menu</md-icon>
 </md-button>
-<h1 class="md-toolbar-tools">FIXX ADMIN</h1>
+<h1 class="md-toolbar-tools"></h1>
 <span flex></span>
 <md-menu>
     <md-button class="md-icon-button" ng-mouseenter="$mdMenu.open()">

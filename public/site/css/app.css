@@ -858,17 +858,17 @@ img {
       font-weight: 700; }
     .diagnostics .select-type span.active {
       background: #ffca13; }
-    .diagnostics .select-type:hover span {
+    .diagnostics .select-type:hover span:not(.active) {
       background: #cecece; }
   .diagnostics .check {
     transition: 0.5s;
     padding: 5px;
     border-radius: 5px;
     cursor: pointer; }
-    .diagnostics .check:hover {
-      background: #cecece; }
   .diagnostics .check.active {
     background: #ffca13; }
+  .diagnostics .check:hover:not(.active) {
+    background: #cecece; }
   .diagnostics .tab-head {
     white-space: nowrap; }
   .diagnostics .circle-index {

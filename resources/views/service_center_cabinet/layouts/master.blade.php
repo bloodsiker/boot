@@ -6,6 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>My AngularJS App</title>
     <meta name="description" content="">
+    <meta name="_token"  content="{{ csrf_token() }}">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
 
@@ -25,7 +26,11 @@
                     md-is-locked-open="$mdMedia('gt-md')"
                     md-whiteframe="4">
             <md-toolbar class="md-theme-indigo">
-                <h1 class="md-toolbar-tools">Sidenav Left</h1>
+                <h4 class="md-toolbar-tools">
+                    <a href="/">
+                    <img width="40px" src="{{ asset('site/img/logo.png') }}" alt="boot.com.ua"> <span>на сайт</span>
+                    </a>
+                </h4>
             </md-toolbar>
             <md-content>
                 @include('service_center_cabinet.includes.sidebar')

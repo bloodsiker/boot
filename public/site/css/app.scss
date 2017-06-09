@@ -1142,7 +1142,7 @@ span.icon {
       background: #ffca13;
     }
     &:hover {
-      span {
+      span:not(.active) {
         background: #cecece;
       }
     }
@@ -1154,12 +1154,13 @@ span.icon {
     padding: 5px;
     border-radius: 5px;
     cursor: pointer;
-    &:hover {
-      background: #cecece;
-    }
   }
   .check.active {
     background: #ffca13;
+
+  }
+  .check:hover:not(.active) {
+    background: #cecece;
   }
 
 
