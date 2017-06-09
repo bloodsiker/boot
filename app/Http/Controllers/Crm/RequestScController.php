@@ -8,7 +8,7 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-class RequestController extends Controller
+class RequestScController extends Controller
 {
     public function getIndex()
     {

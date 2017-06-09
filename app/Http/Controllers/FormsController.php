@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\FormRequest;
 use Mail;
 use Validator;
 use Carbon\Carbon;
@@ -23,11 +24,13 @@ class FormsController extends Controller
             return json_encode(['status' => 400, $validator->failed()]);
         }
 
-        DB::table('form_requests')->insert(
+        FormRequest::insert(
             [
                 'pagename' => 'Главная страница',
+                'city' => 'Днепр',
                 'name' => $request->name,
                 'phone' => $request->phone,
+                'status' => 'Новая',
                 'created_at' => Carbon::now()
             ]
         );
