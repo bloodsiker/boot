@@ -27,5 +27,10 @@ class ServiceCenterServiceProvider extends ServiceProvider
             \App\Repositories\ServiceCenter\ServiceCenterRepositoryInterface::class,
             \App\Repositories\ServiceCenter\ServiceCenterRepository::class
         );
+
+        $this->app->bind(
+            \App\Repositories\VisitsServiceCenter\VisitsRepositoryInterface::class,
+            \App\Repositories\VisitsServiceCenter\VisitsRepository::class
+        );
     }
 }

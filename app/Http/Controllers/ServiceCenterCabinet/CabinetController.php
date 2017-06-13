@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers\ServiceCenterCabinet;
 
-use App\Models\User;
 use App\Repositories\ServiceCenter\ServiceCenterRepositoryInterface;
+use App\Repositories\VisitsServiceCenter\VisitsRepositoryInterface;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
@@ -15,10 +16,15 @@ class CabinetController extends Controller
      * @var ServiceCenterRepositoryInterface
      */
     private $sc;
+    /**
+     * @var VisitsRepositoryInterface
+     */
+    private $visitsRepository;
 
-    public function __construct(ServiceCenterRepositoryInterface $sc)
+    public function __construct(ServiceCenterRepositoryInterface $sc, VisitsRepositoryInterface $visitsRepository)
     {
         $this->sc = $sc;
+        $this->visitsRepository = $visitsRepository;
     }
 
     /**
@@ -26,6 +32,15 @@ class CabinetController extends Controller
      */
     public function getDashboard()
     {
+        $end = Carbon::now()->toDateString();
+        $start = Carbon::now()->addDay(-7)->toDateString();
+        $service_centers = Auth::user()->service_centers->toArray();
+        $visits = [];
+        foreach ($service_centers as $sc){
+            $visits[$sc['service_name']] = $this->visitsRepository->visitsBetween($sc['id'], $start, $end);
+        }
+        dd($visits);
+
         return view('service_center_cabinet.dashboard');
     }
 
