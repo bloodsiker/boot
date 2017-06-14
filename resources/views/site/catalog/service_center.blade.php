@@ -82,47 +82,49 @@
             <div class="col-md-6">
 
                 <!--=======================================TAGS=======================================-->
-                <h3>Описание</h3>
+                <h3 ng-if="service_center.tags.length > 0">Описание</h3>
                 <div class="tag" ng-repeat="item in service_center.tags" ng-bind="item.tag"></div>
-                <hr>
+                <hr ng-if="service_center.tags.length > 0">
                 <!--=======================================ABOUT=======================================-->
-                <h3>О компании</h3>
+                <h3 ng-if="service_center.about">О компании</h3>
                 <p ng-bind="service_center.about"></p>
-                <hr>
+                <hr ng-if="service_center.about">
 
-                <h3>Преимущества</h3>
+                <h3 ng-if="service_center.advantages.length > 0">Преимущества</h3>
                 <ul>
                     <li ng-repeat="item in service_center.advantages" ng-bind="item.advantages"></li>
                 </ul>
-                <hr>
+                <hr ng-if="service_center.advantages.length > 0">
 
                 <!--=======================================BRANDS=======================================-->
-                <h3>Марки телефонов</h3>
+                <h3 ng-if="service_center.manufacturers.length > 0">Марки телефонов</h3>
                 <p><span ng-repeat="item in service_center.manufacturers" ng-bind="item.manufacturer + ', '"></span></p>
-                <hr>
+                <hr ng-if="service_center.manufacturers.length > 0">
 
                 <!--=======================================BUY=======================================-->
-                <h3>Примерная стоимость работ</h3>
-                <table class="table table-bordered table-responsive">
+                <h3 ng-if="service_center.price.length > 0">Примерная стоимость работ</h3>
+                <table ng-if="service_center.price.length > 0" class="table table-bordered table-responsive">
                     <thead>
                     <tr>
                         <th>Услуга</th>
                         <th>Цена</th>
+                        <th>Валюта</th>
                     </tr>
                     </thead>
                     <tbody>
                     <tr ng-repeat="item in service_center.price">
                         <td ng-bind="item.title"></td>
                         <td ng-bind="item.price"></td>
+                        <td ng-bind="item.currency"></td>
                     </tr>
                     </tbody>
                 </table>
             </div>
             <div class="col-md-6">
                 <!--=======================================PHOTOS=======================================-->
-                <h3>Фотографии</h3>
+                <h3 ng-if="filteredPhotos.length != 0">Фотографии</h3>
                 <div class="row photos">
-                    <div ng-if="photo.type === 'service_photo'" ng-repeat="photo in service_center.service_photo">
+                    <div ng-repeat="photo in service_center.service_photo | filter: 'service_photo' as filteredPhotos">
                         <div class="clearfix" ng-if="$index % 3 == 0"></div>
                         <div class="col-md-4" >
                             <img class="photo-item"
@@ -133,12 +135,13 @@
                                  ng-src="@{{photo.path +photo.file_name_mini}}">
                         </div>
                     </div>
+
                 </div>
-                <hr>
+                <hr ng-if="filteredLicense.length != 0 && filteredPhotos.length != 0">
                 <!--=======================================CERTIFICATE=======================================-->
-                <h3>Сертификаты и лицензии</h3>
+                <h3 ng-if="filteredLicense.length != 0">Сертификаты и лицензии</h3>
                 <div class="row certificate">
-                    <div ng-if="photo.type !== 'service_photo'" ng-repeat="photo in service_center.service_photo">
+                    <div ng-repeat="photo in service_center.service_photo | filter: 'licenses': 'certificate' as filteredLicense">
                         <div class="clearfix" ng-if="$index % 3 == 0"></div>
                         <div class="col-md-4" >
                             <img class="photo-item"
@@ -154,7 +157,7 @@
         </div>
         <hr>
         <!--=======================================PERSONAL SC=======================================-->
-        <div class="row">
+        <div class="row" ng-if="service_center.personal">
             <div class="col-xs-12 personal-sc">
                 <h3>Команда сервиса</h3>
                 <slick
@@ -189,7 +192,7 @@
                 </div>
             </div>
             <!--=======================================HEADER COMMENTS=======================================-->
-            <div class="col-md-12">
+            <div class="col-md-12" >
                 <div class="comments-header">
                     <div class="row text-center">
                         <div class="col-md-2">
@@ -234,18 +237,14 @@
                         <div class="rating"><span class="count" ng-bind="item.r_total_rating"></span> <span class="glyphicon glyphicon-star"></span></div>
                         <div class="device-name">Устройство <span ng-bind="item.device"></span></div>
                         <div class="service-name">Услуга <span ng-bind="item.service">Замена экрана</span></div>
-                        <div class="social">
-                            <span>Поделитесь отзывом:</span><span class="ya-share2"
-                                                                  data-services="vkontakte,facebook,gplus"></span>
-
-                        </div>
+                        <div class="service-name" ng-bind="dateBind(item.created_at) | date: 'dd-MM-yyyy'"></div>
                     </div>
                     <div class="col-md-6">
                         <p ng-bind="item.text"></p>
                         <div class="info-comment">Отзыв зафиксирован со слов клиента по телефону</div>
                     </div>
                     <div class="col-md-3">
-                        <img class="avatar" src="http://fakeimg.pl/350x200/?text=Photo" align="left"/>
+                        <img class="avatar" src="{{ asset('site/img/logo_user_default.png') }}" align="left"/>
                         <h4 class="name" ng-bind="item.user_name"></h4>
                         <span class="date" ng-bind="item.date"></span>
                         <hr>

@@ -4,8 +4,6 @@
     angular.module("angular-rating", []).component("rating", {
         template: '<span class="rating-container" ng-mouseleave="model.control_onMouseLeave()">' +
         '<span class="star glyphicon glyphicon-star" ng-class="{\'star-on\':entry.filled, \'star-high\':entry.highlighted}"' +
-        'ng-mouseover="model.onMouseOver($index)"' +
-        'ng-mouseleave="model.onMouseLeave($index)"' +
         'ng-click="model.onClick($index)"' +
         'style="font-size:{{model.size}};" ng-repeat="entry in model.stars track by $index"></span>' +
         '</span>',
@@ -36,10 +34,10 @@
                 model.size = '20px';
 
             if (!model.color)
-                model.color = "#F7EB90";
+                model.color = "#ff8f00";
 
             if (!model.highColor)
-                model.highColor = "#F7EB90";
+                model.highColor = "#ff8f00";
 
             if (model.max == undefined) {
                 model.max = 5;
