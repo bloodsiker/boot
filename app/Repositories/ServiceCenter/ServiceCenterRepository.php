@@ -275,7 +275,7 @@ class ServiceCenterRepository implements ServiceCenterRepositoryInterface
                     'title' => $price['title'],
                     'price' => $price['price'],
                     'currency' => $price['currency'],
-                    'is_new' => $price['is_new']
+                    'is_new' => isset($price['is_new']) ? $price['is_new'] : 0
                 ]);
         }
         return true;
