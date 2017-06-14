@@ -182,6 +182,7 @@ return [
         App\Providers\ViewComposerServiceProvider::class,
         App\Providers\AdminPanelComposer::class,
         App\Providers\CrmPanelComposer::class,
+        App\Providers\ServicesViewServiceProvider::class,
 
     ],
 

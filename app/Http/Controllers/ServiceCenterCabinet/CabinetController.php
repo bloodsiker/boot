@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\ServiceCenterCabinet;
 
 use App\Repositories\ServiceCenter\ServiceCenterRepositoryInterface;
+use App\Repositories\ServicesView\ServicesViewRepositoryInterface;
 use App\Repositories\VisitsServiceCenter\VisitsRepositoryInterface;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -20,11 +21,18 @@ class CabinetController extends Controller
      * @var VisitsRepositoryInterface
      */
     private $visitsRepository;
+    /**
+     * @var ServicesViewRepositoryInterface
+     */
+    private $servicesView;
 
-    public function __construct(ServiceCenterRepositoryInterface $sc, VisitsRepositoryInterface $visitsRepository)
+    public function __construct(ServiceCenterRepositoryInterface $sc,
+                                VisitsRepositoryInterface $visitsRepository,
+                                ServicesViewRepositoryInterface $servicesView)
     {
         $this->sc = $sc;
         $this->visitsRepository = $visitsRepository;
+        $this->servicesView = $servicesView;
     }
 
     /**
@@ -32,16 +40,29 @@ class CabinetController extends Controller
      */
     public function getDashboard()
     {
+
+        return view('service_center_cabinet.dashboard');
+    }
+
+
+    /**
+     * @return array
+     */
+    public function getDashboardStat()
+    {
         $end = Carbon::now()->toDateString();
         $start = Carbon::now()->addDay(-7)->toDateString();
         $service_centers = Auth::user()->service_centers->toArray();
-        $visits = [];
+        $statistic = [];
         foreach ($service_centers as $sc){
-            $visits[$sc['service_name']] = $this->visitsRepository->visitsBetween($sc['id'], $start, $end);
+            $statistic['visits'][$sc['service_name']] = $this->visitsRepository->visitsBetween($sc['id'], $start, $end);
         }
-        dd($visits);
+        $statistic['top_services'] = $this->servicesView->topViewServices();
 
-        return view('service_center_cabinet.dashboard');
+        $array_id = array_column($service_centers, 'id');
+        $statistic['services_by_service'] = $this->servicesView->viewByServiceUser($array_id);
+
+        return $statistic;
     }
 
 

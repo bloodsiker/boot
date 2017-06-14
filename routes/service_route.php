@@ -8,6 +8,7 @@ Route::group(['middleware' => ['service.center']], function (){
     });
     Route::get('cabinet', 'ServiceCenterCabinet\CabinetController@getIndex')->name('cabinet');
     Route::get('cabinet/dashboard', 'ServiceCenterCabinet\CabinetController@getDashboard')->name('cabinet.dashboard');
+    Route::get('cabinet/dashboard_stat', 'ServiceCenterCabinet\CabinetController@getDashboardStat')->name('cabinet.dashboard.stat');
     Route::get('cabinet/settings', 'ServiceCenterCabinet\CabinetController@getSettings')->name('cabinet.settings');
     Route::post('cabinet/settings', 'ServiceCenterCabinet\CabinetController@postSettings')->name('cabinet.settings');
 
