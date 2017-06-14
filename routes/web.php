@@ -22,6 +22,7 @@ Route::group(['middleware' => ['web']], function (){
 
     Route::get('catalog', 'CatalogController@getIndex')->name('catalog');
     Route::get('sc/{id}', 'CatalogController@getServiceCenter')->name('sc');
+    Route::post('sc/{id}/add-comments', 'CatalogController@postAddCommentsServiceCenter')->name('sc.add.comments');
 
 
     Route::post('forms/main', 'FormsController@mainHelpRequest')->name('form.main.help');

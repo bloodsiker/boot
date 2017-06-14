@@ -8,6 +8,14 @@ use Illuminate\Database\Eloquent\Model;
 
 class Comments extends Model
 {
+    protected $table = 'comments';
+
+    protected $fillable = ['user_name', 'device', 'service', 'service_number', 'text',
+                            'r_total_rating', 'r_quality_of_work', 'r_deadlines', 'r_compliance_cost', 'r_price_quality', 'r_service'];
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
     public function serviceCenter()
     {
         return $this->belongsTo('App\Models\ServiceCenter');
