@@ -19,7 +19,7 @@
                                 {{--<a style="font-size: 24px; white-space: nowrap; text-decoration: none;" href="tel:0800256357"><span class="glyphicon glyphicon-phone-alt"></span> 0 800 256-357</a>--}}
                                 {{--<br>--}}
                                 @if(Auth::check())
-                                    <a href="{{ route('cabinet') }}" class="sign-in">В кабинет</a> |
+                                    <a href="{{ route('cabinet.dashboard') }}" class="sign-in">В кабинет</a> |
                                     <a href="{{ route('cabinet.logout') }}" class="exit">Выход</a>
                                 @else
                                     <a href="{{ route('service.login') }}" class="sign-in">Вход</a> |
