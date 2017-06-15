@@ -94,6 +94,7 @@ class ServiceCenterRepository implements ServiceCenterRepositoryInterface
         $sc->district_id = $requestData->district;
         $sc->street = $requestData->street;
         $sc->number_h = $requestData->number_h;
+        $sc->number_h_add = $requestData->number_h_add;
         $sc->c1 = $requestData->c1;
         $sc->c2 = $requestData->c2;
         $sc->created_at = Carbon::now();
@@ -158,6 +159,7 @@ class ServiceCenterRepository implements ServiceCenterRepositoryInterface
         $sc->address = 'Украина, ' . $requestData->city['city_name'] . ', ' . $requestData->street;
         $sc->street = $requestData->street;
         $sc->number_h = $requestData->number_h;
+        $sc->number_h_add = $requestData->number_h_add;
         $sc->c1 = $requestData->c1;
         $sc->c2 = $requestData->c2;
         $sc->updated_at = Carbon::now();
