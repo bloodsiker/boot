@@ -93,6 +93,12 @@
 
 
                                 </div>
+                                <div layout="row">
+                                    <md-input-container flex class="md-block">
+                                        <label>Дополнительная информация (ТЦ Большевик, 2 этаж)</label>
+                                        <input type="text" ng-model="sc.number_h_add">
+                                    </md-input-container>
+                                </div>
 
                                 <div layout="row" layout-align="end center" ng-repeat="day in sc.work_days track by $index">
                                     <md-input-container flex-gt-xs="10" class="md-block">

@@ -30,12 +30,14 @@
                                 <br>
                                 <span ng-class="{active : activeType === 'phone'}">Телефон</span>
                             </div>
-                            <div class="col-md-4 text-center select-type" ng-click="activeType = 'tab'">
+                            <div class="col-md-4 text-center select-type" style="cursor:not-allowed ">
+                                {{--ng-click="activeType = 'tab'"--}}
                                 <img class="tablet-img" src="{{ asset('site/img/tablet.svg') }}" alt="Диагностика планшета">
                                 <br>
                                 <span ng-class="{active : activeType === 'tab'}">Планшет</span>
                             </div>
-                            <div class="col-md-4 text-center select-type" ng-click="activeType = 'laptop'">
+                            <div class="col-md-4 text-center select-type" style="cursor:not-allowed ">
+                                {{--ng-click="activeType = 'laptop'"--}}
                                 <img class="laptop-img" src="{{ asset('site/img/laptop.svg') }}" alt="Диагностика ноутбука">
                                 <br>
                                 <span ng-class="{active : activeType === 'laptop'}">Ноутбук</span>
@@ -57,7 +59,7 @@
                         </uib-tab-heading>
 
                         <div class="row" style="display: flex;align-items: center;">
-                            <div class="col-xs-6">
+                            <div class="col-xs-4">
                                 <h3>Знаю точно: </h3>
                                 <div ng-if="problems_know" ng-repeat="problem_know in problems_know" style="margin-bottom: 2px;">
                                         <span class="check"
@@ -66,23 +68,37 @@
                                 </div>
 
                             </div>
-                            <div ng-if="problems_watching" class="col-xs-6">
+                            <div ng-if="problems_watching" class="col-xs-4">
                                 <h3>Наблюдаю: </h3>
 
                                 <div ng-repeat="problem_watching in problems_watching" style="margin-bottom: 2px;">
                                         <span class="check"
                                               ng-class="{active: problem_watching_check === problem_watching}"
-                                              ng-click="setProblemWatching(problem_watching)">@{{problem_watching}}</span>
+                                              ng-click="setProblemWatching(activeType, problem_watching)">@{{problem_watching}}</span>
+                                </div>
+
+                            </div>
+                            <div class="col-xs-4" ng-if="problem_know_check && problem_watching_check">
+                                <h3>Описание дефекта: </h3>
+                                <div ng-repeat="problem_description in problems_description" style="margin-bottom: 2px;">
+                                    <span class="check"
+                                          ng-class="{active: problem_description_check === problem_description}"
+                                          ng-click="setProblemDescription(problem_description)">@{{problem_description}}</span>
                                 </div>
 
                             </div>
                         </div>
                         <div class="row diagnostics-footer">
                             <div class="col-md-12 text-right">
+                                <button class="btn btn-yellow" style="margin-right: 20px;" ng-click="firstStepBtn(activeType); reload()">
+                                    Сброс <span class="glyphicon glyphicon-repeat"></span>
+                                </button>
                                 <button class="btn btn-black" ng-click="prevPage(activeTab -1)">
                                     Назад <span class="glyphicon glyphicon-triangle-left"></span>
                                 </button>
-                                <button class="btn" ng-disabled="!problem_watching_check" ng-class="{'btn-yellow': problem_know_check && problem_watching_check, 'btn-black': !problem_know_check && !problem_watching_check}" ng-click="getProblemDescription(activeType, problem_know_check, problem_watching_check)">
+                                <button class="btn" ng-disabled="!problem_description_check"
+                                        ng-class="{'btn-yellow': problem_description_check, 'btn-black': !problem_description_check}"
+                                        ng-click="getProblemRezult(activeType, problem_know_check, problem_watching_check, problem_description_check)">
                                     Вперед <span class="glyphicon glyphicon-triangle-right" ></span>
                                 </button>
                             </div>
@@ -96,16 +112,8 @@
                         </uib-tab-heading>
 
                         <div class="row">
-                            <div class="col-xs-4">
-                                <h3>Описание дефекта: </h3>
-                                <div ng-if="problems_description" ng-repeat="problem_description in problems_description" style="margin-bottom: 2px;">
-                                    <span class="check"
-                                          ng-class="{active: problem_description_check === problem_description}"
-                                          ng-click="getProblemRezult(activeType, problem_know_check, problem_watching_check, problem_description)">@{{problem_description}}</span>
-                                </div>
 
-                            </div>
-                            <div ng-if="results" class="col-xs-8">
+                            <div ng-if="results" class="col-xs-10">
                                 <h3>Результат: </h3>
                                 <table class="table">
                                     <thead>
@@ -113,6 +121,8 @@
                                             <th>Нужная запчасть</th>
                                             <th>Вероятность поломки</th>
                                             <th>Нужная услуга</th>
+                                            <th>Минимальная цена</th>
+                                            <th>Максимальная цена</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -120,6 +130,8 @@
                                             <td ng-bind="rez.spare_part"></td>
                                             <td ng-bind="rez.percentage"></td>
                                             <td ng-bind="rez.services"></td>
+                                            <td ng-bind="rez.min_price ? rez.min_price : '-'"></td>
+                                            <td ng-bind="rez.max_price ? rez.max_price : '-'"></td>
                                         </tr>
                                     </tbody>
                                 </table>

@@ -557,7 +557,7 @@ span.icon {
   }
   .dropdown-menu {
     padding: 0;
-    min-width: 250px;
+    min-width: 320px;
     .datapicker {
       padding: 5px;
     }
@@ -582,6 +582,15 @@ span.icon {
   }
 }
 
+.chips {
+  margin-right: 5px;
+  font-size: 14px;
+  padding: 4px;
+  padding-top: 1px;
+  margin-top:5px;
+  padding-bottom: 1px;
+  margin-left: 5px;
+}
 .sort {
   padding-top: 20px;
   padding-bottom: 20px;
@@ -745,19 +754,6 @@ span.icon {
   }
   ng-map {
     height: 100vh;
-  }
-  .affix {
-    top: 0;
-    width: 100%;
-  }
-  .fix_map {
-    position: relative !important;
-  }
-  .affix-top {
-    top: 0;
-  }
-  .affix-bottom {
-    bottom: 0;
   }
   .gm-style-iw {
     .btn {
@@ -1149,6 +1145,7 @@ span.icon {
   }
 
 
+
   .check {
     transition: 0.5s;
     padding: 5px;
@@ -1208,6 +1205,33 @@ span.icon {
   }
 }
 
+
+.checkbox {
+  background: #fff;
+  box-shadow: 0px 0px 3px 1px #505050;
+  width: 15px;
+  height: 15px;
+  border-radius: 2px;
+  float: left;
+  vertical-align: top;
+  margin: 0;
+  margin-right: 10px;
+}
+
+.checkbox.active {
+  background: #f9c512;
+  position: relative;
+  &:after {
+    content: '✔';
+    font-size: 20px;
+    position: absolute;
+    bottom: -7px;
+  }
+}
+
+.checkbox:hover:not(.active) {
+  background: #f9c512;
+}
 .photo-show {
   background-color: transparent;
   -webkit-box-shadow: none;

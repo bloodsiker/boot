@@ -28,7 +28,7 @@
             <md-toolbar class="md-theme-indigo">
                 <h4 class="md-toolbar-tools">
                     <a href="/">
-                    <img width="40px" src="{{ asset('site/img/logo.png') }}" alt="boot.com.ua"> <span>на сайт</span>
+                    <img width="40px" src="{{ asset('site/img/logo.png') }}" alt="boot.com.ua">
                     </a>
                 </h4>
             </md-toolbar>

@@ -17,13 +17,19 @@
                 data: {action: 'type_device', type_device: arg},
                 headers: { 'X-CSRF-TOKEN': token },
             }).then(function (success) {
-                $scope.problems_know = success.data;
+                $scope.problems_know = success.data.problem_know;
+                $scope.problems_watching = success.data.problem_watching;
                 $scope.activeTab = 1;
             });
         };
 
+        $scope.reload = function () {
+            $scope.problem_watching_check = false;
+            $scope.problem_know_check = false;
+        };
         $scope.getProblemWatching = function (type, problem) {
             $scope.problem_know_check = problem;
+
             $http({
                 method: 'post',
                 url: '/diagnostic',
@@ -31,31 +37,48 @@
                 headers: { 'X-CSRF-TOKEN': token },
             }).then(function (success) {
                 $scope.problems_watching = success.data;
-                $scope.problem_watching_check = false;
             });
+            if ($scope.problem_watching_check && $scope.problem_know_check) {
+                $scope.getProblemDescription(type, $scope.problem_know_check, $scope.problem_watching_check)
+            }
+
         };
 
-        $scope.setProblemWatching = function (agr) {
-            $scope.problem_watching_check = agr;
+        $scope.setProblemWatching = function (type, watching) {
+            $scope.problem_watching_check = watching;
+            $http({
+                method: 'post',
+                url: '/diagnostic',
+                data: {action: 'problem_watching', type_device: type, problem_watching: watching},
+                headers: { 'X-CSRF-TOKEN': token },
+            }).then(function (success) {
+                $scope.problems_know = success.data;
+                console.log(success.data);
+                console.log($scope.problems_know);
+            });
+            if ($scope.problem_watching_check && $scope.problem_know_check) {
+                $scope.getProblemDescription(type, $scope.problem_know_check, $scope.problem_watching_check)
+            }
+
+
         };
 
         $scope.getProblemDescription = function (type, know, watching) {
             $http({
                 method: 'post',
                 url: '/diagnostic',
-                data: {action: 'problem_watching', type_device: type, problem_know: know, problem_watching: watching},
+                data: {action: 'problem_know_watching', type_device: type, problem_know: know, problem_watching: watching},
                 headers: { 'X-CSRF-TOKEN': token },
             }).then(function (success) {
                 $scope.problems_description = success.data;
-                $scope.results = false;
-                $scope.activeTab = 2;
                 $scope.problem_description_check = '';
             });
         };
 
 
-
-
+        $scope.setProblemDescription = function (arg) {
+            $scope.problem_description_check = arg
+        };
 
         $scope.getProblemRezult = function (type, know, watching, description) {
             $scope.problem_description_check = description;
@@ -66,8 +89,7 @@
                 headers: { 'X-CSRF-TOKEN': token },
             }).then(function (success) {
                 $scope.results = success.data;
-
-
+                $scope.activeTab = 2;
             });
         };
 

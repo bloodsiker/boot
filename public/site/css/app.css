@@ -1,3 +1,4 @@
+@charset "UTF-8";
 /* font-family: "LatoRegular"; */
 @font-face {
   font-family: "LatoRegular";
@@ -423,7 +424,7 @@ img {
     cursor: pointer; }
   .filters .dropdown-menu {
     padding: 0;
-    min-width: 250px; }
+    min-width: 320px; }
     .filters .dropdown-menu .datapicker {
       padding: 5px; }
     .filters .dropdown-menu .price {
@@ -441,6 +442,15 @@ img {
       width: 50%;
       margin-top: 5px;
       border-radius: 0 0 3px 0; }
+
+.chips {
+  margin-right: 5px;
+  font-size: 14px;
+  padding: 4px;
+  padding-top: 1px;
+  margin-top: 5px;
+  padding-bottom: 1px;
+  margin-left: 5px; }
 
 .sort {
   padding-top: 20px;
@@ -577,15 +587,6 @@ img {
       display: none; } }
   .catalog-map ng-map {
     height: 100vh; }
-  .catalog-map .affix {
-    top: 0;
-    width: 100%; }
-  .catalog-map .fix_map {
-    position: relative !important; }
-  .catalog-map .affix-top {
-    top: 0; }
-  .catalog-map .affix-bottom {
-    bottom: 0; }
   .catalog-map .gm-style-iw .btn {
     margin-bottom: 10px; }
 
@@ -896,6 +897,29 @@ img {
     position: absolute;
     width: 100%;
     bottom: 0; }
+
+.checkbox {
+  background: #fff;
+  box-shadow: 0px 0px 3px 1px #505050;
+  width: 15px;
+  height: 15px;
+  border-radius: 2px;
+  float: left;
+  vertical-align: top;
+  margin: 0;
+  margin-right: 10px; }
+
+.checkbox.active {
+  background: #f9c512;
+  position: relative; }
+  .checkbox.active:after {
+    content: '✔';
+    font-size: 20px;
+    position: absolute;
+    bottom: -7px; }
+
+.checkbox:hover:not(.active) {
+  background: #f9c512; }
 
 .photo-show {
   background-color: transparent;

@@ -3,12 +3,17 @@
   <component name="ChangeListManager">
     <list default="true" id="eea08daa-98dc-4f0e-a362-15e23181d6ab" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/site/js/controllers/IndexCtrl.js" afterPath="$PROJECT_DIR$/public/site/js/controllers/IndexCtrl.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/site/js/controllers/ServiceCenterCtrl.js" afterPath="$PROJECT_DIR$/public/site/js/controllers/ServiceCenterCtrl.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/site/vendor/angular-rating/src/angular-rating.js" afterPath="$PROJECT_DIR$/public/site/vendor/angular-rating/src/angular-rating.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/site/catalog/service_center.blade.php" afterPath="$PROJECT_DIR$/resources/views/site/catalog/service_center.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/site/includes/footer.blade.php" afterPath="$PROJECT_DIR$/resources/views/site/includes/footer.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/site/layouts/master.blade.php" afterPath="$PROJECT_DIR$/resources/views/site/layouts/master.blade.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/site/css/app.css" afterPath="$PROJECT_DIR$/public/site/css/app.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/site/css/app.css.map" afterPath="$PROJECT_DIR$/public/site/css/app.css.map" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/site/css/app.scss" afterPath="$PROJECT_DIR$/public/site/css/app.scss" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/site/js/controllers/CatalogCtrl.js" afterPath="$PROJECT_DIR$/public/site/js/controllers/CatalogCtrl.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/site/js/controllers/DiagnosticCtrl.js" afterPath="$PROJECT_DIR$/public/site/js/controllers/DiagnosticCtrl.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/service_center_cabinet/add_service.blade.php" afterPath="$PROJECT_DIR$/resources/views/service_center_cabinet/add_service.blade.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/service_center_cabinet/includes/sidebar.blade.php" afterPath="$PROJECT_DIR$/resources/views/service_center_cabinet/includes/sidebar.blade.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/service_center_cabinet/index.blade.php" afterPath="$PROJECT_DIR$/resources/views/service_center_cabinet/index.blade.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/service_center_cabinet/layouts/master.blade.php" afterPath="$PROJECT_DIR$/resources/views/service_center_cabinet/layouts/master.blade.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/site/catalog/catalog.blade.php" afterPath="$PROJECT_DIR$/resources/views/site/catalog/catalog.blade.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/site/diagnostics.blade.php" afterPath="$PROJECT_DIR$/resources/views/site/diagnostics.blade.php" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -20,77 +25,51 @@
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="service_center.blade.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/resources/views/site/catalog/service_center.blade.php">
+      <file leaf-file-name="catalog.blade.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/resources/views/site/catalog/catalog.blade.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-1926">
-              <caret line="78" column="14" lean-forward="true" selection-start-line="78" selection-start-column="14" selection-end-line="78" selection-end-column="14" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="footer.blade.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/resources/views/site/includes/footer.blade.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="642">
-              <caret line="225" column="83" lean-forward="false" selection-start-line="225" selection-start-column="75" selection-end-line="225" selection-end-column="83" />
+            <state relative-caret-position="350">
+              <caret line="95" column="0" lean-forward="true" selection-start-line="95" selection-start-column="0" selection-end-line="95" selection-end-column="0" />
               <folding>
-                <element signature="n#div#1;n#!!top" expanded="false" />
-                <element signature="n#div#2;n#!!top" expanded="false" />
-                <element signature="n#div#3;n#!!top" expanded="false" />
-                <element signature="n#div#4;n#!!top" expanded="false" />
-                <element signature="n#div#7;n#!!top" expanded="false" />
+                <element signature="e#1510#1534#0#HTML" expanded="true" />
+                <element signature="e#5799#5826#0#HTML" expanded="true" />
+                <element signature="e#6446#6472#0#HTML" expanded="true" />
+                <element signature="e#12847#12884#0#HTML" expanded="true" />
+                <element signature="e#13000#13046#0#HTML" expanded="true" />
+                <element signature="e#13194#13237#0#HTML" expanded="true" />
+                <element signature="e#14622#14647#0#HTML" expanded="true" />
+                <element signature="e#14722#14747#0#HTML" expanded="true" />
+                <marker date="1497522066451" expanded="false" signature="4819:4829" ph="..." />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="master.blade.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/resources/views/site/layouts/master.blade.php">
+      <file leaf-file-name="app.scss" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/public/site/css/app.scss">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="14">
-              <caret line="1" column="53" lean-forward="false" selection-start-line="1" selection-start-column="53" selection-end-line="1" selection-end-column="53" />
+            <state relative-caret-position="459">
+              <caret line="1222" column="21" lean-forward="false" selection-start-line="1222" selection-start-column="21" selection-end-line="1222" selection-end-column="21" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="catalog.blade.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/resources/views/site/catalog/catalog.blade.php">
+      <file leaf-file-name="CatalogCtrl.js" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/public/site/js/controllers/CatalogCtrl.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2562">
-              <caret line="183" column="48" lean-forward="true" selection-start-line="183" selection-start-column="48" selection-end-line="183" selection-end-column="48" />
+            <state relative-caret-position="435">
+              <caret line="134" column="12" lean-forward="false" selection-start-line="134" selection-start-column="15" selection-end-line="136" selection-end-column="18" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ServiceCenterCtrl.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/public/site/js/controllers/ServiceCenterCtrl.js">
+      <file leaf-file-name="DiagnosticCtrl.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/public/site/js/controllers/DiagnosticCtrl.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="224">
-              <caret line="18" column="0" lean-forward="true" selection-start-line="18" selection-start-column="0" selection-end-line="18" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="IndexCtrl.js" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/public/site/js/controllers/IndexCtrl.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="575">
-              <caret line="50" column="24" lean-forward="false" selection-start-line="50" selection-start-column="24" selection-end-line="50" selection-end-column="24" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="SettingsScController.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/public/site/js/controllers/SettingsScController.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="210">
-              <caret line="15" column="3" lean-forward="true" selection-start-line="15" selection-start-column="3" selection-end-line="15" selection-end-column="3" />
+            <state relative-caret-position="574">
+              <caret line="56" column="50" lean-forward="false" selection-start-line="56" selection-start-column="50" selection-end-line="56" selection-end-column="50" />
               <folding />
             </state>
           </provider>
@@ -100,8 +79,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>scLo</find>
-      <find>scLogo</find>
       <find>addPersonalDialog</find>
       <find>addPhoto</find>
       <find>btn-wa</find>
@@ -129,6 +106,9 @@
       <find>scCall</find>
       <find>helpCall</find>
       <find>call_sc</find>
+      <find>chec</find>
+      <find>map</find>
+      <find>checkbo</find>
     </findStrings>
     <replaceStrings>
       <replace>btn-black</replace>
@@ -153,18 +133,9 @@
         <option value="$PROJECT_DIR$/resources/views/service_center_cabinet/settings.blade.php" />
         <option value="$PROJECT_DIR$/resources/views/site/includes/search.blade.php" />
         <option value="$PROJECT_DIR$/resources/views/site/index.blade.php" />
-        <option value="$PROJECT_DIR$/public/site/css/app.css" />
-        <option value="$PROJECT_DIR$/resources/views/service_center_cabinet/add_service.blade.php" />
         <option value="$PROJECT_DIR$/public/site/js/controllers/AddScCtrl.js" />
         <option value="$PROJECT_DIR$/.gitignore" />
-        <option value="$PROJECT_DIR$/public/site/js/controllers/CatalogCtrl.js" />
-        <option value="$PROJECT_DIR$/resources/views/site/catalog/catalog.blade.php" />
         <option value="$PROJECT_DIR$/public/site/img/laptop.svg" />
-        <option value="$PROJECT_DIR$/resources/views/site/diagnostics.blade.php" />
-        <option value="$PROJECT_DIR$/public/site/js/controllers/DiagnosticCtrl.js" />
-        <option value="$PROJECT_DIR$/resources/views/service_center_cabinet/layouts/master.blade.php" />
-        <option value="$PROJECT_DIR$/public/site/css/app.scss" />
-        <option value="$PROJECT_DIR$/resources/views/service_center_cabinet/index.blade.php" />
         <option value="$PROJECT_DIR$/public/site/js/controllers/RefactorScCtrl.js" />
         <option value="$PROJECT_DIR$/resources/views/service_center_cabinet/includes/header.blade.php" />
         <option value="$PROJECT_DIR$/resources/views/site/includes/header.blade.php" />
@@ -174,6 +145,16 @@
         <option value="$PROJECT_DIR$/resources/views/site/includes/footer.blade.php" />
         <option value="$PROJECT_DIR$/resources/views/site/layouts/master.blade.php" />
         <option value="$PROJECT_DIR$/public/site/js/controllers/IndexCtrl.js" />
+        <option value="$PROJECT_DIR$/public/site/js/controllers/DiagnosticCtrl.js" />
+        <option value="$PROJECT_DIR$/resources/views/site/diagnostics.blade.php" />
+        <option value="$PROJECT_DIR$/public/site/css/app.css" />
+        <option value="$PROJECT_DIR$/resources/views/service_center_cabinet/add_service.blade.php" />
+        <option value="$PROJECT_DIR$/resources/views/service_center_cabinet/includes/sidebar.blade.php" />
+        <option value="$PROJECT_DIR$/resources/views/service_center_cabinet/layouts/master.blade.php" />
+        <option value="$PROJECT_DIR$/resources/views/service_center_cabinet/index.blade.php" />
+        <option value="$PROJECT_DIR$/public/site/css/app.scss" />
+        <option value="$PROJECT_DIR$/resources/views/site/catalog/catalog.blade.php" />
+        <option value="$PROJECT_DIR$/public/site/js/controllers/CatalogCtrl.js" />
       </list>
     </option>
   </component>
@@ -214,7 +195,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -289,6 +269,54 @@
               <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
+              <option name="myItemId" value="catalog" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="boot" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="boot" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="resources" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="views" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="service_center_cabinet" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="boot" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="boot" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="resources" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="views" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="service_center_cabinet" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
               <option name="myItemId" value="layouts" />
               <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
             </PATH_ELEMENT>
@@ -311,7 +339,7 @@
               <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="site" />
+              <option name="myItemId" value="service_center_cabinet" />
               <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
@@ -409,18 +437,93 @@
               <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
+              <option name="myItemId" value="model" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="boot" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="boot" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="public" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="site" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="js" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
               <option name="myItemId" value="controllers" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="boot" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="boot" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="public" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="site" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="css" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app.scss" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.NestingTreeNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="boot" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="boot" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="public" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="site" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="css" />
               <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
             </PATH_ELEMENT>
           </PATH>
         </subPane>
       </pane>
+      <pane id="Scratches" />
       <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../client" />
     <property name="node.js.path.for.package.jscs" value="project" />
     <property name="nodejs_interpreter_path" value="/usr/bin/node" />
     <property name="node.js.detected.package.jscs" value="true" />
@@ -561,18 +664,20 @@
       <workItem from="1497429882331" duration="903000" />
       <workItem from="1497430942321" duration="1576000" />
       <workItem from="1497433317359" duration="191000" />
-      <workItem from="1497433882761" duration="4528000" />
+      <workItem from="1497433882761" duration="7757000" />
+      <workItem from="1497507371287" duration="2165000" />
+      <workItem from="1497510527523" duration="10222000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="91668000" />
+    <option name="totallyTimeSpent" value="107284000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="48" y="-4" width="1553" height="905" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.29025844" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.29821074" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -612,13 +717,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/public/site/js/model/model.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="280">
-          <caret line="20" column="10" lean-forward="true" selection-start-line="20" selection-start-column="10" selection-end-line="20" selection-end-column="10" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/public/site/js/controllers/RefactorScCtrl.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="4382">
@@ -767,13 +865,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/service_center_cabinet/add_service.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="729">
-          <caret line="62" column="20" lean-forward="false" selection-start-line="62" selection-start-column="20" selection-end-line="65" selection-end-column="41" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/public/site/img/open-laptop-computer.svg">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -788,70 +879,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/public/site/js/model/model.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="238">
-          <caret line="17" column="16" lean-forward="false" selection-start-line="17" selection-start-column="16" selection-end-line="17" selection-end-column="51" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/site/css/app.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="319">
-          <caret line="694" column="22" lean-forward="true" selection-start-line="694" selection-start-column="22" selection-end-line="694" selection-end-column="22" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/site/diagnostics.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="104">
-          <caret line="77" column="34" lean-forward="true" selection-start-line="77" selection-start-column="34" selection-end-line="77" selection-end-column="34" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/service_center_cabinet/layouts/master.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="392">
-          <caret line="28" column="19" lean-forward="false" selection-start-line="28" selection-start-column="19" selection-end-line="28" selection-end-column="19" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/site/css/app.scss">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="706">
-          <caret line="1146" column="7" lean-forward="false" selection-start-line="1146" selection-start-column="7" selection-end-line="1146" selection-end-column="7" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/service_center_cabinet/includes/sidebar.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/resources/views/site/includes/header.blade.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="238">
           <caret line="17" column="52" lean-forward="true" selection-start-line="17" selection-start-column="52" selection-end-line="17" selection-end-column="52" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/service_center_cabinet/includes/header.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="98">
-          <caret line="7" column="21" lean-forward="false" selection-start-line="7" selection-start-column="21" selection-end-line="7" selection-end-column="21" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/service_center_cabinet/index.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="706">
-          <caret line="372" column="26" lean-forward="false" selection-start-line="372" selection-start-column="26" selection-end-line="372" selection-end-column="26" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -859,9 +890,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="336">
           <caret line="39" column="42" lean-forward="false" selection-start-line="39" selection-start-column="42" selection-end-line="39" selection-end-column="42" />
-          <folding>
-            <marker date="1497436070731" expanded="true" signature="384:409" ph="..." />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -869,7 +897,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="560">
           <caret line="58" column="30" lean-forward="false" selection-start-line="58" selection-start-column="30" selection-end-line="58" selection-end-column="65" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -877,7 +904,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="322">
           <caret line="23" column="31" lean-forward="true" selection-start-line="23" selection-start-column="31" selection-end-line="23" selection-end-column="31" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -885,7 +911,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="350">
           <caret line="25" column="14" lean-forward="true" selection-start-line="25" selection-start-column="14" selection-end-line="25" selection-end-column="14" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -901,31 +926,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="322">
           <caret line="25" column="40" lean-forward="true" selection-start-line="25" selection-start-column="40" selection-end-line="25" selection-end-column="40" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/site/js/controllers/CatalogCtrl.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="350">
-          <caret line="27" column="35" lean-forward="true" selection-start-line="27" selection-start-column="35" selection-end-line="27" selection-end-column="35" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/site/js/controllers/AddScCtrl.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="350">
-          <caret line="27" column="87" lean-forward="true" selection-start-line="27" selection-start-column="87" selection-end-line="27" selection-end-column="87" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/site/js/controllers/DiagnosticCtrl.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="364">
-          <caret line="43" column="31" lean-forward="true" selection-start-line="43" selection-start-column="31" selection-end-line="43" selection-end-column="31" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -933,15 +933,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="210">
           <caret line="15" column="3" lean-forward="true" selection-start-line="15" selection-start-column="3" selection-end-line="15" selection-end-column="3" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/site/catalog/catalog.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2562">
-          <caret line="183" column="48" lean-forward="true" selection-start-line="183" selection-start-column="48" selection-end-line="183" selection-end-column="48" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -949,7 +940,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="224">
           <caret line="18" column="0" lean-forward="true" selection-start-line="18" selection-start-column="0" selection-end-line="18" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -957,15 +947,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="14">
           <caret line="1" column="53" lean-forward="false" selection-start-line="1" selection-start-column="53" selection-end-line="1" selection-end-column="53" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/site/catalog/service_center.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1926">
-          <caret line="78" column="14" lean-forward="true" selection-start-line="78" selection-start-column="14" selection-end-line="78" selection-end-column="14" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -973,13 +954,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="642">
           <caret line="225" column="83" lean-forward="false" selection-start-line="225" selection-start-column="75" selection-end-line="225" selection-end-column="83" />
-          <folding>
-            <element signature="n#div#1;n#!!top" expanded="false" />
-            <element signature="n#div#2;n#!!top" expanded="false" />
-            <element signature="n#div#3;n#!!top" expanded="false" />
-            <element signature="n#div#4;n#!!top" expanded="false" />
-            <element signature="n#div#7;n#!!top" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -987,6 +961,232 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="575">
           <caret line="50" column="24" lean-forward="false" selection-start-line="50" selection-start-column="24" selection-end-line="50" selection-end-column="24" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/site/catalog/service_center.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="272">
+          <caret line="235" column="42" lean-forward="true" selection-start-line="235" selection-start-column="42" selection-end-line="235" selection-end-column="42" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/site/diagnostics.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="146">
+          <caret line="115" column="65" lean-forward="false" selection-start-line="115" selection-start-column="65" selection-end-line="115" selection-end-column="65" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/site/js/model/model.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="238">
+          <caret line="17" column="16" lean-forward="false" selection-start-line="17" selection-start-column="16" selection-end-line="17" selection-end-column="51" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/site/css/app.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="149">
+          <caret line="869" column="20" lean-forward="false" selection-start-line="869" selection-start-column="16" selection-end-line="869" selection-end-column="20" />
+          <folding>
+            <marker date="1497518455086" expanded="true" signature="14776:14815" ph="{...}" />
+            <marker date="1497518455086" expanded="true" signature="14830:14853" ph="{...}" />
+            <marker date="1497518455086" expanded="true" signature="14868:14918" ph="{...}" />
+            <marker date="1497518455086" expanded="true" signature="14933:15050" ph="{...}" />
+            <marker date="1497518455086" expanded="true" signature="15065:15091" ph="{...}" />
+            <marker date="1497518455086" expanded="true" signature="15105:15129" ph="{...}" />
+            <marker date="1497518455086" expanded="true" signature="15154:15182" ph="{...}" />
+            <marker date="1497518455086" expanded="true" signature="15203:15227" ph="{...}" />
+            <marker date="1497518455086" expanded="true" signature="15256:15337" ph="{...}" />
+            <marker date="1497518455086" expanded="true" signature="15365:15390" ph="{...}" />
+            <marker date="1497518455086" expanded="true" signature="15412:15511" ph="{...}" />
+            <marker date="1497518455086" expanded="true" signature="15533:15580" ph="{...}" />
+            <marker date="1497518455086" expanded="true" signature="15607:15674" ph="{...}" />
+            <marker date="1497518455086" expanded="true" signature="15736:15814" ph="{...}" />
+            <marker date="1497518455086" expanded="true" signature="15847:15901" ph="{...}" />
+            <marker date="1497518455086" expanded="true" signature="15937:15963" ph="{...}" />
+            <marker date="1497518455086" expanded="true" signature="15983:16078" ph="{...}" />
+            <marker date="1497518455086" expanded="true" signature="16107:16155" ph="{...}" />
+            <marker date="1497518455086" expanded="true" signature="16177:16272" ph="{...}" />
+            <marker date="1497518455086" expanded="true" signature="16303:16329" ph="{...}" />
+            <marker date="1497518455086" expanded="true" signature="16346:16582" ph="{...}" />
+            <marker date="1497518455086" expanded="true" signature="16619:16646" ph="{...}" />
+            <marker date="1497518455086" expanded="true" signature="16678:16724" ph="{...}" />
+            <marker date="1497518455086" expanded="true" signature="16754:16824" ph="{...}" />
+            <marker date="1497518455086" expanded="true" signature="16871:16893" ph="{...}" />
+            <marker date="1497518455086" expanded="true" signature="16940:17126" ph="{...}" />
+            <marker date="1497518455086" expanded="true" signature="17169:17215" ph="{...}" />
+            <marker date="1497518455086" expanded="true" signature="17252:17276" ph="{...}" />
+            <marker date="1497518455086" expanded="true" signature="17318:17366" ph="{...}" />
+            <marker date="1497518455086" expanded="true" signature="17407:17477" ph="{...}" />
+            <marker date="1497518455086" expanded="true" signature="17520:17681" ph="{...}" />
+            <marker date="1497518455086" expanded="true" signature="17718:17868" ph="{...}" />
+            <marker date="1497518455086" expanded="true" signature="17922:17966" ph="{...}" />
+            <marker date="1497518455086" expanded="true" signature="18087:18185" ph="{...}" />
+            <marker date="1497518455086" expanded="true" signature="18244:18288" ph="{...}" />
+            <marker date="1497518455086" expanded="true" signature="18345:18368" ph="{...}" />
+            <marker date="1497518455086" expanded="true" signature="18426:18470" ph="{...}" />
+            <marker date="1497518455086" expanded="true" signature="18601:18624" ph="{...}" />
+            <marker date="1497518455086" expanded="true" signature="18668:18692" ph="{...}" />
+            <marker date="1497518455086" expanded="true" signature="18715:18901" ph="{...}" />
+            <marker date="1497518455086" expanded="true" signature="18943:18999" ph="{...}" />
+            <marker date="1497518455086" expanded="true" signature="19030:19098" ph="{...}" />
+            <marker date="1497518455086" expanded="true" signature="19151:19188" ph="{...}" />
+            <marker date="1497518455086" expanded="true" signature="19239:19266" ph="{...}" />
+            <marker date="1497518455086" expanded="true" signature="19303:19340" ph="{...}" />
+            <marker date="1497518455086" expanded="true" signature="19370:19437" ph="{...}" />
+            <marker date="1497518455086" expanded="true" signature="19477:19500" ph="{...}" />
+            <marker date="1497518455086" expanded="true" signature="19516:19731" ph="{...}" />
+            <marker date="1497518455086" expanded="true" signature="19756:19855" ph="{...}" />
+            <marker date="1497518455086" expanded="true" signature="19887:19913" ph="{...}" />
+            <marker date="1497518455086" expanded="true" signature="19974:20022" ph="{...}" />
+            <marker date="1497518455086" expanded="true" signature="20097:20119" ph="{...}" />
+            <marker date="1497518455086" expanded="true" signature="20144:20166" ph="{...}" />
+            <marker date="1497518455086" expanded="true" signature="20194:20224" ph="{...}" />
+            <marker date="1497518455086" expanded="true" signature="20298:20458" ph="{...}" />
+            <marker date="1497518455086" expanded="true" signature="20592:20615" ph="{...}" />
+            <marker date="1497518455086" expanded="true" signature="20640:20787" ph="{...}" />
+            <marker date="1497518455086" expanded="true" signature="20810:20908" ph="{...}" />
+            <marker date="1497518455086" expanded="true" signature="20931:20985" ph="{...}" />
+            <marker date="1497518455086" expanded="true" signature="21022:21042" ph="{...}" />
+            <marker date="1497518455086" expanded="true" signature="21080:21110" ph="{...}" />
+            <marker date="1497518455086" expanded="true" signature="21150:21198" ph="{...}" />
+            <marker date="1497518455086" expanded="true" signature="21307:21352" ph="{...}" />
+            <marker date="1497518455086" expanded="true" signature="21367:21434" ph="{...}" />
+            <marker date="1497518455086" expanded="true" signature="21461:21482" ph="{...}" />
+            <marker date="1497518455086" expanded="true" signature="21510:21531" ph="{...}" />
+            <marker date="1497518455086" expanded="true" signature="21616:21687" ph="{...}" />
+            <marker date="1497518455086" expanded="true" signature="21716:21740" ph="{...}" />
+            <marker date="1497518455086" expanded="true" signature="21775:21805" ph="{...}" />
+            <marker date="1497518455086" expanded="true" signature="21841:21993" ph="{...}" />
+            <marker date="1497518455086" expanded="true" signature="22036:22066" ph="{...}" />
+            <marker date="1497518455086" expanded="true" signature="22121:22151" ph="{...}" />
+            <marker date="1497518455086" expanded="true" signature="22174:22262" ph="{...}" />
+            <marker date="1497518455086" expanded="true" signature="22292:22320" ph="{...}" />
+            <marker date="1497518455086" expanded="true" signature="22362:22390" ph="{...}" />
+            <marker date="1497518455086" expanded="true" signature="22416:22444" ph="{...}" />
+            <marker date="1497518455086" expanded="true" signature="22474:22585" ph="{...}" />
+            <marker date="1497518455086" expanded="true" signature="22622:22657" ph="{...}" />
+            <marker date="1497518455086" expanded="true" signature="22767:22800" ph="{...}" />
+            <marker date="1497518455086" expanded="true" signature="23217:23244" ph="{...}" />
+            <marker date="1497518455086" expanded="true" signature="23280:23361" ph="{...}" />
+            <marker date="1497518455086" expanded="true" signature="23373:23561" ph="{...}" />
+            <marker date="1497518455086" expanded="true" signature="23580:23606" ph="{...}" />
+            <marker date="1497518455086" expanded="true" signature="23787:23813" ph="{...}" />
+            <marker date="1497518455086" expanded="true" signature="23827:23952" ph="{...}" />
+            <marker date="1497518455086" expanded="true" signature="23975:24014" ph="{...}" />
+            <marker date="1497518455086" expanded="true" signature="24049:24157" ph="{...}" />
+            <marker date="1497518455086" expanded="true" signature="24193:24307" ph="{...}" />
+            <marker date="1497518455086" expanded="true" signature="24323:24453" ph="{...}" />
+            <marker date="1497518455086" expanded="true" signature="24497:24517" ph="{...}" />
+            <marker date="1497518455086" expanded="true" signature="24539:24582" ph="{...}" />
+            <marker date="1497518455086" expanded="true" signature="24592:24783" ph="{...}" />
+            <marker date="1497518455086" expanded="true" signature="24807:24870" ph="{...}" />
+            <marker date="1497518455086" expanded="true" signature="24955:24980" ph="{...}" />
+            <marker date="1497518455086" expanded="true" signature="25001:25050" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/site/js/controllers/DiagnosticCtrl.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="574">
+          <caret line="56" column="50" lean-forward="false" selection-start-line="56" selection-start-column="50" selection-end-line="56" selection-end-column="50" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/site/vendor/ngmap/directives/info-window.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/service_center_cabinet/add_service.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="994">
+          <caret line="71" column="42" lean-forward="false" selection-start-line="71" selection-start-column="42" selection-end-line="71" selection-end-column="42" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/service_center_cabinet/includes/sidebar.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="42">
+          <caret line="3" column="17" lean-forward="false" selection-start-line="3" selection-start-column="17" selection-end-line="3" selection-end-column="17" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/service_center_cabinet/index.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="594">
+          <caret line="100" column="38" lean-forward="true" selection-start-line="100" selection-start-column="38" selection-end-line="100" selection-end-column="38" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/site/css/app.scss">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="459">
+          <caret line="1222" column="21" lean-forward="false" selection-start-line="1222" selection-start-column="21" selection-end-line="1222" selection-end-column="21" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/service_center_cabinet/layouts/master.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="420">
+          <caret line="30" column="95" lean-forward="false" selection-start-line="30" selection-start-column="95" selection-end-line="30" selection-end-column="95" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/site/js/controllers/AddScCtrl.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="393">
+          <caret line="49" column="8" lean-forward="false" selection-start-line="49" selection-start-column="8" selection-end-line="49" selection-end-column="8" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/service_center_cabinet/includes/header.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="98">
+          <caret line="7" column="21" lean-forward="false" selection-start-line="7" selection-start-column="21" selection-end-line="7" selection-end-column="21" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/site/catalog/catalog.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="350">
+          <caret line="95" column="0" lean-forward="true" selection-start-line="95" selection-start-column="0" selection-end-line="95" selection-end-column="0" />
+          <folding>
+            <element signature="e#1510#1534#0#HTML" expanded="true" />
+            <element signature="e#5799#5826#0#HTML" expanded="true" />
+            <element signature="e#6446#6472#0#HTML" expanded="true" />
+            <element signature="e#12847#12884#0#HTML" expanded="true" />
+            <element signature="e#13000#13046#0#HTML" expanded="true" />
+            <element signature="e#13194#13237#0#HTML" expanded="true" />
+            <element signature="e#14622#14647#0#HTML" expanded="true" />
+            <element signature="e#14722#14747#0#HTML" expanded="true" />
+            <marker date="1497522066451" expanded="false" signature="4819:4829" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/site/js/controllers/CatalogCtrl.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="435">
+          <caret line="134" column="12" lean-forward="false" selection-start-line="134" selection-start-column="15" selection-end-line="136" selection-end-column="18" />
           <folding />
         </state>
       </provider>

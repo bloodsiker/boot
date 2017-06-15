@@ -20,25 +20,23 @@
             <!--=======================================SERVICE=====================================-->
 
                 <div>
-                    <div class="filters">
-                        <div uib-dropdown auto-close="outsideClick" is-open="openedService">
-                            <span class="filter-panel"
-                                  uib-dropdown-toggle>
+                    <div class="filters" style="min-width: 320px;">
+                        <div uib-dropdown auto-close="outsideClick" is-open="isOpenServices">
+                            <span class="filter-panel" uib-dropdown-toggle>
                                 Услуга <span class="glyphicon glyphicon-chevron-down"></span>
                             </span>
-                            <div class="popover bottom fade in" style="top: 20px; left: 0;" uib-dropdown-menu
-                                 ng-mouseleave="openedService =
-                            false">
+                            <div class="popover bottom fade in" style="top: 20px; left: 0;" uib-dropdown-menu>
                                 <div class="arrow" style="left: 30px;"></div>
                                 <div class="popover-inner">
                                     <div class="popover-content">
-                                        <div ng-repeat="item in [1,2,3,4,5,6,7,8]">
-                                            <label>
-                                                <input type="checkbox" ng-model="value1"> @{{ item }} Value
-                                            </label>
+                                        <div ng-repeat="service in services" ng-click="selectFilterServices(service)" style="cursor: pointer;">
+                                            <div class="checkbox" ng-class="{'active': service.active}"></div>
+                                            @{{ service.title }}
                                         </div>
                                     </div>
                                 </div>
+                                <button type="button" class="btn btn-black" ng-click="clearFilterServices(); isOpenServices = false">Сбросить</button>
+                                <button class="btn btn-yellow" ng-click="applyFilterServices(); isOpenServices = false">Применить</button>
                             </div>
                         </div>
                         <!--=======================================TIME=======================================-->
@@ -53,7 +51,6 @@
                             <div class="popover bottom fade in"
                                  style="top: 20px"
                                  uib-dropdown-menu
-                                 ng-mouseleave="openedTime = false"
                                  >
                                 <div class="arrow" style="left: 30px;"></div>
                                 <div class="popover-inner">
@@ -69,34 +66,43 @@
                                                  show-meridian="ismeridian"></div>
                                         </div>
                                     </div>
-                                    <button type="button" class="btn btn-danger" ng-click="clear_time()">Сбросить</button>
-                                    <button class="btn btn-warning" ng-click="select_time(start_time, end_time)">Выбрать</button>
+                                    <button type="button" class="btn btn-black" ng-click="clear_time(); openedTime = false">Сбросить</button>
+                                    <button class="btn btn-yellow" ng-click="select_time(start_time, end_time); openedTime = false">Выбрать</button>
                                 </div>
                             </div>
                         </div>
 
                         <!--=======================================SERVICE MORE=======================================-->
-                        <div uib-dropdown auto-close="outsideClick" is-open="openedServiceMore">
-                            <span class="filter-panel"
-                                  uib-dropdown-toggle>
-                                Дополнительные условия <span class="glyphicon glyphicon-chevron-down"></span>
-                            </span>
-                            <div class="popover bottom fade in" style="top: 20px;" uib-dropdown-menu
-                                 ng-mouseleave="openedServiceMore =
-                            false">
-                                <div class="arrow"></div>
-                                <div class="popover-inner">
-                                    <div class="popover-content">
-                                        <div ng-repeat="item in [1,2,3,4,5,6,7,8]">
-                                            <label>
-                                                <input type="checkbox" ng-model="value1"> @{{ item }} Value
-                                            </label>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                        {{--<div uib-dropdown auto-close="outsideClick" is-open="openedServiceMore">--}}
+                            {{--<span class="filter-panel"--}}
+                                  {{--uib-dropdown-toggle>--}}
+                                {{--Дополнительные условия <span class="glyphicon glyphicon-chevron-down"></span>--}}
+                            {{--</span>--}}
+                            {{--<div class="popover bottom fade in" style="top: 20px;" uib-dropdown-menu--}}
+                                 {{--ng-mouseleave="openedServiceMore =--}}
+                            {{--false">--}}
+                                {{--<div class="arrow"></div>--}}
+                                {{--<div class="popover-inner">--}}
+                                    {{--<div class="popover-content">--}}
+                                        {{--<div ng-repeat="item in [1,2,3,4,5,6,7,8]">--}}
+                                            {{--<label>--}}
+                                                {{--<input type="checkbox" ng-model="value1"> @{{ item }} Value--}}
+                                            {{--</label>--}}
+                                        {{--</div>--}}
+                                    {{--</div>--}}
+                                {{--</div>--}}
+                            {{--</div>--}}
+                        {{--</div>--}}
 
+                    </div>
+
+                    <div style="padding-left: 15px;">
+                        <div ng-if="filterService.length > 0"
+                             class="chips btn btn-yellow"
+                             ng-repeat="filter in filterService track by $index"
+                             ng-click="removeFilterService($index, filter)">
+                            @{{filter}} <span class="glyphicon glyphicon-remove"></span>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -104,7 +110,7 @@
     </div>
     <!--=======================================CATALOG=======================================-->
 
-    <div class="container">
+    <div class="container" style="min-height: 100vh;">
 
         <div class="row">
             <div class="col-sm-6 col-xs-12">
@@ -142,7 +148,6 @@
                      |orderBy: order_by
                      | filterBy: ['street', 'metro.address', 'district.address']: addressFilter
                      | filterBy: ['radius'] : true
-                     | filterBy: ['start_time'] : index.start_time <= timeStartFilter ? 'rg' : index.start_time
                      | filterBy: ['manufacturers']: manufacturerFilter as filtered_catalog">
 
                     <div class="col-md-8">
@@ -168,12 +173,16 @@
                                 </div>
                             </span>
 
-                            <br>
-                            <span class="glyphicon glyphicon-map-marker"></span>
-                            <span class="text" ng-bind="item.address"></span>
-                            <br>
-                            <span style="font-weight: 900;">M</span>
-                            <span class="text" ng-bind="item.metro.address"></span>
+                            <div>
+                                <span class="glyphicon glyphicon-map-marker"></span>
+                                <span class="text" ng-bind="item.address+ (item.number_h ? ', '+item.number_h : '')"></span>
+                            </div>
+                            <div ng-if="item.number_h_add" class="text" ng-bind="item.number_h_add"></div>
+                            <div>
+                                <span style="font-weight: 900;">M</span>
+                                <span class="text" ng-bind="item.metro.address"></span>
+                            </div>
+
                         </div>
                     </div>
                     <div class="col-md-4" style="display: flex; flex-direction: column;">
@@ -196,28 +205,44 @@
             </div>
             <div class="col-sm-6 hidden-xs catalog-map">
                 <ng-map id="map"
-                        style="position: fixed; top: 0; width:inherit; z-index:1;"
-                        zoom-to-include-markers="auto">
+                        style="position: fixed; top: 0; width:inherit; z-index:1;">
 
                     <info-window id="foo">
                         <div ng-non-bindable="">
-                            <h1 ng-bind="info.service_name"></h1>
-                            <button class="btn btn-warning" data-toggle="modal"
-                                    data-target="#call_modal"
-                                    ng-click="openCall(info)">Связаться
-                            </button>
-                            <div class="info-sc"><span class="glyphicon glyphicon-time"></span> <span
-                                        ng-bind="info.work_time"></span></div>
-                            <div class="info-sc"><span class="glyphicon glyphicon-map-marker"></span> <span
-                                        ng-bind="info.address"></span>
+                            <img ng-if="info.logo" class="logo-cs" ng-src="@{{info.logo}}" alt="@{{info.service_name}}">
+                            <rating value="item.rating" disabled max="5"></rating>
+                            <a style="font-size: 20px; color: #000;" class="title-sc" ng-href="@{{ '/sc/'+info.id }}" ng-bind="info.service_name"></a>
+                            <div style="margin-top: 10px; margin-bottom: 10px;" class="info-sc">
+                                <span class="glyphicon glyphicon-time"></span>
+                                <span class="text" style="font-weight: bold; font-size: 15px;" ng-bind="'Сегодня: c '+ info.work_days[week_day-1].start_time+' по '+info.work_days[week_day-1].end_time"></span>
+                                <ul>
+                                    <li style="list-style: none;"
+                                        ng-repeat="work in info.work_days"
+                                        ng-style="{'font-weight': $index == week_day-1 ? '900' : 'normal', color: $index == week_day-1 ? '#000' : ''}"
+                                        ng-bind="work.title + ' ' + (work.weekend == 1 ? 'выходной' : work.start_time + ' - '+ work.end_time)"></li>
+                                </ul>
+
+                                <div>
+                                    <span class="glyphicon glyphicon-map-marker"></span>
+                                    <span class="text" ng-bind="info.address+ (info.number_h ? ', '+info.number_h : '')"></span>
+                                </div>
+                                <div ng-if="info.number_h_add" class="text" ng-bind="info.number_h_add"></div>
+                                <div>
+                                    <span style="font-weight: 900;">M</span>
+                                    <span class="text" ng-bind="info.metro.address"></span>
+                                </div>
+
+
+
                             </div>
-                            <div class="info-sc" ng-if="info.metro"><span class="glyphicon glyphicon-road"></span> <span
-                                        ng-bind="info.metro.address"></span></div>
+                            <a ng-href="@{{ '/sc/'+info.id }}" style="margin-bottom: 0;" class="btn btn-black" >Посмотреть</a>
+                            <button style="margin-bottom: 0;" class="btn btn-yellow" data-toggle="modal" data-target="#call_modal" ng-click="openScCall(info.id)">Связаться</button>
                         </div>
                     </info-window>
 
                     <marker
                             position="@{{item.c1}}, @{{item.c2}}"
+                            fit="true"
                             ng-repeat="item in filtered_catalog"
                             on-click="showInfo(event, item)"
                             icon="{url:'site/img/marker-map.png'}">
