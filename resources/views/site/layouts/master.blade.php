@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" ng-app="App">
+<html lang="en" ng-app="App" ng-controller="IndexCtrl">
 
 <head>
     <meta charset="utf-8">
@@ -53,10 +53,6 @@
 
 <!--==============RATING STAR=========================-->
 <script src="{{ asset('site/vendor/angular-rating/src/angular-rating.js') }}"></script>
-
-<!--==============YANDEX SHARE=========================-->
-<script src="//yastatic.net/es5-shims/0.0.2/es5-shims.min.js"></script>
-<script src="//yastatic.net/share2/share.js"></script>
 
 
 <script src="{{ asset('site/vendor/underscore/underscore.js') }}"></script>

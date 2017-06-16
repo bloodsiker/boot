@@ -99,32 +99,87 @@
                 model.get('/services').then(function (prices) {
                     $scope.currency = ['ГРН', 'USD', 'EUR'];
 
+
+
+                    prices.data.map(function (price) {
+                        price.price = '';
+                        price.currency = 'ГРН';
+
+
+                    });
+
+                    $scope.sc.price.map(function (scPrice) {
+                        prices.data.map(function (key) {
+                            if (key.title === scPrice.title) {
+                                key.price = scPrice.price
+                                key.currency = scPrice.currency
+                            }
+                        });
+                    });
+
                     $scope.sc.price.map(function (scPrice) {
                         if (scPrice.is_new == 1) {
                             prices.data.push(scPrice);
                         }
                     });
 
-                    prices.data.map(function (price) {
-                        price.price = '';
-                        $scope.sc.price.map(function (scPrice) {
-                            if (scPrice.title === price.title) {
-                                price.price = parseFloat(scPrice.price);
-                                price.currency = scPrice.currency;
-                            } else {
-                                price.currency = 'ГРН';
-                            }
-                        });
-                    });
-
-                    console.log(prices.data);
                     $scope.price_list = prices.data;
+
                 });
 
 
             });
         }
         getModel();
+
+
+
+
+
+        // ======================== ЦЕНЫ ==========================
+        $scope.newPriceTitle = '';
+        $scope.newPriceCost = '';
+        $scope.showAddPrice = false;
+
+        $scope.addPrice = function (valid, sc, title, price, currency) {
+            var oldTitle = _.some($scope.price_list, function (key) {
+                return key.title === title;
+            });
+            if (valid && !oldTitle) {
+                $scope.price_list.push({
+                    title: title,
+                    price: price,
+                    is_new: 1,
+                    currency: currency
+                });
+                $scope.newPriceTitle = '';
+                $scope.newPriceCost = '';
+
+            }
+        };
+        $scope.deletePrice = function (sc, index) {
+            sc.price.splice(index, 1);
+        };
+
+        $scope.saveScPrice = function (valid, price_list) {
+            if (valid) {
+                $scope.sc.price = [];
+                price_list.map(function (key) {
+                    if (key.price) {
+                        $scope.sc.price.push(key);
+                    }
+                });
+                $scope.sc.street.address ? $scope.sc.street = $scope.sc.street.address : '';
+                model.put('/cabinet' + url + '/update', $scope.sc).then(function (res) {
+                    console.log(res);
+                    $mdToast.show($mdToast.simple().position('right bottom').textContent('Сохранено!'));
+                });
+            } else {
+                console.log('Массивы идентичны');
+            }
+        }
+
+
         $scope.saveSc = function (valid, sc) {
             if (valid) {
 
@@ -287,44 +342,6 @@
         };
 
 
-        // ======================== ЦЕНЫ ==========================
-        $scope.newPriceTitle = '';
-        $scope.newPriceCost = '';
-        $scope.showAddPrice = false;
-
-        $scope.addPrice = function (valid, sc, title, price, currency) {
-            if (valid) {
-                $scope.price_list.push({
-                    title: title,
-                    price: price,
-                    is_new: 1,
-                    currency: currency
-                });
-                $scope.newPriceTitle = '';
-                $scope.newPriceCost = '';
-
-            }
-        };
-        $scope.deletePrice = function (sc, index) {
-            sc.price.splice(index, 1);
-        };
-
-        $scope.saveScPrice = function (valid, price_list) {
-            if (valid) {
-                price_list.map(function (key) {
-                    if (key.price) {
-                        $scope.sc.price.push({title: key.name, price: key.price, currency: key.currency});
-                    }
-                });
-                $scope.sc.street.address ? $scope.sc.street = $scope.sc.street.address : '';
-                model.put('/cabinet' + url + '/update', $scope.sc).then(function (res) {
-                    console.log(res);
-                    $mdToast.show($mdToast.simple().position('right bottom').textContent('Сохранено!'));
-                });
-            } else {
-                console.log('Массивы идентичны');
-            }
-        }
 
 
         // ======================== ПЕРСОНАЛ ==========================

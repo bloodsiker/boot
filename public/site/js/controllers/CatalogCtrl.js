@@ -1,78 +1,151 @@
 (function () {
     angular.module('App')
         .controller('CatalogCtrl', CatalogCtrl);
-    CatalogCtrl.$inject = ['$scope', 'NgMap', '$rootScope', 'model', '_'];
-    function CatalogCtrl($scope, NgMap, $rootScope, model, _) {
+    CatalogCtrl.$inject = ['$scope', 'NgMap', '$rootScope', 'model', '_', '$timeout'];
+    function CatalogCtrl($scope, NgMap, $rootScope, model, _, $timeout) {
 
         // ================= CATALOG ========================
-        model.get('/catalog').then(function (success) {
 
-            _.mapObject(success.data, function (index) {
-                index.radius = true;
-                console.log(index.start_time);
-                // index.start_time = parseInt(index.start_time.replace(":", ""));
-                // index.end_time = parseInt(index.end_time.replace(":", ""));
-                var brands = [];
-                _.mapObject(index.manufacturers, function (el) {
-                    brands.push(el.manufacturer)
+        $scope.getCatalog = function () {
+            model.get('/catalog').then(function (success) {
+
+                _.mapObject(success.data, function (index) {
+                    index.radius = true;
+                    console.log(index.start_time);
+                    // index.start_time = parseInt(index.start_time.replace(":", ""));
+                    // index.end_time = parseInt(index.end_time.replace(":", ""));
+                    var brands = [];
+                    _.mapObject(index.manufacturers, function (el) {
+                        brands.push(el.manufacturer);
+                    });
+                    index.manufacturers = brands.toString();
                 });
-                index.manufacturers = brands.toString();
+
+                $rootScope.filtered_catalog = [];
+                $rootScope.catalog = success.data;
+
+                console.log($rootScope.catalog);
+
+
+
             });
 
-            $rootScope.filtered_catalog = [];
-            $rootScope.catalog = success.data;
-
-            console.log($rootScope.catalog);
-        });
-
-        // ================= MAP
 
 
-        NgMap.getMap("map").then(function (map) {
-            $scope.map = map;
-        });
 
-        $scope.showInfo = function (evt, item) {
-            $scope.map.showInfoWindow('foo', this);
-            $scope.info = item;
-        };
+            // ================= MAP
+
+
+
+            NgMap.getMap("map").then(function (map) {
+                $scope.map = map;
+
+                // map.fitBounds();
+                // var center = map.getCenter();
+                // google.maps.event.trigger(map, "resize");
+                //
+                // map.setCenter(center);
+
+                var markers = [];
+
+                $rootScope.catalog.map(function (key) {
+                    markers.push(new google.maps.LatLng(key.c1, key.c2));
+                });
+
+                // var bounds = new google.maps.LatLngBounds(myPlace, Item_1);
+                // map.fitBounds(bounds);
+                // console.log(markers);
+                zoomToIncludeMarkers(markers);
+            });
+
+            $scope.showInfo = function (evt, item) {
+                $scope.map.showInfoWindow('foo', this);
+                $scope.info = item;
+            };
 
         function zoomToIncludeMarkers(markers) {
             var bounds = new google.maps.LatLngBounds();
             for (var key in markers) {
-                bounds.extend(markers[key].getPosition());
+                bounds.extend(markers[key]);
             }
-            vm.map.fitBounds(bounds);
+            $scope.map.fitBounds(bounds);
         }
 
 
-        // ============ RELOAD MAP
 
-        $("#map-catalog").on('affixed.bs.affix', function () {
-            google.maps.event.trigger($scope.map, 'resize');
+
+
+            // $scope.map.trigger($scope.map, 'resize');
+        };
+
+
+
+        $scope.getCatalog();
+
+
+        model.get('/services').then(function (success) {
+            console.log(success.data);
+            success.data.map(function (key) {
+                key.active = false;
+            });
+            $scope.services = success.data;
         });
 
-        $("#map-catalog").on('affixed-top.bs.affix', function () {
-            google.maps.event.trigger($scope.map, 'resize');
-        });
+
+        var date_now = new Date ();
+        $scope.week_day = date_now.getDay();
 
 
-        $scope.start_time = new Date();
-        $scope.end_time = new Date();
-        $scope.select_time = function (start, end) {
-            var m1 = start.getMinutes() < 9 ? "0"+ start.getMinutes() : start.getMinutes();
-            $scope.timeStartFilter = start.getHours()+''+ m1;
 
-            var m2 = end.getMinutes() < 9 ? "0"+ end.getMinutes() : end.getMinutes();
-            $scope.timeEndFilter = end.getHours()+''+ m2;
 
+        // ============= FILTERS ================
+
+
+        $scope.filterService = [];
+        var filterService = [];
+        $scope.selectFilterServices = function (service) {
+            service.active = !service.active;
+
+            if (service.active) {
+                filterService.push(service.title);
+            } else {
+                filterService = _.without(filterService, service.title);
+
+            }
 
         };
+
+        $scope.clearFilterServices = function () {
+            $scope.filterService = [];
+            filterService = [];
+            $scope.services.map(function (key) {
+                key.active = false;
+            });
+            $scope.getCatalog();
+        };
+        $scope.applyFilterServices = function () {
+            $scope.filterService = filterService;
+            $scope.getCatalog();
+        };
+
+        $scope.removeFilterService = function (index, filter) {
+            filterService = _.without(filterService, filter);
+            $scope.filterService = filterService;
+            // $scope.services[]
+            // $scope.services.map(function (key) {
+            //     key.active = false;
+            // });
+        };
+
+
+        $scope.isOpenServices = false;
+
+        var filterTime;
         $scope.clear_time = function () {
-            $scope.start_time = 0;
-            $scope.end_time = 0;
-            $scope.timeStartFilter = '';
-        }
+
+        };
+
+
 
         // ================= ORDER BY
 
@@ -83,6 +156,7 @@
                 return parseFloat(item[val])
             };
         };
+
 
 
     }

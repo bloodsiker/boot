@@ -66,6 +66,12 @@
                     </md-input-container>
 
                 </div>
+                <div layout="row">
+                    <md-input-container flex class="md-block">
+                        <label>Дополнительная информация (ТЦ Большевик, 2 этаж)</label>
+                        <input type="text" ng-model="sc.number_h_add">
+                    </md-input-container>
+                </div>
                 <div flex></div>
                 <div layout="row">
                     <span flex></span>

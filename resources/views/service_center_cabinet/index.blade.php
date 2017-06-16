@@ -93,6 +93,12 @@
 
 
                                 </div>
+                                <div layout="row">
+                                    <md-input-container flex class="md-block">
+                                        <label>Дополнительная информация (ТЦ Большевик, 2 этаж)</label>
+                                        <input type="text" ng-model="sc.number_h_add">
+                                    </md-input-container>
+                                </div>
 
                                 <div layout="row" layout-align="end center" ng-repeat="day in sc.work_days track by $index">
                                     <md-input-container flex-gt-xs="10" class="md-block">
@@ -330,7 +336,7 @@
                                     <md-list-item ng-repeat="price in price_list" layout="row">
                                         <p ng-bind="price.title"></p>
                                         <md-input-container class="md-block">
-                                            <input type="number" placeholder="Цена" number-to-string ng-model="price.price" step="0.01" >
+                                            <input type="text" placeholder="Цена" number-to-string ng-model="price.price">
                                         </md-input-container>
                                         <md-input-container flex="10" class="md-block">
                                             <label>Валюта</label>
@@ -412,7 +418,10 @@
         <md-dialog-content layout-padding>
              <form name="adPhotoForm" novalidate>
                  <label style="cursor: pointer; position: relative;">
-                     <img src="http://fakeimg.pl/300x300/?text=Foto" alt="add personal" >
+                     <img ng-if="!file.base64" src="http://fakeimg.pl/300x300/?text=Foto" alt="add personal" >
+
+                     <img style="max-width: 300px;" ng-if="file.base64" ng-src="@{{'data:'+file.filetype+';base64,'+file.base64}}" alt="@{{sc.service_name}}">
+
                      <span style="position: absolute; bottom: 8px; right: 5px;"><md-icon>add_a_photo</md-icon></span>
                      <input type="file" ng-hide="true" accept="image/*" aria-label="Фото" ng-model="file" base-sixty-four-input required>
                  </label>
@@ -438,23 +447,25 @@
             <md-dialog-content layout-padding layout="column">
                  <form name="newPersonalForm" novalidate>
                      <label style="cursor: pointer; position: relative;">
-                         <img src="http://fakeimg.pl/300x300/" alt="add personal">
+                         <img ng-if="!newPersonalPhoto.base64" src="http://fakeimg.pl/300x300/" alt="add personal">
+                         <img class="md-card-image" style="max-width: 300px;" ng-if="newPersonalPhoto.base64" ng-src="@{{'data:'+newPersonalPhoto.filetype+';base64,'+newPersonalPhoto.base64}}" alt="@{{sc.service_name}}">
+
                          <span style="position: absolute; bottom: 8px; right: 5px;"><md-icon>add_a_photo</md-icon></span>
                          <input type="file" ng-hide="true" accept="image/*" aria-label="Фото" ng-model="newPersonalPhoto" base-sixty-four-input required>
                      </label>
 
 
                     <md-input-container class="md-block">
-                        <input type="text" ng-model="newPersonalName" placeholder="ФИО" required>
+                        <input type="text" ng-model="newPersonalName" placeholder="ФИО (Иванов Иван Иванович)" required>
                     </md-input-container>
                     <md-input-container class="md-block">
-                        <input type="text" ng-model="newPersonalInfo" placeholder="Должность">
+                        <input type="text" ng-model="newPersonalInfo" placeholder="Должность (Старший мастер)">
                     </md-input-container>
                      <md-input-container class="md-block">
-                        <input type="text" ng-model="newPersonalWorkExp" placeholder="Специализация">
+                        <input type="text" ng-model="newPersonalSpecialization" placeholder="Специализация (Мастер по ремонту смартфонов)">
                     </md-input-container>
                      <md-input-container class="md-block">
-                        <input type="text" ng-model="newPersonalSpecialization" placeholder="Опыт работы">
+                        <input type="text" ng-model="newPersonalWorkExp" placeholder="Опыт работы (10 лет)">
                     </md-input-container>
                          <div layout="row">
                                 <md-button aria-label="Добавить фото" type="submit" ng-click="closeDialog()">Отмена</md-button>

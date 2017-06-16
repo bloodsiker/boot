@@ -1,7 +1,7 @@
 <md-list>
     <md-list-item ng-click="null" class="{{ active('cabinet.dashboard') }}" ng-href="{{ route('cabinet.dashboard') }}">
         <md-icon>dashboard</md-icon>
-        <p>Dashboard</p>
+        <p>Панель</p>
     </md-list-item>
 
     @if (count($service_centers) > 0)

@@ -68,7 +68,7 @@
                 <div class="modal-body">
                     <div class="row comment-item">
                         <div class="col-md-4">
-                            <img class="avatar" src="http://fakeimg.pl/350x200/?text=Photo" alt="client-user">
+                            <img class="avatar" src="{{ asset('site/img/logo_user_default.png') }}" alt="client-user">
                             <h4 class="name">
                                 <input type="text"
                                        ng-minlength="2"
@@ -128,6 +128,7 @@
                         </div>
                         <div class="col-md-8">
                             <textarea autofocus
+                                      required
                                       ng-class="{'input-error': add_comment.text.length == 0 && add_comment_valid}"
                                       class="add-comment-text " ng-model="add_comment.text"
                                       name="add_comment_text"
@@ -212,7 +213,6 @@
                         <div class="form-group">
                             <label>Телефон</label>
                             <input type="text"
-                                   pattern="^(?:0|\(?\+380\)?\s?|0033\s?)[1-79](?:[\.\-\s]?\d\d){4}$"
                                    class="form-control"
                                    required
                                    placeholder="Введите телефон"
@@ -253,15 +253,14 @@
                     </div>
                     <div class="form-group">
                         <label for="client_phone">Телефон</label>
-                        <input type="text" id="client_phone" pattern="^(?:0|\(?\+380\)?\s?|0033\s?)[1-79](?:[\.\-\s]?\d\d){4}$" class="form-control" placeholder="Введите телефон"
+                        <input type="text" id="client_phone" class="form-control" placeholder="Введите телефон"
                                name="client_phone" required ng-model="client_phone">
                     </div>
 
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-black" data-dismiss="modal">Отмена</button>
-                    <button type="submit" class="btn btn-yellow" ng-click="scCall(call_form.$valid, client_name,
-                    client_phone, call_sc)">
+                    <button type="submit" class="btn btn-yellow" ng-click="scCall(call_form.$valid, client_name, client_phone, call_sc)">
                         Связаться
                     </button>
                 </div>
