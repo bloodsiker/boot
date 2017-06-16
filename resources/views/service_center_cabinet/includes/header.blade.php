@@ -3,6 +3,22 @@
 </md-button>
 <h1 class="md-toolbar-tools">service_name</h1>
 <span flex></span>
+
+
+<md-button class="md-icon-button" ng-href="{{ route('main') }}" ng-click="null">
+    <md-icon>home</md-icon>
+    <md-tooltip md-direction="bottom">На главную</md-tooltip>
+</md-button>
+<md-button class="md-icon-button" ng-href="{{ route('catalog') }}" ng-click="null">
+    <md-icon>assignment</md-icon>
+    <md-tooltip md-direction="bottom">В каталог</md-tooltip>
+</md-button>
+<md-button class="md-icon-button" ng-href="{{ route('diagnostics') }}" ng-click="null">
+    <md-icon>build</md-icon>
+    <md-tooltip md-direction="bottom">К диагностике</md-tooltip>
+</md-button>
+
+
 <md-menu>
     <md-button class="md-icon-button" ng-mouseenter="$mdMenu.open()">
         <md-icon>menu</md-icon>
@@ -16,13 +32,13 @@
         </md-menu-item>
         <md-menu-item>
             <md-button ng-href="{{ route('catalog') }}" ng-click="null">
-                <md-icon>list</md-icon>
+                <md-icon>assignment</md-icon>
                 В каталог
             </md-button>
         </md-menu-item>
         <md-menu-item>
             <md-button ng-href="{{ route('diagnostics') }}" ng-click="null">
-                <md-icon>find_replace</md-icon>
+                <md-icon>build</md-icon>
                 К диагностике
             </md-button>
         </md-menu-item>
