@@ -14,7 +14,6 @@
 
 Route::group(['middleware' => ['web']], function (){
     Route::get('/', 'SiteController@getIndex')->name('main');
-    Route::get('load', 'SiteController@load')->name('load');
     Route::get('about', 'SiteController@getAbout')->name('about');
     Route::get('support', 'SiteController@getSupport')->name('support');
     Route::get('diagnostics', 'DiagnosticsController@getIndex')->name('diagnostics');
@@ -34,6 +33,9 @@ Route::group(['middleware' => ['web']], function (){
     Route::post('service-center/login', 'LoginController@postServiceLogin')->name('service.login');
     Route::get('service-center/registration', 'RegisterController@getServiceRegister')->name('service.registration');
     Route::post('service-center/registration', 'RegisterController@postServiceRegister')->name('service.registration');
+
+    Route::get('load', 'ImportController@load')->name('load');
+    Route::get('excel', 'ImportController@excel')->name('excel');
 
 });
 
