@@ -220,6 +220,21 @@ class CabinetController extends Controller
 
 
     /**
+     * Delete service center
+     * @param Request $request
+     * @param $id
+     * @return string
+     */
+    public function enabledService(Request $request, $id)
+    {
+        $sc = ServiceCenter::find($id);
+        $sc->enabled = $request->enabled;
+        $sc->update();
+        return json_encode(["status" => 200]);
+    }
+
+
+    /**
      * Logout sc cabinet
      * @return \Illuminate\Http\RedirectResponse
      */

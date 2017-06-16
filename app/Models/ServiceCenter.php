@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Eloquent\Model;
 
@@ -112,5 +113,17 @@ class ServiceCenter extends Model
     public function service_photo()
     {
         return $this->hasMany('App\Models\ServicePhoto', 'service_center_id', 'id');
+    }
+
+
+    /**
+     * @param Builder $builder
+     * @param int $enabled
+     * @return mixed
+     */
+    public static function scopeEnabled(Builder $builder, $enabled = 0)
+    {
+        return $builder
+            ->where('enabled', $enabled);
     }
 }

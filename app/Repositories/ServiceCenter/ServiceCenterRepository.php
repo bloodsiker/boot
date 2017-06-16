@@ -20,7 +20,7 @@ class ServiceCenterRepository implements ServiceCenterRepositoryInterface
      */
     public function getAllServiceCenter()
     {
-        $service_center = ServiceCenter::all();
+        $service_center = ServiceCenter::enabled(0)->get();
         $service_center->load('work_days', 'city', 'metro', 'district', 'price', 'tags', 'manufacturers');
         $service_center->map(function ($comment) {
             $comment['comments'] = Comments::count_comment($comment->id);

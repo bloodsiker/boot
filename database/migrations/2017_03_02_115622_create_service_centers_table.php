@@ -27,7 +27,7 @@ class CreateServiceCentersTable extends Migration
             $table->string('c1');
             $table->string('c2');
             $table->string('logo');
-            $table->string('logo');
+            $table->boolean('enabled')->defoult(0);
             $table->timestamps();
 
             $table->foreign('user_id')
