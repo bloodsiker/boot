@@ -8,6 +8,7 @@ use App\Models\ServicesView;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Session;
 
 class DiagnosticsController extends Controller
 {
@@ -27,9 +28,7 @@ class DiagnosticsController extends Controller
      */
     public function postDiagnostic(Request $request)
     {
-        //$action = 'problem_description';
         $action = $request->action;
-
         $result = null;
 
         // выбран девай, показываем уникальные наблюдаю и знаю точно
@@ -152,16 +151,14 @@ class DiagnosticsController extends Controller
 
         //Перенаправляем на страницу каталога с фильтрацией по данным услугам
         if($action == 'pick_up_service'){
-            $services = $request->services;
-            //Пишем в статистику, что по таким услугам был запрос на подбор сервисного центра
-            foreach ($services as $value){
-                ServicesView::create([
-                    'services' => $value,
-                    'date_view' => Carbon::now()->format('Y-m-d')
-                ]);
-            }
-            $_SESSION['pick_up_service'] = $services;
-            return redirect()->route('catalog');
+            //Пишем в статистику, что по таким услугам был запрос на подбор сервисного центр
+            ServicesView::create([
+                'type_device' => $request->type_device,
+                'services' => $request->service,
+                'date_view' => Carbon::now()->format('Y-m-d')
+            ]);
+            Session::put('pick_up_service', $request->service);
+            return route('catalog');
         }
         return true;
     }
