@@ -7,18 +7,18 @@ use Illuminate\Database\Eloquent\Model;
 
 class ServiceCenter extends Model
 {
-    //protected $table = 'service_centers';
+    protected $table = 'service_centers';
+
     public $timestamps = false;
 
     protected $fillable = [
         'service_name', 'about', 'city_id', 'metro_id', 'district_id',
-        'work_time', 'start_day', 'end_day', 'start_time', 'end_time',
-        'address', 'street', 'c1', 'c2', 'logo'
+        'address', 'number_h', 'number_h_add', 'street', 'c1', 'c2', 'logo'
     ];
 
     public function user()
     {
-        return $this->hasOne('App/Models/User');
+        return $this->hasOne('App\Models\User');
     }
 
     public function request()

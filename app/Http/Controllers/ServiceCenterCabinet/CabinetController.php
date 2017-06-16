@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\ServiceCenterCabinet;
 
+use App\Models\ServiceCenter;
 use App\Repositories\ServiceCenter\ServiceCenterRepositoryInterface;
 use App\Repositories\ServicesView\ServicesViewRepositoryInterface;
 use App\Repositories\VisitsServiceCenter\VisitsRepositoryInterface;
@@ -102,8 +103,9 @@ class CabinetController extends Controller
         if($service_centers->whereIn('id', $id)->isEmpty()){
             return redirect()->back()->with(['message' => 'У вас нету доступа для управлением этим сервисным центром']);
         }
-        //$service = ServiceCenter::find($id);
-        return view('service_center_cabinet.index');
+        $service = ServiceCenter::where('id', $id)->select('service_name')->first();
+        $service_name = $service->service_name;
+        return view('service_center_cabinet.index', compact('service_name'));
     }
 
     /**
