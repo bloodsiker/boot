@@ -99,6 +99,17 @@
             $scope.results = [];
         };
 
+        $scope.searchService = function (service) {
+            $http({
+                method: 'post',
+                url: '/diagnostic',
+                data: {action: 'pick_up_service', service: service},
+                headers: { 'X-CSRF-TOKEN': token },
+            }).then(function (success) {
+                document.location = success.data
+            });
+        }
+
         // ===================================
 
 

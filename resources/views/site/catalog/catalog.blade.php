@@ -110,7 +110,7 @@
     </div>
     <!--=======================================CATALOG=======================================-->
 
-    <div class="container" style="min-height: 100vh;">
+    <div class="container-fluid" style="min-height: 100vh;">
 
         <div class="row">
             <div class="col-sm-6 col-xs-12">

@@ -113,7 +113,7 @@
 
                         <div class="row">
 
-                            <div ng-if="results" class="col-xs-10">
+                            <div ng-if="results" class="col-xs-12">
                                 <h3>Результат: </h3>
                                 <table class="table">
                                     <thead>
@@ -123,6 +123,7 @@
                                             <th>Нужная услуга</th>
                                             <th>Минимальная цена</th>
                                             <th>Максимальная цена</th>
+                                            <th></th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -132,6 +133,14 @@
                                             <td ng-bind="rez.services"></td>
                                             <td ng-bind="rez.min_price ? rez.min_price : '-'"></td>
                                             <td ng-bind="rez.max_price ? rez.max_price : '-'"></td>
+                                            <td>
+                                                <button style="font-size: 14px;"
+                                                        class="btn btn-yellow btn-sm"
+                                                        ng-click="searchService(rez.services)">
+                                                    <span class="glyphicon glyphicon-search"></span>
+                                                    Подобрать сервисный центр
+                                                </button>
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
