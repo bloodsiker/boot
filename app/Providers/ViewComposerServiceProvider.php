@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Models\ServiceCenter;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\ServiceProvider;
 
@@ -15,7 +16,7 @@ class ViewComposerServiceProvider extends ServiceProvider
     public function boot()
     {
         view()->composer('service_center_cabinet.includes.sidebar', function($view){
-            $view->with('service_centers', Auth::user()->service_centers);
+            $view->with('service_centers', Auth::user()->service_centers()->enabled()->get());
         });
     }
 
