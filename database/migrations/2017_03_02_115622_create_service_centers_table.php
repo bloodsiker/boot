@@ -18,9 +18,16 @@ class CreateServiceCentersTable extends Migration
             $table->string('service_name');
             $table->integer('user_id')->unsigned();
             $table->integer('city_id')->unsigned();
-            $table->integer('metro_id')->unsigned()->default(0);
-            $table->integer('district_id')->unsigned();
+            $table->string('metro_id')->nullable();
+            $table->string('district_id')->nullable();
+            $table->string('site');
             $table->string('street');
+            $table->string('number_h')->nullable();
+            $table->string('number_h_add')->nullable();
+            $table->string('c1');
+            $table->string('c2');
+            $table->string('logo');
+            $table->boolean('enabled')->defoult(0);
             $table->timestamps();
 
             $table->foreign('user_id')
@@ -30,16 +37,6 @@ class CreateServiceCentersTable extends Migration
 
             $table->foreign('city_id')
                 ->references('id')->on('cities')
-                ->onDelete('cascade')
-                ->onUpdate('cascade');
-
-            $table->foreign('metro_id')
-                ->references('id')->on('metros')
-                ->onDelete('cascade')
-                ->onUpdate('cascade');
-
-            $table->foreign('district_id')
-                ->references('id')->on('districts')
                 ->onDelete('cascade')
                 ->onUpdate('cascade');
         });

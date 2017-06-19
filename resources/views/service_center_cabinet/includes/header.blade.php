@@ -1,7 +1,7 @@
 <md-button hide-gt-md class="md-icon-button" ng-click="openSideMenu()">
     <md-icon>menu</md-icon>
 </md-button>
-<h1 class="md-toolbar-tools">service_name</h1>
+<h1 class="md-toolbar-tools">{{ (isset($service_name)) ? $service_name : Auth::user()->name }}</h1>
 <span flex></span>
 
 

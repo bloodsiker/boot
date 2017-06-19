@@ -12,5 +12,4 @@ composer.phar
 fixx.sql
 npm-debug.log.3162645094
 storage/app
-webpack.mix.js
-yarn.lock
+

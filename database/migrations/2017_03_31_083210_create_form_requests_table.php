@@ -15,7 +15,8 @@ class CreateFormRequestsTable extends Migration
     {
         Schema::create('form_requests', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('pagename');
+            $table->string('pagename')->nullable();
+            $table->string('city')->nullable();
             $table->string('name');
             $table->string('phone');
             $table->text('comment')->nullable();

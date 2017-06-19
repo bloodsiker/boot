@@ -9,7 +9,13 @@ interface ServiceCenterRepositoryInterface
 
     public function find($id);
 
+    public function updateSetting($requestData);
+
     public function addServiceCenter($requestData);
+
+    public function addLogo($requestData, $id);
+
+    public function updateWorkingDays($requestData, $id);
 
     public function updateServiceCenter($requestData, $id);
 
@@ -20,5 +26,13 @@ interface ServiceCenterRepositoryInterface
     public function updateManufacturer($requestData, $id);
 
     public function updatePrice($requestData, $id);
+
+    public function addPersonal($requestData, $id);
+
+    public function deletePersonal($id, $id_person);
+
+    public function addPhoto($requestData, $id);
+
+    public function deletePhoto($id, $id_photo);
 
 }

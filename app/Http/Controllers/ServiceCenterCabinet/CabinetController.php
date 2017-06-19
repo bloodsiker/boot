@@ -2,15 +2,13 @@
 
 namespace App\Http\Controllers\ServiceCenterCabinet;
 
-use App\Repositories\ServiceCenter\ServiceCenterRepositoryInterface;
-use Carbon\Carbon;
-use Illuminate\Support\Facades\Storage;
-use Intervention\Image\ImageManagerStatic as Image;
-use Illuminate\Support\Facades\Input;
-use Illuminate\Http\Request;
 use App\Models\ServiceCenter;
+use App\Repositories\ServiceCenter\ServiceCenterRepositoryInterface;
+use App\Repositories\ServicesView\ServicesViewRepositoryInterface;
+use App\Repositories\VisitsServiceCenter\VisitsRepositoryInterface;
+use Carbon\Carbon;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 
 class CabinetController extends Controller
@@ -20,10 +18,22 @@ class CabinetController extends Controller
      * @var ServiceCenterRepositoryInterface
      */
     private $sc;
+    /**
+     * @var VisitsRepositoryInterface
+     */
+    private $visitsRepository;
+    /**
+     * @var ServicesViewRepositoryInterface
+     */
+    private $servicesView;
 
-    public function __construct(ServiceCenterRepositoryInterface $sc)
+    public function __construct(ServiceCenterRepositoryInterface $sc,
+                                VisitsRepositoryInterface $visitsRepository,
+                                ServicesViewRepositoryInterface $servicesView)
     {
         $this->sc = $sc;
+        $this->visitsRepository = $visitsRepository;
+        $this->servicesView = $servicesView;
     }
 
     /**
@@ -31,19 +41,56 @@ class CabinetController extends Controller
      */
     public function getDashboard()
     {
-        $service_centers = Auth::user()->service_centers;
-        //dd($service_centers);
-        return view('service_center_cabinet.dashboard', compact('service_centers'));
+
+        return view('service_center_cabinet.dashboard');
     }
+
+
+    /**
+     * @return array
+     */
+    public function getDashboardStat()
+    {
+        $end = Carbon::now()->toDateString();
+        $start = Carbon::now()->addDay(-7)->toDateString();
+        $service_centers = Auth::user()->service_centers->toArray();
+        $statistic = [];
+        foreach ($service_centers as $sc){
+            $statistic['visits'][$sc['service_name']] = $this->visitsRepository->visitsBetween($sc['id'], $start, $end);
+        }
+        $statistic['top_services'] = $this->servicesView->topViewServices();
+
+        $array_id = array_column($service_centers, 'id');
+        $statistic['services_by_service'] = $this->servicesView->viewByServiceUser($array_id);
+
+        return $statistic;
+    }
+
+
+    /**
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function getSettings()
+    {
+        return view('service_center_cabinet.settings');
+    }
+
+
+    /**
+     * @param Request $request
+     */
+    public function postSettings(Request $request)
+    {
+        return $this->sc->updateSetting($request);
+    }
+
 
     /**
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function getIndex()
     {
-        //dd(Auth::user());
-        $service_centers = Auth::user()->service_centers;
-        return view('service_center_cabinet.index', compact('service_centers'));
+        return view('service_center_cabinet.index');
     }
 
     /**
@@ -56,8 +103,9 @@ class CabinetController extends Controller
         if($service_centers->whereIn('id', $id)->isEmpty()){
             return redirect()->back()->with(['message' => 'У вас нету доступа для управлением этим сервисным центром']);
         }
-        //$service = ServiceCenter::find($id);
-        return view('service_center_cabinet.index', compact('service_centers'));
+        $service = ServiceCenter::where('id', $id)->select('service_name')->first();
+        $service_name = $service->service_name;
+        return view('service_center_cabinet.index', compact('service_name'));
     }
 
     /**
@@ -65,9 +113,7 @@ class CabinetController extends Controller
      */
     public function getAddService()
     {
-        $service_centers = Auth::user()->service_centers;
-        //dd($service_centers);
-        return view('service_center_cabinet.add_service', compact('service_centers'));
+        return view('service_center_cabinet.add_service');
     }
 
     /**
@@ -81,6 +127,18 @@ class CabinetController extends Controller
         return response()->json(['sc_id' => $service_center], 200);
     }
 
+
+    /**
+     * @param Request $request
+     * @param $id
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function postAddLogo(Request $request, $id)
+    {
+        $sc_logo = $this->sc->addLogo($request, $id);
+        return response()->json([$sc_logo], 200);
+    }
+
     /**
      * Edit sc cabinet
      * @param Request $request
@@ -89,10 +147,11 @@ class CabinetController extends Controller
      */
     public function putUpdateService(Request $request, $id)
     {
-        $service_center = $this->sc->find($id);
-
         // Основная информация
         $this->sc->updateServiceCenter($request, $id);
+
+        // Рабочий график
+        $this->sc->updateWorkingDays($request, $id);
 
         // Преимущества
         $this->sc->updateAdvantages($request, $id);
@@ -117,25 +176,7 @@ class CabinetController extends Controller
      */
     public function postAddPersonalService(Request $request, $id)
     {
-        $sc = ServiceCenter::find($id);
-
-        $file = $request->avatar['data']['base64'];
-        $img_name = str_random() . '-' . $sc->service_name . ".jpg";
-        Storage::makeDirectory('/sc_uploads/avatars/' . $sc->id);
-        $path = "/sc_uploads/avatars/{$sc->id}/";
-        $path_img = $path . $img_name;
-        Storage::disk('public')->put($path_img, base64_decode($file));
-
-        Image::make(public_path() . $path_img)->resize(500, 500)->save(public_path() . $path_img);
-
-        $sc_personal = [
-            'service_center_id' => $sc->id,
-            'name' => $request->name,
-            'info' => $request->info,
-            'path' => $path,
-            'avatar' => $img_name
-        ];
-        DB::table('service_center_personal')->insert($sc_personal);
+        $sc_personal = $this->sc->addPersonal($request, $id);
         return response()->json([$sc_personal], 200);
     }
 
@@ -147,28 +188,51 @@ class CabinetController extends Controller
      */
     public function postAddPhotoService(Request $request, $id)
     {
-        $sc = ServiceCenter::find($id);
-
-        $file = $request->photo['data']['base64'];
-
-        $img_name = str_random() . '-' . $sc->service_name . ".jpg";
-        Storage::makeDirectory("/sc_uploads/{$request->type}/{$sc->id}");
-        $path = "/sc_uploads/{$request->type}/{$sc->id}/";
-        $path_img = $path . $img_name;
-        Storage::disk('public')->put($path_img, base64_decode($file));
-
-        Image::make(public_path() . $path_img)->resize(500, 500)->save(public_path() . $path_img);
-
-        $sc_photo = [
-            'service_center_id' => $sc->id,
-            'path' => $path,
-            'file_name' => $img_name,
-            'type' => $request->type
-        ];
-
-        DB::table('service_center_photo')->insert($sc_photo);
+        $sc_photo = $this->sc->addPhoto($request, $id);
         return response()->json([$sc_photo], 200);
     }
+
+
+    /**
+     * Delete personal from Service Center
+     * @param $id
+     * @param $id_person
+     * @return string
+     */
+    public function deletePersonalService($id, $id_person)
+    {
+        $this->sc->deletePersonal($id, $id_person);
+        return json_encode(["status" => 200]);
+    }
+
+
+    /**
+     * Delete photo from Service Center
+     * @param $id
+     * @param $id_photo
+     * @return string
+     */
+    public function deletePhotoService($id, $id_photo)
+    {
+        $this->sc->deletePhoto($id, $id_photo);
+        return json_encode(["status" => 200]);
+    }
+
+
+    /**
+     * Delete service center
+     * @param Request $request
+     * @param $id
+     * @return string
+     */
+    public function enabledService(Request $request, $id)
+    {
+        $sc = ServiceCenter::find($id);
+        $sc->enabled = $request->enabled;
+        $sc->update();
+        return json_encode(["status" => 200]);
+    }
+
 
     /**
      * Logout sc cabinet

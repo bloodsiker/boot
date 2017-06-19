@@ -18,6 +18,8 @@ class ServiceCenterPersonalTable extends Migration
             $table->integer('service_center_id')->unsigned();
             $table->string('name');
             $table->string('info')->nullable();
+            $table->string('work_exp')->nullable();
+            $table->string('specialization')->nullable();
             $table->string('path')->nullable();
             $table->string('avatar')->nullable();
 

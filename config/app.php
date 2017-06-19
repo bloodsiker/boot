@@ -169,6 +169,7 @@ return [
         Laravel\Tinker\TinkerServiceProvider::class,
         Watson\Active\ActiveServiceProvider::class,
         Intervention\Image\ImageServiceProvider::class,
+        Maatwebsite\Excel\ExcelServiceProvider::class,
 
         /*
          * Application Service Providers...
@@ -179,6 +180,10 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
         App\Providers\ServiceCenterServiceProvider::class,
+        App\Providers\ViewComposerServiceProvider::class,
+        App\Providers\AdminPanelComposer::class,
+        App\Providers\CrmPanelComposer::class,
+        App\Providers\ServicesViewServiceProvider::class,
 
     ],
 
@@ -230,6 +235,7 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
         'Active' => Watson\Active\Facades\Active::class,
         'Image' => Intervention\Image\Facades\Image::class,
+        'Excel' => Maatwebsite\Excel\Facades\Excel::class,
 
     ],
 

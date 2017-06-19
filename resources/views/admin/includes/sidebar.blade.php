@@ -16,6 +16,19 @@
             </a>
         </li>
         <li class="header">MAIN NAVIGATION</li>
+
+        <li class="treeview">
+            <a href="#">
+                <i class="fa fa-files-o"></i> <span>Страницы</span>
+                <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+            </a>
+            <ul class="treeview-menu">
+                <li><a href="{{ route('admin.pages') }}"><i class="fa fa-files-o"></i> Страницы</a></li>
+                <li><a href="{{ route('admin.pages') }}"><i class="fa fa-files-o"></i> SEO</a></li>
+            </ul>
+        </li>
         <li>
             <a href="{{ route('admin.city') }}">
                 <i class="fa fa-th"></i> <span>Города</span>
@@ -23,28 +36,13 @@
             </span>
             </a>
         </li>
-        <li class="treeview">
-            <a href="#">
-                <i class="fa fa-files-o"></i>
-                <span>Layout Options</span>
-                <span class="pull-right-container">
-              <span class="label label-primary pull-right">4</span>
-            </span>
-            </a>
-            <ul class="treeview-menu">
-                <li><a href="pages/layout/top-nav.html"><i class="fa fa-circle-o"></i> Top Navigation</a></li>
-                <li><a href="pages/layout/boxed.html"><i class="fa fa-circle-o"></i> Boxed</a></li>
-                <li><a href="pages/layout/fixed.html"><i class="fa fa-circle-o"></i> Fixed</a></li>
-                <li><a href="pages/layout/collapsed-sidebar.html"><i class="fa fa-circle-o"></i> Collapsed Sidebar</a></li>
-            </ul>
-        </li>
         <li>
-            <a href="pages/widgets.html">
-                <i class="fa fa-th"></i> <span>Widgets</span>
+            <a href="{{ route('admin.street') }}">
+                <i class="fa fa-street-view"></i> <span>Улицы</span>
                 <span class="pull-right-container">
-              <small class="label pull-right bg-green">new</small>
             </span>
             </a>
         </li>
+
     </ul>
 </section>

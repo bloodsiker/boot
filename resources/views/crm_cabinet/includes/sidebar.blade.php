@@ -10,10 +10,19 @@
         </li>
         <li>
             <a href="{{ route('crm.request') }}">
-                <i class="fa fa-th"></i>
-                <span>Заявки</span>
+                <i class="fa fa-clipboard"></i>
+                <span>Заявки СЦ</span>
                 <span class="pull-right-container">
-              <span class="label label-primary pull-right">4</span>
+              <span class="label label-success pull-right">{{ $count_request_cs }}</span>
+            </span>
+            </a>
+        </li>
+        <li>
+            <a href="{{ route('crm.help.request') }}">
+                <i class="fa fa-clipboard"></i>
+                <span>Подобрать СЦ</span>
+                <span class="pull-right-container">
+              <span class="label label-success pull-right">{{ $count_request_help }}</span>
             </span>
             </a>
         </li>

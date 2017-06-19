@@ -2,23 +2,24 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Eloquent\Model;
 
 class ServiceCenter extends Model
 {
-    //protected $table = 'service_centers';
+    protected $table = 'service_centers';
+
     public $timestamps = false;
 
     protected $fillable = [
         'service_name', 'about', 'city_id', 'metro_id', 'district_id',
-        'work_time', 'start_day', 'end_day', 'start_time', 'end_time',
-        'address', 'street', 'c1', 'c2', 'logo'
+        'address', 'number_h', 'number_h_add', 'street', 'c1', 'c2', 'logo'
     ];
 
     public function user()
     {
-        return $this->hasOne('App/Models/User');
+        return $this->hasOne('App\Models\User');
     }
 
     public function request()
@@ -101,10 +102,10 @@ class ServiceCenter extends Model
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-//    public function certificate()
-//    {
-//        return $this->hasMany('App\Models\Certificate', 'service_center_id', 'id');
-//    }
+    public function work_days()
+    {
+        return $this->hasMany('App\Models\WorkDays', 'service_center_id', 'id');
+    }
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
@@ -112,5 +113,17 @@ class ServiceCenter extends Model
     public function service_photo()
     {
         return $this->hasMany('App\Models\ServicePhoto', 'service_center_id', 'id');
+    }
+
+
+    /**
+     * @param Builder $builder
+     * @param int $enabled
+     * @return mixed
+     */
+    public static function scopeEnabled(Builder $builder, $enabled = 0)
+    {
+        return $builder
+            ->where('enabled', $enabled);
     }
 }

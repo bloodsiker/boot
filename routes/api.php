@@ -22,6 +22,7 @@ Route::get('streets', 'Api\SiteController@getStreets')->name('api.streets');
 Route::get('metro', 'Api\SiteController@getMetro')->name('api.metro');
 Route::get('districts', 'Api\SiteController@getDistricts')->name('api.districts');
 Route::get('manufacturers', 'Api\SiteController@getManufacturers')->name('api.manufacturers');
+Route::get('services', 'Api\ServicesController@getServices')->name('api.services');
 
 Route::get('catalog', 'Api\CatalogController@getIndex')->name('api.catalog');
 Route::get('sc/{id}', 'Api\CatalogController@getServiceCenter')->name('api.sc');
