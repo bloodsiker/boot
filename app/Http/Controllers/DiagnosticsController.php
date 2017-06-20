@@ -136,8 +136,8 @@ class DiagnosticsController extends Controller
                 $list_result[$i]['percentage'] = $value['percentage'];
                 $list_result[$i]['services'] = $value['services'];
                 $list_result[$i]['spare_part'] = $value['spare_part'];
-                $list_result[$i]['min_price'] = DB::table('service_center_price')->where('title', $value['services'])->min('price');
-                $list_result[$i]['max_price'] = DB::table('service_center_price')->where('title', $value['services'])->max('price');
+                $list_result[$i]['min_price'] = DB::table('service_center_price')->where('title', $value['services'])->min('price_min');
+                $list_result[$i]['max_price'] = DB::table('service_center_price')->where('title', $value['services'])->max('price_max');
                 $i++;
             }
 
