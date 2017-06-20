@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Models\Comments;
 use App\Models\ServicesView;
 use App\Repositories\VisitsServiceCenter\VisitsRepositoryInterface;
-use App\Services\SessionFromPage;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -18,16 +17,11 @@ class CatalogController extends Controller
      * @var VisitsRepositoryInterface
      */
     private $visitsRepository;
-    /**
-     * @var SessionFromPage
-     */
-    private $sessionFromPage;
 
-    public function __construct(VisitsRepositoryInterface $visitsRepository, SessionFromPage $sessionFromPage)
+    public function __construct(VisitsRepositoryInterface $visitsRepository)
     {
 
         $this->visitsRepository = $visitsRepository;
-        $this->sessionFromPage = $sessionFromPage;
     }
 
     /**
@@ -47,7 +41,7 @@ class CatalogController extends Controller
     public function getServiceCenter($id)
     {
         $this->visitsRepository->addVisits($id);
-        
+
         if(Session::has('pick_up_service')){
             ServicesView::create([
                 'service_center_id' => $id,

@@ -99,9 +99,11 @@ class CabinetController extends Controller
      */
     public function getService($id)
     {
-        $service_centers = Auth::user()->service_centers;
-        if($service_centers->whereIn('id', $id)->isEmpty()){
-            return redirect()->back()->with(['message' => 'У вас нету доступа для управлением этим сервисным центром']);
+        if(Auth::user()->roleSc()){
+            $service_centers = Auth::user()->service_centers;
+            if($service_centers->whereIn('id', $id)->isEmpty()){
+                return redirect()->back()->with(['message' => 'У вас нету доступа для управлением этим сервисным центром']);
+            }
         }
         $service = ServiceCenter::where('id', $id)->select('service_name')->first();
         $service_name = $service->service_name;

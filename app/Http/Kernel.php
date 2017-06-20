@@ -50,6 +50,7 @@ class Kernel extends HttpKernel
      * @var array
      */
     protected $routeMiddleware = [
+        'session.page' => \App\Http\Middleware\SessionFromPage::class,
         'service.center' => \App\Http\Middleware\IsServiceCenter::class,
         'seo' => \App\Http\Middleware\IsSeo::class,
         'crm' => \App\Http\Middleware\IsCrm::class,

@@ -13,21 +13,6 @@ use Illuminate\Support\Facades\Session;
 
 class DiagnosticsController extends Controller
 {
-
-    /**
-     * @var SessionFromPage
-     */
-    private $sessionFromPage;
-
-    /**
-     * DiagnosticsController constructor.
-     * @param SessionFromPage $sessionFromPage
-     */
-    public function __construct(SessionFromPage $sessionFromPage)
-    {
-        $this->sessionFromPage = $sessionFromPage;
-    }
-
     /**
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */

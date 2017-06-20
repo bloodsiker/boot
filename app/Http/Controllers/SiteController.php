@@ -13,20 +13,6 @@ use Illuminate\Support\Facades\Auth;
 class SiteController extends Controller
 {
     /**
-     * @var SessionFromPage
-     */
-    private $sessionFromPage;
-
-    /**
-     * SiteController constructor.
-     * @param SessionFromPage $sessionFromPage
-     */
-    public function __construct(SessionFromPage $sessionFromPage)
-    {
-        $this->sessionFromPage = $sessionFromPage;
-    }
-
-    /**
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function getIndex()

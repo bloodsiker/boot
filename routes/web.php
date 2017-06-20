@@ -12,7 +12,7 @@
 */
 
 
-Route::group(['middleware' => ['web']], function (){
+Route::group(['middleware' => ['web', 'session.page']], function (){
     Route::get('/', 'SiteController@getIndex')->name('main');
     Route::get('about', 'SiteController@getAbout')->name('about');
     Route::get('support', 'SiteController@getSupport')->name('support');
