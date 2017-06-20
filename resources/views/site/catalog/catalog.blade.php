@@ -76,6 +76,26 @@
                             </div>
                         </div>
 
+                        <div uib-dropdown auto-close="outsideClick" is-open="isOpenRadius">
+                            <span class="filter-panel" uib-dropdown-toggle>
+                                Радиус <span class="glyphicon glyphicon-chevron-down"></span>
+                            </span>
+                            <div class="popover bottom fade in" style="top: 20px; left: 0; min-width: 250px;" uib-dropdown-menu>
+                                <div class="arrow" style="left: 30px;"></div>
+                                <div class="popover-inner">
+                                    <div class="popover-content">
+                                        <div ng-repeat="radius_item in radiuses"
+                                             ng-click="selectFilterRadius(radius_item)" style="cursor: pointer;">
+                                            <div class="checkbox" ng-class="{'active': radius_item.active}"></div>
+                                            @{{ radius_item.title }}
+                                        </div>
+                                    </div>
+                                </div>
+                                <button type="button" class="btn btn-black" ng-click="resetRadius(); isOpenRadius = false">Сбросить</button>
+                                <button class="btn btn-yellow" ng-click="applyRadius(); isOpenRadius = false">Применить</button>
+                            </div>
+                        </div>
+
                     </div>
 
                     <div style="padding-left: 15px;">
@@ -119,18 +139,14 @@
                     </div>
                 </div>
                 <!--=======================end need help=======================-->
-                <div class="row" ng-if="filtered_catalog.length == 0">
+                <div class="row" ng-if="catalog.length == 0">
                     <div class="col-xs-12 text-center">
                         <div class="not-result">Не найдено</div>
                     </div>
                 </div>
                 <!--=======================================CATALOG ITEM=======================================-->
                 <div class="row catalog-item"
-                     ng-repeat="item in catalog | limitTo: limitCatalog
-                     |orderBy: order_by
-                     | filterBy: ['street', 'metro.address', 'district.address']: addressFilter
-                     | filterBy: ['radius'] : true
-                     | filterBy: ['manufacturers']: manufacturerFilter as filtered_catalog">
+                     ng-repeat="item in catalog | limitTo: limitCatalog | orderBy: order_by ">
 
                     <div class="col-md-8">
                         <a class="title-sc" ng-href="@{{ '/sc/'+item.id }}" ng-bind="item.service_name"></a>
@@ -181,7 +197,7 @@
                     </div>
                 </div>
 
-                <div class="row" ng-if="catalog && catalog.length >= limitCatalog">
+                <div class="row" ng-if="catalog.length > 0 && catalog.length >= limitCatalog">
                     <div class="col-xs-12 text-center">
                         <button ng-click="limitCatalogCount()" style="margin-bottom: 20px;" class="btn btn-yellow">Показать еще</button>
                     </div>
@@ -192,6 +208,7 @@
 
             </div>
             <div class="col-sm-6 hidden-xs catalog-map">
+
                 <ng-map id="map"
                         style="position: fixed; top: 0; width:inherit; z-index:1;">
 
@@ -231,11 +248,24 @@
                     <marker
                             position="@{{item.c1}}, @{{item.c2}}"
                             fit="true"
-                            ng-repeat="item in filtered_catalog"
+                            ng-repeat="item in catalog"
                             on-click="showInfo(event, item)"
                             icon="{url:'site/img/marker-map.png'}">
 
                     </marker>
+
+                    <shape id="circle"
+                           ng-if="address.address"
+                           name="circle"
+                           centered="true"
+                           stroke-color='#ffca13'
+                           stroke-opacity="0.3"
+                           stoke-index="2"
+                           stroke-weight="2"
+                           center="@{{address.c1}}, @{{address.c2}}"
+                           radius="@{{radiusMap}}"
+                           editable="false" ></shape>
+
                 </ng-map>
             </div>
         </div>

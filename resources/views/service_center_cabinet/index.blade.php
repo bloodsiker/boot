@@ -343,7 +343,7 @@
                                         <td width="100">
                                             <input type="text" ng-class="{'error-input': price.price_min == 0 && price.active}" placeholder="цена от" number-to-string ng-model="price.price_min">
                                             <em ng-if="price.price_min == 0 && price.active" style="color: #F44336;">Введите цену</em>
-                                            <em ng-if="price.active && price.price_min > price.price_max" style="color: #F44336;">Введите корректную цену</em>
+                                            <em ng-if="showErrorPrice(price)" style="color: #F44336;">Введите корректную цену</em>
                                         </td>
                                         <td> - </td>
                                         <td width="100">

@@ -163,9 +163,13 @@
             sc.price.splice(index, 1);
         };
 
+        $scope.showErrorPrice = function (price) {
+            $scope.priceError = price.active && parseFloat(price.price_min) > parseFloat(price.price_max);
+            return price.active && parseFloat(price.price_min) > parseFloat(price.price_max);
+        };
 
         $scope.saveScPrice = function (valid, price_list) {
-            if (valid) {
+            if (valid && !$scope.priceError) {
                 $scope.sc.price = [];
                 price_list.map(function (key) {
                     if (key.active) {

@@ -1,12 +1,14 @@
 (function () {
     angular.module('App')
         .controller('CatalogCtrl', CatalogCtrl);
-    CatalogCtrl.$inject = ['$scope', 'NgMap', '$rootScope', 'model', '_', '$timeout'];
-    function CatalogCtrl($scope, NgMap, $rootScope, model, _, $timeout) {
+    CatalogCtrl.$inject = ['$scope', 'NgMap', '$rootScope', 'model', '_', '$timeout', 'searchService', '$filter'];
+    function CatalogCtrl($scope, NgMap, $rootScope, model, _, $timeout, searchService, $filter) {
 
         // ================= CATALOG ========================
 
-        $scope.getCatalog = function () {
+
+
+        var getCatalog = function () {
             model.get('/catalog').then(function (success) {
 
                 _.mapObject(success.data, function (index) {
@@ -17,64 +19,23 @@
                     _.mapObject(index.manufacturers, function (el) {
                         brands.push(el.manufacturer);
                     });
-                    index.manufacturers = brands.toString();
+                    index.manufacturers = brands
                 });
 
+                $scope.catalog = success.data;
+                $scope._catalog = success.data;
 
 
-                $rootScope.filtered_catalog = [];
-                $rootScope.catalog = success.data;
-
-                renderMap();
+                filtersCatalog();
 
 
             });
 
-
-
-
-            // ================= MAP
-
-            var renderMap = function () {
-
-                NgMap.getMap("map").then(function (map) {
-                    $scope.map = map;
-
-
-                    var markers = [];
-
-                    $rootScope.catalog.map(function (key) {
-                        markers.push(new google.maps.LatLng(key.c1, key.c2));
-                    });
-
-                    zoomToIncludeMarkers(markers);
-                });
-
-                function zoomToIncludeMarkers(markers) {
-                    var bounds = new google.maps.LatLngBounds();
-                    for (var key in markers) {
-                        bounds.extend(markers[key]);
-                    }
-                    $scope.map.fitBounds(bounds);
-                }
-            }
-
-
-
-
-            $scope.showInfo = function (evt, item) {
-                $scope.map.showInfoWindow('foo', this);
-                $scope.info = item;
-            };
-
-
-
-
-
-
-
-            // $scope.map.trigger($scope.map, 'resize');
         };
+
+        getCatalog();
+
+
         $scope.limitCatalog = 15;
         $scope.limitCatalogCount = function () {
             $scope.limitCatalog += 10;
@@ -84,8 +45,7 @@
 
 
 
-
-        $scope.getCatalog();
+        // ============= FILTERS ================
 
 
         model.get('/services').then(function (success) {
@@ -95,15 +55,6 @@
             });
             $scope.services = success.data;
         });
-
-
-        var date_now = new Date ();
-        $scope.week_day = date_now.getDay();
-
-
-
-
-        // ============= FILTERS ================
 
 
         $scope.filterService = [];
@@ -155,14 +106,6 @@
                 key.title === filter ? key.active = false : '';
             });
 
-
-            //
-            //
-            // filterService = _.indexOf(filterService, filter);
-            // $scope.filterService = filterService;
-            // $timeout(function () {
-            //     $scope.getCatalog();
-            // }, 100)
         };
 
 
@@ -243,6 +186,76 @@
 
 
 
+
+
+
+
+
+
+        // =================== RADIUS ===============
+
+        $scope.radiuses = [
+            {
+                title: '500 м',
+                value: '500',
+                active: false,
+            },
+            {
+                title: '1 км',
+                value: '1000',
+                active: false,
+            },{
+                title: '2 км',
+                value: '2000',
+                active: false,
+            },{
+                title: '3 км',
+                value: '3000',
+                active: true,
+            },{
+                title: '5 км',
+                value: '5000',
+                active: false,
+            }
+            ,{
+                title: '10 км',
+                value: '10000',
+                active: false,
+            },
+        ];
+
+        $scope.radiusMap = $scope.radiuses[3].value;
+
+
+        $scope.selectFilterRadius = function (radius) {
+            $scope.radiuses.map(function (key) {
+                key.active = false;
+            });
+            radius.active = true;
+        };
+
+        $scope.resetRadius = function () {
+            $scope.radiuses.map(function (key) {
+                key.active = false;
+            });
+
+            $scope.radiuses[3].active = true;
+            $scope.radiusMap = $scope.radiuses[3].value;
+
+            $rootScope.updateSearch = $scope.radiusMap;
+        };
+
+
+        $scope.applyRadius = function () {
+            let radius_map = 0;
+            $scope.radiuses.map(function (key) {
+                key.active ? radius_map = key.value : '';
+            });
+            $scope.radiusMap = radius_map;
+            $rootScope.updateSearch = $scope.radiusMap;
+        };
+
+
         // ================= ORDER BY
 
         $scope.activeSort = '';
@@ -254,6 +267,118 @@
         };
 
 
+
+
+        // ================= MAP
+
+        var renderMap = function (address) {
+
+            NgMap.getMap("map").then(function (map) {
+                $scope.map = map;
+
+
+                var markers = [];
+
+                $scope.catalog.map(function (key) {
+                    markers.push(new google.maps.LatLng(key.c1, key.c2));
+                });
+
+                if (address && address.address) {
+
+                    var radius =  ($scope.radiusMap * 0.00001).toFixed(3);
+                    markers.push(new google.maps.LatLng(parseFloat(address.c1) + parseFloat(radius), parseFloat(address.c2) + parseFloat(radius)));
+                    markers.push(new google.maps.LatLng(parseFloat(address.c1) - parseFloat(radius), parseFloat(address.c2) - parseFloat(radius)));
+                }
+                zoomToIncludeMarkers(markers);
+            });
+
+            function zoomToIncludeMarkers(markers) {
+
+
+                var bounds = new google.maps.LatLngBounds();
+                for (var key in markers) {
+                    bounds.extend(markers[key]);
+                }
+                $scope.map.fitBounds(bounds);
+            }
+        };
+
+
+
+
+        $scope.showInfo = function (evt, item) {
+            $scope.map.showInfoWindow('foo', this);
+            $scope.info = item;
+        };
+
+
+        var filtersCatalog = function () {
+
+
+
+
+            $rootScope.$watch('updateSearch', function () {
+                console.log('update');
+
+
+                let address = searchService.address_model();
+                $scope.address = searchService.address_model();
+                let brand = searchService.brand_model();
+
+
+                var radius = ($scope.radiusMap * 0.00001).toFixed(3);
+
+                let streetCatalog = [];
+                let radiusCatalog = [];
+                let metroCatalog = [];
+                let districtCatalog = [];
+                let brandCatalog = [];
+
+                let globalFilter = [];
+
+                console.log(address);
+                $scope.catalog = $scope._catalog;
+                if (address && address.address) {
+                    angular.forEach($scope._catalog, function (key) {
+
+                        key.street ? key.street === address.address ? streetCatalog.push(key) : '' : '';
+                        key.metro && key.metro.address ? key.metro.address === address.address ? metroCatalog.push(key) : '':'';
+                        key.district && key.district.address ? key.district.address === address.address ? districtCatalog.push(key) : '' : '';
+
+
+
+                        var pi = Math.pow(Math.abs(key.c1 - address.c1), 2) + Math.pow(Math.abs(key.c2 - address.c2), 2);
+
+                        if (pi <= Math.pow(parseFloat(radius), 2)) {
+                            radiusCatalog.push(key);
+                        }
+
+                    });
+                    $scope.catalog = _.union(streetCatalog, radiusCatalog, metroCatalog, districtCatalog);
+                }
+                if (brand) {
+                    angular.forEach($scope.catalog, function (key) {
+                        angular.forEach(key.manufacturers, function (b) {
+                            b === brand.manufacturer ? brandCatalog.push(key) : '';
+                        })
+                    });
+
+                    $scope.catalog = brandCatalog;
+                    console.log(brandCatalog);
+                }
+
+
+
+
+
+
+                renderMap(address);
+            });
+
+
+
+
+        }
 
     }
 })();
