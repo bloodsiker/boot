@@ -214,7 +214,7 @@
 
                     <info-window id="foo">
                         <div ng-non-bindable="">
-                            <img ng-if="info.logo" class="logo-cs" ng-src="@{{info.logo}}" alt="@{{info.service_name}}">
+                            <img ng-if="info.logo" class="logo-cs" style="width: 120px;" ng-src="@{{info.logo}}" alt="@{{info.service_name}}">
                             <rating value="item.rating" disabled max="5"></rating>
                             <a style="font-size: 20px; color: #000;" class="title-sc" ng-href="@{{ '/sc/'+info.id }}" ng-bind="info.service_name"></a>
                             <div style="margin-top: 10px; margin-bottom: 10px;" class="info-sc">
