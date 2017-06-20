@@ -17,7 +17,8 @@ class ServiceCenterPriceTable extends Migration
             $table->increments('id');
             $table->integer('service_center_id')->unsigned();
             $table->string('title');
-            $table->decimal('price', 10, 2);
+            $table->decimal('price_min', 10, 2)->default(0);
+            $table->decimal('price_max', 10, 2)->default(0);
             $table->string('currency', 50)->nullable();
             $table->boolean('is_new')->default(0);
 
