@@ -1,11 +1,7 @@
 <?php
 
 Route::group(['middleware' => ['service.center']], function (){
-    View::composer('service_center_cabinet.layouts.sidebar', function($view)
-    {
-        $service_centers = Auth::user()->service_centers;
-        $view->with(['service_centers' => $service_centers]);
-    });
+
     Route::get('cabinet', 'ServiceCenterCabinet\CabinetController@getIndex')->name('cabinet');
     Route::get('cabinet/dashboard', 'ServiceCenterCabinet\CabinetController@getDashboard')->name('cabinet.dashboard');
     Route::get('cabinet/dashboard_stat', 'ServiceCenterCabinet\CabinetController@getDashboardStat')->name('cabinet.dashboard.stat');

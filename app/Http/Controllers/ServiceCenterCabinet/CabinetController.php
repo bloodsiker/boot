@@ -52,7 +52,7 @@ class CabinetController extends Controller
     public function getDashboardStat()
     {
         $end = Carbon::now()->toDateString();
-        $start = Carbon::now()->addDay(-7)->toDateString();
+        $start = Carbon::now()->addDay(-30)->toDateString();
         $service_centers = Auth::user()->service_centers->toArray();
         $statistic = [];
         foreach ($service_centers as $sc){
