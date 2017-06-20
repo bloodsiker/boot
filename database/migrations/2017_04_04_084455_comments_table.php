@@ -28,6 +28,7 @@ class CommentsTable extends Migration
             $table->unsignedTinyInteger('r_price_quality');
             $table->unsignedTinyInteger('r_service');
             $table->unsignedTinyInteger('status')->default(0);
+            $table->unsignedTinyInteger('is_phone')->default(0);
             $table->timestamps();
 
             $table->foreign('service_center_id')
