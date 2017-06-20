@@ -19,6 +19,15 @@
                 url: "/api"+ url
             })
         };
+
+        this._get = function (url) {
+            return $http({
+                method: 'get',
+                headers: { 'X-CSRF-TOKEN': token },
+                url: url
+            })
+        };
+
         this.post = function (url, data) {
             return $http({
                 method: 'post',

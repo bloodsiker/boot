@@ -107,14 +107,16 @@
                     <thead>
                     <tr>
                         <th>Услуга</th>
-                        <th>Цена</th>
+                        <th>от</th>
+                        <th>до</th>
                         <th>Валюта</th>
                     </tr>
                     </thead>
                     <tbody>
                     <tr ng-repeat="item in service_center.price">
                         <td ng-bind="item.title"></td>
-                        <td ng-bind="item.price"></td>
+                        <td ng-bind="item.price_min"></td>
+                        <td ng-bind="item.price_max"></td>
                         <td ng-bind="item.currency"></td>
                     </tr>
                     </tbody>
@@ -241,7 +243,7 @@
                     </div>
                     <div class="col-md-6">
                         <p ng-bind="item.text"></p>
-                        <div class="info-comment">Отзыв зафиксирован со слов клиента по телефону</div>
+                        <div class="info-comment" ng-if="item.is_phone">Отзыв зафиксирован со слов клиента по телефону</div>
                     </div>
                     <div class="col-md-3">
                         <img class="avatar" src="{{ asset('site/img/logo_user_default.png') }}" align="left"/>

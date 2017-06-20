@@ -89,7 +89,7 @@
                     { title: 'ЧТ', start_time: '09:00', end_time: '19:00', weekend: false},
                     { title: 'ПТ', start_time: '09:00', end_time: '19:00', weekend: false},
                     { title: 'СБ', start_time: '10:00', end_time: '17:00', weekend: '1'},
-                    { title: 'НД', start_time: '10:00', end_time: '17:00', weekend: '1'}
+                    { title: 'ВС', start_time: '10:00', end_time: '17:00', weekend: '1'}
                 ];
                 if (!_.has(success.data, 'work_days')) {
                     success.data.work_days =  work_days;
@@ -97,27 +97,28 @@
                 $scope.sc = success.data;
                 brands(success.data);
                 model.get('/services').then(function (prices) {
-                    $scope.currency = ['ГРН', 'USD', 'EUR'];
-
-
-
+                    $scope.currency = ['ГРН'];
                     prices.data.map(function (price) {
-                        price.price = '';
+                        price.price_min = '';
+                        price.price_max = '';
                         price.currency = 'ГРН';
-
-
                     });
+
+
 
                     $scope.sc.price.map(function (scPrice) {
                         prices.data.map(function (key) {
                             if (key.title === scPrice.title) {
-                                key.price = scPrice.price
+                                key.active = true;
+                                key.price_min = scPrice.price_min;
+                                key.price_max = scPrice.price_max;
                                 key.currency = scPrice.currency
                             }
                         });
                     });
 
                     $scope.sc.price.map(function (scPrice) {
+                        scPrice.active = true;
                         if (scPrice.is_new == 1) {
                             prices.data.push(scPrice);
                         }
@@ -141,14 +142,15 @@
         $scope.newPriceCost = '';
         $scope.showAddPrice = false;
 
-        $scope.addPrice = function (valid, sc, title, price, currency) {
+        $scope.addPrice = function (valid, sc, title, price_min, price_max, currency) {
             var oldTitle = _.some($scope.price_list, function (key) {
                 return key.title === title;
             });
             if (valid && !oldTitle) {
                 $scope.price_list.push({
                     title: title,
-                    price: price,
+                    price_min: price_min ? price_min : 0,
+                    price_max: price_max ? price_max : 0,
                     is_new: 1,
                     currency: currency
                 });
@@ -161,11 +163,14 @@
             sc.price.splice(index, 1);
         };
 
+
         $scope.saveScPrice = function (valid, price_list) {
             if (valid) {
                 $scope.sc.price = [];
                 price_list.map(function (key) {
-                    if (key.price) {
+                    if (key.active) {
+                        key.price_min = key.price_min ? key.price_min : 0,
+                        key.price_max = key.price_max ? key.price_max : 0,
                         $scope.sc.price.push(key);
                     }
                 });

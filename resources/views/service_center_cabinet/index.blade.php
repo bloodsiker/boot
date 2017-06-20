@@ -327,47 +327,62 @@
 
                 </md-content>
             </md-tab>
-            <md-tab label="Цены" flex layout="column">
+            <md-tab label="Услуги и цены" flex layout="column">
                 <md-content layout-fill flex layout="column">
                     <div flex layout="row">
                         <div flex layout="column" layout-padding>
-                            <h1 class="md-display-1">Примерная стоимость работ</h1>
-                                <md-list>
-                                    <md-list-item ng-repeat="price in price_list" layout="row">
-                                        <p ng-bind="price.title"></p>
-                                        <md-input-container class="md-block">
-                                            <input type="text" placeholder="Цена" number-to-string ng-model="price.price">
-                                        </md-input-container>
-                                        <md-input-container flex="10" class="md-block">
-                                            <label>Валюта</label>
-                                            <md-select name="currency" ng-model="price.currency">
+                            <h1 class="md-display-1">Виды и стоимость работ</h1>
+
+
+                                <table>
+                                    <tr ng-repeat="price in price_list" style="vertical-align: top;">
+                                        <td>
+                                            <md-checkbox name="tos" ng-model="price.active" required></md-checkbox>
+                                        </td>
+                                        <td ng-bind="price.title"></td>
+                                        <td width="100">
+                                            <input type="text" ng-class="{'error-input': price.price_min == 0 && price.active}" placeholder="цена от" number-to-string ng-model="price.price_min">
+                                            <em ng-if="price.price_min == 0 && price.active" style="color: #F44336;">Введите цену</em>
+                                            <em ng-if="price.active && price.price_min > price.price_max" style="color: #F44336;">Введите корректную цену</em>
+                                        </td>
+                                        <td> - </td>
+                                        <td width="100">
+                                            <input type="text"  ng-class="{'error-input': price.price_max == 0 && price.active}" placeholder="цена до" number-to-string ng-model="price.price_max">
+                                            <em ng-if="price.price_max == 0 && price.active" style="color: #F44336;">Введите цену</em>
+
+                                        </td>
+                                        <td>
+                                            <md-select style="margin: 0;" name="currency" ng-model="price.currency">
                                                 <md-option ng-repeat="time in currency" value="@{{time}}">@{{ time }}</md-option>
                                             </md-select>
-                                        </md-input-container>
-                                    </md-list-item>
-
-
-                                    <md-list-item layout="row">
-                                        <form name="addPriceForm" flex layout="row" layout-align="end end" novalidate>
-                                            <md-input-container flex>
+                                        </td>
+                                    </tr>
+                                </table>
+                                <md-divider></md-divider>
+                                <form name="addPriceForm" novalidate>
+                                    <table>
+                                        <tr  style="vertical-align: top;">
+                                            <td>
                                                 <input type="text" placeholder="Добавить услугу" ng-model="newPriceTitle" required>
-                                            </md-input-container>
-                                            <span flex></span>
-                                            <md-input-container class="md-block">
-                                                <input type="number" placeholder="Цена" step="0.01" ng-model="newPriceCost" required>
-                                            </md-input-container>
-                                            <md-input-container flex="10" class="md-block">
-                                                <label>Валюта</label>
-                                                <md-select name="currency" ng-model="newPriceCurrency">
+                                            </td>
+                                            <td><input type="number" placeholder="Цена" step="0.01" ng-model="newPriceCostMin"></td>
+                                            <td> - </td>
+                                            <td><input type="number" placeholder="Цена" step="0.01" ng-model="newPriceCostMax"></td>
+                                            <td>
+                                                <md-select style="margin: 0;" name="currency" ng-model="newPriceCurrency">
                                                     <md-option ng-selected="@{{$first}}" ng-repeat="time in currency" value="@{{time}}">@{{ time }}</md-option>
                                                 </md-select>
-                                            </md-input-container>
-                                            <md-button type="button" ng-click="addPrice(addPriceForm.$valid, sc, newPriceTitle, newPriceCost, newPriceCurrency)" class="md-primary md-raised">
-                                                Добавить
-                                            </md-button>
-                                        </form>
-                                    </md-list-item>
-                                </md-list>
+                                            </td>
+                                            <td width="100"></td>
+                                            <td>
+                                                <md-button style="margin: 0;" type="button" ng-click="addPrice(addPriceForm.$valid, sc, newPriceTitle, newPriceCostMin, newPriceCostMax, newPriceCurrency)" class="md-primary md-raised">
+                                                    Добавить
+                                                </md-button>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </form>
+
                                 <div flex></div>
                                 <div layout="row">
                                     <span flex></span>

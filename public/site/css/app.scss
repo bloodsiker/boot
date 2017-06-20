@@ -557,9 +557,9 @@ span.icon {
   }
   .dropdown-menu {
     padding: 0;
-    min-width: 320px;
+    min-width: 345px;
     .datapicker {
-      padding: 5px;
+      padding: 10px;
     }
     .price {
       width: 90px;
@@ -1313,8 +1313,15 @@ span.icon {
 
 
 
-
-
+.error-input {
+  border: 2px solid #F44336;
+}
+.dropdown-limit {
+  .dropdown-menu {
+    max-height: 300px;
+    overflow: auto;
+  }
+}
 
 
 

@@ -11,7 +11,7 @@
 
 @section('content')
 
-    <div style="position: relative;z-index: 2;background: #fff;">
+    <div style="position: relative;z-index: 2;background: #fff;" ng-cloak>
         <div class="container" style="position: relative;z-index: 2;">
             <div class="search-catalog">
                 <!--======================================= INCLUDE SEARCH SC =======================================-->
@@ -47,58 +47,40 @@
                                 Время работы <span class="glyphicon glyphicon-chevron-down"></span>
                             </span>
 
-
-                            <div class="popover bottom fade in"
-                                 style="top: 20px"
-                                 uib-dropdown-menu
-                                 >
+                            <div class="popover bottom fade in" style="top: 20px;"uib-dropdown-menu>
                                 <div class="arrow" style="left: 30px;"></div>
                                 <div class="popover-inner">
-                                    <div class="row datapicker">
-                                        <div class="col-md-6">
-                                            <span>Начало дня</span>
-                                            <div uib-timepicker ng-model="start_time" show-spinners="false"
-                                                 show-meridian="ismeridian"></div>
+                                    <div class="datapicker">
+                                        <div style="float: left;">
+                                            <label>День недели
+                                                <select name="weekDay" class="form-control"  ng-model="timeFilter.day">
+                                                    <option ng-repeat="day in week_days" value="@{{day}}">@{{day}}</option>
+                                                </select>
+                                            </label>
                                         </div>
-                                        <div class="col-md-6">
-                                            <span>Конец дня</span>
-                                            <div uib-timepicker ng-model="end_time" show-spinners="false"
-                                                 show-meridian="ismeridian"></div>
+                                        <div  style="float: left;margin-left: 10px; margin-right: 10px;margin-left: 10px;">
+                                            <label>Начало дня
+                                                <div uib-timepicker ng-model="timeFilter.start_time" show-spinners="false" show-meridian="ismeridian"></div>
+                                            </label>
+                                        </div>
+                                        <div  style="float: left;">
+                                            <label>Конец дня
+                                                <div uib-timepicker ng-model="timeFilter.end_time" show-spinners="false" show-meridian="ismeridian"></div>
+                                            </label>
                                         </div>
                                     </div>
+                                    <div class="clearfix"></div>
                                     <button type="button" class="btn btn-black" ng-click="clear_time(); openedTime = false">Сбросить</button>
-                                    <button class="btn btn-yellow" ng-click="select_time(start_time, end_time); openedTime = false">Выбрать</button>
+                                    <button class="btn btn-yellow" ng-click="applyTime(); openedTime = false">Выбрать</button>
                                 </div>
                             </div>
                         </div>
-
-                        <!--=======================================SERVICE MORE=======================================-->
-                        {{--<div uib-dropdown auto-close="outsideClick" is-open="openedServiceMore">--}}
-                            {{--<span class="filter-panel"--}}
-                                  {{--uib-dropdown-toggle>--}}
-                                {{--Дополнительные условия <span class="glyphicon glyphicon-chevron-down"></span>--}}
-                            {{--</span>--}}
-                            {{--<div class="popover bottom fade in" style="top: 20px;" uib-dropdown-menu--}}
-                                 {{--ng-mouseleave="openedServiceMore =--}}
-                            {{--false">--}}
-                                {{--<div class="arrow"></div>--}}
-                                {{--<div class="popover-inner">--}}
-                                    {{--<div class="popover-content">--}}
-                                        {{--<div ng-repeat="item in [1,2,3,4,5,6,7,8]">--}}
-                                            {{--<label>--}}
-                                                {{--<input type="checkbox" ng-model="value1"> @{{ item }} Value--}}
-                                            {{--</label>--}}
-                                        {{--</div>--}}
-                                    {{--</div>--}}
-                                {{--</div>--}}
-                            {{--</div>--}}
-                        {{--</div>--}}
 
                     </div>
 
                     <div style="padding-left: 15px;">
                         <div ng-if="filterService.length > 0"
-                             class="chips btn btn-yellow"
+                             class="chips btn btn-yellow slide"
                              ng-repeat="filter in filterService track by $index"
                              ng-click="removeFilterService($index, filter)">
                             @{{filter}} <span class="glyphicon glyphicon-remove"></span>
@@ -144,7 +126,7 @@
                 </div>
                 <!--=======================================CATALOG ITEM=======================================-->
                 <div class="row catalog-item"
-                     ng-repeat="item in catalog
+                     ng-repeat="item in catalog | limitTo: limitCatalog
                      |orderBy: order_by
                      | filterBy: ['street', 'metro.address', 'district.address']: addressFilter
                      | filterBy: ['radius'] : true
@@ -196,6 +178,12 @@
                         </div>
                         <button class="btn btn-yellow" data-toggle="modal" data-target="#call_modal" ng-click="openScCall(item.id)">Связаться</button>
 
+                    </div>
+                </div>
+
+                <div class="row" ng-if="catalog && catalog.length >= limitCatalog">
+                    <div class="col-xs-12 text-center">
+                        <button ng-click="limitCatalogCount()" style="margin-bottom: 20px;" class="btn btn-yellow">Показать еще</button>
                     </div>
                 </div>
 

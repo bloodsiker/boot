@@ -424,9 +424,9 @@ img {
     cursor: pointer; }
   .filters .dropdown-menu {
     padding: 0;
-    min-width: 320px; }
+    min-width: 345px; }
     .filters .dropdown-menu .datapicker {
-      padding: 5px; }
+      padding: 10px; }
     .filters .dropdown-menu .price {
       width: 90px; }
     .filters .dropdown-menu .btn-black {
@@ -977,5 +977,12 @@ img {
     .footer ul li a {
       line-height: 1.5;
       color: #cccccc; }
+
+.error-input {
+  border: 2px solid #F44336; }
+
+.dropdown-limit .dropdown-menu {
+  max-height: 300px;
+  overflow: auto; }
 
 /*# sourceMappingURL=app.css.map */

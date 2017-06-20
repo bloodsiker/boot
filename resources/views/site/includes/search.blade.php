@@ -6,7 +6,7 @@
     </div>
     <div class="search">
         <!--=======================================ADDRESS=======================================-->
-        <div style="flex: 40;padding-left: 20px;padding-right: 20px;">
+        <div style="flex: 40;padding-left: 20px;padding-right: 20px;" class="dropdown-limit">
             <uib-tabset active="active">
                 <uib-tab index="0" heading="Район" ng-click="reset_address()">
                     <input type="text"
@@ -24,7 +24,7 @@
                            typeahead-min-length="0"
                            placeholder="Искать по всем метро"
                            ng-model="address_model.address"
-                           uib-typeahead="item as item.address for item in metro | filter:$viewValue | limitTo:8"
+                           uib-typeahead="item as item.address for item in metro | filter:$viewValue"
                            class="form-control">
                     <span ng-if="address_model.address" ng-click="reset_address()" class="glyphicon glyphicon-remove reset-input"></span>
                 </uib-tab>
@@ -34,7 +34,7 @@
                            typeahead-min-length="0"
                            placeholder="Искать по всем улицам"
                            ng-model="address_model.address"
-                           uib-typeahead="item as item.address for item in streets | filter:$viewValue | limitTo:8"
+                           uib-typeahead="item as item.address for item in streets | filter:$viewValue | limitTo:30"
                            class="form-control">
                     <span ng-if="address_model.address" ng-click="reset_address()" class="glyphicon glyphicon-remove reset-input"></span>
                 </uib-tab>
@@ -43,13 +43,13 @@
         <!--=======================================BRAND=======================================-->
         <div style="flex: 20;padding-right: 20px; text-align: left;">
             <div class="name-filed">Бренд</div>
-            <div style="position: relative;">
+            <div style="position: relative;" class="dropdown-limit">
                 <input type="text"
                        typeahead-show-hint="true"
                        typeahead-min-length="0"
                        placeholder="Все варианты"
                        ng-model="brand_model"
-                       uib-typeahead="item as item.manufacturer for item in brands | filter:$viewValue | limitTo:8"
+                       uib-typeahead="item as item.manufacturer for item in brands | filter:$viewValue"
                        class="form-control">
                 <span ng-if="brand_model" ng-click="reset_brand()" class="glyphicon glyphicon-remove
         reset-input"></span>

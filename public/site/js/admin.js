@@ -13,9 +13,9 @@
     ]).config(function($mdThemingProvider, ChartJsProvider) {
 
         ChartJsProvider.setOptions({
-            chartColors: ['#ffb15a', '#ff9300'],
+
             responsive: true,
-            tooltips: { enabled: false }
+            tooltips: { enabled: true }
         });
         // Настроить цвет по своему, просто раскомментируй и измени глубину и код цвета
         // переменные подходят
