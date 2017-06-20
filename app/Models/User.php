@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Support\Facades\Auth;
 
 class User extends Authenticatable
 {
@@ -35,5 +36,50 @@ class User extends Authenticatable
     public function service_centers()
     {
         return $this->hasMany('App\Models\ServiceCenter', 'user_id', 'id');
+    }
+
+    /**
+     * @return bool
+     */
+    public function roleSc()
+    {
+        if(Auth::user()->role_id == 2){
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * @return bool
+     */
+    public function roleAdmin()
+    {
+        if(Auth::user()->role_id == 1){
+            return true;
+        }
+        return false;
+    }
+
+
+    /**
+     * @return bool
+     */
+    public function roleSeo()
+    {
+        if(Auth::user()->role_id == 4){
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * @return bool
+     */
+    public function roleCrm()
+    {
+        if(Auth::user()->role_id == 5){
+            return true;
+        }
+        return false;
     }
 }

@@ -16,7 +16,7 @@ class IsCrm
      */
     public function handle($request, Closure $next)
     {
-        if (Auth::user() &&  (Auth::user()->role_id == 1 || Auth::user()->role_id == 5)) {
+        if (Auth::user() &&  (Auth::user()->roleCrm() || Auth::user()->roleAdmin())) {
             return $next($request);
         }
         return redirect('/adm/auth')->with(['message' => 'У вас нету прав доступа в эту часть кабинета!']);
