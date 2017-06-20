@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Diagnostic;
 use App\Models\DiagnosticRequest;
 use App\Models\ServicesView;
+use App\Services\SessionFromPage;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -12,6 +13,21 @@ use Illuminate\Support\Facades\Session;
 
 class DiagnosticsController extends Controller
 {
+
+    /**
+     * @var SessionFromPage
+     */
+    private $sessionFromPage;
+
+    /**
+     * DiagnosticsController constructor.
+     * @param SessionFromPage $sessionFromPage
+     */
+    public function __construct(SessionFromPage $sessionFromPage)
+    {
+        $this->sessionFromPage = $sessionFromPage;
+    }
+
     /**
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */

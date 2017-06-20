@@ -32,5 +32,9 @@ class ServiceCenterServiceProvider extends ServiceProvider
             \App\Repositories\VisitsServiceCenter\VisitsRepositoryInterface::class,
             \App\Repositories\VisitsServiceCenter\VisitsRepository::class
         );
+
+        $this->app->bind(
+            \App\Services\SessionFromPage::class
+        );
     }
 }

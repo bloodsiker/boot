@@ -3,10 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Models\Comments;
+use App\Models\ServicesView;
 use App\Repositories\VisitsServiceCenter\VisitsRepositoryInterface;
+use App\Services\SessionFromPage;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Session;
 
 class CatalogController extends Controller
 {
@@ -15,11 +18,16 @@ class CatalogController extends Controller
      * @var VisitsRepositoryInterface
      */
     private $visitsRepository;
+    /**
+     * @var SessionFromPage
+     */
+    private $sessionFromPage;
 
-    public function __construct(VisitsRepositoryInterface $visitsRepository)
+    public function __construct(VisitsRepositoryInterface $visitsRepository, SessionFromPage $sessionFromPage)
     {
 
         $this->visitsRepository = $visitsRepository;
+        $this->sessionFromPage = $sessionFromPage;
     }
 
     /**
@@ -39,6 +47,14 @@ class CatalogController extends Controller
     public function getServiceCenter($id)
     {
         $this->visitsRepository->addVisits($id);
+        
+        if(Session::has('pick_up_service')){
+            ServicesView::create([
+                'service_center_id' => $id,
+                'services' => Session::get('pick_up_service'),
+                'date_view' => Carbon::now()->format('Y-m-d')
+            ]);
+        }
 
         $data_seo = json_decode(DB::table('seo_meta')->where('title', 'sc_view')->get());
         return view('site.catalog.service_center', compact('data_seo'));
