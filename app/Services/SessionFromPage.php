@@ -33,6 +33,6 @@ class SessionFromPage
         if($this->route != 'catalog' && $this->route != 'sc') {
             Session::forget('pick_up_service');
         }
-        dd(Session::all());
+        //dd(Session::all());
     }
 }

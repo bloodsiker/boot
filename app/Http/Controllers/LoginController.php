@@ -26,9 +26,12 @@ class LoginController extends Controller
             'password' => 'required'
         ]);
 
-        if(Auth::attempt(['email' => $request->email, 'password' => $request->password, 'role_id' => 2])){
-            return redirect()->route('cabinet.dashboard');
+        if(Auth::attempt(['email' => $request->email, 'password' => $request->password])){
+            if(Auth::user()->role_id == 2 || Auth::user()->role_id == 1){
+                return redirect()->route('cabinet.dashboard');
+            }
+            return redirect()->back()->with(['message' => 'У Вас нету доступа в эту часть кабинета!']);
         }
-        return redirect()->back();
+        return redirect()->back()->with(['message' => 'Не верные данные для входа в личный кабинет!']);
     }
 }
