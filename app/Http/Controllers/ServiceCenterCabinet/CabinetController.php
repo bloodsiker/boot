@@ -220,17 +220,54 @@ class CabinetController extends Controller
 
 
     /**
-     * Delete service center
+     * Disabled service center
      * @param Request $request
      * @param $id
      * @return string
      */
+    public function disabledService(Request $request, $id)
+    {
+        $service_centers = Auth::user()->service_centers;
+        if($service_centers->whereIn('id', $id)->isEmpty()){
+            return redirect()->back()->with(['message' => 'У вас нету доступа для управлением этим сервисным центром']);
+        }
+        $sc = ServiceCenter::find($id);
+        $sc->enabled = 1;
+        if($sc->update()){
+            return json_encode(["status" => 200]);
+        }
+        return json_encode(["status" => 400]);
+    }
+
+    /**
+     * Enabled service center
+     * @param Request $request
+     * @param $id
+     * @return \Illuminate\Http\RedirectResponse|string
+     */
     public function enabledService(Request $request, $id)
     {
+        $service_centers = Auth::user()->service_centers;
+        if($service_centers->whereIn('id', $id)->isEmpty()){
+            return redirect()->back()->with(['message' => 'У вас нету доступа для управлением этим сервисным центром']);
+        }
         $sc = ServiceCenter::find($id);
-        $sc->enabled = $request->enabled;
-        $sc->update();
-        return json_encode(["status" => 200]);
+        $sc->enabled = 0;
+        if($sc->update()){
+            return json_encode(["status" => 200]);
+        }
+        return json_encode(["status" => 400]);
+    }
+
+
+    /**
+     * List disabled
+     * @return string
+     */
+    public function listDisabledService()
+    {
+        $service_centers = Auth::user()->service_centers()->enabled(1)->get();
+        return json_encode($service_centers);
     }
 
 
