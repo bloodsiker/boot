@@ -8,6 +8,7 @@ use Validator;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use App\Mail\HelpPickUpServiceCenter;
 
 class FormsController extends Controller
 {
@@ -40,6 +41,14 @@ class FormsController extends Controller
             $message->from('info@boot.com.ua', 'BOOT');
             $message->to('maldini2@ukr.net')->cc('info@boot.com.ua')->subject('Помощь в подборе сервисного центра');
         });
+
+//        $content = [
+//            'title'=> 'Itsolutionstuff.com mail',
+//            'body'=> 'The body of your message.',
+//            'button' => 'Click Here'
+//        ];
+//
+//        Mail::to('maldini2@ukr.net')->send(new HelpPickUpServiceCenter($content));
 
         return json_encode(["status" => 200]);
     }
