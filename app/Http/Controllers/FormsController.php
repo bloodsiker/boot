@@ -24,23 +24,54 @@ class FormsController extends Controller
             return json_encode(['status' => 400, $validator->failed()]);
         }
 
-        FormRequest::insert(
-            [
-                'pagename' => 'Главная страница',
-                'city' => 'Днепр',
-                'name' => $request->name,
-                'phone' => $request->phone,
-                'status' => 'Новая',
-                'created_at' => Carbon::now()
-            ]
-        );
+        $data = [
+            'pagename' => 'Главная страница',
+            'city' => 'Днепр',
+            'name' => $request->name,
+            'phone' => $request->phone,
+            'status' => 'Новая',
+            'created_at' => Carbon::now()
+        ];
+
+        DB::table('form_requests')->insert($data);
 
         // send the email
-//        Mail::send('site.emails.help', $input, function($message)
-//        {
-//            $message->from('us@example.com', 'Laravel');
-//            $message->to('maldini2@ukr.net')->subject('Помощь в подборе сервисного центра');
-//        });
+        Mail::send('site.emails.help', ['data' => $data], function ($message) use ($data) {
+            $message->from('info@boot.com.ua', 'BOOT');
+            $message->to('maldini2@ukr.net')->cc('info@boot.com.ua')->subject('Помощь в подборе сервисного центра');
+        });
+
+        return json_encode(["status" => 200]);
+    }
+
+
+    /**
+     * Форма связи со страници сервисного центра
+     * @param Request $request
+     * @return string
+     */
+    public function scRequest(Request $request)
+    {
+        $input = $request->all();
+
+        $validator = Validator::make($input, [
+            'name' => 'required|min:2',
+            'phone' => 'required'
+        ]);
+
+        if ($validator->fails()) {
+            return json_encode(['status' => 400, $validator->failed()]);
+        }
+
+        DB::table('form_requests')->insert([
+            'pagename' => 'Главная страница',
+            'city' => 'Днепр',
+            'service_id' => $request->id,
+            'name' => $request->name,
+            'phone' => $request->phone,
+            'status' => 'Новая',
+            'created_at' => Carbon::now()
+        ]);
 
         return json_encode(["status" => 200]);
     }

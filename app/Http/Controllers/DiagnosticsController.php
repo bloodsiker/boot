@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Models\Diagnostic;
 use App\Models\DiagnosticRequest;
 use App\Models\ServicesView;
-use App\Services\SessionFromPage;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
