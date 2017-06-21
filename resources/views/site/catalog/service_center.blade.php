@@ -243,7 +243,7 @@
                     </div>
                     <div class="col-md-6">
                         <p ng-bind="item.text"></p>
-                        <div class="info-comment" ng-if="item.is_phone">Отзыв зафиксирован со слов клиента по телефону</div>
+                        <div class="info-comment" ng-if="item.is_phone == '1'">Отзыв зафиксирован со слов клиента по телефону</div>
                     </div>
                     <div class="col-md-3">
                         <img class="avatar" src="{{ asset('site/img/logo_user_default.png') }}" align="left"/>
