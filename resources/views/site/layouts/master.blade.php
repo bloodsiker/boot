@@ -40,8 +40,8 @@
 <script src="{{ asset('site/vendor/jquery/dist/jquery.min.js') }}"></script>
 <script src="{{ asset('site/vendor/bootstrap/dist/js/bootstrap.min.js') }}"></script>
 
-<script src="{{ asset('site/vendor/angular-bootstrap/ui-bootstrap-tpls.min.js') }}"></script>
 
+<script src="{{ asset('site/vendor/angular-bootstrap/ui-bootstrap-tpls.min.js') }}"></script>
 <!--==============================MAP=====================-->
 <script src="http://maps.google.com/maps/api/js?key=AIzaSyDdycmfIt4XbYlFLw5138RsuKNLb_yUFA4"></script>
 <script src="{{ asset('site/vendor/ngmap/build/scripts/ng-map.min.js') }}"></script>

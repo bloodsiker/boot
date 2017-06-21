@@ -1,26 +1,26 @@
 (function () {
     angular.module('App')
-        .controller('AdminController', AdminController)
+        .controller('AdminController', AdminController);
 
-    AdminController.$inject = ['$scope', '$mdSidenav', 'model', '$mdDialog', '$http'];
+    AdminController.$inject = ['$scope', 'model', '$http'];
 
-    function AdminController($scope, $mdSidenav, model, $mdDialog, $http) {
-        model.get('/districts').then(function (success) {
-            $scope.districts = success.data;
-        });
-        model.get('/cities').then(function (success) {
-            // $scope.cities = success.data;
-            $scope.cities = success.data;
-        });
-        model.get('/metro').then(function (success) {
-            $scope.metro = success.data;
-        });
-        model.get('/streets').then(function (success) {
-            $scope.streets = success.data;
-        });
-        $scope.openSideMenu = function () {
-            $mdSidenav('side').toggle();
-        };
+    function AdminController($scope, model, $http) {
+        // model.get('/districts').then(function (success) {
+        //     $scope.districts = success.data;
+        // });
+        // model.get('/cities').then(function (success) {
+        //     // $scope.cities = success.data;
+        //     $scope.cities = success.data;
+        // });
+        // model.get('/metro').then(function (success) {
+        //     $scope.metro = success.data;
+        // });
+        // model.get('/streets').then(function (success) {
+        //     $scope.streets = success.data;
+        // });
+        // $scope.openSideMenu = function () {
+        //     $mdSidenav('side').toggle();
+        // };
 
 
         $scope.addSettingsSc = function (event, valid, settings) {
@@ -54,15 +54,15 @@
             return showTrash;
         }
 
-        $scope.openTrash = function () {
-            $mdDialog.show({
-                templateUrl: 'trash.html',
-                clickOutsideToClose:true,
-                fullscreen: true,
-                controller: trashController
-            });
-        };
-        function trashController($scope, $mdDialog, model) {
+        // $scope.openTrash = function () {
+        //     $mdDialog.show({
+        //         templateUrl: 'trash.html',
+        //         clickOutsideToClose:true,
+        //         fullscreen: true,
+        //         controller: trashController
+        //     });
+        // };
+        function trashController($scope, model) {
             $http({
                 method: 'get',
                 url: '/cabinet/sc/list-disabled'
@@ -82,7 +82,7 @@
                 }
             };
             $scope.closeDialog = function() {
-                $mdDialog.hide();
+                // $mdDialog.hide();
             };
 
         }

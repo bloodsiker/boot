@@ -2,9 +2,9 @@
     angular.module('App')
         .controller('RefactorScController', RefactorScController);
 
-    RefactorScController.$inject = ['$scope', '$http', 'model', '_', '$mdToast', '$mdDialog'];
+    RefactorScController.$inject = ['$scope', '$http', 'model', '_'];
 
-    function RefactorScController($scope, $http, model, _, $mdToast, $mdDialog) {
+    function RefactorScController($scope, $http, model, _,) {
         var url = window.location.pathname.slice(8);
 
         $scope.scLogo = null;
@@ -204,17 +204,21 @@
                 console.log('Массивы идентичны');
             }
         };
-        $scope.addAdvantages = function (advantages, sc_id) {
-            return {
-                advantages: advantages,
-                service_center_id: sc_id
-            };
+        $scope.preAdvantage = '';
+        $scope.addAdvantages = function (advantag) {
+            $scope.sc.advantages.push(advantag);
+            $scope.preAdvantage = '';
         };
-        $scope.addTags = function (tag, sc_id) {
-            return {
-                tag: tag,
-                service_center_id: sc_id
-            };
+        $scope.removeAdvantages = function (index) {
+            $scope.sc.advantages.splice(index, 1);
+        };
+        $scope.preTag = '';
+        $scope.addTags = function (tag) {
+            $scope.sc.tags.push(tag);
+            $scope.preTag = '';
+        };
+        $scope.removeTags = function (index) {
+            $scope.sc.tags.splice(index, 1);
         };
 
 
