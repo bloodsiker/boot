@@ -15,7 +15,8 @@ class CreateServiceCenterViewsServicesTable extends Migration
     {
         Schema::create('service_center_views_services', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('service_center_id')->nullable();
+            $table->string('service_center_id', 50)->nullable();
+            $table->string('user_id', 50)->nullable();
             $table->string('type_device')->nullable();
             $table->string('services');
             $table->date('date_view');
