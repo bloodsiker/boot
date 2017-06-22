@@ -204,12 +204,14 @@ class ServiceCenterRepository implements ServiceCenterRepositoryInterface
         $sc = ServiceCenter::find($id);
 
         DB::table('service_center_advantages')->where('service_center_id', '=', $sc->id)->delete();
-        foreach ($requestData->advantages as $advantage){
-            DB::table('service_center_advantages')->insert(
-                [
-                    'service_center_id' => $sc->id,
-                    'advantages' => $advantage['advantages']
-                ]);
+        if(is_array($requestData->advantages)){
+            foreach ($requestData->advantages as $advantage){
+                DB::table('service_center_advantages')->insert(
+                    [
+                        'service_center_id' => $sc->id,
+                        'advantages' => $advantage
+                    ]);
+            }
         }
         return true;
     }
@@ -226,12 +228,14 @@ class ServiceCenterRepository implements ServiceCenterRepositoryInterface
         $sc = ServiceCenter::find($id);
 
         DB::table('service_center_vs_tags')->where('service_center_id', '=', $sc->id)->delete();
-        foreach ($requestData->tags as $tag){
-            DB::table('service_center_vs_tags')->insert(
-                [
-                    'service_center_id' => $sc->id,
-                    'tag' => $tag['tag']
-                ]);
+        if(is_array($requestData->tags)){
+            foreach ($requestData->tags as $tag){
+                DB::table('service_center_vs_tags')->insert(
+                    [
+                        'service_center_id' => $sc->id,
+                        'tag' => $tag
+                    ]);
+            }
         }
         return true;
     }
