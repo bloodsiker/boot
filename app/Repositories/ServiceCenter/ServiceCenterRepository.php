@@ -152,10 +152,6 @@ class ServiceCenterRepository implements ServiceCenterRepositoryInterface
         $sc->city_id = $requestData->city_id;
         $sc->metro_id = $requestData->metro_id;
         $sc->district_id = $requestData->district_id;
-//        $sc->start_day = $requestData->start_day;
-//        $sc->end_day = $requestData->end_day;
-//        $sc->start_time = $requestData->start_time;
-//        $sc->end_time = $requestData->end_time;
         $sc->address = 'Украина, ' . $requestData->city['city_name'] . ', ' . $requestData->street;
         $sc->street = $requestData->street;
         $sc->number_h = $requestData->number_h;
@@ -178,8 +174,8 @@ class ServiceCenterRepository implements ServiceCenterRepositoryInterface
     {
         $sc = ServiceCenter::find($id);
 
-        DB::table('service_working_days')->where('service_center_id', '=', $sc->id)->delete();
         if(is_array($requestData->work_days)){
+            DB::table('service_working_days')->where('service_center_id', '=', $sc->id)->delete();
             foreach ($requestData->work_days as $work_day){
                 DB::table('service_working_days')->insert(
                     [
@@ -205,8 +201,8 @@ class ServiceCenterRepository implements ServiceCenterRepositoryInterface
     {
         $sc = ServiceCenter::find($id);
 
-        DB::table('service_center_advantages')->where('service_center_id', '=', $sc->id)->delete();
         if(is_array($requestData->advantages)){
+            DB::table('service_center_advantages')->where('service_center_id', '=', $sc->id)->delete();
             foreach ($requestData->advantages as $advantage){
                 DB::table('service_center_advantages')->insert(
                     [
@@ -229,8 +225,8 @@ class ServiceCenterRepository implements ServiceCenterRepositoryInterface
     {
         $sc = ServiceCenter::find($id);
 
-        DB::table('service_center_vs_tags')->where('service_center_id', '=', $sc->id)->delete();
         if(is_array($requestData->tags)){
+            DB::table('service_center_vs_tags')->where('service_center_id', '=', $sc->id)->delete();
             foreach ($requestData->tags as $tag){
                 DB::table('service_center_vs_tags')->insert(
                     [
@@ -253,8 +249,8 @@ class ServiceCenterRepository implements ServiceCenterRepositoryInterface
     {
         $sc = ServiceCenter::find($id);
 
-        DB::table('service_center_vs_manufacturer')->where('service_center_id', '=', $sc->id)->delete();
         if(is_array($requestData->manufacturers)){
+            DB::table('service_center_vs_manufacturer')->where('service_center_id', '=', $sc->id)->delete();
             foreach ($requestData->manufacturers as $manufacturer){
                 DB::table('service_center_vs_manufacturer')->insert(
                     [
@@ -277,8 +273,8 @@ class ServiceCenterRepository implements ServiceCenterRepositoryInterface
     {
         $sc = ServiceCenter::find($id);
 
-        DB::table('service_center_price')->where('service_center_id', '=', $sc->id)->delete();
         if(is_array($requestData->price)){
+            DB::table('service_center_price')->where('service_center_id', '=', $sc->id)->delete();
             foreach ($requestData->price as $price){
                 DB::table('service_center_price')->insert(
                     [
