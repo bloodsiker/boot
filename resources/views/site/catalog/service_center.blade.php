@@ -87,7 +87,7 @@
                 <hr ng-if="service_center.tags.length > 0">
                 <!--=======================================ABOUT=======================================-->
                 <h3 ng-if="service_center.about">О компании</h3>
-                <p ng-bind="service_center.about"></p>
+                <p ng-bind-html="service_center.about"></p>
                 <hr ng-if="service_center.about">
 
                 <h3 ng-if="service_center.advantages.length > 0">Преимущества</h3>

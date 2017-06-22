@@ -1,6 +1,7 @@
 (function () {
     angular.module('App', [
         'ngAnimate',
+        'ngSanitize',
         'ui.bootstrap',
         'ngMap',
         'slick',

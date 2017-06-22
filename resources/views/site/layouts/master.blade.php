@@ -34,6 +34,7 @@
 
 <script src="{{ asset('site/vendor/angular/angular.js') }}"></script>
 <script src="{{ asset('site/vendor/angular-animate/angular-animate.js') }}"></script>
+<script src="{{ asset('site/vendor/angular-sanitize/angular-sanitize.js') }}"></script>
 
 <!--==============BOOTSTRAP=========================-->
 

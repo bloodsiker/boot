@@ -176,7 +176,7 @@
                                 <span class="text" ng-bind="item.address+ (item.number_h ? ', '+item.number_h : '')"></span>
                             </div>
                             <div ng-if="item.number_h_add" class="text" ng-bind="item.number_h_add"></div>
-                            <div>
+                            <div ng-if="info.metro.address">
                                 <span style="font-weight: 900;">M</span>
                                 <span class="text" ng-bind="item.metro.address"></span>
                             </div>
@@ -232,7 +232,7 @@
                                     <span class="text" ng-bind="info.address+ (info.number_h ? ', '+info.number_h : '')"></span>
                                 </div>
                                 <div ng-if="info.number_h_add" class="text" ng-bind="info.number_h_add"></div>
-                                <div>
+                                <div ng-if="info.metro.address">
                                     <span style="font-weight: 900;">M</span>
                                     <span class="text" ng-bind="info.metro.address"></span>
                                 </div>

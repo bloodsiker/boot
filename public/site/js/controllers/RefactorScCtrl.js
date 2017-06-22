@@ -2,23 +2,163 @@
     angular.module('App')
         .controller('RefactorScController', RefactorScController);
 
-    RefactorScController.$inject = ['$scope', '$http', 'model', '_'];
+    RefactorScController.$inject = ['$scope', '$http', 'model', '_', '$uibModal', '$timeout'];
 
-    function RefactorScController($scope, $http, model, _,) {
+    function RefactorScController($scope, $http, model, _, $uibModal, $timeout) {
         var url = window.location.pathname.slice(8);
 
-        $scope.scLogo = null;
-        $scope.$watch('scLogo', function() {
-            $scope.visibleSaveLogo = true;
-        });
-        $scope.addLogo = function (logo) {
-            $scope.visibleSaveLogo = false;
-            model.post('/cabinet' + url + '/add-logo', {logo: logo}).then(function (res) {
-                $mdToast.show($mdToast.simple().position('right bottom').textContent('Сохранено!'));
+
+        var alertSuccess = '<div class="alert alert-success alert-dismissible" style="position: fixed;bottom: 0;right: 0;">'+
+                                '<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>'+
+                                '<h4><i class="icon fa fa-check"></i> Сохранено!</h4>'+
+                                'Данные сервисного центра удачно обновлены'+
+                            '</div>';
+
+
+        model.get('/districts').then(function (success) {
+            $scope.districts = success.data;
+
+            model.get('/cities').then(function (success) {
+                $scope.cities = [success.data[0]]; // ------------ fix ====================
             });
+
+            model.get('/metro').then(function (success) {
+                $scope.metros = success.data;
+            });
+
+            model.get('/streets').then(function (success) {
+                $scope.streets = success.data;
+
+
+            });
+
+        });
+
+
+        function getModel(){
+            model.get(url).then(function (success) {
+
+                var work_days = [
+                    { title: 'ПН', start_time: '09:00', end_time: '19:00', weekend: false},
+                    { title: 'ВТ', start_time: '09:00', end_time: '19:00', weekend: false},
+                    { title: 'СР', start_time: '09:00', end_time: '19:00', weekend: false},
+                    { title: 'ЧТ', start_time: '09:00', end_time: '19:00', weekend: false},
+                    { title: 'ПТ', start_time: '09:00', end_time: '19:00', weekend: false},
+                    { title: 'СБ', start_time: '10:00', end_time: '17:00', weekend: '1'},
+                    { title: 'ВС', start_time: '10:00', end_time: '17:00', weekend: '1'}
+                ];
+                if (success.data.advantages) {
+                    var advantages = [];
+                    success.data.advantages.map(function (key) {
+                        advantages.push(key.advantages)
+                    });
+                    success.data.advantages = advantages;
+                }
+
+                if (success.data.tags) {
+                    var tags = [];
+                    success.data.tags.map(function (key) {
+                        tags.push(key.tag)
+                    });
+                    success.data.tags = tags;
+                }
+
+                if (success.data.work_days.length <= 0) {
+                    success.data.work_days =  work_days;
+                }
+
+
+
+                $scope.sc = success.data;
+
+
+                model.get('/services').then(function (prices) {
+                    $scope.currency = ['ГРН'];
+                    prices.data.map(function (price) {
+                        price.price_min = '';
+                        price.price_max = '';
+                        price.currency = 'ГРН';
+                    });
+
+                    $scope.sc.price.map(function (scPrice) {
+                        prices.data.map(function (key) {
+                            if (key.title === scPrice.title) {
+                                key.active = true;
+                                key.price_min = scPrice.price_min;
+                                key.price_max = scPrice.price_max;
+                                key.currency = scPrice.currency
+                            }
+                        });
+                    });
+
+                    $scope.sc.price.map(function (scPrice) {
+                        scPrice.active = true;
+                        if (scPrice.is_new == 1) {
+                            prices.data.push(scPrice);
+                        }
+                    });
+
+                    $scope.price_list = prices.data;
+
+                    console.log($scope.price_list);
+
+                });
+
+
+
+                brands(success.data);
+
+
+            });
+        }
+
+
+        getModel();
+
+
+
+        $scope.scLogo = [];
+        $scope.$watch('scLogo', function(val, oldVal) {
+            console.log(val.base64);
+            if (val.base64) {
+                model.post('/cabinet' + url + '/add-logo', {logo: val}).then(function (res) {
+                    $scope.scLogo = [];
+                });
+            }
+
+        });
+
+
+
+        $scope.saveGlobalSc = function (valid, sc) {
+            if (valid) {
+                var data = {
+                    info: {
+                        c1: sc.c1,
+                        c2: sc.c2,
+                        service_name: sc.service_name,
+                        city_id: sc.city.id,
+                        city_name: sc.city.city_name,
+                        district_id: sc.district.id,
+                        street: sc.street,
+                        metro_id: sc.metro.id,
+                        number_h: sc.number_h,
+                        number_h_add: sc.number_h_add,
+                    }
+
+                };
+
+                model.put('/cabinet' + url + '/update', data).then(function (res) {
+                    console.log(res);
+
+                    angular.element('#alert').append(alertSuccess);
+                    $timeout(function () {
+                        angular.element('#alert').html('');
+                    }, 4000)
+                });
+
+            }
         };
-
-
 
 
         $scope.selectedStreet = function (street) {
@@ -29,6 +169,9 @@
             }
 
         };
+
+
+
         $scope.dragMap = function () {
 
             $scope.sc.c1 = $scope.map.markers[0].position.lat();
@@ -55,6 +198,8 @@
         };
 
 
+
+        // =================================================================
         $scope.week_days = ['пн', 'вт', 'ср', 'чт', 'пт', 'сб', 'вс'];
         $scope.times_start = [
             '06:00', '06:30',
@@ -79,67 +224,27 @@
             '21:00', '21:30',
             '22:00', '22:30'
         ];
-        function getModel(){
-            model.get(url).then(function (success) {
 
-                var work_days = [
-                    { title: 'ПН', start_time: '09:00', end_time: '19:00', weekend: false},
-                    { title: 'ВТ', start_time: '09:00', end_time: '19:00', weekend: false},
-                    { title: 'СР', start_time: '09:00', end_time: '19:00', weekend: false},
-                    { title: 'ЧТ', start_time: '09:00', end_time: '19:00', weekend: false},
-                    { title: 'ПТ', start_time: '09:00', end_time: '19:00', weekend: false},
-                    { title: 'СБ', start_time: '10:00', end_time: '17:00', weekend: '1'},
-                    { title: 'ВС', start_time: '10:00', end_time: '17:00', weekend: '1'}
-                ];
-                if (!_.has(success.data, 'work_days')) {
-                    success.data.work_days =  work_days;
-                }
-                $scope.sc = success.data;
-                brands(success.data);
-                model.get('/services').then(function (prices) {
-                    $scope.currency = ['ГРН'];
-                    prices.data.map(function (price) {
-                        price.price_min = '';
-                        price.price_max = '';
-                        price.currency = 'ГРН';
-                    });
-
-
-
-                    $scope.sc.price.map(function (scPrice) {
-                        prices.data.map(function (key) {
-                            if (key.title === scPrice.title) {
-                                key.active = true;
-                                key.price_min = scPrice.price_min;
-                                key.price_max = scPrice.price_max;
-                                key.currency = scPrice.currency
-                            }
-                        });
-                    });
-
-                    $scope.sc.price.map(function (scPrice) {
-                        scPrice.active = true;
-                        if (scPrice.is_new == 1) {
-                            prices.data.push(scPrice);
-                        }
-                    });
-
-                    $scope.price_list = prices.data;
-
-                });
-
-
+        $scope.saveGraphic = function (graphic) {
+            var data = {
+                work_days: graphic,
+            };
+            model.put('/cabinet' + url + '/update', data).then(function (res) {
+                console.log(res); angular.element('#alert').append(alertSuccess);
+                    $timeout(function () {
+                        angular.element('#alert').html('');
+                    }, 4000)
             });
-        }
-        getModel();
-
+        };
 
 
 
 
         // ======================== ЦЕНЫ ==========================
         $scope.newPriceTitle = '';
-        $scope.newPriceCost = '';
+        $scope.newPriceCostMin = '';
+        $scope.newPriceCostMax = '';
+        $scope.newPriceCurrency = 'ГРН';
         $scope.showAddPrice = false;
 
         $scope.addPrice = function (valid, sc, title, price_min, price_max, currency) {
@@ -148,6 +253,7 @@
             });
             if (valid && !oldTitle) {
                 $scope.price_list.push({
+                    active: true,
                     title: title,
                     price_min: price_min ? price_min : 0,
                     price_max: price_max ? price_max : 0,
@@ -155,7 +261,8 @@
                     currency: currency
                 });
                 $scope.newPriceTitle = '';
-                $scope.newPriceCost = '';
+                $scope.newPriceCostMin = '';
+                $scope.newPriceCostMax = '';
 
             }
         };
@@ -174,36 +281,22 @@
                 price_list.map(function (key) {
                     if (key.active) {
                         key.price_min = key.price_min ? key.price_min : 0,
-                        key.price_max = key.price_max ? key.price_max : 0,
-                        $scope.sc.price.push(key);
+                            key.price_max = key.price_max ? key.price_max : 0,
+                            $scope.sc.price.push(key);
                     }
                 });
-                $scope.sc.street.address ? $scope.sc.street = $scope.sc.street.address : '';
-                model.put('/cabinet' + url + '/update', $scope.sc).then(function (res) {
-                    console.log(res);
-                    $mdToast.show($mdToast.simple().position('right bottom').textContent('Сохранено!'));
+
+                model.put('/cabinet' + url + '/update', {price:$scope.sc.price}).then(function (res) {
+                    console.log(res); angular.element('#alert').append(alertSuccess);
+                    $timeout(function () {
+                        angular.element('#alert').html('');
+                    }, 4000)
                 });
-            } else {
-                console.log('Массивы идентичны');
-            }
-        }
-
-
-        $scope.saveSc = function (valid, sc) {
-            if (valid) {
-
-                //$mdToast.show($mdToast.simple().position('right bottom').textContent('Сохранено!'));
-                //var url = 'hug';
-                //console.log($scope.sc);
-                $scope.sc.street.address ? $scope.sc.street = $scope.sc.street.address : '';
-                model.put('/cabinet' + url + '/update', $scope.sc).then(function (res) {
-                    console.log(res);
-                    $mdToast.show($mdToast.simple().position('right bottom').textContent('Сохранено!'));
-                });
-            } else {
-                console.log('Массивы идентичны');
             }
         };
+
+
+
         $scope.preAdvantage = '';
         $scope.addAdvantages = function (advantag) {
             $scope.sc.advantages.push(advantag);
@@ -212,6 +305,18 @@
         $scope.removeAdvantages = function (index) {
             $scope.sc.advantages.splice(index, 1);
         };
+        $scope.saveAdvantages = function (advantages) {
+            model.put('/cabinet' + url + '/update', {advantages:advantages}).then(function (res) {
+                console.log(res); angular.element('#alert').append(alertSuccess);
+                    $timeout(function () {
+                        angular.element('#alert').html('');
+                    }, 4000)
+            });
+        };
+
+
+
+
         $scope.preTag = '';
         $scope.addTags = function (tag) {
             $scope.sc.tags.push(tag);
@@ -220,6 +325,24 @@
         $scope.removeTags = function (index) {
             $scope.sc.tags.splice(index, 1);
         };
+        $scope.saveTags = function (tags) {
+            model.put('/cabinet' + url + '/update', {tags:tags}).then(function (res) {
+                console.log(res); angular.element('#alert').append(alertSuccess);
+                    $timeout(function () {
+                        angular.element('#alert').html('');
+                    }, 4000)
+            });
+        };
+
+
+        $scope.saveBrands = function (brands) {
+            model.put('/cabinet' + url + '/update', {manufacturers:brands}).then(function (res) {
+                console.log(res); angular.element('#alert').append(alertSuccess);
+                $timeout(function () {
+                    angular.element('#alert').html('');
+                }, 4000)
+            });
+        }
 
 
         function brands(sc) {
@@ -231,7 +354,7 @@
                 next(sc, success.data);
             });
             function next(sc, brands) {
-                $scope.items = brands;
+                $scope.brands = brands;
                 $scope.selected = sc.manufacturers;
 
                 $scope.toggle = function (item, list) {
@@ -251,19 +374,19 @@
 
                 $scope.isIndeterminate = function() {
                     return ($scope.selected.length !== 0 &&
-                    $scope.selected.length !== $scope.items.length);
+                    $scope.selected.length !== $scope.brands.length);
                 };
 
                 $scope.isChecked = function() {
-                    return $scope.selected.length === $scope.items.length;
+                    return $scope.selected.length === $scope.brands.length;
                 };
 
                 $scope.toggleAll = function() {
-                    if ($scope.selected.length === $scope.items.length) {
+                    if ($scope.selected.length === $scope.brands.length) {
                         $scope.selected = [];
                         $scope.sc.manufacturers = $scope.selected;
                     } else if ($scope.selected.length === 0 || $scope.selected.length > 0) {
-                        $scope.selected = $scope.items.slice(0);
+                        $scope.selected = $scope.brands.slice(0);
                         $scope.sc.manufacturers = $scope.selected;
                     }
                 };
@@ -273,85 +396,60 @@
 
 
 
+        $scope.saveAbout = function () {
 
+            var text = angular.element('#aboutSc .wysihtml5-sandbox').contents().find("body").html();
+
+            model.put('/cabinet' + url + '/update', {about:text}).then(function (res) {
+                console.log(res); angular.element('#alert').append(alertSuccess);
+                $timeout(function () {
+                    angular.element('#alert').html('');
+                }, 4000)
+            });
+
+        };
 
 
         // ======================== ГАЛЕРЕЯ ==========================
-        $scope.addPhotoDialog = function(ev, sc) {
-            $mdDialog.show({
-                targetEvent: ev,
-                templateUrl: 'addGallery.html',
-                clickOutsideToClose:true,
-                fullscreen: true,
-                locals: {
-                    sc: sc
-                },
-                controller: addPhotoController
-            });
-            function addPhotoController($scope, $mdDialog, sc, model) {
-                $scope.file = [];
-                $scope.addPhoto = function (valid, type, photo) {
-                    // console.log(type);
-                    if (valid) {
-                        model.post('/cabinet' + url + '/add-photo', {
-                            sc_id: sc.id,
-                            type: type,
-                            photo: {data: photo}
-                        }).then(function (success) {
-                            console.log(success);
-                            if (sc.service_photo) {
-                                sc.service_photo.push(success.data[0])
-                            } else {
-                                sc.service_photo = [];
-                                sc.service_photo.push(success.data[0]);
-                            }
-                            // getModel();
 
-                            $mdDialog.hide();
-                        });
+        $scope.addPhotoFile = [];
+        $scope.addPhotoType = 'service_photo';
+        $scope.addPhoto = function (valid, type, photo) {
+            if (valid) {
+                model.post('/cabinet' + url + '/add-photo', {
+                    type: type,
+                    photo: {data: photo}
+                }).then(function (success) {
+                    if ($scope.sc.service_photo) {
+                        $scope.sc.service_photo.push(success.data[0])
+                    } else {
+                        $scope.sc.service_photo = [];
+                        $scope.sc.service_photo.push(success.data[0]);
                     }
-                };
-                $scope.closeDialog = function() {
-                    $mdDialog.hide();
-                };
-
+                    $scope.addPhotoFile = [];
+                });
             }
         };
+
         $scope.deletePhoto = function (photos, photo, index) {
-            // arr.splice(index, 1);
-            // $scope.saveSc(true);
-            // console.log(photos, photo, index);
-            model.delete('/cabinet' + url + '/delete-photo/'+photo.id).then(function (success) {
+            console.log(photos, photo, index);
+            model.delete('/cabinet' + url + '/delete-photo/'+photo.id).then(function () {
                 photos.splice(index, 1);
-                // getModel();
-                $mdDialog.hide();
-                $mdToast.show($mdToast.simple().position('right bottom').textContent('Удалено!'));
             });
-
         };
-        $scope.showPhoto = function(ev, photo) {
-            $mdDialog.show({
-                targetEvent: ev,
-                template:
-                '<md-dialog class="dialog-picture" aria-label="Фото">' +
-                '  <md-dialog-content>'+
-                '      <div><img ng-src="{{photo}}"></div>  '+
-                '  </md-dialog-content>' +
-                '</md-dialog>',
-                clickOutsideToClose:true,
-                fullscreen: true,
-                locals: {
-                    photo: photo
-                },
-                controller: showPhotoController
-            });
-            function showPhotoController($scope, $mdDialog, photo) {
-                $scope.photo = photo;
-                $scope.closeDialog = function() {
-                    $mdDialog.hide();
-                };
 
-            }
+        $scope.showPhoto = function(photo) {
+            var service_name = $scope.sc.service_name;
+            $uibModal.open({
+                animation: true,
+                ariaLabelledBy: 'show-photo',
+                ariaDescribedBy: 'show-photo',
+                templateUrl: 'photoShow.html',
+                controller: function($scope) {
+                    $scope.photoUrl = photo.path + photo.file_name;
+                    $scope.title = service_name;
+                }
+            });
         };
 
 
@@ -360,63 +458,66 @@
         // ======================== ПЕРСОНАЛ ==========================
         $scope.showAddPersonal = false;
 
-        $scope.deletePersonal = function (sc, index, idPerson) {
+
+        $scope.newPersonalName='';
+        $scope.newPersonalInfo='';
+        $scope.newPersonalWorkExp='';
+        $scope.newPersonalSpecialization='';
+        $scope.newPersonalPhoto='';
+        $scope.addPersonFile = [];
 
 
-            model.delete('/cabinet' + url + '/delete-personal/'+idPerson.id).then(function (success) {
-                sc.personal.splice(index, 1);
-                // getModel();
-                $mdDialog.hide();
-                $mdToast.show($mdToast.simple().position('right bottom').textContent('Удалено!'));
-            });
-
-            // $scope.saveSc(true, sc);
-        };
-        $scope.addPersonalDialog = function (ev, sc) {
-            $mdDialog.show({
-                targetEvent: ev,
-                templateUrl: 'addPersonal.html',
-                clickOutsideToClose:true,
-                fullscreen: true,
-                locals: {
-                    sc: sc
-                },
-                controller: addPersonalController
-            });
-            function addPersonalController($scope, $rootScope, $mdDialog, sc, model) {
-                $scope.newPersonalPhoto = [];
-                $scope.addPersonal = function (valid, name, info, work_exp, specialization, photo) {
-                    console.log($rootScope);
-                    if (valid) {
-                        model.post('/cabinet' + url + '/add-personal', {
-                            service_center_id: sc.id,
-                            name: name,
-                            info: info,
-                            work_exp:work_exp,
-                            specialization: specialization,
-                            avatar: {
-                                data: photo
-                            }
-                        }).then(function (success) {
-                            if (sc.personal) {
-                                sc.personal.push(success.data[0]);
-                            } else {
-                                sc.personal = [];
-                                sc.personal.push(success.data[0]);
-                            }
-                            // getModel();
-
-                            $mdDialog.hide();
-                        });
-
+        $scope.addPersonal = function (valid, name, info, work_exp, specialization, photo) {
+            if (valid) {
+                model.post('/cabinet' + url + '/add-personal', {
+                    name: name,
+                    info: info,
+                    work_exp:work_exp,
+                    specialization: specialization,
+                    avatar: {
+                        data: photo
                     }
-                };
-                $scope.closeDialog = function() {
-                    $mdDialog.hide();
-                };
+                }).then(function (success) {
+                    if ($scope.sc.personal) {
+                        $scope.sc.personal.push(success.data[0]);
+                    } else {
+                        $scope.sc.personal = [];
+                        $scope.sc.personal.push(success.data[0]);
+                    }
+                });
 
             }
         };
+
+        $scope.deletePersonal = function (personal, index, idPerson) {
+
+            model.delete('/cabinet' + url + '/delete-personal/'+idPerson.id).then(function () {
+                personal.splice(index, 1);
+            });
+
+        };
+
+        $scope.showPerson = function (person) {
+            $uibModal.open({
+                animation: true,
+                ariaLabelledBy: 'show-photo',
+                ariaDescribedBy: 'show-photo',
+                templateUrl: 'personShow.html',
+                controller: function($scope) {
+                    $scope.photoUrl = person.path + person.file_name;
+                    $scope.name = person.name;
+                    $scope.info = person.info;
+                    $scope.work_exp = person.work_exp;
+                    $scope.specialization = person.specialization;
+
+                }
+            });
+        }
+
+
+
+
+
 
 
     }
