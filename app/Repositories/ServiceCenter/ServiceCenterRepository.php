@@ -179,15 +179,17 @@ class ServiceCenterRepository implements ServiceCenterRepositoryInterface
         $sc = ServiceCenter::find($id);
 
         DB::table('service_working_days')->where('service_center_id', '=', $sc->id)->delete();
-        foreach ($requestData->work_days as $work_day){
-            DB::table('service_working_days')->insert(
-                [
-                    'service_center_id' => $sc->id,
-                    'title' => $work_day['title'],
-                    'start_time' => $work_day['start_time'],
-                    'end_time' => $work_day['end_time'],
-                    'weekend' => $work_day['weekend']
-                ]);
+        if(is_array($requestData->work_days)){
+            foreach ($requestData->work_days as $work_day){
+                DB::table('service_working_days')->insert(
+                    [
+                        'service_center_id' => $sc->id,
+                        'title' => $work_day['title'],
+                        'start_time' => $work_day['start_time'],
+                        'end_time' => $work_day['end_time'],
+                        'weekend' => $work_day['weekend']
+                    ]);
+            }
         }
         return true;
     }
@@ -252,12 +254,14 @@ class ServiceCenterRepository implements ServiceCenterRepositoryInterface
         $sc = ServiceCenter::find($id);
 
         DB::table('service_center_vs_manufacturer')->where('service_center_id', '=', $sc->id)->delete();
-        foreach ($requestData->manufacturers as $manufacturer){
-            DB::table('service_center_vs_manufacturer')->insert(
-                [
-                    'service_center_id' => $sc->id,
-                    'manufacturer_id' => $manufacturer['id']
-                ]);
+        if(is_array($requestData->manufacturers)){
+            foreach ($requestData->manufacturers as $manufacturer){
+                DB::table('service_center_vs_manufacturer')->insert(
+                    [
+                        'service_center_id' => $sc->id,
+                        'manufacturer_id' => $manufacturer['id']
+                    ]);
+            }
         }
         return true;
     }
@@ -274,16 +278,18 @@ class ServiceCenterRepository implements ServiceCenterRepositoryInterface
         $sc = ServiceCenter::find($id);
 
         DB::table('service_center_price')->where('service_center_id', '=', $sc->id)->delete();
-        foreach ($requestData->price as $price){
-            DB::table('service_center_price')->insert(
-                [
-                    'service_center_id' => $sc->id,
-                    'title' => $price['title'],
-                    'price_min' => $price['price_min'],
-                    'price_max' => $price['price_max'],
-                    'currency' => $price['currency'],
-                    'is_new' => isset($price['is_new']) ? $price['is_new'] : 0
-                ]);
+        if(is_array($requestData->price)){
+            foreach ($requestData->price as $price){
+                DB::table('service_center_price')->insert(
+                    [
+                        'service_center_id' => $sc->id,
+                        'title' => $price['title'],
+                        'price_min' => $price['price_min'],
+                        'price_max' => $price['price_max'],
+                        'currency' => $price['currency'],
+                        'is_new' => isset($price['is_new']) ? $price['is_new'] : 0
+                    ]);
+            }
         }
         return true;
     }

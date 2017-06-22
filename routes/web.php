@@ -35,6 +35,11 @@ Route::group(['middleware' => ['web', 'session.page']], function (){
     Route::get('service-center/registration', 'RegisterController@getServiceRegister')->name('service.registration');
     Route::post('service-center/registration', 'RegisterController@postServiceRegister')->name('service.registration');
 
+
+    Route::get('/auth', 'SocialAuthController@auth')->name('auth');
+    Route::get('/auth/sc/facebook', 'SocialAuthController@facebookScRedirect')->name('auth.sc.facebook');
+    Route::get('/auth/facebook/callback', 'SocialAuthController@facebookCallback')->name('auth.facebook.callback');
+
     Route::get('load', 'ImportController@load')->name('load');
     Route::get('excel', 'ImportController@excel')->name('excel');
 

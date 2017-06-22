@@ -1,12 +1,54 @@
 <?php
+namespace App\Services;
+
+use App\Models\SocialAccount;
+use App\Models\User;
+use Laravel\Socialite\Contracts\User as ProviderUser;
 
 /**
- * Created by PhpStorm.
- * User: Lenovo
- * Date: 22.06.2017
- * Time: 10:06
+ * Class SocialAccountService
+ * @package App\Services
  */
 class SocialAccountService
 {
 
+    /**
+     * @param ProviderUser $providerUser
+     * @param $role
+     * @return mixed
+     */
+    public function createOrGetUser(ProviderUser $providerUser, $role)
+    {
+        $account = SocialAccount::whereProvider('facebook')
+            ->whereProviderUserId($providerUser->getId())
+            ->first();
+
+        if ($account) {
+            return $account->user;
+        } else {
+
+            $account = new SocialAccount([
+                'provider_user_id' => $providerUser->getId(),
+                'provider' => 'facebook'
+            ]);
+
+            $user = User::whereEmail($providerUser->getEmail())->first();
+
+            if (!$user) {
+
+                $user = User::create([
+                    'email' => $providerUser->getEmail(),
+                    'name' => $providerUser->getName(),
+                    'avatar' => $providerUser->getAvatar(),
+                    'role_id' => $role,
+                ]);
+            }
+
+            $account->user()->associate($user);
+            $account->save();
+
+            return $user;
+
+        }
+    }
 }
