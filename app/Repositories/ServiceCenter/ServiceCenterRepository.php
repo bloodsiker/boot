@@ -42,7 +42,9 @@ class ServiceCenterRepository implements ServiceCenterRepositoryInterface
     public function find($id)
     {
         $service_center = ServiceCenter::find($id);
-        $service_center->load('work_days', 'city', 'metro', 'district', 'tags', 'manufacturers', 'advantages', 'price', 'personal', 'service_photo');
+        $service_center->load('work_days', 'city', 'metro', 'district',
+            'tags', 'manufacturers', 'advantages', 'price', 'personal',
+            'service_photo', 'service_phones', 'service_emails');
         $service_center['count_clients'] = UserRequest::count_request($id);
         $service_center['total_rating'] = Comments::rating($id, 'total');
         $service_center['total_comments'] = Comments::count_comment($id);
@@ -147,22 +149,36 @@ class ServiceCenterRepository implements ServiceCenterRepositoryInterface
     {
         $sc = ServiceCenter::find($id);
 
-        $sc->service_name = $requestData->service_name;
-        $sc->about = $requestData->about;
-        $sc->city_id = $requestData->city_id;
-        $sc->metro_id = $requestData->metro_id;
-        $sc->district_id = $requestData->district_id;
-        $sc->address = 'Украина, ' . $requestData->city['city_name'] . ', ' . $requestData->street;
-        $sc->street = $requestData->street;
-        $sc->number_h = $requestData->number_h;
-        $sc->number_h_add = $requestData->number_h_add;
-        $sc->c1 = $requestData->c1;
-        $sc->c2 = $requestData->c2;
+        $sc->service_name = $requestData->info['service_name'];
+        $sc->city_id = $requestData->info['city_id'];
+        $sc->metro_id = $requestData->info['metro_id'];
+        $sc->district_id = $requestData->info['district_id'];
+        $sc->address = 'Украина, ' . $requestData->info['city_name'] . ', ' . $requestData->info['street'];
+        $sc->street = $requestData->info['street'];
+        $sc->number_h = $requestData->info['number_h'];
+        $sc->number_h_add = $requestData->info['number_h_add'];
+        $sc->c1 = $requestData->info['c1'];
+        $sc->c2 = $requestData->info['c2'];
         $sc->updated_at = Carbon::now();
         $sc->update();
 
         return true;
     }
+
+
+    /**
+     * @param $requestData
+     * @param $id
+     * @return bool
+     */
+    public function updateAboutServiceCenter($requestData, $id)
+    {
+        $sc = ServiceCenter::find($id);
+        $sc->about = $requestData->about;
+        $sc->update();
+        return true;
+    }
+
 
     /**
      * График работы
@@ -184,6 +200,54 @@ class ServiceCenterRepository implements ServiceCenterRepositoryInterface
                         'start_time' => $work_day['start_time'],
                         'end_time' => $work_day['end_time'],
                         'weekend' => $work_day['weekend']
+                    ]);
+            }
+        }
+        return true;
+    }
+
+
+    /**
+     * Phone
+     * @param $requestData
+     * @param $id
+     * @return bool
+     */
+    public function updatePhones($requestData, $id)
+    {
+        $sc = ServiceCenter::find($id);
+
+        if(is_array($requestData->phones)){
+            DB::table('service_center_phone')->where('service_center_id', '=', $sc->id)->delete();
+            foreach ($requestData->phones as $phone){
+                DB::table('service_center_phone')->insert(
+                    [
+                        'service_center_id' => $sc->id,
+                        'phone' => $phone
+                    ]);
+            }
+        }
+        return true;
+    }
+
+
+    /**
+     * Email
+     * @param $requestData
+     * @param $id
+     * @return bool
+     */
+    public function updateEmails($requestData, $id)
+    {
+        $sc = ServiceCenter::find($id);
+
+        if(is_array($requestData->emails)){
+            DB::table('service_center_email')->where('service_center_id', '=', $sc->id)->delete();
+            foreach ($requestData->emails as $email){
+                DB::table('service_center_email')->insert(
+                    [
+                        'service_center_id' => $sc->id,
+                        'email' => $email
                     ]);
             }
         }

@@ -150,22 +150,48 @@ class CabinetController extends Controller
     public function putUpdateService(Request $request, $id)
     {
         // Основная информация
-        $this->sc->updateServiceCenter($request, $id);
+        if($request->has('info')){
+            $this->sc->updateServiceCenter($request, $id);
+        }
+
+        if($request->has('about')){
+            $this->sc->updateAboutServiceCenter($request, $id);
+        }
 
         // Рабочий график
-        $this->sc->updateWorkingDays($request, $id);
+        if($request->has('work_days')){
+            $this->sc->updateWorkingDays($request, $id);
+        }
+
+        // Телефоны
+        if($request->has('phones')){
+            $this->sc->updatePhones($request, $id);
+        }
+
+        //Emails
+        if($request->has('emails')){
+            $this->sc->updateEmails($request, $id);
+        }
 
         // Преимущества
-        $this->sc->updateAdvantages($request, $id);
+        if($request->has('advantages')){
+            $this->sc->updateAdvantages($request, $id);
+        }
 
         // Теги
-        $this->sc->updateTags($request, $id);
+        if($request->has('tags')){
+            $this->sc->updateTags($request, $id);
+        }
 
          //Бренды
-        $this->sc->updateManufacturer($request, $id);
+        if($request->has('manufacturers')){
+            $this->sc->updateManufacturer($request, $id);
+        }
 
         // Цены
-        $this->sc->updatePrice($request, $id);
+        if($request->has('price')){
+            $this->sc->updatePrice($request, $id);
+        }
 
         return response()->json(['res' => $request->all()], 200);
     }

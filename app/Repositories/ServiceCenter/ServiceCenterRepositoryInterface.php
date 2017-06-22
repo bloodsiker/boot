@@ -17,7 +17,13 @@ interface ServiceCenterRepositoryInterface
 
     public function updateWorkingDays($requestData, $id);
 
+    public function updatePhones($requestData, $id);
+
+    public function updateEmails($requestData, $id);
+
     public function updateServiceCenter($requestData, $id);
+
+    public function updateAboutServiceCenter($requestData, $id);
 
     public function updateAdvantages($requestData, $id);
 
