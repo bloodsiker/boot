@@ -10,6 +10,10 @@
 <body>
 <a href="{{ route('auth.sc.facebook') }}">Facebook</a>
 
+@if(Auth::user())
+    <h1>Hello {{ Auth::user()->name }}</h1>
+    <img src="{{ Auth::user()->avatar }}" width="200px" alt="">
+@endif;
 </body>
 </html>
 

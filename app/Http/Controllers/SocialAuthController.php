@@ -47,7 +47,7 @@ class SocialAuthController extends Controller
 
         } elseif (Auth::user()->roleUser()){
 
-            return redirect()->route('main');
+            return redirect()->route('auth');
 
         }
 
