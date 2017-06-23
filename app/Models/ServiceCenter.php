@@ -19,12 +19,12 @@ class ServiceCenter extends Model
 
     public function user()
     {
-        return $this->hasOne('App\Models\User');
+        return $this->hasOne('App\Models\User', 'id', 'user_id');
     }
 
     public function request()
     {
-        return $this->hasMany('App\Models\UserRequest');
+        return $this->hasMany('App\Models\FormRequest');
     }
 
     /**
