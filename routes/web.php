@@ -26,6 +26,7 @@ Route::group(['middleware' => ['web', 'session.page']], function (){
 
     Route::post('forms/main', 'FormsController@mainHelpRequest')->name('form.main.help');
     Route::post('forms/sc', 'FormsController@ScRequest')->name('form.sc');
+    Route::get('html', 'FormsController@html')->name('form.sc');
 
     Route::get('user/registration', 'RegisterController@getUserIndex')->name('user.registration');
     Route::post('user/registration', 'RegisterController@postUserIndex')->name('user.create');

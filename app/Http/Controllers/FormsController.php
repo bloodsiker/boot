@@ -128,4 +128,14 @@ class FormsController extends Controller
 
         return json_encode(["status" => $user]);
     }
+
+    public function html()
+    {
+        $user = 'Dfcz';
+        Mail::send('site.emails.index', compact('user'), function ($message) {
+            $message->from('info@boot.com.ua', 'BOOT');
+            $message->to('maldini2@ukr.net')->cc('do@generalse.com')->subject('Новая заявка для сервисного центра ');
+        });
+        return view('site.emails.index');
+    }
 }
