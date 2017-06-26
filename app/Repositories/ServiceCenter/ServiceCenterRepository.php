@@ -3,9 +3,9 @@
 namespace App\Repositories\ServiceCenter;
 
 use App\Models\Comments;
+use App\Models\FormRequest;
 use App\Models\ServiceCenter;
 use App\Models\User;
-use App\Models\UserRequest;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -45,7 +45,7 @@ class ServiceCenterRepository implements ServiceCenterRepositoryInterface
         $service_center->load('work_days', 'city', 'metro', 'district',
             'tags', 'manufacturers', 'advantages', 'price', 'personal',
             'service_photo', 'service_phones', 'service_emails');
-        $service_center['count_clients'] = UserRequest::count_request($id);
+        $service_center['count_clients'] = FormRequest::count_request($id);
         $service_center['total_rating'] = Comments::rating($id, 'total');
         $service_center['total_comments'] = Comments::count_comment($id);
         return $service_center;
