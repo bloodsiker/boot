@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\FormRequest;
 use App\Models\ServiceCenter;
+use App\Models\UserRequest;
 use App\Services\UserRequestService;
 use Auth;
 use Mail;
@@ -20,13 +21,23 @@ class FormsController extends Controller
      */
     private $requestService;
 
+    /**
+     * FormsController constructor.
+     * @param UserRequestService $requestService
+     */
     public function __construct(UserRequestService $requestService)
     {
 
         $this->requestService = $requestService;
     }
 
-    public function mainHelpRequest1(Request $request)
+
+    /**
+     * Обработака формы "Помощь в подборе сервисного центра"
+     * @param Request $request
+     * @return string
+     */
+    public function mainHelpRequest(Request $request)
     {
         $input = $request->all();
 
@@ -40,17 +51,14 @@ class FormsController extends Controller
         }
 
         $data = [
-            'pagename' => 'Главная страница',
-            'user_id' => Auth::user()->roleUser() ? Auth::user()->id : null,
-            'city' => 'Днепр',
-            'name' => $request->name,
+            'user_name' => $request->name,
             'phone' => $request->phone,
             'status' => 'Новая',
             'created_at' => Carbon::now()
         ];
 
         //DB::table('form_requests')->insert($data);
-        FormRequest::create($data);
+        UserRequest::create($data);
 
         // send the email
         Mail::send('site.emails.help', ['data' => $data], function ($message) {
@@ -73,10 +81,9 @@ class FormsController extends Controller
     /**
      * Форма связи со страници сервисного центра
      * @param Request $request
-     * @param UserRequestService $requestService
      * @return string
      */
-    public function mainHelpRequest(Request $request)
+    public function ScRequest(Request $request)
     {
         $input = $request->all();
 
@@ -91,7 +98,6 @@ class FormsController extends Controller
 
         $data = [
             'r_id' => $this->requestService->generateRequestID(),
-            'pagename' => 'Страница сервисного центра',
             'service_center_id' => $request->service_center,
             'user_id' => Auth::user()->roleUser() ? Auth::user()->id : null,
             'city' => 'Днепр',

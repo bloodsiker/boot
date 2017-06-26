@@ -10,7 +10,7 @@ class FormRequest extends Model
     protected $table = 'form_requests';
 
     protected $fillable = [
-        'r_id', 'pagename', 'service_center_id', 'user_id', 'city', 'name', 'phone', 'email',
+        'r_id', 'service_center_id', 'user_id', 'city', 'name', 'phone', 'email',
         'manufacturer', 'services', 'cost_of_work', 'cost_of_work_end', 'task_description',
         'payment_method', 'exit_master', 'comment', 'status'
     ];
@@ -24,13 +24,23 @@ class FormRequest extends Model
         return $this->belongsTo('App\Models\ServiceCenter');
     }
 
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function tags()
+    {
+        return $this->hasMany('App\Models\FormRequestMessage', 'request_id', 'id');
+    }
+
+
     /**
      * @param $service_center_id
      * @return mixed
      */
     public static function count_request($service_center_id)
     {
-        $count = parent::where('service_id', $service_center_id)->get()->count();
+        $count = parent::where('service_center_id', $service_center_id)->get()->count();
         return $count;
     }
 

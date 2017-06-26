@@ -16,8 +16,8 @@ class CreateFormRequestMessageTable extends Migration
         Schema::create('form_request_message', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('request_id')->unsigned();
-            $table->string('user_id', 50);
-            $table->string('service_center_id', 50);
+            $table->string('user_id', 50)->nullable();
+            $table->string('service_center_id', 50)->nullable();
             $table->text('message');
             $table->timestamps();
 
