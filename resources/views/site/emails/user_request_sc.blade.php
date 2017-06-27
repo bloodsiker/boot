@@ -2,54 +2,57 @@
 
 @section('content')
 
-    <h3>Новая заявка #{{ $data['r_id'] }} для сервисного центра &laquo;{{ $service_center->service_name }}&raquo;</h3>
+    <h3>Выша заявка #{{ $user_request->r_id }} на услугу &laquo;{{ $user_request->services  }}&raquo; перешла в статус &laquo;{{ $user_request->status }}&raquo;</h3>
+    @if($user_request->status == 'Отклонена')
+        <h3>Комментарий от сервисного центра:</h3>
+        <table class="content" width="100%" cellpadding="5" cellspacing="0" style="background: #f17c70; color: #fff">
+            <tr>
+                <td>
+                    <span>{{ !empty($user_request->cancel_comment) ? $user_request->cancel_comment : 'Причина не указана!' }}</span>
+                </td>
+            </tr>
+        </table>
+    @endif
+
+    @if(!empty($user_request->deadline))
+        <h3>Приблизительное дата завершение работы : {{ $user_request->deadline }}</h3>
+    @endif
     <hr>
-    <h4>Данные клиента:</h4>
-    <table border="1" cellpadding="5" cellspacing="0" width="700px">
-        <tr>
-            <td><strong>Имя:</strong></td>
-            <td>{{ $data['name'] }}</td>
-        </tr>
-        <tr>
-            <td><strong>Телефон:</strong></td>
-            <td>{{ $data['phone'] }}</td>
-        </tr>
-        <tr>
-            <td><strong>Email:</strong></td>
-            <td>{{ $data['email'] }}</td>
-        </tr>
-    </table>
     <h4>Информация о заявке:</h4>
-    <table border="1" cellpadding="5" cellspacing="0" width="700px">
+    <table border="1" cellpadding="5" cellspacing="0" width="100%">
         <tr>
             <td><strong>Производитель устройства:</strong></td>
-            <td>{{ $data['manufacturer'] }}</td>
+            <td>{{ $user_request->manufacturer }}</td>
         </tr>
         <tr>
             <td><strong>Услуга:</strong></td>
-            <td>{{ $data['services'] }}</td>
+            <td>{{ $user_request->services }}</td>
         </tr>
         <tr>
             <td><strong>Стоимость работы (ориентировочно):</strong></td>
-            <td>{{ $data['cost_of_work'] }}</td>
+            <td>{{ $user_request->cost_of_work }}</td>
         </tr>
         <tr>
             <td><strong>Описание задачи:</strong></td>
-            <td>{{ $data['task_description'] }}</td>
+            <td>{{ $user_request->task_description }}</td>
         </tr>
         <tr>
             <td><strong>Способ оплаты:</strong></td>
-            <td>{{ $data['payment_method'] }}</td>
+            <td>{{ $user_request->payment_method }}</td>
         </tr>
         <tr>
             <td><strong>Выезд мастера:</strong></td>
-            <td>{{ $data['exit_master'] }}</td>
+            <td>{{ $user_request->exit_master }}</td>
         </tr>
     </table>
     <br>
     <hr>
     <h4>Данные сервисного цента:</h4>
-    <table border="1" cellpadding="5" cellspacing="0" width="700px">
+    <table border="1" cellpadding="5" cellspacing="0" width="100%">
+        <tr>
+            <td><strong>Сервисный центр:</strong></td>
+            <td>{{ $service_center->service_name }}</td>
+        </tr>
         <tr>
             <td><strong>Адрес:</strong></td>
             <td>{{ $service_center->address . ',' .  $service_center->number_h_add }}</td>

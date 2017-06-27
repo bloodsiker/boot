@@ -120,4 +120,6 @@ return [
         ],
     ],
 
+    'support_email' => 'maldini2@ukr.net',
+
 ];

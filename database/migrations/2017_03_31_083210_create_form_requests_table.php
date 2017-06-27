@@ -29,6 +29,7 @@ class CreateFormRequestsTable extends Migration
             $table->text('task_description');
             $table->string('payment_method')->nullable();
             $table->string('exit_master', 50)->nullable();
+            $table->string('deadline', 50)->nullable();
             $table->text('comment');
             $table->string('status')->nullable();
             $table->text('cancel_comment');

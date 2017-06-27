@@ -121,21 +121,28 @@ class FormsController extends Controller
 
         $user = $service_center->user;
 
+        // Отправляем письмо сервисному центру
         Mail::send('site.emails.request_sc', compact('data', 'service_center', 'user'), function ($message) use ($service_center) {
             $message->from('info@boot.com.ua', 'BOOT');
-            $message->to('maldini2@ukr.net')->subject('Новая заявка для сервисного центра ' . $service_center->service_name);
+            $message->to('maldini2@ukr.net')->to('do@generalse.com')->subject('Новая заявка для сервисного центра ' . $service_center->service_name);
         });
 
-        return json_encode(["status" => $user]);
+        // Отправляем письмо оператору
+        Mail::send('site.emails.request_sc', compact('data', 'service_center', 'user'), function ($message) use ($service_center) {
+            $message->from('info@boot.com.ua', 'BOOT');
+            $message->to(config('mail.support_email'))->subject('Новая заявка для сервисного центра ' . $service_center->service_name);
+        });
+
+        return json_encode(["status" => 200]);
     }
 
     public function html()
     {
-        $user = 'Dfcz';
-        Mail::send('site.emails.index', compact('user'), function ($message) {
-            $message->from('info@boot.com.ua', 'BOOT');
-            $message->to('maldini2@ukr.net')->cc('do@generalse.com')->subject('Новая заявка для сервисного центра ');
-        });
-        return view('site.emails.index');
+//        $user = 'Dfcz';
+//        Mail::send('site.emails.index', compact('user'), function ($message) {
+//            $message->from('info@boot.com.ua', 'BOOT');
+//            $message->to(config('mail.support_email'))->to('do@generalse.com')->subject('Новая заявка для сервисного центра ');
+//        });
+        return view('site.emails.thanks_sc_register');
     }
 }
