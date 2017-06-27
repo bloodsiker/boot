@@ -19,11 +19,16 @@ Route::group(['middleware' => ['service.center']], function (){
     Route::put ('cabinet/sc/{id}/enabled', 'ServiceCenterCabinet\CabinetController@enabledService')->name('cabinet.enabled.service');
     Route::get ('cabinet/sc/list-disabled', 'ServiceCenterCabinet\CabinetController@listDisabledService')->name('cabinet.list-disabled.service');
 
-
     Route::get ('cabinet/requests', 'ServiceCenterCabinet\UserRequestController@allRequest')->name('cabinet.requests');
     Route::get ('cabinet/request/change_status', 'ServiceCenterCabinet\UserRequestController@changeStatus')->name('cabinet.request.change_status');
 
     Route::get('cabinet/add/service', 'ServiceCenterCabinet\CabinetController@getAddService')->name('cabinet.add.service');
     Route::post('cabinet/add/service', 'ServiceCenterCabinet\CabinetController@postAddService')->name('cabinet.add.service');
     Route::get('cabinet/logout', 'ServiceCenterCabinet\CabinetController@getLogout')->name('cabinet.logout');
+
+    Route::group(['middleware' => ['admin']], function (){
+        Route::get('cabinet/admin/user-list', 'ServiceCenterCabinet\AdminCabinetController@getUserList')->name('cabinet.admin.user.list');
+        Route::get('cabinet/admin/user/{id}/list-sc', 'ServiceCenterCabinet\AdminCabinetController@getUserListSc')->name('cabinet.admin.user.list.sc');
+        Route::get('cabinet/admin/sc/{id}', 'ServiceCenterCabinet\AdminCabinetController@getService')->name('cabinet.service')->where('id', '[0-9]+');
+    });
 });

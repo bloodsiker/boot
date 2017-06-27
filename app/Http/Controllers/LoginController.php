@@ -26,10 +26,14 @@ class LoginController extends Controller
             'password' => 'required'
         ]);
 
+
         if(Auth::attempt(['email' => $request->email, 'password' => $request->password])){
-            if(Auth::user()->roleSc() || Auth::user()->roleAdmin()){
+            if(Auth::user()->roleSc()){
                 return redirect()->route('cabinet.dashboard');
+            } elseif (Auth::user()->roleAdmin()){
+                return redirect()->route('cabinet.admin.user.list');
             }
+            Auth::logout();
             return redirect()->back()->with(['message' => 'У Вас нету доступа в эту часть кабинета!']);
         }
         return redirect()->back()->with(['message' => 'Не верные данные для входа в личный кабинет!']);
