@@ -1,5 +1,5 @@
 <div style="position: relative;z-index: 2;background: #fff;">
-    <div class="container">
+    <div class="container" id="header">
         <div class="row">
             <div class="col-md-12">
                 <div class="nav-bar">
@@ -12,7 +12,7 @@
                                 <a href="{{ route('main') }}" class="{{ active('main') }}">Главная</a>
                                 <a href="{{ route('catalog') }}" class="{{ active('catalog') }}">Каталог</a>
                                 <a href="{{ route('diagnostics') }} " class="{{ active('diagnostics') }}">Диагностика</a>
-                                <a href="{{ route('about') }}" class="{{ active('about') }}">О нас</a>
+                                <a href="{{ route('about') }}" class="{{ active('about') }}">О проекте</a>
                                 <a href="{{ route('support') }}" class="{{ active('support') }}">Служба поддержки</a>
                             </div>
                             <div class="text-right">
@@ -29,7 +29,7 @@
                         </div>
                         <div class="search-box">
                             <form action="/search" method="get">
-                                <input type="text" placeholder="Поиск" style="width: 100%;">
+                                <input type="text" placeholder="Поиск неисправностей" style="width: 100%;">
                                 <button class="btn search-button"><span class="glyphicon glyphicon-search"></span></button>
                             </form>
                         </div>

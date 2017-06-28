@@ -52,13 +52,20 @@
 
             success.data.map(function (key) {
                 key.active = false;
+                key.min = 0;
+                key.max = 200;
             });
             $scope.services = success.data;
         });
 
 
-        $scope.filterService = [];
-        var filterService = [];
+        if (searchService.service_model().length > 0) {
+            var _s = searchService.service_model()[0];
+            $scope.filterService = [_s.services];
+        } else {
+            $scope.filterService = [];
+        }
+        var filterService = angular.copy($scope.filterService);
         $scope.selectFilterServices = function (service) {
             service.active = !service.active;
 
@@ -72,42 +79,30 @@
         };
 
         $scope.clearFilterServices = function () {
-            $scope.filterService = [];
             filterService = [];
+            $scope.filterService = angular.copy(filterService);
             $scope.services.map(function (key) {
                 key.active = false;
             });
-            $timeout(function () {
-                $scope.getCatalog();
-            }, 100)
-
+            searchService.setService('');
+            filtersCatalog();
         };
 
-
-
         $scope.applyFilterServices = function () {
-            $scope.filterService = filterService;
-
-            console.log($scope.filterService);
-            $timeout(function () {
-                $scope.getCatalog();
-            }, 100)
+            $scope.filterService = angular.copy(filterService);
+            searchService.setService('');
+            filtersCatalog();
         };
 
         $scope.removeFilterService = function (index, filter) {
-
-
             filterService = _.without(filterService, filter);
             $scope.filterService = _.without($scope.filterService, filter);
-
-
-
             $scope.services.map(function (key, index) {
                 key.title === filter ? key.active = false : '';
             });
-
+            searchService.setService('');
+            filtersCatalog();
         };
-
 
         $scope.isOpenServices = false;
 
@@ -117,7 +112,7 @@
 
         // =============================== new =======================
 
-        let work_days = [
+        var work_days = [
             { title: 'ПН', start_time: '09:00', end_time: '19:00', weekend: false},
             { title: 'ВТ', start_time: '09:00', end_time: '19:00', weekend: false},
             { title: 'СР', start_time: '09:00', end_time: '19:00', weekend: false},
@@ -153,43 +148,37 @@
             '22:00', '22:30'
         ];
 
-        let date = new Date();
-        let indexDay = date.getDay();
-        $scope.timeFilter = {
+        var date = new Date();
+        var indexDay = date.getDay() - 1;
+        $scope.indexDay = indexDay;
+        $scope._timeFilter = {
             day: work_days[indexDay].title,
             start_time: new Date ('01.01.1970 '+work_days[indexDay].start_time),
-            end_time: new Date ('01.01.1970 ' + work_days[indexDay].end_time)
+            end_time: new Date ('01.01.1970 ' + work_days[indexDay].end_time),
+            indexDay: indexDay
         };
 
-        let _timeFilter = {
-            day: work_days[indexDay].title,
-            start_time: new Date ('01.01.1970 '+work_days[indexDay].start_time),
-            end_time: new Date ('01.01.1970 ' + work_days[indexDay].end_time)
-        };
-
-
+        var _timeFilter = angular.copy($scope._timeFilter);
 
         $scope.applyTime = function () {
-            console.log($scope.timeFilter);
-
+            $scope._timeFilter.indexDay = $scope.week_days.indexOf($scope._timeFilter.day);
+            console.log($scope._timeFilter);
+            $scope.timeFilter = angular.copy($scope._timeFilter);
+            filtersCatalog();
             // post server  ==========================
-
         };
         $scope.clear_time = function () {
-            $scope.timeFilter.day = _timeFilter.day;
-            $scope.timeFilter.start_time = _timeFilter.start_time;
-            $scope.timeFilter.end_time = _timeFilter.end_time;
-
-
+            $scope._timeFilter.day = _timeFilter.day;
+            $scope._timeFilter.start_time = _timeFilter.start_time;
+            $scope._timeFilter.end_time = _timeFilter.end_time;
+            $scope.timeFilter = '';
+            filtersCatalog();
             // post server ===================
         };
-
-
-
-
-
-
-
+        $scope.removeFilterTime = function () {
+            $scope.timeFilter = '';
+            filtersCatalog();
+        };
 
 
         // =================== RADIUS ===============
@@ -247,7 +236,7 @@
 
 
         $scope.applyRadius = function () {
-            let radius_map = 0;
+            var radius_map = 0;
             $scope.radiuses.map(function (key) {
                 key.active ? radius_map = key.value : '';
             });
@@ -273,9 +262,17 @@
 
         var renderMap = function (address) {
 
+
+
+
+
             NgMap.getMap("map").then(function (map) {
                 $scope.map = map;
 
+                $scope.callbackFunc = function(param) {
+                    console.log('I know where '+ param +' are. ');
+                    console.log('You are at' + $scope.map.getCenter());
+                };
 
                 var markers = [];
 
@@ -321,20 +318,25 @@
                 console.log('update');
 
 
-                let address = searchService.address_model();
+                var address = searchService.address_model();
                 $scope.address = searchService.address_model();
-                let brand = searchService.brand_model();
+                var brand = searchService.brand_model();
+                var services = $scope.filterService;
+                var time = $scope.timeFilter;
 
 
                 var radius = ($scope.radiusMap * 0.00001).toFixed(3);
 
-                let streetCatalog = [];
-                let radiusCatalog = [];
-                let metroCatalog = [];
-                let districtCatalog = [];
-                let brandCatalog = [];
+                var streetCatalog = [];
+                var radiusCatalog = [];
+                var metroCatalog = [];
+                var districtCatalog = [];
+                var brandCatalog = [];
+                var servicesCatalog = [];
+                var timeCatalog = [];
 
-                let globalFilter = [];
+
+                var globalFilter = [];
 
                 console.log(address);
                 $scope.catalog = $scope._catalog;
@@ -357,14 +359,40 @@
                     $scope.catalog = _.union(streetCatalog, radiusCatalog, metroCatalog, districtCatalog);
                 }
                 if (brand) {
+                    console.log('brand');
                     angular.forEach($scope.catalog, function (key) {
                         angular.forEach(key.manufacturers, function (b) {
                             b === brand.manufacturer ? brandCatalog.push(key) : '';
                         })
                     });
-
                     $scope.catalog = brandCatalog;
-                    console.log(brandCatalog);
+                }
+
+                if (services.length > 0) {
+                    console.log('service');
+                    console.log(services);
+                    angular.forEach($scope.catalog, function (key) {
+                        angular.forEach(key.price, function (price) {
+                            angular.forEach(services, function (service) {
+                                price.title === service ? servicesCatalog.push(key) : '';
+                            });
+                        })
+                    });
+                    $scope.catalog = servicesCatalog;
+                }
+
+                if (time) {
+                    console.log('time');
+                    angular.forEach($scope.catalog, function (key) {
+                        var _start = Date.parse(time.start_time);
+                        var _end = Date.parse(time.end_time);
+                        var startS = new Date ('01.01.1970 '+key.work_days[time.indexDay].start_time);
+                        var endS = new Date ('01.01.1970 '+key.work_days[time.indexDay].end_time);
+
+                        _start >= startS && _end <= endS ? timeCatalog.push(key) : '';
+
+                    });
+                    $scope.catalog = timeCatalog;
                 }
 
 
