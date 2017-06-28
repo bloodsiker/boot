@@ -205,10 +205,10 @@ img {
     background: #d9d6d6;
     padding: 3px 20px 3px 20px;
     display: flex; }
-    .nav-bar .search-box form {
+    .nav-bar .search-box .form {
       width: 100%;
       position: relative; }
-      .nav-bar .search-box form input {
+      .nav-bar .search-box .form input {
         background-color: #fff;
         color: #000;
         padding-left: 10px;
@@ -216,7 +216,7 @@ img {
         height: 100%;
         border: none;
         border-radius: 2px; }
-      .nav-bar .search-box form .search-button {
+      .nav-bar .search-box .form .search-button {
         position: absolute;
         top: 2px;
         right: 2px;
@@ -225,6 +225,18 @@ img {
         border: none;
         padding: 1px 5px 1px 5px;
         border-radius: 2px; }
+    .nav-bar .search-box .searched-box {
+      width: 100%;
+      max-height: 300px;
+      position: absolute;
+      z-index: 2;
+      overflow-x: hidden;
+      overflow-y: auto;
+      background: #fff;
+      border-bottom-left-radius: 2px;
+      border-bottom-right-radius: 2px;
+      box-shadow: 2px 4px 4px 0px #2f2f2f;
+      padding: 10px; }
 
 .home {
   padding-top: 120px;

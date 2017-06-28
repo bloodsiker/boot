@@ -248,11 +248,21 @@
         // ================= ORDER BY
 
         $scope.activeSort = '';
-        $scope.order_event = function (val) {
-            $scope.activeSort = val;
-            $scope.order_by = function (item) {
-                return parseFloat(item[val])
-            };
+        $scope.order_event = function (arg) {
+            $scope.activeSort =  arg;
+            if (arg === 'name') {
+                $scope.catalog =  _.sortBy($scope.catalog, 'service_name');
+            }
+
+            if (arg === 'rating') {
+                var _rating =  _.sortBy($scope.catalog, 'rating');
+                $scope.catalog = _rating.reverse();
+            }
+            if (arg === 'comments') {
+                var _comments = _.sortBy($scope.catalog, 'comments');
+                $scope.catalog = _comments.reverse();
+            }
+
         };
 
 

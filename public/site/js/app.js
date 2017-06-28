@@ -40,8 +40,27 @@
 (function () {
     angular.module('App')
         .controller('TopSearchCtrl', TopSearchCtrl);
-    TopSearchCtrl.$inject = ['$scope'];
-    function TopSearchCtrl($scope) {
+    TopSearchCtrl.$inject = ['$scope', 'model', 'searchService'];
+    function TopSearchCtrl($scope, model, searchService) {
+
+        $scope.filterTopSearch = '';
+
+
+        $scope.getSearchData = function () {
+            model.get('/services').then(function (success) {
+                $scope.services = success.data;
+
+                $scope.selectServiceSearch = function (service) {
+                    // console.log(service);
+                    service.services = service.title;
+                    searchService.setService([service]);
+                    window.location = '/catalog';
+                };
+            });
+            model.get('/catalog').then(function (success) {
+              $scope.catalog = success.data;
+            });
+        }
 
     }
 })();

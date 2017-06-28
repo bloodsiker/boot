@@ -275,7 +275,7 @@ span.icon {
     background: #d9d6d6;
     padding: 3px 20px 3px 20px;
     display: flex;
-    form {
+    .form {
       width: 100%;
       position: relative;
       input {
@@ -297,6 +297,19 @@ span.icon {
         padding: 1px 5px 1px 5px;
         border-radius: 2px;
       }
+    }
+    .searched-box {
+      width: 100%;
+      max-height: 300px;
+      position: absolute;
+      z-index: 2;
+      overflow-x: hidden;
+      overflow-y: auto;
+      background: #fff;
+      border-bottom-left-radius: 2px;
+      border-bottom-right-radius: 2px;
+      box-shadow: 2px 4px 4px 0px #2f2f2f;
+      padding: 10px;
     }
   }
 }

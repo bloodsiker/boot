@@ -11,8 +11,8 @@
 
 @section('content')
 
-    <div style="position: relative;z-index: 2;background: #fff;" ng-cloak>
-        <div class="container" style="position: relative;z-index: 2;">
+    <div style="position: relative;z-index: 1;background: #fff;" ng-cloak>
+        <div class="container" style="position: relative;z-index: 1;">
             <div class="search-catalog">
                 <!--======================================= INCLUDE SEARCH SC =======================================-->
             @include('site.includes.search')
@@ -136,7 +136,7 @@
                 <div class="row sort">
                     <div class="col-xs-12">
                     <span>Сортировать:
-                        <span ng-class="{active: activeSort == ''}" ng-click="order_event('')" class="sort-by active">по популярности <i ng-if="activeSort == ''" class="glyphicon glyphicon-sort-by-attributes-alt"></i></span>
+                        <span ng-class="{active: activeSort == 'name'}" ng-click="order_event('name')" class="sort-by active">по имени <i ng-if="activeSort == 'name'" class="glyphicon glyphicon-sort-by-attributes-alt"></i></span>
                         <span ng-class="{active: activeSort == 'rating'}" ng-click="order_event('rating')" class="sort-by">по рейтингу <i ng-if="activeSort == 'rating'" class="glyphicon glyphicon-sort-by-attributes-alt"></i></span>
                         <span ng-class="{active: activeSort == 'comments'}" ng-click="order_event('comments')" class="sort-by">по отзывам  <i ng-if="activeSort == 'comments'"  class="glyphicon glyphicon-sort-by-attributes-alt"></i></span>
                     </span>
@@ -161,7 +161,7 @@
                 </div>
                 <!--=======================================CATALOG ITEM=======================================-->
                 <div class="row catalog-item"
-                     ng-repeat="item in catalog track by $index| limitTo: limitCatalog">
+                     ng-repeat="item in catalog track by $index | limitTo: limitCatalog">
 
                     <div class="col-md-8">
                         <a class="title-sc" ng-href="@{{ '/sc/'+item.id }}" ng-bind="item.service_name"></a>
@@ -227,7 +227,7 @@
                 <ng-map id="map"
                         center='current-position'
                         geo-callback="callbackFunc('you')"
-                        style="position: fixed; top: 0; width:inherit; z-index:1;">
+                        style="position: fixed; top: 0; width:inherit; z-index:0;">
 
                     <info-window id="foo">
                         <div ng-non-bindable="">
