@@ -118,8 +118,8 @@
                         </div>
                     </div>
 
-                    <div style="padding-left: 15px; margin-top: 20px;">
-                        <span style="color: #ffca13;">Найдено @{{ catalog.length }} сервисных центров, соответствующих Вашему запросу </span>
+                    <div ng-if="catalog.length" style="padding-left: 15px; margin-top: 20px;">
+                        <span style="color: #ffca13;">Найдено <b><u>@{{ catalog.length }}</u></b> сервисных центров, соответствующих Вашему запросу </span>
                     </div>
                 </div>
             </div>
@@ -161,7 +161,7 @@
                 </div>
                 <!--=======================================CATALOG ITEM=======================================-->
                 <div class="row catalog-item"
-                     ng-repeat="item in catalog track by $index | limitTo: limitCatalog">
+                     ng-repeat="item in catalog | limitTo: limitCatalog track by $index">
 
                     <div class="col-md-8">
                         <a class="title-sc" ng-href="@{{ '/sc/'+item.id }}" ng-bind="item.service_name"></a>
@@ -265,7 +265,7 @@
                     <marker
                             position="@{{item.c1}}, @{{item.c2}}"
                             fit="true"
-                            ng-repeat="item in catalog"
+                            ng-repeat="item in catalog track by $index"
                             on-click="showInfo(event, item)"
                             icon="{url:'site/img/marker-map.png'}">
 

@@ -46,21 +46,12 @@
         $scope.filterTopSearch = '';
 
 
-        $scope.getSearchData = function () {
-            model.get('/services').then(function (success) {
-                $scope.services = success.data;
-
-                $scope.selectServiceSearch = function (service) {
-                    // console.log(service);
-                    service.services = service.title;
-                    searchService.setService([service]);
-                    window.location = '/catalog';
-                };
-            });
-            model.get('/catalog').then(function (success) {
-              $scope.catalog = success.data;
-            });
-        }
+        $scope.selectServiceSearch = function (service) {
+            // console.log(service);
+            service.services = service.title;
+            searchService.setService([service]);
+            window.location = '/catalog';
+        };
 
     }
 })();
