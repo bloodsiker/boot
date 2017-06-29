@@ -57,7 +57,7 @@
                             <h3 class="box-title"><i class="fa fa-area-chart" aria-hidden="true"></i> @{{ $index }}  Статистика просмотров <b><u>@{{ visit_key }}</u></b></h3>
                         </div>
                         <div class="box-body">
-                            <canvas flex id="line"
+                            <canvas
                                     ng-if="visit"
                                     class="chart chart-bar"
                                     chart-data="visitData(visit)"

@@ -146,6 +146,7 @@
                         metro_id: sc.metro.id,
                         number_h: sc.number_h,
                         number_h_add: sc.number_h_add,
+                        exit_master: sc.exit_master
                     }
 
                 };
@@ -296,6 +297,56 @@
                 });
             }
         };
+
+
+
+        $scope.prePhone = '';
+        $scope.addPhone = function (phone) {
+            $scope.sc.service_phones.push({phone:phone});
+            $scope.prePhone = '';
+        };
+        $scope.removePhone = function (index) {
+            $scope.sc.service_phones.splice(index, 1);
+        };
+        $scope.savePhones = function (phones) {
+            var data = [];
+
+            phones.forEach(function (key) {
+                data.push(key.phone)
+            });
+            model.put('/cabinet' + url + '/update', {phones:data}).then(function (res) {
+                console.log(res); angular.element('#alert').append(alertSuccess);
+                $timeout(function () {
+                    angular.element('#alert').html('');
+                }, 4000)
+            });
+        };
+
+
+
+
+        $scope.preEmail = '';
+        $scope.addEmail = function (email) {
+            $scope.sc.service_emails.push({email:email});
+            $scope.preEmail = '';
+        };
+        $scope.removeEmail = function (index) {
+            $scope.sc.service_emails.splice(index, 1);
+        };
+        $scope.saveEmails = function (emails) {
+            var data = [];
+
+            emails.forEach(function (key) {
+                data.push(key.email)
+            });
+            model.put('/cabinet' + url + '/update', {emails:data}).then(function (res) {
+                console.log(res); angular.element('#alert').append(alertSuccess);
+                $timeout(function () {
+                    angular.element('#alert').html('');
+                }, 4000)
+            });
+        };
+
 
 
 
