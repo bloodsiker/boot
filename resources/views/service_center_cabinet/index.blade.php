@@ -1,484 +1,518 @@
 @extends('service_center_cabinet.layouts.master')
 
 @section('content')
-    <div flex layout="column" data-ng-controller="RefactorScController">
-        <md-tabs flex layout="column" layout-fill md-border-bottom>
-            <md-tab label="Основное" flex layout="column">
-                <md-content layout-fill flex layout="column">
-                    <div flex layout="row">
-                        <div flex layout="column" layout-padding>
-                            <form name="ReqForm" flex layout="column" novalidate>
-
-                                <div layout="row">
-                                    <md-input-container flex>
-                                        <label>Название сервисного центра</label>
-                                        <input required name="name" ng-model="sc.service_name">
-                                        <div ng-messages="ReqForm.name.$error">
-                                            <div ng-message="required">Это поле обязательное для ввода</div>
-                                        </div>
-                                    </md-input-container>
-                                    <div layout="column" layout-padding>
-                                        <label for="logoSc">
-                                            <div style="max-width: 200px; cursor: pointer; position: relative;">
-                                                <img ng-if="!scLogo" class="sc-logo" ng-src="@{{sc.logo ? sc.logo : 'http://fakeimg.pl/200x100/'}}" alt="@{{sc.service_name}}">
-                                                <img ng-if="scLogo" class="sc-logo" ng-src="@{{'data:'+scLogo.filetype+';base64,'+scLogo.base64}}" alt="@{{sc.service_name}}">
-                                                <span style="position: absolute; bottom: 8px; right: 5px;"><md-icon>add_a_photo</md-icon></span>
-                                            </div>
-
-                                        </label>
-                                        <input type="file" ng-hide="true" id="logoSc" ng-model="scLogo" accept="image/*" base-sixty-four-input>
-                                        <div layout="row"  layout-sm="column" ng-show="scLogo && visibleSaveLogo">
-                                            <md-button class="md-primary md-mini md-raised" ng-click="scLogo = null">Отмена</md-button>
-                                            <md-button class="md-primary md-mini md-raised " ng-click="addLogo(scLogo)">Сохранить</md-button>
-                                        </div>
-
-                                    </div>
-
-                                </div>
-
-                                <div layout="row">
-                                    <md-input-container flex>
-                                        <label>Город</label>
-                                        <md-select name="city" ng-model="sc.city_id" required>
-                                            <md-option ng-if="item.id == 1" ng-repeat="item in cities"
-                                                       value="@{{item.id}}">@{{ item.city_name }}</md-option>
-                                        </md-select>
-                                        <div ng-messages="ReqForm.city.$error">
-                                            <div ng-message="required">Это поле обязательное для ввода.</div>
-                                        </div>
-                                    </md-input-container>
-                                    <md-input-container flex>
-                                        <label>Район</label>
-                                        <md-select name="district" ng-model="sc.district_id" required>
-                                            <md-option ng-repeat="item in districts"
-                                                       value="@{{item.id}}">@{{ item.address }}</md-option>
-                                        </md-select>
-                                        <div ng-messages="ReqForm.district.$error">
-                                            <div ng-message="required">Это поле обязательное для ввода.</div>
-                                        </div>
-                                    </md-input-container>
-
-                                </div>
-
-                                <div layout="row">
-
-                                    <md-input-container flex-gt-xs="50" class="md-block">
-                                        <label>Метро</label>
-                                        <md-select name="metro" ng-model="sc.metro_id" required>
-                                            <md-option ng-repeat="item in metro"
-                                                       value="@{{item.id}}">@{{ item.address }}</md-option>
-                                        </md-select>
-                                        <div ng-messages="ReqForm.metro.$error">
-                                            <div ng-message="required">Это поле обязательное для ввода. Выберите
-                                                ближайшее метро
-                                            </div>
-                                        </div>
-                                    </md-input-container>
-                                    <md-autocomplete md-no-cache="true"
-                                                     flex required
-                                                     md-input-name="street"
-                                                     md-floating-label="Улица, площадь, шоссе.."
-                                                     md-selected-item="sc.street"
-                                                     md-min-length="1"
-                                                     md-selected-item-change="selectedStreet(item)"
-                                                     md-items="item in streets | filter: {'address': searchText} "
-                                                     md-search-text="searchText"
-                                                     md-item-text="item.address">
-                                        <span>@{{ item.address }}</span>
-                                    </md-autocomplete>
-                                    <md-input-container flex-gt-xs="10" class="md-block">
-                                        <label>Номер</label>
-                                        <input type="text" ng-change="changeNumberH($event)" ng-model="sc.number_h">
-                                    </md-input-container>
 
 
-                                </div>
-                                <div layout="row">
-                                    <md-input-container flex class="md-block">
-                                        <label>Дополнительная информация (ТЦ Большевик, 2 этаж)</label>
-                                        <input type="text" ng-model="sc.number_h_add">
-                                    </md-input-container>
-                                </div>
+    <div ng-controller="RefactorScController" ng-cloak>
+        <section class="content-header">
+            <h1 ng-bind="sc.service_name"></h1>
+            <ol class="breadcrumb">
+                <li><a href="/cabinet/dashboard"><i class="fa fa-dashboard"></i> Главная</a></li>
+                <li class="active">Cервисный центр</li>
+            </ol>
+        </section>
 
-                                <div layout="row" layout-align="end center" ng-repeat="day in sc.work_days track by $index">
-                                    <md-input-container flex-gt-xs="10" class="md-block">
-                                        <input type="text" ng-model="day.title" disabled>
-                                    </md-input-container>
-                                    <md-input-container flex-gt-xs="25" class="md-block">
-                                        <label>Начало дня</label>
-                                        <md-select name="start_time" ng-model="day.start_time">
-                                            <md-option ng-repeat="time in times_start"
-                                                       value="@{{time}}">@{{ time }}</md-option>
-                                        </md-select>
-                                    </md-input-container>
-                                    <md-input-container flex-gt-xs="25" class="md-block">
-                                        <label>Конец дня</label>
-                                        <md-select name="end_time" ng-model="day.end_time">
-                                            <md-option ng-repeat="time in times_end"
-                                                       value="@{{time}}">@{{ time }}</md-option>
-                                        </md-select>
-                                    </md-input-container>
-                                    <md-checkbox flex ng-model="day.weekend" ng-true-value="'1'" ng-false-value="'0'">Выходной</md-checkbox>
+        <section class="content" >
+            <div class="row">
 
-                                </div>
-                                <div flex></div>
-                                <div layout="row">
-                                    <span flex></span>
-                                    <md-button type="submit" ng-click="saveSc(ReqForm.$valid, sc)" class="md-primary
-                                    md-raised md-fab-bottom-right">Сохранить
-                                    </md-button>
-                                </div>
-                            </form>
+
+                {{--============================Главная информация==================================--}}
+                <div class="col-sm-12">
+                    <div class="box box-primary box-solid">
+                        <div class="box-header with-border">
+                            <h3 class="box-title"><i class="fa fa-home" aria-hidden="true"></i>  Главная информация</h3>
                         </div>
-                        <div flex layout="column">
-                            <div class="md-warn" ng-if="sc.c1 && sc.c2">Переместите маркер для точного местоположения
+
+                        <form role="form" name="saveGlobalForm" novalidate>
+                            <div class="box-body">
+
+                                <div class="row">
+                                    <div class="col-md-8">
+
+                                        <div class="row">
+                                            <div class="col-md-3">
+                                                <label for="logoSc">
+                                                    <div style="cursor: pointer; position: relative;">
+                                                        <img ng-if="!scLogo.base64 && !sc.logo" style="max-width: 100%;" src="http://fakeimg.pl/200x140/?text=Foto" alt="add personal" >
+                                                        <img ng-if="scLogo.base64 && !sc.logo" style="max-width: 100%;" ng-src="@{{'data:'+scLogo.filetype+';base64,'+scLogo.base64}}" alt="@{{sc.service_name}}">
+                                                        <img ng-if="sc.logo && !scLogo.base64" style="max-width: 100%;" ng-src="@{{sc.logo}}" alt="@{{sc.service_name}}">
+                                                        <span style="position: absolute; bottom: 8px; right: 5px;" class="fa fa-camera"></span>
+                                                        <input type="file" ng-hide="true" id="logoSc" ng-model="scLogo" accept="image/*" base-sixty-four-input>
+                                                    </div>
+                                                </label>
+                                            </div>
+                                            <div class="col-md-9">
+                                                <div class="form-group">
+                                                    <label>Название сервисного центра</label>
+                                                    <input type="text" ng-model="sc.service_name" class="form-control" placeholder="Название сервисного центра" required>
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+
+                                        <div class="row">
+                                            <div class="col-sm-3">
+                                                <div class="form-group">
+                                                    <label>Город</label>
+                                                    <select class="form-control" ng-model="sc.city" ng-options="city.city_name for city in cities track by city.id" required></select>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-4">
+                                                <div class="form-group">
+                                                    <label>Район</label>
+                                                    <select class="form-control" ng-model="sc.district" ng-options="district.address for district in districts track by district.id"></select>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-5">
+                                                <div style="width: 80%; float: left;position: relative;">
+                                                    <div class="form-group drop-street">
+                                                        <label>Улица</label>
+                                                        <input type="text"
+                                                               class="form-control"
+                                                               typeahead-on-select="selectedStreet($item)"
+                                                               typeahead-show-hint="true"
+                                                               typeahead-min-length="0"
+                                                               placeholder="Искать улицу"
+                                                               ng-model="sc.street"
+                                                               required
+                                                               uib-typeahead="street as street.address for street in streets | filter:$viewValue | limitTo: 30">
+                                                    </div>
+                                                    <span ng-if="street.address" style="position: absolute; right: 5px;bottom: 0;line-height: 5.8;" ng-click="street.address = ''" class="glyphicon glyphicon-remove"></span>
+
+                                                </div>
+                                                <div style="width: 20%; float: left;">
+                                                    <div class="form-group">
+                                                        <label>Номер</label>
+                                                        <input type="text" class="form-control" ng-change="changeNumberH($event)" ng-model="sc.number_h" required>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-3">
+                                                <div class="form-group">
+                                                    <label>Метро</label>
+                                                    <select class="form-control" ng-model="sc.metro" ng-options="metro.address for metro in metros track by metro.id"></select>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-9">
+                                                <div class="form-group">
+                                                    <label>Дополнительная информация (ТЦ Большевик, 2 этаж)</label>
+                                                    <input type="text" class="form-control" ng-model="sc.number_h_add">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <ng-map id="map"
+                                                center="@{{sc.c1 +','+ sc.c2}}"
+                                                zoom="14">
+                                            <marker draggable="true"
+                                                    on-dragend="dragMap()"
+                                                    position="@{{sc.c1 +','+ sc.c2}}"
+                                                    icon="{url:'/site/img/marker-map.png'}"></marker>
+                                        </ng-map>
+                                    </div>
+                                </div>
+
                             </div>
-                            <ng-map id="map"
-                                    style="height: 100%"
-                                    center="@{{sc.c1 +','+ sc.c2}}"
-                                    zoom="14">
 
-                                <marker draggable="true"
-                                        on-dragend="dragMap()"
-                                        position="@{{sc.c1 +','+ sc.c2}}"
-                                        icon="{url:'/site/img/marker-map.png'}"></marker>
-                            </ng-map>
+
+                            <div class="box-footer text-right">
+                                <button type="button" class="btn btn-primary" ng-click="saveGlobalSc(saveGlobalForm.$valid, sc)">Сохранить</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+
+                {{--============================График работы==================================--}}
+                <div class="col-md-5">
+                    <div class="box box-primary box-solid collapsed-box">
+                        <div class="box-header with-border" >
+                            <h3 class="box-title"><i class="fa fa-calendar" aria-hidden="true"></i>  График работы</h3>
+                            <div class="box-tools pull-right">
+                                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-plus"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="box-body">
+                            <table class="table table-bordered">
+                                <tbody>
+                                    <tr>
+                                        <th>День</th>
+                                        <th>с</th>
+                                        <th>по</th>
+                                        <th>вых.</th>
+                                    </tr>
+                                    <tr ng-repeat="day in sc.work_days track by $index">
+                                        <td ng-bind="day.title"></td>
+                                        <td>
+                                            <select class="form-control" ng-model="day.start_time" ng-options="time for time in times_start"></select>
+                                        </td>
+                                        <td>
+                                            <select class="form-control" ng-model="day.end_time" ng-options="time for time in times_end"></select>
+                                        </td>
+                                        <td style="text-align: center; width: 20px;">
+                                            <input type="checkbox" ng-model="day.weekend" ng-true-value="'1'" ng-false-value="'0'">
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+
+                        </div>
+
+                        <div class="box-footer text-right" >
+                            <button type="button" class="btn btn-primary" ng-click="saveGraphic(sc.work_days)">Сохранить</button>
                         </div>
                     </div>
+                </div>
 
-                </md-content>
-            </md-tab>
-            <md-tab label="Преимущества" flex layout="column">
-                <md-content layout-fill flex layout="column">
-                    <div flex layout="row">
-                        <div flex layout="column" layout-padding>
-                            <form name="scForm" flex layout="column" novalidate>
-                                <div layout="row">
-                                    <div flex layout-padding class="md-block">
-                                        <label>Преимущества</label>
-                                        <md-chips ng-model="sc.advantages"
-                                                  name="advantages"
-                                                  md-transform-chip="addAdvantages($chip, sc.id)"
-                                                  placeholder='Добавить преимущество... (напр. "Прозрачная ценовая политика")'>
-                                            <md-chip-template>
-                                                <strong>@{{$chip.advantages}}</strong>
-                                            </md-chip-template>
-                                        </md-chips>
+                {{--============================Виды и стоимость работ==================================--}}
+                <div class="col-md-7">
+                    <div class="box box-primary box-solid collapsed-box">
+                        <div class="box-header with-border">
+                            <h3 class="box-title"><i class="fa fa-money" aria-hidden="true"></i>  Виды и стоимость работ</h3>
+
+                            <div class="box-tools pull-right">
+                                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-plus"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="box-body">
+                            <table>
+                                <tr ng-repeat="price in price_list" style="vertical-align: top;">
+                                    <td>
+                                        <input type="checkbox" ng-model="price.active" required>
+                                    </td>
+                                    <td>
+                                        <span ng-bind="price.title"></span>
+                                        <em ng-if="showErrorPrice(price)" style="color: #F44336;">Введите корректную цену</em>
+                                    </td>
+                                    <td width="100">
+                                        <input type="text" class="form-control" ng-class="{'error-input': price.price_min == 0 && price.active}" placeholder="цена от" number-to-string ng-model="price.price_min">
+                                        <em ng-if="price.price_min == 0 && price.active" style="color: #F44336;">Введите цену</em>
+
+                                    </td>
+                                    <td> - </td>
+                                    <td width="100">
+                                        <input type="text" class="form-control" ng-class="{'error-input': price.price_max == 0 && price.active}" placeholder="цена до" number-to-string ng-model="price.price_max">
+                                        <em ng-if="price.price_max == 0 && price.active" style="color: #F44336;">Введите цену</em>
+                                    </td>
+                                    <td colspan="2">
+                                        <select style="margin: 0;"  class="form-control" ng-model="price.currency" ng-options="cur for cur in currency"></select>
+                                    </td>
+                                </tr>
+                            </table>
+
+                                <form name="addPriceForm" class="text-right">
+                                    <table>
+                                        <tr style="vertical-align: top; margin-top: 10px;">
+                                            <td></td>
+                                            <td>
+                                                <input type="text" class="form-control" style="width: 100%;" placeholder="Добавить услугу" ng-model="newPriceTitle" required>
+                                            </td>
+                                            <td><input type="number" class="form-control" placeholder="Цена" step="0.01" ng-model="newPriceCostMin" required></td>
+                                            <td> - </td>
+                                            <td><input type="number" class="form-control" placeholder="Цена" step="0.01" ng-model="newPriceCostMax" required></td>
+                                            <td>
+                                                <select style="margin: 0;" class="form-control"  ng-model="newPriceCurrency" ng-options="cur for cur in currency"></select>
+                                            </td>
+                                        </tr>
+
+                                    </table>
+                                    <button type="button" ng-disabled="!addPriceForm.$valid" ng-click="addPrice(addPriceForm.$valid, sc, newPriceTitle, newPriceCostMin, newPriceCostMax, newPriceCurrency)" class="btn btn-info">добавить</button>
+
+
+                                </form>
+                            </table>
+                        </div>
+                        <div class="box-footer text-right" >
+                            <button type="button" class="btn btn-primary" ng-click="saveScPrice(true, price_list)">Сохранить</button>
+                        </div>
+                    </div>
+                </div>
+
+                {{--============================Преимущества==================================--}}
+                <div class="col-md-6">
+                    <div class="box box-primary box-solid collapsed-box">
+                        <div class="box-header with-border">
+                            <h3 class="box-title"><i class="fa fa-certificate" aria-hidden="true"></i>  Преимущества</h3>
+                            <div class="box-tools pull-right">
+                                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-plus"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="box-body">
+                            <table class="table">
+                                <tr ng-repeat="advantage in sc.advantages track by $index">
+                                    <td ng-bind="advantage"></td>
+                                    <td class="text-right"><i style="cursor: pointer;" ng-click="removeAdvantages($index)" class="fa fa-trash"></i></td>
+                                </tr>
+                            </table>
+                            <div class="input-group input-group-sm">
+                                <input type="text" class="form-control" ng-model="preAdvantage" placeholder='напр. "Прозрачная ценовая политика"'>
+                                <span class="input-group-btn">
+                                  <button type="button" ng-disabled="!preAdvantage" ng-click="addAdvantages(preAdvantage)"  class="btn btn-info btn-flat">добавить</button>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="box-footer text-right" >
+                            <button type="button" class="btn btn-primary" ng-click="saveAdvantages(sc.advantages)">Сохранить</button>
+                        </div>
+                    </div>
+                </div>
+
+                {{--============================Теги==================================--}}
+                <div class="col-md-6">
+                    <div class="box box-primary box-solid collapsed-box">
+                        <div class="box-header with-border">
+                            <h3 class="box-title"><i class="fa fa-tags" aria-hidden="true"></i>  Теги</h3>
+                            <div class="box-tools pull-right">
+                                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-plus"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="box-body">
+                            <table class="table">
+                                <tr ng-repeat="tag in sc.tags track by $index">
+                                    <td ng-bind="tag"></td>
+                                    <td class="text-right"><i style="cursor: pointer;" ng-click="removeTags($index)" class="fa fa-trash"></i></td>
+                                </tr>
+                            </table>
+                            <div class="input-group input-group-sm">
+                                <input type="text" class="form-control" ng-model="preTag" placeholder='напр. "Выезд мастера"'>
+                                <span class="input-group-btn">
+                                  <button type="button" ng-disabled="!preTag" ng-click="addTags(preTag)" class="btn btn-info btn-flat">добавить</button>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="box-footer text-right" >
+                            <button type="button" class="btn btn-primary" ng-click="saveTags(sc.tags)">Сохранить</button>
+                        </div>
+                    </div>
+                </div>
+
+                {{--============================Бренды==================================--}}
+                <div class="col-md-12">
+                    <div class="box box-primary box-solid collapsed-box">
+                        <div class="box-header with-border">
+                            <h3 class="box-title"><i class="fa fa-mobile" aria-hidden="true"></i>  Бренды</h3>
+                            <div class="box-tools pull-right">
+                                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-plus"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="box-body">
+                            <div>
+                                <input type="checkbox" aria-label="Select All"
+                                       ng-checked="isChecked()"
+                                       md-indeterminate="isIndeterminate()"
+                                       ng-click="toggleAll()">
+                                <span ng-if="isChecked()">Снять отметки</span>
+                                <span ng-if="!isChecked()">Выбрать все</span>
+
+                            </div>
+                            <div class="row">
+                                <div class="col-xs-3" ng-repeat="item in brands track by $index">
+                                    <input type="checkbox" ng-checked="exists(item, selected)" ng-click="toggle(item, selected)"> @{{ item.manufacturer }}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="box-footer text-right" >
+                            <button type="button" class="btn btn-primary" ng-click="saveBrands(sc.manufacturers)">Сохранить</button>
+                        </div>
+                    </div>
+                </div>
+
+                {{--============================О компании==================================--}}
+                <div class="col-md-12">
+                    <div class="box box-primary box-solid collapsed-box">
+                        <div class="box-header with-border">
+                            <h3 class="box-title"><i class="fa fa-file-text-o" aria-hidden="true"></i> О компании</h3>
+                            <div class="box-tools pull-right">
+                                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-plus"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="box-body" id="aboutSc">
+                            <textarea style="width:100%;" class="aboutSc" name="about" ng-model="sc.about"></textarea>
+                        </div>
+                        <div class="box-footer text-right" >
+                            <button type="button" class="btn btn-primary" ng-click="saveAbout()">Сохранить</button>
+                        </div>
+                    </div>
+                </div>
+
+                {{--============================ГАЛЕРЕЯ==================================--}}
+                <div class="col-md-12">
+                    <div class="box box-primary box-solid collapsed-box">
+                        <div class="box-header with-border">
+                            <h3 class="box-title"><i class="fa fa-file-image-o" aria-hidden="true"></i> Фотографии, cертификаты и лицензии</h3>
+                            <div class="box-tools pull-right">
+                                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-plus"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="box-body">
+
+                            <div class="row">
+                                <div class="col-sm-6 col-md-3" ng-repeat="photo in sc.service_photo">
+                                    <div class="thumbnail">
+                                        <img ng-src="@{{photo.path + photo.file_name_mini}}" alt="@{{'Фото ' + sc.service_name}}">
+                                        <div class="caption">
+                                            <p ng-if="photo.type === 'service_photo'">Фото</p>
+                                            <p ng-if="photo.type === 'certificate'">Сертификат</p>
+                                            <p ng-if="photo.type === 'licenses'">Лицензия</p>
+                                            <p>
+                                                <button class="btn btn-primary" type="button" ng-click="deletePhoto(sc.service_photo, photo, $index)">Удалить</button>
+                                                <button class="btn btn-default" type="button" ng-click="showPhoto(photo)">Посмотреть</button>
+                                            </p>
+                                        </div>
                                     </div>
-                                    <div flex layout-padding class="md-block">
-                                        <label>Теги</label>
-                                        <md-chips ng-model="sc.tags"
-                                                  name="tags"
-                                                  md-transform-chip="addTags($chip, sc.id)"
-                                                  placeholder='Добавить тег... (напр. "Выезд мастера")'>
-                                            <md-chip-template>
-                                                <strong>@{{$chip.tag}}</strong>
-                                            </md-chip-template>
-                                        </md-chips>
+                                </div>
+
+
+
+                                <div class="col-sm-6 col-md-3" >
+                                    <form name="addPhotoForm" novalidate>
+                                    <div class="thumbnail">
+                                        <img ng-if="!addPhotoFile.base64" src="http://fakeimg.pl/200x140/?text=Foto" alt="add personal" >
+                                        <img ng-if="addPhotoFile.base64" ng-src="@{{'data:'+addPhotoFile.filetype+';base64,'+addPhotoFile.base64}}" alt="@{{sc.service_name}}">
+
+                                        <div class="caption">
+                                            <select class="form-control" ng-model="addPhotoType" aria-label="Тип фото" required>
+                                                <option value="service_photo">Фото</option>
+                                                <option value="certificate">Сертификат</option>
+                                                <option value="licenses">Лицензия</option>
+                                            </select>
+                                            <p style="margin-top: 10px;">
+                                                <label class="btn btn-default" style="width: 50%;float: left;" role="button" >
+                                                    <i class="fa fa-file-image-o" aria-hidden="true"></i> Выбрать
+                                                    <input type="file" ng-hide="true" accept="image/*" aria-label="Фото" ng-model="addPhotoFile" base-sixty-four-input required>
+                                                </label>
+                                                <button type="button" style="width: 50%;" class="btn btn-default" ng-click="addPhoto(addPhotoForm.$valid, addPhotoType, addPhotoFile)"><i class="fa fa-plus" aria-hidden="true"></i> Добавить</button>
+                                            </p>
+                                        </div>
+                                    </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                 {{--============================ПЕРСОНАЛ==================================--}}
+                <div class="col-md-12">
+                    <div class="box box-primary box-solid collapsed-box">
+                        <div class="box-header with-border">
+                            <h3 class="box-title"><i class="fa fa-users" aria-hidden="true"></i> Команда сервиса</h3>
+                            <div class="box-tools pull-right">
+                                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-plus"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="box-body">
+
+
+
+                            <div class="row">
+                                <div class="col-sm-6 col-md-3" ng-repeat="person in sc.personal">
+                                    <div class="thumbnail">
+                                        <img ng-src="@{{person.path + person.file_name_mini}}" alt="@{{person.name}}">
+                                        <div class="caption">
+                                            <h3 ng-bind="person.name"></h3>
+                                            <p ng-bind="'Должность:  '+ person.info"></p>
+                                            <p ng-bind="'Специализация:  '+ person.specialization"></p>
+                                            <p ng-bind="'Опыт работы:  '+ person.work_exp"></p>
+                                            <p>
+                                                <button class="btn btn-danger" type="button" ng-click="deletePersonal(sc.personal, $index, person)">Удалить</button>
+                                                <button class="btn btn-primary" type="button" ng-click="showPerson(person)">Посмотреть</button>
+                                            </p>
+                                        </div>
                                     </div>
                                 </div>
-                                <div flex></div>
-                                <div layout="row">
-                                    <span flex></span>
-                                    <md-button type="submit" ng-click="saveSc(true)" class="md-primary
-                                    md-raised">Сохранить
-                                    </md-button>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
 
-                </md-content>
-            </md-tab>
-            <md-tab label="Бренды" flex layout="column">
-                <md-content layout-fill flex layout="column">
-                    <div flex layout="row">
-                        <div flex layout="column" layout-padding>
-                            <form name="scForm" flex layout="column" novalidate>
-                                <div>
-                                    <md-checkbox aria-label="Select All"
-                                                 ng-checked="isChecked()"
-                                                 md-indeterminate="isIndeterminate()"
-                                                 ng-click="toggleAll()">
-                                        <span ng-if="isChecked()">Снять отметки</span>
-                                        <span ng-if="!isChecked()">Выбрать все</span>
-                                    </md-checkbox>
-                                </div>
-                                <div layout="row" layout-wrap flex>
-                                    <div flex="30" ng-repeat="item in items track by $index">
-                                        <md-checkbox ng-checked="exists(item, selected)"
-                                                     ng-click="toggle(item, selected)">
-                                            @{{ item.manufacturer }}
-                                        </md-checkbox>
-                                    </div>
-                                </div>
-                                <div flex></div>
-                                <div layout="row">
-                                    <span flex></span>
-                                    <md-button type="submit" ng-click="saveSc(true)" class="md-primary
-                                    md-raised">Сохранить
-                                    </md-button>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
 
-                </md-content>
-            </md-tab>
-            <md-tab label="Галерея">
 
-                <md-content layout-fill flex>
 
-                    <md-tabs layout-fill md-dynamic-height md-border-bottom>
-                        <md-tab label="Фотографии">
-                            <md-content layout-fill flex>
-                                <div layout="row" class="md-padding" layout-wrap flex>
-                                    <md-card ng-repeat="item in sc.service_photo" ng-if="item.type === 'service_photo'">
-                                        <img ng-src="@{{item.path + item.file_name_mini}}"
-                                             class="md-card-image"
-                                             alt="@{{'Фото ' + sc.service_name}}">
-                                        <md-card-footer>
-                                            <div layout="row">
-                                                <span flex></span>
-                                                <md-button class="md-icon-button" ng-click="deletePhoto(sc.service_photo, item, $index)">
-                                                    <md-icon>delete</md-icon>
-                                                </md-button>
-                                                <md-button class="md-icon-button" ng-click="showPhoto($event, item.path + item.file_name)">
-                                                    <md-icon>zoom_in</md-icon>
-                                                </md-button>
+
+                                <div class="col-sm-6 col-md-3" >
+                                    <form name="addPersonForm" novalidate>
+                                        <div class="thumbnail">
+                                            <img ng-if="!addPersonFile.base64" src="http://fakeimg.pl/200x140/?text=Foto" alt="add personal" >
+                                            <img ng-if="addPersonFile.base64" ng-src="@{{'data:'+addPersonFile.filetype+';base64,'+addPersonFile.base64}}" alt="@{{sc.service_name}}">
+
+                                            <div class="caption">
+
+                                                <div class="form-group">
+                                                    <label>ФИО</label>
+                                                    <input type="text" class="form-control" ng-model="newPersonalName" placeholder="Иванов Иван Иванович" required>
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <label>Должность</label>
+                                                    <input type="text" class="form-control" ng-model="newPersonalInfo" placeholder="Старший мастер">
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <label>Специализация</label>
+                                                    <input type="text" class="form-control" ng-model="newPersonalSpecialization" placeholder="Мастер по ремонту смартфонов">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label>Опыт работы</label>
+                                                    <input type="text" class="form-control" ng-model="newPersonalWorkExp" placeholder="10 лет">
+                                                </div>
+
+                                                <p style="margin-top: 10px;">
+                                                    <label class="btn btn-default" style="width: 50%;float: left;" role="button" >
+                                                        <i class="fa fa-file-image-o" aria-hidden="true"></i> Фото
+                                                        <input type="file" ng-hide="true" accept="image/*" aria-label="Фото" ng-model="addPersonFile" base-sixty-four-input required>
+                                                    </label>
+                                                    <button ng-disabled="!addPersonForm.$valid" type="button" style="width: 50%;" class="btn btn-primary" ng-click="addPersonal(addPersonForm.$valid, newPersonalName, newPersonalInfo, newPersonalWorkExp, newPersonalSpecialization,  addPersonFile)" ><i class="fa fa-plus" aria-hidden="true"></i> Добавить</button>
+                                                </p>
                                             </div>
-                                        </md-card-footer>
-                                    </md-card>
+                                        </div>
+                                    </form>
                                 </div>
-                            </md-content>
-                        </md-tab>
-                        <md-tab label="Cертификаты">
-                            <md-content>
-                                <div layout="row" class="md-padding" layout-wrap flex>
-                                    <md-card ng-repeat="item in sc.service_photo" ng-if="item.type === 'certificate'">
-                                        <img ng-src="@{{item.path + item.file_name_mini}}"
-                                             class="md-card-image"
-                                             alt="@{{'Фото ' + sc.service_name}}">
-                                        <md-card-footer>
-                                            <div layout="row">
-                                                <span flex></span>
-                                                <md-button class="md-icon-button" ng-click="deletePhoto(sc.service_photo, item, $index)">
-                                                    <md-icon>delete</md-icon>
-                                                </md-button>
-                                                <md-button class="md-icon-button" ng-click="showPhoto($event, item.path + item.file_name)">
-                                                    <md-icon>zoom_in</md-icon>
-                                                </md-button>
-                                            </div>
-                                        </md-card-footer>
-                                    </md-card>
-                                </div>
-                            </md-content>
-                        </md-tab>
-                        <md-tab label="Лицензии">
-                            <md-content>
-                                <div layout="row" class="md-padding" layout-wrap flex>
-                                    <md-card ng-repeat="item in sc.service_photo" ng-if="item.type === 'licenses'">
-                                        <img ng-src="@{{item.path + item.file_name_mini}}"
-                                             class="md-card-image"
-                                             alt="@{{'Фото ' + sc.service_name}}">
-                                        <md-card-footer>
-                                            <div layout="row">
-                                                <span flex></span>
-                                                <md-button class="md-icon-button" ng-click="deletePhoto(sc.service_photo, item, $index)">
-                                                    <md-icon>delete</md-icon>
-                                                </md-button>
-                                                <md-button class="md-icon-button" ng-click="showPhoto($event, item.path + item.file_name)">
-                                                    <md-icon>zoom_in</md-icon>
-                                                </md-button>
-                                            </div>
-                                        </md-card-footer>
-                                    </md-card>
-                                </div>
-                            </md-content>
-                        </md-tab>
-                    </md-tabs>
-                </md-content>
-                <md-button class="md-fab md-fab-bottom-right" ng-click="addPhotoDialog($event, sc)">
-                    <md-icon>add</md-icon>
-                </md-button>
-            </md-tab>
-            <md-tab label="О компании" flex layout="column">
-                <md-content layout-fill flex layout="column">
-                    <div flex layout="row">
-                        <div flex layout="column" layout-padding>
-                            <h1 class="md-display-1">О компании</h1>
-                            <form name="aboutForm" flex layout="column" novalidate>
-                                <div flex></div>
-                                <div>
-                                    <md-input-container class="md-block">
-                                        <label>О компании</label>
-                                        <textarea name="about" ng-model="sc.about"></textarea>
-                                    </md-input-container>
-                                </div>
-                                <div layout="row">
-                                    <span flex></span>
-                                    <md-button type="submit" ng-click="saveSc(aboutForm.$valid, sc)" class="md-primary
-                                    md-raised">Сохранить
-                                    </md-button>
-                                </div>
-                            </form>
+                            </div>
                         </div>
                     </div>
+                </div>
 
-                </md-content>
-            </md-tab>
-            <md-tab label="Цены" flex layout="column">
-                <md-content layout-fill flex layout="column">
-                    <div flex layout="row">
-                        <div flex layout="column" layout-padding>
-                            <h1 class="md-display-1">Примерная стоимость работ</h1>
-                                <md-list>
-                                    <md-list-item ng-repeat="price in price_list" layout="row">
-                                        <p ng-bind="price.title"></p>
-                                        <md-input-container class="md-block">
-                                            <input type="text" placeholder="Цена" number-to-string ng-model="price.price">
-                                        </md-input-container>
-                                        <md-input-container flex="10" class="md-block">
-                                            <label>Валюта</label>
-                                            <md-select name="currency" ng-model="price.currency">
-                                                <md-option ng-repeat="time in currency" value="@{{time}}">@{{ time }}</md-option>
-                                            </md-select>
-                                        </md-input-container>
-                                    </md-list-item>
+            </div>
+        </section>
 
 
-                                    <md-list-item layout="row">
-                                        <form name="addPriceForm" flex layout="row" layout-align="end end" novalidate>
-                                            <md-input-container flex>
-                                                <input type="text" placeholder="Добавить услугу" ng-model="newPriceTitle" required>
-                                            </md-input-container>
-                                            <span flex></span>
-                                            <md-input-container class="md-block">
-                                                <input type="number" placeholder="Цена" step="0.01" ng-model="newPriceCost" required>
-                                            </md-input-container>
-                                            <md-input-container flex="10" class="md-block">
-                                                <label>Валюта</label>
-                                                <md-select name="currency" ng-model="newPriceCurrency">
-                                                    <md-option ng-selected="@{{$first}}" ng-repeat="time in currency" value="@{{time}}">@{{ time }}</md-option>
-                                                </md-select>
-                                            </md-input-container>
-                                            <md-button type="button" ng-click="addPrice(addPriceForm.$valid, sc, newPriceTitle, newPriceCost, newPriceCurrency)" class="md-primary md-raised">
-                                                Добавить
-                                            </md-button>
-                                        </form>
-                                    </md-list-item>
-                                </md-list>
-                                <div flex></div>
-                                <div layout="row">
-                                    <span flex></span>
-                                    <md-button type="submit" ng-click="saveScPrice(true, price_list)" class="md-primary
-                                    md-raised">Сохранить
-                                    </md-button>
-                                </div>
-                        </div>
-                    </div>
-                </md-content>
-            </md-tab>
 
-            <md-tab label="Команда сервиса">
 
-                <md-content class="md-padding" flex layout="column">
-                    <h1 class="md-display-1">Команда сервиса</h1>
-                    <div layout="row" layout-wrap flex>
-                        <md-card flex="20" class="delete-animate" ng-repeat="item in sc.personal">
-                            <img ng-src="@{{item.path + item.avatar}}"
-                                 class="md-card-image"
-                                 alt="@{{item.name}}">
 
-                            <md-card-title>
-                                <md-card-title-text>
-                                    <span class="md-headline">@{{ item.name }}</span>
-                                    <span class="md-subhead">@{{ item.info }}</span>
-                                </md-card-title-text>
-                            </md-card-title>
-                            <md-card-actions layout="row" layout-align="end center">
-                                <md-button ng-click="deletePersonal(sc, $index, item)">Удалить</md-button>
-                            </md-card-actions>
-                        </md-card>
-                    </div>
-                    <md-button class="md-fab md-fab-top-right" ng-click="addPersonalDialog($event, sc)">
-                        <md-icon>add</md-icon>
-                    </md-button>
-                </md-content>
+        <script type="text/ng-template" id="photoShow.html">
+            <div class="modal-body">
+                <img ng-src="@{{photoUrl}}" alt="@{{title}}">
+            </div>
+        </script>
 
-            </md-tab>
-        </md-tabs>
+        <script type="text/ng-template" id="personShow.html">
+            <div class="modal-header">
+                <h3 ng-bind="name"></h3>
+            </div>
+            <div class="modal-body">
+                <img ng-src="@{{photoUrl}}" alt="@{{title}}">
+            </div>
+            <div class="modal-footer">
+                <p ng-bind="'Должность:  '+ info"></p>
+                <p ng-bind="'Специализация:  '+ specialization"></p>
+                <p ng-bind="'Опыт работы:  '+ work_exp"></p>
+            </div>
+        </script>
+
+
+
     </div>
 
-
-
-    <script type="text/ng-template" id="addGallery.html">
-
-    <md-dialog aria-label="Добавить фото">
-        <md-dialog-content layout-padding>
-             <form name="adPhotoForm" novalidate>
-                 <label style="cursor: pointer; position: relative;">
-                     <img ng-if="!file.base64" src="http://fakeimg.pl/300x300/?text=Foto" alt="add personal" >
-
-                     <img style="max-width: 300px;" ng-if="file.base64" ng-src="@{{'data:'+file.filetype+';base64,'+file.base64}}" alt="@{{sc.service_name}}">
-
-                     <span style="position: absolute; bottom: 8px; right: 5px;"><md-icon>add_a_photo</md-icon></span>
-                     <input type="file" ng-hide="true" accept="image/*" aria-label="Фото" ng-model="file" base-sixty-four-input required>
-                 </label>
-                 <md-select ng-model="type" aria-label="Тип фото" required>
-                                       <md-option selected value="service_photo">Фото</md-option>
-                                      <md-option value="certificate">Сертификат</md-option>
-                                      <md-option value="licenses">Лицензия</md-option>
-                              </md-select>
-
-                     <div layout="row">
-                            <md-button aria-label="Добавить фото" type="submit" ng-click="closeDialog()">Отмена</md-button>
-                    <span flex></span>
-                           <md-button aria-label="Добавить фото" type="submit" ng-click="addPhoto(adPhotoForm.$valid, type, file)">Добавить</md-button>
-                           </div>
-                      </form>
-              </md-dialog-content>
-        </md-dialog>
-
-    </script>
-
-    <script type="text/ng-template" id="addPersonal.html">
-        <md-dialog aria-label="Добавить фото">
-            <md-dialog-content layout-padding layout="column">
-                 <form name="newPersonalForm" novalidate>
-                     <label style="cursor: pointer; position: relative;">
-                         <img ng-if="!newPersonalPhoto.base64" src="http://fakeimg.pl/300x300/" alt="add personal">
-                         <img class="md-card-image" style="max-width: 300px;" ng-if="newPersonalPhoto.base64" ng-src="@{{'data:'+newPersonalPhoto.filetype+';base64,'+newPersonalPhoto.base64}}" alt="@{{sc.service_name}}">
-
-                         <span style="position: absolute; bottom: 8px; right: 5px;"><md-icon>add_a_photo</md-icon></span>
-                         <input type="file" ng-hide="true" accept="image/*" aria-label="Фото" ng-model="newPersonalPhoto" base-sixty-four-input required>
-                     </label>
-
-
-                    <md-input-container class="md-block">
-                        <input type="text" ng-model="newPersonalName" placeholder="ФИО (Иванов Иван Иванович)" required>
-                    </md-input-container>
-                    <md-input-container class="md-block">
-                        <input type="text" ng-model="newPersonalInfo" placeholder="Должность (Старший мастер)">
-                    </md-input-container>
-                     <md-input-container class="md-block">
-                        <input type="text" ng-model="newPersonalSpecialization" placeholder="Специализация (Мастер по ремонту смартфонов)">
-                    </md-input-container>
-                     <md-input-container class="md-block">
-                        <input type="text" ng-model="newPersonalWorkExp" placeholder="Опыт работы (10 лет)">
-                    </md-input-container>
-                         <div layout="row">
-                                <md-button aria-label="Добавить фото" type="submit" ng-click="closeDialog()">Отмена</md-button>
-                           <span flex></span>
-                            <md-button type="submit" ng-click="addPersonal(newPersonalForm.$valid, newPersonalName, newPersonalInfo, newPersonalWorkExp, newPersonalSpecialization,  newPersonalPhoto)">
-                               Добавить
-                           </md-button>
-                     </div>
-                </form>
-                </md-dialog-content>
-            </md-dialog>
-    </script>
-
+<div id="alert"></div>
 
 
 @endsection

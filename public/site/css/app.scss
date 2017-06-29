@@ -161,15 +161,18 @@ span.icon {
 
 
 // ============================ ANIMATE =============================
+.fade {
+  opacity: 1;
+  transition:0.3s linear all;
+}
 .fade.ng-enter {
-  transition:0.5s linear all;
+  transition:0.3s linear all;
   opacity:0;
 }
 .fade.ng-enter.ng-enter-active {
-  opacity:1;
+  opacity:0;
 }
 .fade.ng-leave {
-  transition:0.5s linear all;
   opacity:1;
 }
 .fade.ng-leave.ng-leave-active {
@@ -272,7 +275,7 @@ span.icon {
     background: #d9d6d6;
     padding: 3px 20px 3px 20px;
     display: flex;
-    form {
+    .form {
       width: 100%;
       position: relative;
       input {
@@ -294,6 +297,19 @@ span.icon {
         padding: 1px 5px 1px 5px;
         border-radius: 2px;
       }
+    }
+    .searched-box {
+      width: 100%;
+      max-height: 300px;
+      position: absolute;
+      z-index: 2;
+      overflow-x: hidden;
+      overflow-y: auto;
+      background: #fff;
+      border-bottom-left-radius: 2px;
+      border-bottom-right-radius: 2px;
+      box-shadow: 2px 4px 4px 0px #2f2f2f;
+      padding: 10px;
     }
   }
 }
@@ -557,9 +573,9 @@ span.icon {
   }
   .dropdown-menu {
     padding: 0;
-    min-width: 320px;
+    min-width: 345px;
     .datapicker {
-      padding: 5px;
+      padding: 10px;
     }
     .price {
       width: 90px;
@@ -1313,8 +1329,15 @@ span.icon {
 
 
 
-
-
+.error-input {
+  border: 2px solid #F44336;
+}
+.dropdown-limit {
+  .dropdown-menu {
+    max-height: 300px;
+    overflow: auto;
+  }
+}
 
 
 

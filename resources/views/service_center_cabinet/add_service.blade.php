@@ -1,102 +1,114 @@
 @extends('service_center_cabinet.layouts.master')
 
 @section('content')
-    <div flex layout="column" ng-controller="AddScController">
-        <form name="scForm" flex layout="row" novalidate>
-            <div flex layout="column" layout-padding>
-                <md-input-container class="md-block">
-                    <label>Название сервисного центра</label>
-                    <input required name="name" ng-model="sc.name">
-                    <div ng-messages="scForm.name.$error">
-                        <div ng-message="required">Это поле обязательное для ввода</div>
+
+
+    <section class="content-header">
+        <h1>
+            Добавить сервисный центр
+        </h1>
+        <ol class="breadcrumb">
+            <li><a href="/cabinet/dashboard"><i class="fa fa-dashboard"></i> Главная</a></li>
+            <li class="active">Добавить сервисный центр</li>
+        </ol>
+    </section>
+
+    <section class="content" ng-controller="AddScController">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="box box-primary" >
+                <div class="box-header with-border">
+                    <h3 class="box-title">Главная информация</h3>
+                </div>
+
+                <form role="form" name="addForm" novalidate>
+                    <div class="box-body">
+
+
+                        <div class="form-group">
+                            <label>Название сервисного центра</label>
+                            <input type="text" ng-model="sc.name" class="form-control" placeholder="Название сервисного центра" required>
+                        </div>
+
+
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <div class="form-group">
+                                    <label>Город</label>
+                                    <select class="form-control" ng-model="sc.city" ng-options="city.city_name for city in cities track by city.id" required></select>
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="form-group">
+                                    <label>Район</label>
+                                    <select class="form-control" ng-model="sc.district" ng-options="district.address for district in districts track by district.id"></select>
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="form-group drop-street">
+                                    <label>Улица</label>
+
+                                    <input type="text"
+                                           class="form-control"
+                                           typeahead-on-select="selectedStreet($item)"
+                                           typeahead-show-hint="true"
+                                           typeahead-min-length="0"
+                                           placeholder="Искать улицу"
+                                           ng-model="street.address"
+                                           required
+                                           uib-typeahead="street as street.address for street in streets | filter:$viewValue | limitTo: 30">
+
+                                    <span ng-if="address_model.address" ng-click="reset_address()" class="glyphicon glyphicon-remove reset-input"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-1">
+                                <div class="form-group">
+                                    <label>Номер</label>
+                                    <input type="text" class="form-control" ng-change="changeNumberH($event)" ng-model="sc.number_h" required>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label>Метро</label>
+                                    <select class="form-control" ng-model="sc.metro" ng-options="metro.address for metro in metros track by metro.id"></select>
+                                </div>
+                            </div>
+                            <div class="col-md-9">
+                                <div class="form-group">
+                                    <label>Дополнительная информация (ТЦ Большевик, 2 этаж)</label>
+                                    <input type="text" class="form-control" ng-model="sc.number_h_add">
+                                </div>
+                            </div>
+                        </div>
+
                     </div>
-                </md-input-container>
 
-                <div layout="row">
-                    <md-input-container flex>
-                        <label>Город</label>
-                        <md-select name="city" ng-model="sc.city" ng-change="selectedCity()" required>
-                            <md-option ng-if="item.id == 1" ng-repeat="item in cities"
-                                       value="@{{item.id}}">@{{ item.city_name }}</md-option>
-                        </md-select>
-                        <div ng-messages="scForm.city.$error">
-                            <div ng-message="required">Это поле обязательное для ввода.</div>
-                        </div>
-                    </md-input-container>
-                    <md-input-container flex>
-                        <label>Район</label>
-                        <md-select name="district" ng-model="sc.district" required>
-                            <md-option ng-repeat="item in districts"
-                                       value="@{{item.id}}">@{{ item.address }}</md-option>
-                        </md-select>
-                        <div ng-messages="scForm.district.$error">
-                            <div ng-message="required">Это поле обязательное для ввода.</div>
-                        </div>
-                    </md-input-container>
 
-                </div>
-
-                <div layout="row">
-
-                    <md-input-container flex-gt-xs="50" class="md-block">
-                        <label>Метро</label>
-                        <md-select name="metro" ng-model="sc.metro" required>
-                            <md-option ng-repeat="item in metro"
-                                       value="@{{item.id}}">@{{ item.address }}</md-option>
-                        </md-select>
-                        <div ng-messages="scForm.metro.$error">
-                            <div ng-message="required">Это поле обязательное для ввода. Выберите ближайшее метро</div>
-                        </div>
-                    </md-input-container>
-                    <md-autocomplete md-no-cache="true"
-                                     flex required
-                                     md-input-name="street"
-                                     md-floating-label="Улица, площадь, шоссе.."
-                                     md-selected-item="selectStreet"
-                                     md-min-length="1"
-                                     md-selected-item-change="selectedStreet(selectStreet)"
-                                     md-items="item in streets | filter: {'address': searchText}"
-                                     md-search-text="searchText"
-                                     md-item-text="item.address">
-                        <span>@{{ item.address }}</span>
-                    </md-autocomplete>
-                    <md-input-container flex-gt-xs="10" class="md-block">
-                        <label>Номер</label>
-                        <input type="text" ng-change="changeNumberH($event)" ng-model="sc.number_h">
-                    </md-input-container>
-
-                </div>
-                <div layout="row">
-                    <md-input-container flex class="md-block">
-                        <label>Дополнительная информация (ТЦ Большевик, 2 этаж)</label>
-                        <input type="text" ng-model="sc.number_h_add">
-                    </md-input-container>
-                </div>
-                <div flex></div>
-                <div layout="row">
-                    <span flex></span>
-                    <md-button type="submit" ng-click="addSc(scForm.$valid, sc)" class="md-primary
-                    md-raised
-                    md-fab-bottom-right">Добавить</md-button>
-                </div>
-
+                    <div class="box-footer text-right">
+                        <button type="button" class="btn btn-primary" ng-click="addSc(addForm.$valid, sc)">Добавить</button>
+                    </div>
+                </form>
             </div>
-            <div flex layout="column">
-                <div class="md-warn" ng-if="sc.c1 && sc.c2">Переместите маркер для точного местоположения</div>
-                <ng-map id="map"
-                        style="height: 100%"
-                        center="@{{sc.c1 && sc.c2 ? sc.c1 +','+ sc.c2 : [48.475808, 35.018782]}}"
-                        zoom="14">
+        </div>
 
-                    <marker draggable="true"
-                            on-dragend="dragMap()"
-                            position="@{{sc.c1 +','+ sc.c2}}"
-                            icon="{url:'/site/img/marker-map.png'}"></marker>
-                </ng-map>
-            </div>
+        <div class="col-md-12">
+            <ng-map id="map" center="@{{sc.c1}}, @{{sc.c2}}" zoom="14">
+                <marker position="@{{sc.c1}}, @{{sc.c2}}"
+                        cursor="default"
+                        icon="{url:'/site/img/marker-map.png'}">
 
-        </form>
+                </marker>
+            </ng-map>
+        </div>
+
+
     </div>
+
+
+</section>
+
 
 
 

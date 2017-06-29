@@ -1,11 +1,21 @@
 (function () {
     angular.module('App')
         .controller('IndexCtrl', IndexCtrl);
-    IndexCtrl.$inject = ['$scope', '$rootScope', 'model', '$uibModal'];
+    IndexCtrl.$inject = ['$scope', '$rootScope', 'model', '$uibModal', '$timeout', '$anchorScroll'];
     
-    function IndexCtrl($scope, $rootScope, model, $uibModal) {
+    function IndexCtrl($scope, $rootScope, model, $uibModal, $timeout, $anchorScroll) {
 
 
+
+        $scope.topScroll = function () {
+            $anchorScroll();
+        };
+
+        angular.element(window).on('scroll', function () {
+            $timeout(function () {
+                $scope.showButtonTop = window.pageYOffset;
+            }, 10);
+        });
         // ================= HELP CALL ============================
 
 
@@ -40,7 +50,7 @@
                 service_center = service_center.id
             }
             if (valid) {
-                model.post('/forms/main', {
+                model.post('/forms/sc', {
                     name: name,
                     phone: phone,
                     service_center: service_center

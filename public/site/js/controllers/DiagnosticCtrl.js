@@ -1,8 +1,8 @@
 (function () {
     angular.module('App')
         .controller('DiagnosticCtrl', DiagnosticCtrl);
-    DiagnosticCtrl.$inject = ['$scope', '$timeout', '$http'];
-    function DiagnosticCtrl($scope, $timeout, $http) {
+    DiagnosticCtrl.$inject = ['$scope', '$timeout', '$http', 'searchService'];
+    function DiagnosticCtrl($scope, $timeout, $http, searchService) {
 
         $scope.activeTab = 0;
         $scope.activeType = 'phone';
@@ -100,14 +100,8 @@
         };
 
         $scope.searchService = function (service) {
-            $http({
-                method: 'post',
-                url: '/diagnostic',
-                data: {action: 'pick_up_service', service: service},
-                headers: { 'X-CSRF-TOKEN': token },
-            }).then(function (success) {
-                document.location = success.data
-            });
+            searchService.setService([service]);
+            window.location = '/catalog';
         }
 
         // ===================================

@@ -1,6 +1,7 @@
 (function () {
     angular.module('App', [
         'ngAnimate',
+        'ngSanitize',
         'ui.bootstrap',
         'ngMap',
         'slick',
@@ -39,8 +40,30 @@
 (function () {
     angular.module('App')
         .controller('TopSearchCtrl', TopSearchCtrl);
-    TopSearchCtrl.$inject = ['$scope'];
-    function TopSearchCtrl($scope) {
+    TopSearchCtrl.$inject = ['$scope', 'model', 'searchService'];
+    function TopSearchCtrl($scope, model, searchService) {
+
+        $scope.filterTopSearch = '';
+        $scope.services = '';
+        $scope.catalog = '';
+
+        $scope.getSearchData = function () {
+            if (!$scope.services) {
+                model.get('/services').then(function (success) {
+                    $scope.services = success.data;
+                });
+            }
+            if (!$scope.services) {
+                model.get('/catalog').then(function (success) {
+                    $scope.catalog = success.data;
+                });
+            }
+        };
+        $scope.selectServiceSearch = function (service) {
+            service.services = service.title;
+            searchService.setService([service]);
+            window.location = '/catalog';
+        };
 
     }
 })();

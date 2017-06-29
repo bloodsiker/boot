@@ -1,8 +1,8 @@
 (function () {
     angular.module('App')
         .controller('SearchCtrl', SearchCtrl);
-    SearchCtrl.$inject = ['$scope', 'model', '$rootScope'];
-    function SearchCtrl($scope, model, $rootScope) {
+    SearchCtrl.$inject = ['$scope', 'model', '_', 'searchService'];
+    function SearchCtrl($scope, model, _, searchService) {
 
 
         model.get('/districts').then(function (success) {
@@ -18,70 +18,39 @@
             $scope.brands = success.data;
         });
 
+        $scope.active = searchService.active();
+        $scope.address_model = searchService.address_model();
+        $scope.brand_model = searchService.brand_model();
 
         // ================== ADDRESS ========================
-
         $scope.reset_address = function () {
-            $scope.address_model = {address: ''};
-            localStorage.setItem('address', angular.toJson($scope.address_model));
+            $scope.address_model.address = '';
+            localStorage.removeItem('address');
         };
 
         // ================== BRAND ========================
-
         $scope.reset_brand = function () {
             $scope.brand_model = '';
-            localStorage.setItem('manufacturer', angular.toJson($scope.brand_model));
+            localStorage.removeItem('brand');
         };
 
         //=================== SEARCH BUTTON ===============
-        $scope.active = 0;
+
         $scope.search_button = function (active, address_model, brand_model) {
 
-            localStorage.setItem('address', angular.toJson(address_model));
-            localStorage.setItem('active', angular.toJson(active));
-            localStorage.setItem('manufacturer', angular.toJson(brand_model));
+            searchService.setSearch({
+                active: active,
+                address_model: address_model,
+                brand_model: brand_model
+            });
 
-            $rootScope.manufacturerFilter = brand_model.manufacturer;
             if (window.location.pathname === '/') {
                 window.location.pathname = '/catalog'
-            } else {
-                $rootScope.addressFilter = '';
-                var r = 0.030;
-                $rootScope.catalog.forEach(function (index) {
-                    index.radius = true;
-                    if (address_model !== '') {
-                        var pi = Math.pow(Math.abs(index.c1 - address_model.c1), 2) + Math.pow(Math.abs(index.c2 - address_model.c2), 2);
-
-                        if (pi <= Math.pow(r, 2)) {
-                            $rootScope.addressFilter = '';
-                            index.radius = true;
-                        } else {
-                            $rootScope.addressFilter = address_model.address;
-                            index.radius = false;
-                            console.log('false radius');
-                        }
-                    }
-                });
-                google.maps.event.trigger($scope.map, 'resize');
             }
+            console.log(searchService.address_model());
+
         };
 
-
-
-
-
-        if (localStorage.getItem('manufacturer')) {
-            $scope.brand_model = angular.fromJson(localStorage.getItem('manufacturer'));
-            $rootScope.manufacturerFilter = $scope.brand_model.manufacturer;
-
-        } else $scope.brand_model = '';
-
-        if (localStorage.getItem('address') && localStorage.getItem('active')) {
-            $scope.active = angular.fromJson(localStorage.getItem('active'));
-            $scope.address_model = {address: ''};
-            $scope.address_model.address = angular.fromJson(localStorage.getItem('address'));
-
-        } else $scope.address_model = {address: ''};
 
 
 
