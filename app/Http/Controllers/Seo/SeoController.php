@@ -47,8 +47,8 @@ class SeoController extends Controller
      */
     public function getLogout()
     {
-        Auth::logout();
         $this->adminLog->log('Вышел из кабинета');
+        Auth::logout();
         return redirect()->route('auth.auth');
     }
 }
