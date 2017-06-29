@@ -22,8 +22,8 @@
                     index.manufacturers = brands
                 });
 
-                $scope.catalog = success.data;
                 $scope._catalog = success.data;
+                $scope.catalog = angular.copy($scope._catalog);
 
 
                 filtersCatalog();
@@ -321,9 +321,6 @@
 
         var filtersCatalog = function () {
 
-
-
-
             $rootScope.$watch('updateSearch', function () {
                 console.log('update');
 
@@ -349,7 +346,7 @@
                 var globalFilter = [];
 
                 console.log(address);
-                $scope.catalog = $scope._catalog;
+                $scope.catalog = angular.copy($scope._catalog);
                 if (address && address.address) {
                     angular.forEach($scope._catalog, function (key) {
 
@@ -375,20 +372,21 @@
                             b === brand.manufacturer ? brandCatalog.push(key) : '';
                         })
                     });
-                    $scope.catalog = brandCatalog;
+                    $scope.catalog = _.union(brandCatalog);
                 }
 
                 if (services.length > 0) {
                     console.log('service');
                     console.log(services);
-                    angular.forEach($scope.catalog, function (key) {
-                        angular.forEach(key.price, function (price) {
-                            angular.forEach(services, function (service) {
+
+                    angular.forEach(services, function (service) {
+                        angular.forEach($scope.catalog, function (key) {
+                            angular.forEach(key.price, function (price) {
                                 price.title === service ? servicesCatalog.push(key) : '';
                             });
                         })
                     });
-                    $scope.catalog = servicesCatalog;
+                    $scope.catalog = _.union(servicesCatalog);
                 }
 
                 if (time) {
@@ -402,7 +400,8 @@
                         _start >= startS && _end <= endS ? timeCatalog.push(key) : '';
 
                     });
-                    $scope.catalog = timeCatalog;
+
+                    $scope.catalog = _.union(timeCatalog);
                 }
 
 

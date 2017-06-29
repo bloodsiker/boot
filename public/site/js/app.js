@@ -44,10 +44,22 @@
     function TopSearchCtrl($scope, model, searchService) {
 
         $scope.filterTopSearch = '';
+        $scope.services = '';
+        $scope.catalog = '';
 
-
+        $scope.getSearchData = function () {
+            if (!$scope.services) {
+                model.get('/services').then(function (success) {
+                    $scope.services = success.data;
+                });
+            }
+            if (!$scope.services) {
+                model.get('/catalog').then(function (success) {
+                    $scope.catalog = success.data;
+                });
+            }
+        };
         $scope.selectServiceSearch = function (service) {
-            // console.log(service);
             service.services = service.title;
             searchService.setService([service]);
             window.location = '/catalog';
