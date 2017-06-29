@@ -132,7 +132,7 @@ class ServiceCenterRepository implements ServiceCenterRepositoryInterface
         $path_img = $path . $img_name;
         Storage::disk('public')->put($path_img, base64_decode($file));
 
-        Image::make(public_path() . $path_img)->resize(200, 100)->save(public_path() . $path_img);
+        //Image::make(public_path() . $path_img)->resize(200, 100)->save(public_path() . $path_img);
         $sc->logo = $path_img;
         $sc->update();
         return $sc->logo;
@@ -159,6 +159,7 @@ class ServiceCenterRepository implements ServiceCenterRepositoryInterface
         $sc->number_h_add = $requestData->info['number_h_add'];
         $sc->c1 = $requestData->info['c1'];
         $sc->c2 = $requestData->info['c2'];
+        $sc->exit_master = $requestData->info['exit_master'];
         $sc->updated_at = Carbon::now();
         $sc->update();
 
@@ -372,7 +373,7 @@ class ServiceCenterRepository implements ServiceCenterRepositoryInterface
         $path_img = $path . $img_name;
         Storage::disk('public')->put($path_img, base64_decode($file));
 
-        Image::make(public_path() . $path_img)->resize(300, 300)->save(public_path() . $path_img);
+        //Image::make(public_path() . $path_img)->resize(300, 300)->save(public_path() . $path_img);
 
         $sc_personal = [
             'service_center_id' => $sc->id,
@@ -422,7 +423,7 @@ class ServiceCenterRepository implements ServiceCenterRepositoryInterface
         Storage::disk('public')->put($path_mini, base64_decode($file));
 
         //Image::make(public_path() . $path_img)->resize(500, 500)->save(public_path() . $path_img);
-        Image::make(public_path() . $path_mini)->resize(300, 200)->save(public_path() . $path_mini);
+        //Image::make(public_path() . $path_mini)->resize(300, 200)->save(public_path() . $path_mini);
 
         $sc_photo = [
             'service_center_id' => $sc->id,
