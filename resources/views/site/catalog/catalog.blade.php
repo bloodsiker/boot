@@ -99,13 +99,21 @@
                             <span class="filter-panel">
                                 Цена: до @{{ filterService[0].price_max }}грн
                             </span>
-                            <input style="display: block;width: 150px;vertical-align: top;"
+                            <input style="display: block;vertical-align: top;"
                                    type="range"
                                    ng-if="filterService[0].price_max"
-                                   min="@{{ filterService[0].price_min+1 }}"
+                                   min="@{{ filterService[0]._price_min+1 }}"
                                    max="@{{ filterService[0]._price_max }}"
                                    step="1" ng-model="filterService[0].price_max">
-                            <div class="filter-panel">@{{ filterService[0].price_min }}грн <div class="pull-right">@{{ filterService[0]._price_max }}грн</div></div>
+
+                            <div style="width: 200px; margin-top: 5px; vertical-align: bottom;">
+                                <input type="number" style="width: 33%;" step="0.01" ng-model="filterService[0].price_min">
+                                <span style="color: #ffffff;">грн</span>
+                                <input type="number" style="width: 33%; margin-left: 12px;"  step="0.01" ng-model="filterService[0].price_max">
+                                <span style="color: #ffffff;">грн</span>
+
+                            </div>
+
                         </div>
 
                     </div>

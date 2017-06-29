@@ -52,6 +52,7 @@
                             parseFloat($scope.filterService[0].price_max) <= parseFloat(price.price_max) ? $scope.filterService[0].price_max = parseFloat(price.price_max) : '';
                             parseFloat($scope.filterService[0].price_min) >= parseFloat(price.price_min) ? $scope.filterService[0].price_min = parseFloat(price.price_min) : '';
                             $scope.filterService[0]._price_max = $scope.filterService[0].price_max;
+                            $scope.filterService[0]._price_min = $scope.filterService[0].price_min;
                         }
                     })
                 });
