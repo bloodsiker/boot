@@ -72,8 +72,8 @@
                 if (searchService.service_model().length > 0) {
                     var s = searchService.service_model()[0];
                     s.title = s.services;
-                    s.price_min = parseFloat(s.min_price);
-                    s.price_max = parseFloat(s.max_price);
+                    s.price_min = s.min_price ? parseFloat(s.min_price) : 0;
+                    s.price_max = s.max_price ? parseFloat(s.max_price) : 0;
                     $scope.filterService = [s];
                 } else {
                     $scope.filterService = [];
@@ -313,10 +313,6 @@
             $rootScope.$watch('updateSearch', function () {
                 console.log('update');
 
-
-
-
-
                 var address = searchService.address_model();
                 $scope.address = searchService.address_model();
                 var brand = searchService.brand_model();
@@ -382,7 +378,7 @@
                         $scope.catalog = _.union(servicesCatalog);
                     }
 
-                    if (services.length === 1) {
+                    if (services.length === 1 ) {
                         console.log('service 1');
                         console.log(services);
 

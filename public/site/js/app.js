@@ -45,23 +45,23 @@
     function TopSearchCtrl($scope, model, searchService) {
 
         $scope.filterTopSearch = '';
-        $scope.services = '';
-        $scope.catalog = '';
+
 
         $scope.getSearchData = function () {
-            if (!$scope.services) {
+            if (!$scope.services_search) {
                 model.get('/services').then(function (success) {
-                    $scope.services = success.data;
+                    $scope.services_search = success.data;
                 });
             }
-            if (!$scope.services) {
+            if (!$scope.catalog_search) {
                 model.get('/catalog').then(function (success) {
-                    $scope.catalog = success.data;
+                    $scope.catalog_search = success.data;
                 });
             }
         };
         $scope.selectServiceSearch = function (service) {
             service.services = service.title;
+            console.log(service);
             searchService.setService([service]);
             window.location = '/catalog';
         };
