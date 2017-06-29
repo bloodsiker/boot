@@ -100,6 +100,7 @@
         };
 
         $scope.searchService = function (service) {
+            console.log(service);
             searchService.setService([service]);
             window.location = '/catalog';
         }

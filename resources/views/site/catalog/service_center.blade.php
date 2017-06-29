@@ -37,6 +37,11 @@
                         </div>
                     </div>
                 </div>
+                <div class="row" ng-if="service_center.exit_master === '1'">
+                    <div class="col-md-12">
+                        <h4><span class="glyphicon glyphicon-wrench"></span> Выезд мастера</h4>
+                    </div>
+                </div>
                 <div class="row callback">
                     <div class="col-sm-4">
                         <button class="btn btn-yellow btn-call"
@@ -63,6 +68,30 @@
                     <div class="col-sm-2 comments">
                         <div class="count" ng-bind="service_center.total_comments"></div>
                         <div>отзывов</div>
+                    </div>
+                </div>
+
+                <div class="row" style="margin-top: 20px;">
+                    <div class="col-md-12">
+                        <!--=======================================TAGS=======================================-->
+                        <h3 ng-if="service_center.tags.length > 0">Описание</h3>
+                        <div class="tag" ng-repeat="item in service_center.tags" ng-bind="item.tag"></div>
+                        <hr ng-if="service_center.tags.length > 0">
+                        <!--=======================================ABOUT=======================================-->
+                        <h3 ng-if="service_center.about">О компании</h3>
+                        <p ng-bind-html="service_center.about"></p>
+                        <hr ng-if="service_center.about">
+
+                        <h3 ng-if="service_center.advantages.length > 0">Преимущества</h3>
+                        <ul>
+                            <li ng-repeat="item in service_center.advantages" ng-bind="item.advantages"></li>
+                        </ul>
+                        <hr ng-if="service_center.advantages.length > 0">
+
+                        <!--=======================================BRANDS=======================================-->
+                        <h3 ng-if="service_center.manufacturers.length > 0">Марки телефонов</h3>
+                        <p><span ng-repeat="item in service_center.manufacturers" ng-bind="item.manufacturer + ', '"></span></p>
+                        <hr ng-if="service_center.manufacturers.length > 0">
                     </div>
                 </div>
             </div>
@@ -97,33 +126,9 @@
                 </table>
             </div>
         </div>
-        <hr>
+
         <div class="row">
-            <div class="col-sm-6">
-
-                <!--=======================================TAGS=======================================-->
-                <h3 ng-if="service_center.tags.length > 0">Описание</h3>
-                <div class="tag" ng-repeat="item in service_center.tags" ng-bind="item.tag"></div>
-                <hr ng-if="service_center.tags.length > 0">
-                <!--=======================================ABOUT=======================================-->
-                <h3 ng-if="service_center.about">О компании</h3>
-                <p ng-bind-html="service_center.about"></p>
-                <hr ng-if="service_center.about">
-
-                <h3 ng-if="service_center.advantages.length > 0">Преимущества</h3>
-                <ul>
-                    <li ng-repeat="item in service_center.advantages" ng-bind="item.advantages"></li>
-                </ul>
-                <hr ng-if="service_center.advantages.length > 0">
-
-                <!--=======================================BRANDS=======================================-->
-                <h3 ng-if="service_center.manufacturers.length > 0">Марки телефонов</h3>
-                <p><span ng-repeat="item in service_center.manufacturers" ng-bind="item.manufacturer + ', '"></span></p>
-                <hr ng-if="service_center.manufacturers.length > 0">
-
-
-            </div>
-            <div class="col-sm-6">
+            <div class="col-md-6">
                 <!--=======================================PHOTOS=======================================-->
                 <h3 ng-if="filteredPhotos.length != 0">Фотографии</h3>
                 <div class="row photos">
@@ -140,7 +145,9 @@
                     </div>
 
                 </div>
-                <hr ng-if="filteredLicense.length != 0 && filteredPhotos.length != 0">
+
+            </div>
+            <div class="col-md-6">
                 <!--=======================================CERTIFICATE=======================================-->
                 <h3 ng-if="filteredLicense.length != 0">Сертификаты и лицензии</h3>
                 <div class="row certificate">
@@ -158,6 +165,7 @@
                 </div>
             </div>
         </div>
+
         <hr>
         <!--=======================================PERSONAL SC=======================================-->
         <div class="row" ng-if="service_center.personal">

@@ -95,11 +95,17 @@
                                 <button class="btn btn-yellow" ng-click="applyRadius(); isOpenRadius = false">Применить</button>
                             </div>
                         </div>
-                        <div ng-if="false" style="display: inline-block; margin-left: 10px;">
+                        <div ng-if="filterService.length == 1" style="vertical-align: top;display: inline-block; float: right;">
                             <span class="filter-panel">
-                                Цена
+                                Цена: до @{{ filterService[0].price_max }}грн
                             </span>
-                            <input style="display: inline-block;width: 150px;vertical-align: top;" type="range" min="0" max="100" step="1" value="50">
+                            <input style="display: block;width: 150px;vertical-align: top;"
+                                   type="range"
+                                   ng-if="filterService[0].price_max"
+                                   min="@{{ filterService[0].price_min+1 }}"
+                                   max="@{{ filterService[0]._price_max }}"
+                                   step="1" ng-model="filterService[0].price_max">
+                            <div class="filter-panel">@{{ filterService[0].price_min }}грн <div class="pull-right">@{{ filterService[0]._price_max }}грн</div></div>
                         </div>
 
                     </div>
@@ -109,7 +115,7 @@
                              class="chips btn btn-yellow fade"
                              ng-repeat="filter in filterService track by $index"
                              ng-click="removeFilterService($index, filter)">
-                            @{{filter}} <span class="glyphicon glyphicon-remove"></span>
+                            @{{filter.title}} <span class="glyphicon glyphicon-remove"></span>
                         </div>
                         <div ng-if="timeFilter"
                              class="chips btn btn-yellow fade"

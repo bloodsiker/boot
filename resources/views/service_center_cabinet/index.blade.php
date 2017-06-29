@@ -488,7 +488,7 @@
                             <div class="row">
                                 <div class="col-sm-6 col-md-3" ng-repeat="person in sc.personal">
                                     <div class="thumbnail">
-                                        <img ng-src="@{{person.path + person.file_name_mini}}" alt="@{{person.name}}">
+                                        <img ng-src="@{{person.path + person.avatar}}" alt="@{{person.name}}">
                                         <div class="caption">
                                             <h3 ng-bind="person.name"></h3>
                                             <p ng-bind="'Должность:  '+ person.info"></p>
