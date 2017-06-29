@@ -27,7 +27,7 @@ class CreateServiceCentersTable extends Migration
             $table->string('c1');
             $table->string('c2');
             $table->string('logo');
-            $table->string('exit_master',50);
+            $table->boolean('exit_master')->defoult(0);
             $table->boolean('enabled')->defoult(0);
             $table->boolean('verified')->defoult(0);
             $table->timestamps();

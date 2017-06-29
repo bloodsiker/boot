@@ -8,5 +8,5 @@ class AdminLog extends Model
 {
     protected $table = 'admin_logs';
 
-    protected $fillable = ['action', 'ip_address', 'user_agent'];
+    protected $fillable = ['user_id', 'action', 'ip_address', 'user_agent'];
 }

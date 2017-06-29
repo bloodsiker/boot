@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Seo;
 
+use App\Facades\AdminLog;
 use App\Http\Controllers\Controller;
 use App\Services\AdminLogService;
 use Auth;

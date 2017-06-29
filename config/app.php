@@ -185,6 +185,7 @@ return [
         App\Providers\AdminPanelComposer::class,
         App\Providers\CrmPanelComposer::class,
         App\Providers\ServicesViewServiceProvider::class,
+        App\Providers\AdminPanelServiceProvider::class,
 
     ],
 
@@ -238,6 +239,7 @@ return [
         'Image' => Intervention\Image\Facades\Image::class,
         'Excel' => Maatwebsite\Excel\Facades\Excel::class,
         'Socialite' => Laravel\Socialite\Facades\Socialite::class,
+        'AdminLog' => App\Facades\AdminLog::class,
 
     ],
 
