@@ -104,7 +104,7 @@
                                             </div>
                                             <div class="col-md-12">
                                                 <div class="form-group">
-                                                    <input type="checkbox" ng-model="sc.exit_master" >
+                                                    <input type="checkbox" ng-true-value="'1'" ng-false-value="'0'" ng-model="sc.exit_master" >
                                                     <label>Выезд мастера</label>
                                                 </div>
                                             </div>
