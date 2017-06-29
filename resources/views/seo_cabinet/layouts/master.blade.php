@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>CRM | Dashboard</title>
+    <title>Seo cabinet</title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <!-- Bootstrap 3.3.6 -->
@@ -39,9 +39,9 @@
 
     <header class="main-header">
         <!-- Logo -->
-        <a href="{{ route('crm.cabinet') }}" class="logo">
-            <span class="logo-mini">CRM</span>
-            <span class="logo-lg">CRM</span>
+        <a href="{{ route('seo.cabinet.dashboard') }}" class="logo">
+            <span class="logo-mini">SEO</span>
+            <span class="logo-lg">SEO</span>
         </a>
         <nav class="navbar navbar-static-top">
             <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
@@ -50,136 +50,16 @@
 
             <div class="navbar-custom-menu">
                 <ul class="nav navbar-nav">
-                    <li class="dropdown messages-menu">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                            <i class="fa fa-envelope-o"></i>
-                            <span class="label label-success">4</span>
-                        </a>
-                        <ul class="dropdown-menu">
-                            <li class="header">You have 4 messages</li>
-                            <li>
-                                <ul class="menu">
-                                    <li>
-                                        <a href="#">
-                                            <div class="pull-left">
-                                                <img src="dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
-                                            </div>
-                                            <h4>
-                                                Support Team
-                                                <small><i class="fa fa-clock-o"></i> 5 mins</small>
-                                            </h4>
-                                            <p>Why not buy a new awesome theme?</p>
-                                        </a>
-                                    </li>
-
-                                    <li>
-                                        <a href="#">
-                                            <div class="pull-left">
-                                                <img src="dist/img/user3-128x128.jpg" class="img-circle" alt="User Image">
-                                            </div>
-                                            <h4>
-                                                AdminLTE Design Team
-                                                <small><i class="fa fa-clock-o"></i> 2 hours</small>
-                                            </h4>
-                                            <p>Why not buy a new awesome theme?</p>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#">
-                                            <div class="pull-left">
-                                                <img src="dist/img/user4-128x128.jpg" class="img-circle" alt="User Image">
-                                            </div>
-                                            <h4>
-                                                Developers
-                                                <small><i class="fa fa-clock-o"></i> Today</small>
-                                            </h4>
-                                            <p>Why not buy a new awesome theme?</p>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#">
-                                            <div class="pull-left">
-                                                <img src="dist/img/user3-128x128.jpg" class="img-circle" alt="User Image">
-                                            </div>
-                                            <h4>
-                                                Sales Department
-                                                <small><i class="fa fa-clock-o"></i> Yesterday</small>
-                                            </h4>
-                                            <p>Why not buy a new awesome theme?</p>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#">
-                                            <div class="pull-left">
-                                                <img src="dist/img/user4-128x128.jpg" class="img-circle" alt="User Image">
-                                            </div>
-                                            <h4>
-                                                Reviewers
-                                                <small><i class="fa fa-clock-o"></i> 2 days</small>
-                                            </h4>
-                                            <p>Why not buy a new awesome theme?</p>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </li>
-                            <li class="footer"><a href="#">See All Messages</a></li>
-                        </ul>
-                    </li>
-                    <!-- Notifications: style can be found in dropdown.less -->
-                    <li class="dropdown notifications-menu">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                            <i class="fa fa-bell-o"></i>
-                            <span class="label label-warning">10</span>
-                        </a>
-                        <ul class="dropdown-menu">
-                            <li class="header">You have 10 notifications</li>
-                            <li>
-                                <!-- inner menu: contains the actual data -->
-                                <ul class="menu">
-                                    <li>
-                                        <a href="#">
-                                            <i class="fa fa-users text-aqua"></i> 5 new members joined today
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#">
-                                            <i class="fa fa-warning text-yellow"></i> Very long description here that may not fit into the
-                                            page and may cause design problems
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#">
-                                            <i class="fa fa-users text-red"></i> 5 new members joined
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#">
-                                            <i class="fa fa-shopping-cart text-green"></i> 25 sales made
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#">
-                                            <i class="fa fa-user text-red"></i> You changed your username
-                                        </a>
-                                    </li>
-                                </ul>
-                            </li>
-                            <li class="footer"><a href="#">View all</a></li>
-                        </ul>
-                    </li>
-                    <!-- User Account: style can be found in dropdown.less -->
                     <li class="dropdown user user-menu">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                            <span class="hidden-xs">Alexander Pierce</span>
+                            <span class="hidden-xs">{{ Auth::user()->name }}</span>
                         </a>
                         <ul class="dropdown-menu">
                             <!-- User image -->
                             <li class="user-header">
-                                <img src="dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
-
                                 <p>
-                                    Alexander Pierce - Web Developer
-                                    <small>Member since Nov. 2012</small>
+                                    {{ Auth::user()->name }}
+                                    <small>Member since {{ $created_at }}</small>
                                 </p>
                             </li>
                             <!-- Menu Body -->
@@ -218,7 +98,7 @@
     <!-- Left side column. contains the logo and sidebar -->
     <aside class="main-sidebar">
 
-        @include('crm_cabinet.includes.sidebar')
+        @include('seo_cabinet.includes.sidebar')
 
     </aside>
 
@@ -232,38 +112,9 @@
 
     </footer>
 
-    <aside class="panel-edit-request">
-        <form role="form">
-            <br style="clear:both">
-            <h3 class="title-sc"></h3>
-            <div class="form-group">
-                <input type="text" class="form-control" name="name" placeholder="Имя" disabled>
-            </div>
-            <div class="form-group">
-                <input type="text" class="form-control" name="phone" placeholder="Телнфон" disabled>
-            </div>
-            <div class="form-group">
-                <select class="form-control" id="status" name="status">
-                    <option name="В обработке">В обработке</option>
-                    <option name="Завершена">Завершена</option>
-                    <option name="Не завершена">Не завершена</option>
-                </select>
-            </div>
-            <div class="form-group">
-                <textarea class="form-control" id="comment" name="comment" placeholder="Комментарий" rows="7"></textarea>
-            </div>
-
-            <div class="btn-group pull-right">
-                <button type="button" id="edit-cancel" class="btn btn-default">Отмена</button>
-                <button type="button" id="edit-request" class="btn btn-success">Сохранить</button>
-            </div>
-        </form>
-    </aside>
 
 </div>
-<!-- ./wrapper -->
 
-<!-- jQuery 2.2.3 -->
 <script src="{{ URL::to('admin/plugins/jQuery/jquery-2.2.3.min.js') }}"></script>
 <!-- Bootstrap 3.3.6 -->
 <script src="{{ URL::to('admin/bootstrap/js/bootstrap.min.js') }}"></script>
@@ -278,7 +129,6 @@
 <script src="{{ URL::to('admin/plugins/slimScroll/jquery.slimscroll.min.js') }}"></script>
 <!-- AdminLTE App -->
 <script src="{{ URL::to('admin/dist/js/app.min.js') }}"></script>
-<script src="{{ URL::to('admin/dist/js/crm-request.js') }}"></script>
 
 <script>
     var token = '{{ Session::token() }}';

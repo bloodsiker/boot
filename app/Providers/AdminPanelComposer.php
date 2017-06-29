@@ -19,6 +19,11 @@ class AdminPanelComposer extends ServiceProvider
             $date = new Carbon(Auth::user()->created_at);
             $view->with('created_at', $date->format('d.m.Y'));
         });
+
+        view()->composer('seo_cabinet.layouts.master', function($view){
+            $date = new Carbon(Auth::user()->created_at);
+            $view->with('created_at', $date->format('d.m.Y'));
+        });
     }
 
     /**

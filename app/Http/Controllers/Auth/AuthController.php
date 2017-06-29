@@ -40,7 +40,7 @@ class AuthController extends Controller
 
         if($request->cabinet == 'admin'){
             if(Auth::attempt(['email' => $request->email, 'password' => $request->password])){
-                if(Auth::user()->role_id == 1){
+                if(Auth::user()->roleAdmin()){
                     return redirect()->route('admin.cabinet');
                 }
                 return redirect()->back()->with(['message' => 'У вас нету прав доступа в эту часть кабинета!']);
@@ -49,7 +49,7 @@ class AuthController extends Controller
 
         if($request->cabinet == 'crm'){
             if(Auth::attempt(['email' => $request->email, 'password' => $request->password])){
-                if(Auth::user()->role_id == 1 || Auth::user()->role_id == 5){
+                if(Auth::user()->roleAdmin() || Auth::user()->roleCrm()){
                     return redirect()->route('crm.cabinet');
                 }
                 return redirect()->back()->with(['message' => 'У вас нету прав доступа в эту часть кабинета!']);
@@ -58,8 +58,8 @@ class AuthController extends Controller
 
         if($request->cabinet == 'seo'){
             if(Auth::attempt(['email' => $request->email, 'password' => $request->password])){
-                if(Auth::user()->role_id == 4 || Auth::user()->role_id == 5){
-                    return redirect()->route('seo.cabinet');
+                if(Auth::user()->roleAdmin() || Auth::user()->roleSeo()){
+                    return redirect()->route('seo.cabinet.dashboard');
                 }
                 return redirect()->back()->with(['message' => 'У вас нету прав доступа в эту часть кабинета!']);
             }

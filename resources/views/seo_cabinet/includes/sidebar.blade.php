@@ -2,31 +2,22 @@
     <ul class="sidebar-menu">
         <li class="header">MAIN NAVIGATION</li>
         <li>
-            <a href="">
+            <a href="{{ route('seo.cabinet.dashboard') }}">
                 <i class="fa fa-dashboard"></i> <span>Dashboard</span>
                 <span class="pull-right-container">
             </span>
             </a>
         </li>
+        <li class="header">MAIN NAVIGATION</li>
         <li>
             <a href="{{ route('crm.request') }}">
                 <i class="fa fa-clipboard"></i>
                 <span>Заявки СЦ</span>
                 <span class="pull-right-container">
-              <span class="label label-success pull-right">{{ $count_request_cs }}</span>
+              <span class="label label-success pull-right"></span>
             </span>
             </a>
         </li>
-        <li>
-            <a href="{{ route('crm.help.request') }}">
-                <i class="fa fa-clipboard"></i>
-                <span>Подобрать СЦ</span>
-                <span class="pull-right-container">
-              <span class="label label-success pull-right">{{ $count_request_help }}</span>
-            </span>
-            </a>
-        </li>
-        <li class="header">MAIN NAVIGATION</li>
         <li class="treeview">
             <a href="#">
                 <i class="fa fa-files-o"></i>

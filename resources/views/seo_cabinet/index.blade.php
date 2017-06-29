@@ -1,4 +1,4 @@
-@extends('crm_cabinet.layouts.master')
+@extends('seo_cabinet.layouts.master')
 
 @section('content')
 

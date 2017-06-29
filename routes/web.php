@@ -59,4 +59,5 @@ require_once ('crm_route.php');
 // Route Admin cabinet
 require_once ('admin_route.php');
 
-
+// Route Seo cabinet
+require_once ('seo_route.php');
