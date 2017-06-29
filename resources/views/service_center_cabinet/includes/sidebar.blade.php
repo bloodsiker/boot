@@ -2,7 +2,7 @@
     <ul class="sidebar-menu">
         <li class="header">MAIN NAVIGATION</li>
         <li>
-            <a href="">
+            <a href="/cabinet/dashboard">
                 <i class="fa fa-dashboard"></i> <span>Dashboard</span>
                 <span class="pull-right-container">
             </span>
@@ -34,7 +34,7 @@
         </li>
 
 
-        <li ng-if="showTrash()" class="treeview">
+        <li ng-if="disabledSc.length > 0" class="treeview">
             <a href>
                 <i class="fa fa-trash"></i> <span>Корзина</span>
                 <span class="pull-right-container">
@@ -42,8 +42,14 @@
             </span>
             </a>
             <ul class="treeview-menu">
-                <li><a href="{{ route('admin.pages') }}"><i class="fa fa-files-o"></i> Страницы</a></li>
-                <li><a href="{{ route('admin.pages') }}"><i class="fa fa-files-o"></i> SEO</a></li>
+                <li ng-repeat="sc_item in disabledSc">
+                    <a href ng-click="enableSc(sc_item.id)">
+                        @{{ sc_item.service_name }}
+                        <span class="pull-right-container">
+                            <span class="fa fa-refresh"></span>
+                        </span>
+                    </a>
+                </li>
             </ul>
         </li>
 

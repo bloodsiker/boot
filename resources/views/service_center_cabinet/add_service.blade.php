@@ -8,7 +8,7 @@
             Добавить сервисный центр
         </h1>
         <ol class="breadcrumb">
-            <li><a href="#"><i class="fa fa-dashboard"></i> Главная</a></li>
+            <li><a href="/cabinet/dashboard"><i class="fa fa-dashboard"></i> Главная</a></li>
             <li class="active">Добавить сервисный центр</li>
         </ol>
     </section>

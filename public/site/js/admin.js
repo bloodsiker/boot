@@ -13,7 +13,6 @@
     ]).config(function(ChartJsProvider) {
 
         ChartJsProvider.setOptions({
-
             responsive: true,
             tooltips: { enabled: true }
         });

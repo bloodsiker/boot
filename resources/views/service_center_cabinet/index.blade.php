@@ -7,7 +7,7 @@
         <section class="content-header">
             <h1 ng-bind="sc.service_name"></h1>
             <ol class="breadcrumb">
-                <li><a href="#"><i class="fa fa-dashboard"></i> Главная</a></li>
+                <li><a href="/cabinet/dashboard"><i class="fa fa-dashboard"></i> Главная</a></li>
                 <li class="active">Cервисный центр</li>
             </ol>
         </section>

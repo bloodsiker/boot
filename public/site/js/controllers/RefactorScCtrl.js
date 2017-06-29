@@ -100,7 +100,9 @@
 
                     $scope.price_list = prices.data;
 
-                    console.log($scope.price_list);
+                    if ($scope.sc.about) {
+                        angular.element('#aboutSc .wysihtml5-sandbox').contents().find("body").html($scope.sc.about);
+                    }
 
                 });
 
