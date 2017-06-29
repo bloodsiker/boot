@@ -53,6 +53,15 @@ class User extends Authenticatable
 
 
     /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function logs()
+    {
+        return $this->hasMany('App\Models\AdminLogs', 'user_id', 'id');
+    }
+
+
+    /**
      * @return bool
      */
     public function roleSc()

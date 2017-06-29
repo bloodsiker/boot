@@ -1,10 +1,10 @@
-@extends('crm_cabinet.layouts.master')
+@extends('seo_cabinet.layouts.master')
 
 @section('content')
 
     <section class="content-header">
         <h1>
-            Requests help
+            Pages
             <small>Control panel</small>
         </h1>
     </section>

@@ -50,6 +50,9 @@
 
             <div class="navbar-custom-menu">
                 <ul class="nav navbar-nav">
+                    <li>
+                        <a href="{{ route('main') }}">На сайт <i class="fa fa-sign-out"></i></a>
+                    </li>
                     <li class="dropdown user user-menu">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                             <span class="hidden-xs">{{ Auth::user()->name }}</span>
@@ -62,34 +65,16 @@
                                     <small>Member since {{ $created_at }}</small>
                                 </p>
                             </li>
-                            <!-- Menu Body -->
-                            <li class="user-body">
-                                <div class="row">
-                                    <div class="col-xs-4 text-center">
-                                        <a href="#">Followers</a>
-                                    </div>
-                                    <div class="col-xs-4 text-center">
-                                        <a href="#">Sales</a>
-                                    </div>
-                                    <div class="col-xs-4 text-center">
-                                        <a href="#">Friends</a>
-                                    </div>
-                                </div>
-                                <!-- /.row -->
-                            </li>
-                            <!-- Menu Footer-->
+
                             <li class="user-footer">
                                 <div class="pull-left">
-                                    <a href="#" class="btn btn-default btn-flat">Profile</a>
+                                    <a href="{{ route('seo.profile') }}" class="btn btn-default btn-flat">Профиль</a>
                                 </div>
                                 <div class="pull-right">
-                                    <a href="#" class="btn btn-default btn-flat">Sign out</a>
+                                    <a href="{{ route('seo.logout') }}" class="btn btn-default btn-flat">Выйти</a>
                                 </div>
                             </li>
                         </ul>
-                    </li>
-                    <li>
-                        <a href="{{ route('crm.logout') }}">Выход <i class="fa fa-sign-out"></i></a>
                     </li>
                 </ul>
             </div>
@@ -130,11 +115,6 @@
 <!-- AdminLTE App -->
 <script src="{{ URL::to('admin/dist/js/app.min.js') }}"></script>
 
-<script>
-    var token = '{{ Session::token() }}';
-    var urlRequestInfo = '{{ route('crm.request.info') }}';
-    var urlRequestEdit = '{{ route('crm.request.edit') }}';
-</script>
 <script>
     $(function () {
         $('#table1').DataTable({
