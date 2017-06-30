@@ -297,6 +297,48 @@
 
 
 
+        $scope.prePhone = '';
+        $scope.addPhone = function (phone) {
+            $scope.sc.service_phones.push(phone);
+            $scope.prePhone = '';
+        };
+        $scope.removePhone = function (index) {
+            $scope.sc.service_phones.splice(index, 1);
+        };
+        $scope.savePhones = function (phones) {
+            model.put('/cabinet' + url + '/update', {phones:phones}).then(function (res) {
+                console.log(res); angular.element('#alert').append(alertSuccess);
+                $timeout(function () {
+                    angular.element('#alert').html('');
+                }, 4000)
+            });
+        };
+
+
+
+
+        $scope.preEmail = '';
+        $scope.addEmail = function (email) {
+            $scope.sc.service_emails.push(email);
+            $scope.preEmail = '';
+        };
+        $scope.removeEmail = function (index) {
+            $scope.sc.service_emails.splice(index, 1);
+        };
+        $scope.saveEmails = function (emails) {
+            model.put('/cabinet' + url + '/update', {emails:emails}).then(function (res) {
+                console.log(res); angular.element('#alert').append(alertSuccess);
+                $timeout(function () {
+                    angular.element('#alert').html('');
+                }, 4000)
+            });
+        };
+
+
+
+
+
+
         $scope.preAdvantage = '';
         $scope.addAdvantages = function (advantag) {
             $scope.sc.advantages.push(advantag);

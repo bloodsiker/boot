@@ -127,6 +127,69 @@
                 </div>
 
 
+
+
+                {{--============================ТЕЛЕФОНЫ==================================--}}
+                <div class="col-md-6">
+                    <div class="box box-primary box-solid collapsed-box">
+                        <div class="box-header with-border">
+                            <h3 class="box-title"><i class="fa fa-phone" aria-hidden="true"></i>  Телефоны</h3>
+                            <div class="box-tools pull-right">
+                                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-plus"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="box-body">
+                            <table class="table">
+                                <tr ng-repeat="phone in sc.service_phones track by $index">
+                                    <td ng-bind="phone"></td>
+                                    <td class="text-right"><i style="cursor: pointer;" ng-click="removePhone($index)" class="fa fa-trash"></i></td>
+                                </tr>
+                            </table>
+                            <div class="input-group input-group-sm">
+                                <input type="text" class="form-control" ng-model="prePhone" placeholder='телефон'>
+                                <span class="input-group-btn">
+                                  <button type="button" ng-disabled="!prePhone" ng-click="addPhone(prePhone)"  class="btn btn-info btn-flat">добавить</button>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="box-footer text-right" >
+                            <button type="button" class="btn btn-primary" ng-click="savePhones(sc.service_phones)">Сохранить</button>
+                        </div>
+                    </div>
+                </div>
+
+                {{--============================ПОЧТА==================================--}}
+                <div class="col-md-6">
+                    <div class="box box-primary box-solid collapsed-box">
+                        <div class="box-header with-border">
+                            <h3 class="box-title"><i class="fa fa-envelope" aria-hidden="true"></i>  Почтовые ящики</h3>
+                            <div class="box-tools pull-right">
+                                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-plus"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="box-body">
+                            <table class="table">
+                                <tr ng-repeat="email in sc.service_emails track by $index">
+                                    <td ng-bind="email"></td>
+                                    <td class="text-right"><i style="cursor: pointer;" ng-click="removeEmail($index)" class="fa fa-trash"></i></td>
+                                </tr>
+                            </table>
+                            <div class="input-group input-group-sm">
+                                <input type="email" class="form-control" ng-model="preEmail" placeholder='Email'>
+                                <span class="input-group-btn">
+                                  <button type="button" ng-disabled="!preEmail" ng-click="addEmail(preEmail)" class="btn btn-info btn-flat">добавить</button>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="box-footer text-right" >
+                            <button type="button" class="btn btn-primary" ng-click="saveEmails(sc.service_emails)">Сохранить</button>
+                        </div>
+                    </div>
+                </div>
+
+
                 {{--============================График работы==================================--}}
                 <div class="col-md-5">
                     <div class="box box-primary box-solid collapsed-box">
