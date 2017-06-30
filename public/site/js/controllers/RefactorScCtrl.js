@@ -302,27 +302,19 @@
 
         $scope.prePhone = '';
         $scope.addPhone = function (phone) {
-<<<<<<< HEAD
-            $scope.sc.service_phones.push(phone);
-=======
             $scope.sc.service_phones.push({phone:phone});
->>>>>>> 3b25a47a7f82d000d9e087d7ff9c121c6461b5ca
             $scope.prePhone = '';
         };
         $scope.removePhone = function (index) {
             $scope.sc.service_phones.splice(index, 1);
         };
         $scope.savePhones = function (phones) {
-<<<<<<< HEAD
-            model.put('/cabinet' + url + '/update', {phones:phones}).then(function (res) {
-=======
             var data = [];
 
             phones.forEach(function (key) {
                 data.push(key.phone)
             });
             model.put('/cabinet' + url + '/update', {phones:data}).then(function (res) {
->>>>>>> 3b25a47a7f82d000d9e087d7ff9c121c6461b5ca
                 console.log(res); angular.element('#alert').append(alertSuccess);
                 $timeout(function () {
                     angular.element('#alert').html('');
@@ -335,27 +327,19 @@
 
         $scope.preEmail = '';
         $scope.addEmail = function (email) {
-<<<<<<< HEAD
-            $scope.sc.service_emails.push(email);
-=======
             $scope.sc.service_emails.push({email:email});
->>>>>>> 3b25a47a7f82d000d9e087d7ff9c121c6461b5ca
             $scope.preEmail = '';
         };
         $scope.removeEmail = function (index) {
             $scope.sc.service_emails.splice(index, 1);
         };
         $scope.saveEmails = function (emails) {
-<<<<<<< HEAD
-            model.put('/cabinet' + url + '/update', {emails:emails}).then(function (res) {
-=======
             var data = [];
 
             emails.forEach(function (key) {
                 data.push(key.email)
             });
             model.put('/cabinet' + url + '/update', {emails:data}).then(function (res) {
->>>>>>> 3b25a47a7f82d000d9e087d7ff9c121c6461b5ca
                 console.log(res); angular.element('#alert').append(alertSuccess);
                 $timeout(function () {
                     angular.element('#alert').html('');
@@ -366,11 +350,6 @@
 
 
 
-<<<<<<< HEAD
-
-
-=======
->>>>>>> 3b25a47a7f82d000d9e087d7ff9c121c6461b5ca
         $scope.preAdvantage = '';
         $scope.addAdvantages = function (advantag) {
             $scope.sc.advantages.push(advantag);

@@ -221,8 +221,6 @@
                             <span class="glyphicon glyphicon-comment"></span>
                             <span ng-bind="(item.comments | number) + ' отзывов'"></span>
                         </div>
-                        <button class="btn btn-yellow" data-toggle="modal" data-target="#call_modal" ng-click="openScCall(item.id)">Связаться</button>
-
                     </div>
                 </div>
 
@@ -272,7 +270,6 @@
 
                             </div>
                             <a ng-href="@{{ '/sc/'+info.id }}" style="margin-bottom: 0;" class="btn btn-black" >Посмотреть</a>
-                            <button style="margin-bottom: 0;" class="btn btn-yellow" data-toggle="modal" data-target="#call_modal" ng-click="openScCall(info.id)">Связаться</button>
                         </div>
                     </info-window>
 

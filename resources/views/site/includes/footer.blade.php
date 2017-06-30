@@ -237,7 +237,7 @@
 
 
 <div class="modal fade" id="call_modal" tabindex="-1" role="dialog">
-    <div class="modal-dialog modal-sm" role="document">
+    <div class="modal-dialog" role="document">
         <div class="modal-content">
             <form name="call_form">
                 <div class="modal-header">
@@ -246,21 +246,80 @@
                     <h4 class="modal-title">Связаться</h4>
                 </div>
                 <div class="modal-body">
-                    <div class="form-group">
-                        <label for="client_name">Имя</label>
-                        <input type="text" id="client_name" class="form-control" placeholder="Введите имя"
-                               name="client_name" required ng-model="client_name">
-                    </div>
-                    <div class="form-group">
-                        <label for="client_phone">Телефон</label>
-                        <input type="text" id="client_phone" class="form-control" placeholder="Введите телефон"
-                               name="client_phone" required ng-model="client_phone">
-                    </div>
 
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="client_name">Имя</label>
+                                <input type="text" id="client_name" class="form-control" placeholder="Имя"
+                                       name="client_name" required ng-model="data.client_name">
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="client_phone">Телефон</label>
+                                <input type="text" id="client_phone" class="form-control" placeholder="Телефон"
+                                       name="client_phone" required ng-model="data.client_phone">
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="client_email">Email</label>
+                                <input type="email" id="client_email" class="form-control" placeholder="Email"
+                                       name="client_email" required ng-model="data.client_email">
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="client_manufacturer">Производитель</label>
+                                <select name="client_manufacturer"
+                                        id="client_manufacturer"
+                                        ng-options="manufacturer.manufacturer for manufacturer in manufacturers track by $index"
+                                        ng-model="data.client_manufacturer"></select>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="client_service">Услуга</label>
+                                <select name="client_service"
+                                        id="client_service"
+                                        ng-options="price.title for price in prices track by $index"
+                                        ng-model="data.client_service"></select>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            Примерная стоимость @{{ client_service.price_min }} - @{{ client_service.price_max }}
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="client_payment_type">Тип оплаты</label>
+                                <select name="client_payment_type"
+                                        id="client_payment_type"
+                                        ng-options="payment_type in payment_types track by $index"
+                                        ng-model="data.client_payment_type"></select>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="client_exit_master">Выезд мастера</label>
+                                <input type="checkbox" ng-model="data.client_exit_master" class="form-control">
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="client_task_description">Описание проблемы</label>
+                                <textarea name="client_task_description"
+                                          id="client_task_description"
+                                          ng-model="data.client_task_description"
+                                          cols="30"
+                                          rows="10"></textarea>
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-black" data-dismiss="modal">Отмена</button>
-                    <button type="submit" class="btn btn-yellow" ng-click="scCall(call_form.$valid, client_name, client_phone, call_sc)">
+                    <button type="submit" class="btn btn-yellow" ng-click="scCall(call_form.$valid, data)">
                         Связаться
                     </button>
                 </div>
