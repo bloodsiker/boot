@@ -14,7 +14,7 @@ class ServiceCenter extends Model
 
     protected $fillable = [
         'service_name', 'about', 'city_id', 'metro_id', 'district_id',
-        'address', 'number_h', 'number_h_add', 'street', 'c1', 'c2', 'logo'
+        'address', 'number_h', 'number_h_add', 'street', 'c1', 'c2', 'logo', 'exit_master'
     ];
 
     public function user()

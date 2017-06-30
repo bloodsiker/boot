@@ -11,7 +11,7 @@ class FormRequest extends Model
 
     protected $fillable = [
         'r_id', 'service_center_id', 'user_id', 'city', 'name', 'phone', 'email',
-        'manufacturer', 'services', 'cost_of_work', 'cost_of_work_end', 'task_description',
+        'manufacturer', 'services', 'cost_of_work_min', 'cost_of_work_max', 'cost_of_work_end', 'task_description',
         'payment_method', 'exit_master', 'comment', 'status'
     ];
 

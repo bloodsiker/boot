@@ -24,8 +24,9 @@ class CreateFormRequestsTable extends Migration
             $table->string('email');
             $table->string('manufacturer')->nullable();
             $table->string('services')->nullable();
-            $table->string('cost_of_work', 50)->nullable();
-            $table->string('cost_of_work_end', 50)->nullable();
+            $table->decimal('cost_of_work_min', 10, 2)->nullable();
+            $table->decimal('cost_of_work_max', 10, 2)->nullable();
+            $table->decimal('cost_of_work_end', 10, 2)->nullable();
             $table->text('task_description');
             $table->string('payment_method')->nullable();
             $table->string('exit_master', 50)->nullable();
