@@ -70,10 +70,6 @@
                     </div>
                 </div>
             </div>
-<<<<<<< HEAD
-            <!--======================================= MAP =======================================-->
-=======
->>>>>>> e70a4f41c34b75a710b735b70caf22c5345f1cfd
             <div class="col-sm-6">
                 <ng-map id="map" center="@{{service_center.c1}}, @{{service_center.c2}}" zoom="17">
                     <marker position="@{{service_center.c1}}, @{{service_center.c2}}"
@@ -82,34 +78,10 @@
 
                     </marker>
                 </ng-map>
-                <!--=======================================BUY=======================================-->
-                <h3 style="margin-top: 20px;" ng-if="service_center.price.length > 0">Примерная стоимость работ</h3>
-                <table ng-if="service_center.price.length > 0" class="table table-bordered table-responsive">
-                    <thead>
-                    <tr>
-                        <th>Услуга</th>
-                        <th>от</th>
-                        <th>до</th>
-                        <th>Валюта</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr ng-repeat="item in service_center.price">
-                        <td ng-bind="item.title"></td>
-                        <td ng-bind="item.price_min"></td>
-                        <td ng-bind="item.price_max"></td>
-                        <td ng-bind="item.currency"></td>
-                    </tr>
-                    </tbody>
-                </table>
             </div>
         </div>
         <div class="row">
             <div class="col-sm-6">
-<<<<<<< HEAD
-
-=======
->>>>>>> e70a4f41c34b75a710b735b70caf22c5345f1cfd
                 <!--=======================================TAGS=======================================-->
                 <h3 style="margin-top: 20px;" ng-if="service_center.tags.length > 0">Описание</h3>
                 <div class="tag" ng-repeat="item in service_center.tags" ng-bind="item.tag"></div>
@@ -131,11 +103,6 @@
                 <hr ng-if="service_center.manufacturers.length > 0">
             </div>
 
-<<<<<<< HEAD
-
-            </div>
-            <div class="col-sm-6">
-=======
             <div class="col-sm-6">
                 <!--=======================================BUY=======================================-->
                 <h3 style="margin-top: 20px;" ng-if="service_center.price.length > 0">Примерная стоимость работ</h3>
@@ -161,21 +128,11 @@
         </div>
         <div class="row">
             <div class="col-md-6" ng-if="filteredPhotos.length > 0">
->>>>>>> e70a4f41c34b75a710b735b70caf22c5345f1cfd
                 <!--=======================================PHOTOS=======================================-->
                 <h3 >Фотографии</h3>
                 <div class="row photos">
                     <div ng-repeat="photo in service_center.service_photo | filter: 'service_photo' as filteredPhotos">
                         <div class="clearfix" ng-if="$index % 3 == 0"></div>
-<<<<<<< HEAD
-                        <div class="col-sm-4" >
-                            <img class="photo-item"
-                                 alt="@{{service_center.service_name}}"
-                                 data-toggle="modal"
-                                 data-target="#photoModal"
-                                 ng-click="openPhoto(photo.path +photo.file_name)"
-                                 ng-src="@{{photo.path +photo.file_name_mini}}">
-=======
                         <div class="col-sm-6" >
                             <div style="overflow: hidden;">
                                 <img class="photo-item"
@@ -186,7 +143,6 @@
                                      ng-click="openPhoto(photo.path +photo.file_name)"
                                      ng-src="@{{photo.path +photo.file_name}}">
                             </div>
->>>>>>> e70a4f41c34b75a710b735b70caf22c5345f1cfd
                         </div>
                     </div>
                 </div>
@@ -218,15 +174,6 @@
                 <div class="row certificate">
                     <div ng-repeat="photo in service_center.service_photo | filter: 'licenses' as filteredLicense">
                         <div class="clearfix" ng-if="$index % 3 == 0"></div>
-<<<<<<< HEAD
-                        <div class="col-sm-4" >
-                            <img class="photo-item"
-                                 alt="@{{service_center.service_name}}"
-                                 data-toggle="modal"
-                                 data-target="#photoModal"
-                                 ng-click="openPhoto(photo.path + photo.file_name)"
-                                 ng-src="@{{photo.path + photo.file_name_mini}}">
-=======
                         <div class="col-sm-6" >
                             <div style="overflow: hidden;">
                                 <img class="photo-item"
@@ -237,7 +184,6 @@
                                      ng-click="openPhoto(photo.path + photo.file_name)"
                                      ng-src="@{{photo.path + photo.file_name}}">
                             </div>
->>>>>>> e70a4f41c34b75a710b735b70caf22c5345f1cfd
                         </div>
                     </div>
                 </div>

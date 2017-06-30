@@ -1,15 +1,9 @@
 (function () {
     angular.module('App')
         .controller('IndexCtrl', IndexCtrl);
-<<<<<<< HEAD
-    IndexCtrl.$inject = ['$scope', '$rootScope', 'model', '$uibModal', '$timeout', '$anchorScroll'];
-    
-    function IndexCtrl($scope, $rootScope, model, $uibModal, $timeout, $anchorScroll) {
-=======
     IndexCtrl.$inject = ['$scope', '$rootScope', 'model', '$uibModal', '$timeout', '$anchorScroll', '_', 'searchService'];
     
     function IndexCtrl($scope, $rootScope, model, $uibModal, $timeout, $anchorScroll, _, searchService) {
->>>>>>> e70a4f41c34b75a710b735b70caf22c5345f1cfd
 
 
 
@@ -104,13 +98,6 @@
             console.log(valid, data);
 
             if (valid) {
-<<<<<<< HEAD
-                model.post('/forms/sc', {
-                    name: name,
-                    phone: phone,
-                    service_center: service_center
-                }).then(function (success) {
-=======
                 var send = {
                     service_center: $scope.sc.id,
                     city: $scope.sc.city.city_name,
@@ -126,7 +113,6 @@
                     cost_of_work_max: $scope.sc.price.length > 0 ? $scope.sc.price[$scope.serviceIndex].price_max : ''
                 }
                 model.post('/forms/sc', send).then(function (success) {
->>>>>>> e70a4f41c34b75a710b735b70caf22c5345f1cfd
                     $('.modal').modal('hide');
                     $('#success_call_modal').modal('show');
                 }, function (err) {

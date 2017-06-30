@@ -41,8 +41,10 @@
             }
         };
 
+        var showTrash = false;
         model._get('/cabinet/sc/list-disabled').then(function (success) {
             $scope.disabledSc = success.data;
+            showTrash = success.data.length > 0;
             console.log(success.data);
         });
 

@@ -32,33 +32,21 @@
                                 <input type="text"
                                        ng-model="filterTopSearch"
                                        ng-focus="getSearchData()"
-<<<<<<< HEAD
-                                       placeholder="Поиск неисправностей"
-=======
                                        placeholder="Поиск сервисных центров / неисправностей"
->>>>>>> e70a4f41c34b75a710b735b70caf22c5345f1cfd
                                        style="width: 100%;">
                                 <button type="button" class="btn search-button"><span class="glyphicon glyphicon-search"></span></button>
                                 <div ng-show="filterTopSearch" class="searched-box">
                                     <div class="row">
                                         <div class="col-sm-6">
                                             <span style="font-size: 16px;">Сервисные центры</span>
-<<<<<<< HEAD
-                                            <div ng-repeat="service in catalog | filter: filterTopSearch | limitTo: 10 as filteredCatalog track by $index" style="cursor: pointer;">
-=======
                                             <div ng-repeat="service in catalog_search | filter: filterTopSearch | limitTo: 10 as filteredCatalog track by $index" style="cursor: pointer;">
->>>>>>> e70a4f41c34b75a710b735b70caf22c5345f1cfd
                                                 <a ng-href="@{{ '/sc/'+service.id }}" ng-bind="service.service_name"></a>
                                             </div>
                                             <div ng-if="filteredCatalog.length <= 0" style="font-size: 14px; color: #666;">Не найдено</div>
                                         </div>
                                         <div class="col-sm-6">
                                             <span style="font-size: 16px;">Неисправности</span>
-<<<<<<< HEAD
-                                            <div ng-if="services" ng-repeat="service in services | filter: filterTopSearch as filteredService track by $index" style="cursor: pointer;">
-=======
                                             <div ng-repeat="service in services_search | filter: filterTopSearch as filteredService track by $index" style="cursor: pointer;">
->>>>>>> e70a4f41c34b75a710b735b70caf22c5345f1cfd
                                                 <a href ng-click="selectServiceSearch(service)">@{{ service.title }}</a>
                                             </div>
                                             <div ng-if="filteredService.length <= 0" style="font-size: 14px; color: #666666;">Не найдено</div>

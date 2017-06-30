@@ -43,11 +43,7 @@
                                 <span ng-class="{active : activeType === 'laptop'}">Ноутбук</span>
                             </div>
                         </div>
-<<<<<<< HEAD
-                        <div class="row ">
-=======
                         <div class="row " style="margin-top: 30px;">
->>>>>>> e70a4f41c34b75a710b735b70caf22c5345f1cfd
                             <div class="col-md-12 text-right">
                                 <button class="btn btn-yellow" ng-click="firstStepBtn(activeType)">
                                     Вперед <span class="glyphicon glyphicon-triangle-right"></span>
@@ -92,11 +88,7 @@
 
                             </div>
                         </div>
-<<<<<<< HEAD
-                        <div class="row ">
-=======
                         <div class="row " style="margin-top: 30px;">
->>>>>>> e70a4f41c34b75a710b735b70caf22c5345f1cfd
                             <div class="col-md-12 text-right">
                                 <button class="btn btn-yellow" style="margin-right: 20px;" ng-click="firstStepBtn(activeType); reload()">
                                     Сброс <span class="glyphicon glyphicon-repeat"></span>
@@ -156,11 +148,7 @@
                             </div>
                         </div>
 
-<<<<<<< HEAD
-                        <div class="row ">
-=======
                         <div class="row" style="margin-top: 30px;">
->>>>>>> e70a4f41c34b75a710b735b70caf22c5345f1cfd
                             <div class="col-md-12 text-right">
                                 <button class="btn btn-black" ng-click="prevPage(activeTab -1)">
                                     Назад <span class="glyphicon glyphicon-triangle-left"></span>

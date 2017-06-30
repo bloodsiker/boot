@@ -121,8 +121,6 @@ img {
 [data-toggle] {
   cursor: pointer; }
 
-<<<<<<< HEAD
-=======
 .modal {
   text-align: center;
   padding: 0 !important; }
@@ -139,7 +137,6 @@ img {
   text-align: left;
   vertical-align: middle; }
 
->>>>>>> e70a4f41c34b75a710b735b70caf22c5345f1cfd
 .fade {
   opacity: 1;
   transition: 0.3s linear all; }
@@ -1021,11 +1018,8 @@ img {
   max-height: 300px;
   overflow: auto; }
 
-<<<<<<< HEAD
-=======
 .angular-multi-slider div.handle {
   background-color: #ffca13 !important;
   filter: none !important; }
 
->>>>>>> e70a4f41c34b75a710b735b70caf22c5345f1cfd
 /*# sourceMappingURL=app.css.map */
