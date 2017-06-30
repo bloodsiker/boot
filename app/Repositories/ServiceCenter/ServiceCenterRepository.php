@@ -5,6 +5,7 @@ namespace App\Repositories\ServiceCenter;
 use App\Models\Comments;
 use App\Models\FormRequest;
 use App\Models\ServiceCenter;
+use App\Models\ServiceVisit;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
@@ -30,6 +31,10 @@ class ServiceCenterRepository implements ServiceCenterRepositoryInterface
             $total_rating = Comments::rating($rating->id, 'total');
             $rating['rating'] = $total_rating;
             return $rating;
+        });
+        $service_center->map(function ($visits) {
+            $visits['visits'] = ServiceVisit::where('service_center_id', $visits->id)->sum('hosts');
+            return $visits;
         });
 
         return $service_center;
