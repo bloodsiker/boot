@@ -12,7 +12,7 @@ Route::group(['middleware' => 'seo'], function () {
 
 
         Route::get('/profile', 'Seo\ProfileController@getIndex')->name('seo.profile');
-        Route::put('/profile', 'Seo\ProfileController@getIndex')->name('seo.profile.update');
+        Route::put('/profile', 'Seo\ProfileController@putProfile')->name('seo.profile.update');
         Route::get('/logout', 'Seo\SeoController@getLogout')->name('seo.logout');
     });
 });
