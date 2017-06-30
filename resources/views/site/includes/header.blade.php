@@ -3,7 +3,7 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="nav-bar">
-                    <a href="/"><div style="padding: 5px; width: 100px;">
+                    <a href="/"><div style="padding: 5px; width: 100px; background-color: #ffca13;">
                             <img src="{{ asset('site/img/logo.png') }}" alt="boot">
                         </div></a>
                     <div style="width: 100%;display: flex;flex-direction: column;">

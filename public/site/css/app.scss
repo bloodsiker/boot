@@ -74,10 +74,10 @@ $yellow: #ffca13;
   outline: none !important;
   outline-offset: 0 !important;
 }
-.form-control::-webkit-input-placeholder {color:#000;}
-.form-control::-moz-placeholder          {color:#000;}/* Firefox 19+ */
-.form-control:-moz-placeholder           {color:#000;}/* Firefox 18- */
-.form-control:-ms-input-placeholder      {color:#000;}
+.form-control::-webkit-input-placeholder {color:#333;}
+.form-control::-moz-placeholder          {color:#333;}/* Firefox 19+ */
+.form-control:-moz-placeholder           {color:#333;}/* Firefox 18- */
+.form-control:-ms-input-placeholder      {color:#333;}
 
 
 body {
@@ -265,7 +265,7 @@ span.icon {
     flex: auto;
     width: 100%;
     align-items: center;
-    background-color: #000;
+    background-color: #333;
     color: #ffffff;
     a {
       color: #ffffff;
@@ -296,7 +296,7 @@ span.icon {
       position: relative;
       input {
         background-color: #fff;
-        color: #000;
+        color: #333;
         padding-left: 10px;
         width: 100%;
         height: 100%;
@@ -385,7 +385,7 @@ span.icon {
     font-family: LatoLight;
   }
   span {
-    color: #000;
+    color: #333;
     font-size: 72px;
     margin-top: 20px;
     margin-bottom: 10px;
@@ -393,7 +393,7 @@ span.icon {
   h4 {
     font-size: 16px;
     font-family: 'LatoRegular';
-    color: #000;
+    color: #333;
   }
 }
 
@@ -530,7 +530,7 @@ span.icon {
 
   input {
     font-family: 'LatoBold';
-    color: #000000;
+    color: #333000;
 
   }
   .btn-yellow {
@@ -638,11 +638,11 @@ span.icon {
     margin-left: 10px;
     cursor: pointer;
     &:hover {
-      color: #000000;
+      color: #333000;
     }
   }
   .active {
-    color: #000000;
+    color: #333000;
   }
 }
 
@@ -686,7 +686,7 @@ span.icon {
     font-family: 'LatoBold';
     margin-bottom: 10px;
     line-height: 0.9;
-    color: #000000;
+    color: #333000;
   }
   .btn {
     margin-top: 10px;
@@ -1028,7 +1028,7 @@ span.icon {
   }
 
   .input.ng-valid.ng-touched {
-    border-color: #000;
+    border-color: #333;
   }
 
 
@@ -1066,7 +1066,7 @@ span.icon {
     margin-bottom: 10px;
     color: #666666;
     span {
-      color: #000;
+      color: #333;
     }
   }
   .social {
@@ -1221,7 +1221,7 @@ span.icon {
   .nav-tabs.nav-justified>.active>a:hover {
     border: none;
     .circle-index{
-      background: #000;
+      background: #333;
     }
   }
 
