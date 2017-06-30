@@ -53,6 +53,7 @@ class FormsController extends Controller
         $data = [
             'user_name' => $request->name,
             'phone' => $request->phone,
+            'comment' => $request->comment,
             'status' => 'Новая',
             'created_at' => Carbon::now()
         ];
