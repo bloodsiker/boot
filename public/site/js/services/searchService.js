@@ -30,11 +30,27 @@
             }
         };
 
+
+        this.service_model = function () {
+            if (localStorage.getItem('service')  !== null ) {
+                return _.isObject(angular.fromJson(localStorage.getItem('service'))) ? angular.fromJson(localStorage.getItem('service')) : '';
+            } else {
+                return '';
+            }
+        };
+
         this.setSearch = function (data) {
             $rootScope.updateSearch = data;
             _.isObject(data.address_model) ? localStorage.setItem('address', angular.toJson(data.address_model)) : localStorage.removeItem('address');
             _.isObject(data.brand_model) ? localStorage.setItem('brand', angular.toJson(data.brand_model)) : localStorage.removeItem('brand');
             localStorage.setItem('active', angular.toJson(data.active));
         };
+
+        this.setService = function (data) {
+            $rootScope.updateSearch = data;
+            data ?
+                localStorage.setItem('service', angular.toJson(data)) : localStorage.removeItem('service');
+
+        };
     }
-})()
+})();

@@ -7,7 +7,8 @@
         'slick',
         'angular-rating',
         'angular.filter',
-        'underscore'
+        'underscore',
+        'angularMultiSlider'
     ]);
 })();
 
@@ -40,8 +41,30 @@
 (function () {
     angular.module('App')
         .controller('TopSearchCtrl', TopSearchCtrl);
-    TopSearchCtrl.$inject = ['$scope'];
-    function TopSearchCtrl($scope) {
+    TopSearchCtrl.$inject = ['$scope', 'model', 'searchService'];
+    function TopSearchCtrl($scope, model, searchService) {
+
+        $scope.filterTopSearch = '';
+
+
+        $scope.getSearchData = function () {
+            if (!$scope.services_search) {
+                model.get('/services').then(function (success) {
+                    $scope.services_search = success.data;
+                });
+            }
+            if (!$scope.catalog_search) {
+                model.get('/catalog').then(function (success) {
+                    $scope.catalog_search = success.data;
+                });
+            }
+        };
+        $scope.selectServiceSearch = function (service) {
+            service.services = service.title;
+            console.log(service);
+            searchService.setService([service]);
+            window.location = '/catalog';
+        };
 
     }
 })();

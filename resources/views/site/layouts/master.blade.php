@@ -15,6 +15,7 @@
     <link rel="stylesheet" href="{{ asset('site/vendor/angular/angular-csp.css') }}">
     <link rel="stylesheet" href="{{ asset('site/vendor/slick-carousel/slick/slick.css') }}">
     <link rel="stylesheet" href="{{ asset('site/vendor/slick-carousel/slick/slick-theme.css') }}">
+    <link rel="stylesheet" href="{{ asset('site/vendor/angular-multi-slider/multislider.css') }}">
     <link rel="stylesheet" href="{{ asset('site/css/app.css') }}">
 </head>
 <body ng-cloak>
@@ -60,6 +61,7 @@
 <script src="{{ asset('site/vendor/angular-underscore-module/angular-underscore-module.js') }}"></script>
 
 <script src="{{ asset('site/vendor/angular-filter/dist/angular-filter.js') }}"></script>
+<script src="{{ asset('site/vendor/angular-multi-slider/multislider.js') }}"></script>
 
 <!--==============APP=========================-->
 <script src="{{ asset('site/js/app.js') }}"></script>

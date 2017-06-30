@@ -43,7 +43,7 @@
                                 <span ng-class="{active : activeType === 'laptop'}">Ноутбук</span>
                             </div>
                         </div>
-                        <div class="row diagnostics-footer">
+                        <div class="row " style="margin-top: 30px;">
                             <div class="col-md-12 text-right">
                                 <button class="btn btn-yellow" ng-click="firstStepBtn(activeType)">
                                     Вперед <span class="glyphicon glyphicon-triangle-right"></span>
@@ -88,7 +88,7 @@
 
                             </div>
                         </div>
-                        <div class="row diagnostics-footer">
+                        <div class="row " style="margin-top: 30px;">
                             <div class="col-md-12 text-right">
                                 <button class="btn btn-yellow" style="margin-right: 20px;" ng-click="firstStepBtn(activeType); reload()">
                                     Сброс <span class="glyphicon glyphicon-repeat"></span>
@@ -136,7 +136,7 @@
                                             <td>
                                                 <button style="font-size: 14px;"
                                                         class="btn btn-yellow btn-sm"
-                                                        ng-click="searchService(rez.services)">
+                                                        ng-click="searchService(rez)">
                                                     <span class="glyphicon glyphicon-search"></span>
                                                     Подобрать сервисный центр
                                                 </button>
@@ -148,7 +148,7 @@
                             </div>
                         </div>
 
-                        <div class="row diagnostics-footer">
+                        <div class="row" style="margin-top: 30px;">
                             <div class="col-md-12 text-right">
                                 <button class="btn btn-black" ng-click="prevPage(activeTab -1)">
                                     Назад <span class="glyphicon glyphicon-triangle-left"></span>

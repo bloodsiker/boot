@@ -11,8 +11,8 @@
 
 @section('content')
 
-    <div style="position: relative;z-index: 2;background: #fff;" ng-cloak>
-        <div class="container" style="position: relative;z-index: 2;">
+    <div style="position: relative;z-index: 1;background: #fff;" ng-cloak>
+        <div class="container" style="position: relative;z-index: 1;">
             <div class="search-catalog">
                 <!--======================================= INCLUDE SEARCH SC =======================================-->
             @include('site.includes.search')
@@ -53,19 +53,19 @@
                                     <div class="datapicker">
                                         <div style="float: left;">
                                             <label>День недели
-                                                <select name="weekDay" class="form-control"  ng-model="timeFilter.day">
-                                                    <option ng-repeat="day in week_days" value="@{{day}}">@{{day}}</option>
+                                                <select name="weekDay" class="form-control"  ng-model="_timeFilter.day">
+                                                    <option ng-repeat="(day_key, day) in week_days" value="@{{day}}">@{{day}}</option>
                                                 </select>
                                             </label>
                                         </div>
                                         <div  style="float: left;margin-left: 10px; margin-right: 10px;margin-left: 10px;">
                                             <label>Начало дня
-                                                <div uib-timepicker ng-model="timeFilter.start_time" show-spinners="false" show-meridian="ismeridian"></div>
+                                                <div uib-timepicker ng-model="_timeFilter.start_time" show-spinners="false" show-meridian="ismeridian"></div>
                                             </label>
                                         </div>
                                         <div  style="float: left;">
                                             <label>Конец дня
-                                                <div uib-timepicker ng-model="timeFilter.end_time" show-spinners="false" show-meridian="ismeridian"></div>
+                                                <div uib-timepicker ng-model="_timeFilter.end_time" show-spinners="false" show-meridian="ismeridian"></div>
                                             </label>
                                         </div>
                                     </div>
@@ -95,16 +95,45 @@
                                 <button class="btn btn-yellow" ng-click="applyRadius(); isOpenRadius = false">Применить</button>
                             </div>
                         </div>
+                        <div ng-if="filterService.length == 1" style="vertical-align: top;display: inline-block; float: right;">
+                            <span class="filter-panel">
+                                Цена: до @{{ filterService[0].price_max }}грн
+                            </span>
+                            <input style="display: block;vertical-align: top;"
+                                   type="range"
+                                   ng-if="filterService[0].price_max"
+                                   min="@{{ filterService[0]._price_min+1 }}"
+                                   max="@{{ filterService[0]._price_max }}"
+                                   step="1" ng-model="filterService[0].price_max">
+
+                            <div style="width: 200px; margin-top: 5px; vertical-align: bottom;">
+                                <input type="number" style="width: 33%;" step="0.01" ng-model="filterService[0].price_min">
+                                <span style="color: #ffffff;">грн</span>
+                                <input type="number" style="width: 33%; margin-left: 12px;"  step="0.01" ng-model="filterService[0].price_max">
+                                <span style="color: #ffffff;">грн</span>
+
+                            </div>
+
+                        </div>
 
                     </div>
 
                     <div style="padding-left: 15px;">
                         <div ng-if="filterService.length > 0"
-                             class="chips btn btn-yellow slide"
+                             class="chips btn btn-yellow fade"
                              ng-repeat="filter in filterService track by $index"
                              ng-click="removeFilterService($index, filter)">
-                            @{{filter}} <span class="glyphicon glyphicon-remove"></span>
+                            @{{filter.title}} <span class="glyphicon glyphicon-remove"></span>
                         </div>
+                        <div ng-if="timeFilter"
+                             class="chips btn btn-yellow fade"
+                             ng-click="removeFilterTime()">
+                            @{{_timeFilter.day}} c @{{ _timeFilter.start_time | date: 'HH:mm' }} до @{{ _timeFilter.end_time | date: 'HH:mm' }} <span class="glyphicon glyphicon-remove"></span>
+                        </div>
+                    </div>
+
+                    <div ng-if="catalog.length" style="padding-left: 15px; margin-top: 20px;">
+                        <span style="color: #ffca13;">Найдено <b><u>@{{ catalog.length }}</u></b> сервисных центров, соответствующих Вашему запросу </span>
                     </div>
                 </div>
             </div>
@@ -121,7 +150,7 @@
                 <div class="row sort">
                     <div class="col-xs-12">
                     <span>Сортировать:
-                        <span ng-class="{active: activeSort == ''}" ng-click="order_event('')" class="sort-by active">по популярности <i ng-if="activeSort == ''" class="glyphicon glyphicon-sort-by-attributes-alt"></i></span>
+                        <span ng-class="{active: activeSort == 'name'}" ng-click="order_event('name')" class="sort-by active">по имени <i ng-if="activeSort == 'name'" class="glyphicon glyphicon-sort-by-attributes-alt"></i></span>
                         <span ng-class="{active: activeSort == 'rating'}" ng-click="order_event('rating')" class="sort-by">по рейтингу <i ng-if="activeSort == 'rating'" class="glyphicon glyphicon-sort-by-attributes-alt"></i></span>
                         <span ng-class="{active: activeSort == 'comments'}" ng-click="order_event('comments')" class="sort-by">по отзывам  <i ng-if="activeSort == 'comments'"  class="glyphicon glyphicon-sort-by-attributes-alt"></i></span>
                     </span>
@@ -146,13 +175,13 @@
                 </div>
                 <!--=======================================CATALOG ITEM=======================================-->
                 <div class="row catalog-item"
-                     ng-repeat="item in catalog | limitTo: limitCatalog | orderBy: order_by ">
+                     ng-repeat="item in catalog | limitTo: limitCatalog track by $index">
 
                     <div class="col-md-8">
                         <a class="title-sc" ng-href="@{{ '/sc/'+item.id }}" ng-bind="item.service_name"></a>
                         <div class="info-sc">
                             <span class="glyphicon glyphicon-time"></span>
-                            <span class="text" ng-bind="'Сегодня: c '+ item.work_days[week_day-1].start_time+' по '+item.work_days[week_day-1].end_time"></span>
+                            <span class="text" ng-bind="'Сегодня: c '+ item.work_days[indexDay].start_time+' по '+item.work_days[indexDay].end_time"></span>
 
                             <span uib-dropdown auto-close="outsideClick" is-open="openedServiceMore">
                             <span style="font-size: 10px; cursor: pointer;" uib-dropdown-toggle>Посмотреть все</span>
@@ -163,7 +192,7 @@
                                             <ul>
                                                 <li style="list-style: none;"
                                                     ng-repeat="work in item.work_days"
-                                                    ng-style="{'font-weight': $index == week_day-1 ? '900' : 'normal', color: $index == week_day-1 ? '#000' : ''}"
+                                                    ng-style="{'font-weight': $index == indexDay ? '900' : 'normal', color: $index == indexDay ? '#000' : ''}"
                                                     ng-bind="work.title + ' ' + (work.weekend == 1 ? 'выходной' : work.start_time + ' - '+ work.end_time)"></li>
                                             </ul>
                                         </div>
@@ -173,7 +202,7 @@
 
                             <div>
                                 <span class="glyphicon glyphicon-map-marker"></span>
-                                <span class="text" ng-bind="item.address+ (item.number_h ? ', '+item.number_h : '')"></span>
+                                <span class="text" ng-bind="item.address"></span>
                             </div>
                             <div ng-if="item.number_h_add" class="text" ng-bind="item.number_h_add"></div>
                             <div ng-if="info.metro.address">
@@ -210,7 +239,9 @@
             <div class="col-sm-6 hidden-xs catalog-map">
 
                 <ng-map id="map"
-                        style="position: fixed; top: 0; width:inherit; z-index:1;">
+                        center='current-position'
+                        geo-callback="callbackFunc('you')"
+                        style="position: fixed; top: 0; width:inherit; z-index:0;">
 
                     <info-window id="foo">
                         <div ng-non-bindable="">
@@ -248,7 +279,7 @@
                     <marker
                             position="@{{item.c1}}, @{{item.c2}}"
                             fit="true"
-                            ng-repeat="item in catalog"
+                            ng-repeat="item in catalog track by $index"
                             on-click="showInfo(event, item)"
                             icon="{url:'site/img/marker-map.png'}">
 
@@ -272,5 +303,9 @@
 
 
     </div>
+
+    <button ng-if="showButtonTop > 400" class="btn btn-small btn-yellow fade" style="position: fixed; left: 10px; bottom: 10px; z-index: 10;" ng-click="topScroll()">
+        <span class="glyphicon glyphicon-arrow-up"></span>наверх
+    </button>
 
 @endsection

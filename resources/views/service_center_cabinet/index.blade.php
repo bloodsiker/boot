@@ -7,7 +7,7 @@
         <section class="content-header">
             <h1 ng-bind="sc.service_name"></h1>
             <ol class="breadcrumb">
-                <li><a href="#"><i class="fa fa-dashboard"></i> Главная</a></li>
+                <li><a href="/cabinet/dashboard"><i class="fa fa-dashboard"></i> Главная</a></li>
                 <li class="active">Cервисный центр</li>
             </ol>
         </section>
@@ -100,6 +100,13 @@
                                                 <div class="form-group">
                                                     <label>Дополнительная информация (ТЦ Большевик, 2 этаж)</label>
                                                     <input type="text" class="form-control" ng-model="sc.number_h_add">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-12">
+                                                <div class="form-group">
+                                                    <label>
+                                                    <input type="checkbox" ng-true-value="'1'" ng-false-value="'0'" ng-model="sc.exit_master" >
+                                                    Выезд мастера</label>
                                                 </div>
                                             </div>
                                         </div>
@@ -297,6 +304,67 @@
                     </div>
                 </div>
 
+
+                {{--============================ТЕЛЕФОНЫ==================================--}}
+                <div class="col-md-6">
+                    <div class="box box-primary box-solid collapsed-box">
+                        <div class="box-header with-border">
+                            <h3 class="box-title"><i class="fa fa-phone" aria-hidden="true"></i>  Телефоны</h3>
+                            <div class="box-tools pull-right">
+                                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-plus"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="box-body">
+                            <table class="table">
+                                <tr ng-repeat="phone in sc.service_phones track by $index">
+                                    <td ng-bind="phone.phone"></td>
+                                    <td class="text-right"><i style="cursor: pointer;" ng-click="removePhone($index)" class="fa fa-trash"></i></td>
+                                </tr>
+                            </table>
+                            <div class="input-group input-group-sm">
+                                <input type="text" class="form-control" ng-model="prePhone">
+                                <span class="input-group-btn">
+                                  <button type="button" ng-disabled="!prePhone" ng-click="addPhone(prePhone)"  class="btn btn-info btn-flat">добавить</button>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="box-footer text-right" >
+                            <button type="button" class="btn btn-primary" ng-click="savePhones(sc.service_phones)">Сохранить</button>
+                        </div>
+                    </div>
+                </div>
+
+                {{--============================ПОЧТА==================================--}}
+                <div class="col-md-6">
+                    <div class="box box-primary box-solid collapsed-box">
+                        <div class="box-header with-border">
+                            <h3 class="box-title"><i class="fa fa-tags" aria-hidden="true"></i>  Почта</h3>
+                            <div class="box-tools pull-right">
+                                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-plus"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="box-body">
+                            <table class="table">
+                                <tr ng-repeat="email in sc.service_emails track by $index">
+                                    <td ng-bind="email.email"></td>
+                                    <td class="text-right"><i style="cursor: pointer;" ng-click="removeEmail($index)" class="fa fa-trash"></i></td>
+                                </tr>
+                            </table>
+                            <div class="input-group input-group-sm">
+                                <input type="email" class="form-control" ng-model="preEmail" required>
+                                <span class="input-group-btn">
+                                  <button type="button" ng-disabled="!preEmail" ng-click="addEmail(preEmail)" class="btn btn-info btn-flat">добавить</button>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="box-footer text-right" >
+                            <button type="button" class="btn btn-primary" ng-click="saveEmails(sc.service_emails)">Сохранить</button>
+                        </div>
+                    </div>
+                </div>
+
                 {{--============================Преимущества==================================--}}
                 <div class="col-md-6">
                     <div class="box box-primary box-solid collapsed-box">
@@ -483,7 +551,7 @@
                             <div class="row">
                                 <div class="col-sm-6 col-md-3" ng-repeat="person in sc.personal">
                                     <div class="thumbnail">
-                                        <img ng-src="@{{person.path + person.file_name_mini}}" alt="@{{person.name}}">
+                                        <img ng-src="@{{person.path + person.avatar}}" alt="@{{person.name}}">
                                         <div class="caption">
                                             <h3 ng-bind="person.name"></h3>
                                             <p ng-bind="'Должность:  '+ person.info"></p>
