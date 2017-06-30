@@ -46,7 +46,7 @@
                                         </div>
                                         <div class="col-sm-6">
                                             <span style="font-size: 16px;">Неисправности</span>
-                                            <div ng-if="services" ng-repeat="service in services_search | filter: filterTopSearch as filteredService track by $index" style="cursor: pointer;">
+                                            <div ng-repeat="service in services_search | filter: filterTopSearch as filteredService track by $index" style="cursor: pointer;">
                                                 <a href ng-click="selectServiceSearch(service)">@{{ service.title }}</a>
                                             </div>
                                             <div ng-if="filteredService.length <= 0" style="font-size: 14px; color: #666666;">Не найдено</div>

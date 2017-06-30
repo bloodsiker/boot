@@ -51,6 +51,7 @@
             if (!$scope.services_search) {
                 model.get('/services').then(function (success) {
                     $scope.services_search = success.data;
+                    console.log(success.data);
                 });
             }
             if (!$scope.catalog_search) {
