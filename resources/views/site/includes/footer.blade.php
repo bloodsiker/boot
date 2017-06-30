@@ -1,29 +1,30 @@
 <!--============== FOOTER =========================-->
 
-<hr>
-<div class="container">
+
+<div class="container" style="margin-top: -108px;">
+    <hr>
     <div class="footer">
         <div class="row">
-            <div class="col-md-2">
+            <div class="col-sm-2">
                 <div class="logo-footer">
                     <img src="{{ asset('site/img/logo.png') }}" alt="boot">
                 </div>
             </div>
-            <div class="col-md-3">
+            <div class="col-sm-3">
                 <ul>
                     <li><a href="{{ route('about') }} " class="{{ active('about') }}">О проекте</a></li>
                     <li><a data-toggle="modal" data-target="#terms_modal">Пользовательское соглашение</a></li>
                     <li><a href="{{ route('catalog') }}" class="{{ active('catalog') }}">Каталог сервис-центров</a></li>
                 </ul>
             </div>
-            <div class="col-md-3">
+            <div class="col-sm-3">
                 <ul>
                     <li><a href="{{ route('diagnostics') }} " class="{{ active('diagnostics') }}">Диагностика</a></li>
                     <li><a data-toggle="modal" data-target="#help_modal">Помощь в подборе</a></li>
                     <li><a href="{{ route('service.registration') }}">Регистрация сервис-центров</a></li>
                 </ul>
             </div>
-            <div class="col-md-4">
+            <div class="col-sm-4">
                 <ul>
                     {{--<li><a href="tel:0 800 256-357" class="phone"><i class="glyphicon glyphicon-phone"></i> 0 800--}}
                             {{--256-357</a> <span>Звонки по Украине бесплатны</span></li>--}}
@@ -34,7 +35,7 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-md-12 text-center">
+            <div class="col-sm-12 text-center">
                 <span>© 2017 Boot.com.ua. Все права защищены.</span>
             </div>
         </div>
@@ -67,7 +68,7 @@
             <form novalidate name="add_comment_form">
                 <div class="modal-body">
                     <div class="row comment-item">
-                        <div class="col-md-4">
+                        <div class="col-sm-4">
                             <img class="avatar" src="{{ asset('site/img/logo_user_default.png') }}" alt="client-user">
                             <h4 class="name">
                                 <input type="text"
@@ -126,7 +127,7 @@
                             </div>
 
                         </div>
-                        <div class="col-md-8">
+                        <div class="col-sm-8">
                             <textarea autofocus
                                       required
                                       ng-class="{'input-error': add_comment.text.length == 0 && add_comment_valid}"

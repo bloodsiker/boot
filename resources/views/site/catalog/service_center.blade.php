@@ -127,7 +127,7 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-md-6" ng-if="filteredPhotos.length > 0">
+            <div class="col-md-6" ng-if="filteredPhotos.length !== 0">
                 <!--=======================================PHOTOS=======================================-->
                 <h3 >Фотографии</h3>
                 <div class="row photos">
@@ -147,7 +147,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-6" ng-if="filteredCertificate.length > 0">
+            <div class="col-md-6" ng-if="filteredCertificate.length !== 0">
                 <!--=======================================CERTIFICATE=======================================-->
                 <h3 >Сертификаты</h3>
                 <div class="row certificate">
@@ -168,7 +168,7 @@
                 </div>
 
             </div>
-            <div class="col-md-6" ng-if="filteredLicense.length > 0">
+            <div class="col-md-6" ng-if="filteredLicense.length !== 0">
                 <!--=======================================CERTIFICATE=======================================-->
                 <h3>Лицензии</h3>
                 <div class="row certificate">
@@ -204,7 +204,9 @@
                        autoplay=true>
 
                     <div class="slick-item" ng-repeat="person in service_center.personal">
-                        <img width="100px" ng-src="@{{ person.path + person.avatar }}" alt="@{{person.name}}" align="left"/>
+                        <div style="width: 100px; height: 100px; overflow: hidden;border-radius: 50%;">
+                            <img ng-src="@{{ person.path + person.avatar }}" alt="@{{person.name}}" align="left"/>
+                        </div>
                         <h4 ng-bind="person.name"></h4>
                         <p ng-if="person.info" ng-bind="person.info"></p>
                         <p ng-if="person.specialization" ng-bind="person.specialization"></p>
@@ -218,6 +220,7 @@
 
 
         <div class="row">
+            <hr>
             <div class="comments-section">
                 <div class="col-sm-10">
                     <h3>Отзывы</h3>
@@ -228,7 +231,7 @@
                 </div>
             </div>
             <!--=======================================HEADER COMMENTS=======================================-->
-            <div class="col-sm-12" >
+            <div class="col-sm-12" style="margin-bottom: 20px;">
                 <div class="comments-header">
                     <div class="row text-center">
                         <div class="col-sm-2">

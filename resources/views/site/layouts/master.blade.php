@@ -21,9 +21,12 @@
 <body ng-cloak>
 <div ng-controller="@yield('controller')" ng-cloak>
 
-    @include('site.includes.header')
+    <main style="min-height: 100vh; padding-bottom: 108px;">
+        @include('site.includes.header')
 
-    @yield('content')
+        @yield('content')
+    </main>
+
 
     @include('site.includes.footer')
 

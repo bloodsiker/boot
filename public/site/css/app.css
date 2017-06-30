@@ -729,13 +729,6 @@ img {
       font-size: 12px;
       padding-right: 50px;
       margin: 0; }
-    .page-sc .personal-sc .slick-item img {
-      -webkit-border-radius: 50%;
-      -moz-border-radius: 50%;
-      border-radius: 50%;
-      margin-right: 10px;
-      width: 100px;
-      height: 100px; }
 
 .comments-section .comments-header {
   background-color: #fff;
@@ -867,8 +860,7 @@ img {
 
 .diagnostics {
   margin-top: 30px;
-  margin-bottom: 100px;
-  min-height: 70vh; }
+  margin-bottom: 100px; }
   .diagnostics .phone-img {
     width: 150px; }
   .diagnostics .tablet-img {
