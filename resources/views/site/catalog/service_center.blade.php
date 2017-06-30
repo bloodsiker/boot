@@ -57,7 +57,6 @@
                         <div class="count" ng-bind="service_center.count_clients"></div>
                     </div>
                 </div>
-
                 <!--=======================================ABOUT=======================================-->
 
                 <div class="row text-center">
@@ -70,32 +69,7 @@
                         <div>отзывов</div>
                     </div>
                 </div>
-
-                <div class="row" style="margin-top: 20px;">
-                    <div class="col-md-12">
-                        <!--=======================================TAGS=======================================-->
-                        <h3 ng-if="service_center.tags.length > 0">Описание</h3>
-                        <div class="tag" ng-repeat="item in service_center.tags" ng-bind="item.tag"></div>
-                        <hr ng-if="service_center.tags.length > 0">
-                        <!--=======================================ABOUT=======================================-->
-                        <h3 ng-if="service_center.about">О компании</h3>
-                        <p ng-bind-html="service_center.about"></p>
-                        <hr ng-if="service_center.about">
-
-                        <h3 ng-if="service_center.advantages.length > 0">Преимущества</h3>
-                        <ul>
-                            <li ng-repeat="item in service_center.advantages" ng-bind="item.advantages"></li>
-                        </ul>
-                        <hr ng-if="service_center.advantages.length > 0">
-
-                        <!--=======================================BRANDS=======================================-->
-                        <h3 ng-if="service_center.manufacturers.length > 0">Марки телефонов</h3>
-                        <p><span ng-repeat="item in service_center.manufacturers" ng-bind="item.manufacturer + ', '"></span></p>
-                        <hr ng-if="service_center.manufacturers.length > 0">
-                    </div>
-                </div>
             </div>
-            <!--======================================= MAP =======================================-->
             <div class="col-sm-6">
                 <ng-map id="map" center="@{{service_center.c1}}, @{{service_center.c2}}" zoom="17">
                     <marker position="@{{service_center.c1}}, @{{service_center.c2}}"
@@ -104,6 +78,32 @@
 
                     </marker>
                 </ng-map>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-6">
+                <!--=======================================TAGS=======================================-->
+                <h3 style="margin-top: 20px;" ng-if="service_center.tags.length > 0">Описание</h3>
+                <div class="tag" ng-repeat="item in service_center.tags" ng-bind="item.tag"></div>
+                <hr ng-if="service_center.tags.length > 0">
+                <!--=======================================ABOUT=======================================-->
+                <h3 ng-if="service_center.about">О компании</h3>
+                <p ng-bind-html="service_center.about"></p>
+                <hr ng-if="service_center.about">
+
+                <h3 ng-if="service_center.advantages.length > 0">Преимущества</h3>
+                <ul>
+                    <li ng-repeat="item in service_center.advantages" ng-bind="item.advantages"></li>
+                </ul>
+                <hr ng-if="service_center.advantages.length > 0">
+
+                <!--=======================================BRANDS=======================================-->
+                <h3 ng-if="service_center.manufacturers.length > 0">Марки телефонов</h3>
+                <p><span ng-repeat="item in service_center.manufacturers" ng-bind="item.manufacturer + ', '"></span></p>
+                <hr ng-if="service_center.manufacturers.length > 0">
+            </div>
+
+            <div class="col-sm-6">
                 <!--=======================================BUY=======================================-->
                 <h3 style="margin-top: 20px;" ng-if="service_center.price.length > 0">Примерная стоимость работ</h3>
                 <table ng-if="service_center.price.length > 0" class="table table-bordered table-responsive">
@@ -126,62 +126,85 @@
                 </table>
             </div>
         </div>
-
         <div class="row">
-            <div class="col-md-6">
+            <div class="col-md-6" ng-if="filteredPhotos.length > 0">
                 <!--=======================================PHOTOS=======================================-->
-                <h3 ng-if="filteredPhotos.length != 0">Фотографии</h3>
+                <h3 >Фотографии</h3>
                 <div class="row photos">
                     <div ng-repeat="photo in service_center.service_photo | filter: 'service_photo' as filteredPhotos">
                         <div class="clearfix" ng-if="$index % 3 == 0"></div>
-                        <div class="col-sm-4" >
-                            <img class="photo-item"
-                                 alt="@{{service_center.service_name}}"
-                                 data-toggle="modal"
-                                 data-target="#photoModal"
-                                 ng-click="openPhoto(photo.path +photo.file_name)"
-                                 ng-src="@{{photo.path +photo.file_name_mini}}">
+                        <div class="col-sm-6" >
+                            <div style="overflow: hidden;">
+                                <img class="photo-item"
+                                     width="200px"
+                                     alt="@{{service_center.service_name}}"
+                                     data-toggle="modal"
+                                     data-target="#photoModal"
+                                     ng-click="openPhoto(photo.path +photo.file_name)"
+                                     ng-src="@{{photo.path +photo.file_name}}">
+                            </div>
                         </div>
                     </div>
+                </div>
+            </div>
+            <div class="col-md-6" ng-if="filteredCertificate.length > 0">
+                <!--=======================================CERTIFICATE=======================================-->
+                <h3 >Сертификаты</h3>
+                <div class="row certificate">
+                    <div ng-repeat="photo in service_center.service_photo | filter: 'certificate' as filteredCertificate">
+                        <div class="clearfix" ng-if="$index % 3 == 0"></div>
+                        <div class="col-sm-6" >
+                            <div style="overflow: hidden;">
+                                <img class="photo-item" width="200px"
+                                     alt="@{{service_center.service_name}}"
+                                     data-toggle="modal"
+                                     data-target="#photoModal"
+                                     ng-click="openPhoto(photo.path + photo.file_name)"
+                                     ng-src="@{{photo.path + photo.file_name}}">
+                            </div>
 
+                        </div>
+                    </div>
                 </div>
 
             </div>
-            <div class="col-md-6">
+            <div class="col-md-6" ng-if="filteredLicense.length > 0">
                 <!--=======================================CERTIFICATE=======================================-->
-                <h3 ng-if="filteredLicense.length != 0">Сертификаты и лицензии</h3>
+                <h3>Лицензии</h3>
                 <div class="row certificate">
-                    <div ng-repeat="photo in service_center.service_photo | filter: 'licenses': 'certificate' as filteredLicense">
+                    <div ng-repeat="photo in service_center.service_photo | filter: 'licenses' as filteredLicense">
                         <div class="clearfix" ng-if="$index % 3 == 0"></div>
-                        <div class="col-sm-4" >
-                            <img class="photo-item"
-                                 alt="@{{service_center.service_name}}"
-                                 data-toggle="modal"
-                                 data-target="#photoModal"
-                                 ng-click="openPhoto(photo.path + photo.file_name)"
-                                 ng-src="@{{photo.path + photo.file_name_mini}}">
+                        <div class="col-sm-6" >
+                            <div style="overflow: hidden;">
+                                <img class="photo-item"
+                                     width="200px"
+                                     alt="@{{service_center.service_name}}"
+                                     data-toggle="modal"
+                                     data-target="#photoModal"
+                                     ng-click="openPhoto(photo.path + photo.file_name)"
+                                     ng-src="@{{photo.path + photo.file_name}}">
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
 
-        <hr>
-        <!--=======================================PERSONAL SC=======================================-->
-        <div class="row" ng-if="service_center.personal">
-            <div class="col-xs-12 personal-sc">
-                <h3>Команда сервиса</h3>
-                <slick
-                        infinite=true
-                        dots=true
-                        slides-to-show=3
-                        slides-to-scroll=3
-                        ng-if="service_center.personal"
-                        autoplay=true
+        <div class="row">
+            <!--=======================================PERSONAL SC=======================================-->
 
-                >
+            <div class="col-xs-12 personal-sc" ng-if="service_center.personal.length > 0">
+                <hr>
+                <h3>Команда сервиса</h3>
+                <slick infinite=true
+                       dots=true
+                       slides-to-show=3
+                       slides-to-scroll=3
+                       ng-if="service_center.personal"
+                       autoplay=true>
+
                     <div class="slick-item" ng-repeat="person in service_center.personal">
-                        <img ng-src="@{{ person.path + person.avatar }}" alt="@{{person.name}}" align="left"/>
+                        <img width="100px" ng-src="@{{ person.path + person.avatar }}" alt="@{{person.name}}" align="left"/>
                         <h4 ng-bind="person.name"></h4>
                         <p ng-if="person.info" ng-bind="person.info"></p>
                         <p ng-if="person.specialization" ng-bind="person.specialization"></p>
@@ -191,7 +214,9 @@
                 </slick>
             </div>
         </div>
-        <hr>
+
+
+
         <div class="row">
             <div class="comments-section">
                 <div class="col-sm-10">

@@ -150,9 +150,22 @@
                 <div class="row sort">
                     <div class="col-xs-12">
                     <span>Сортировать:
-                        <span ng-class="{active: activeSort == 'name'}" ng-click="order_event('name')" class="sort-by active">по имени <i ng-if="activeSort == 'name'" class="glyphicon glyphicon-sort-by-attributes-alt"></i></span>
-                        <span ng-class="{active: activeSort == 'rating'}" ng-click="order_event('rating')" class="sort-by">по рейтингу <i ng-if="activeSort == 'rating'" class="glyphicon glyphicon-sort-by-attributes-alt"></i></span>
-                        <span ng-class="{active: activeSort == 'comments'}" ng-click="order_event('comments')" class="sort-by">по отзывам  <i ng-if="activeSort == 'comments'"  class="glyphicon glyphicon-sort-by-attributes-alt"></i></span>
+                        <span ng-class="{active: activeSort == 'name'}" ng-click="order_event('name')" class="sort-by active">по имени
+                            <i ng-if="activeSort == 'name' && !reverseIcon" class="glyphicon glyphicon-sort-by-attributes-alt"></i>
+                            <i ng-if="activeSort == 'name' && reverseIcon" class="glyphicon glyphicon-sort-by-attributes"></i>
+                        </span>
+                        <span ng-class="{active: activeSort == 'popular'}" ng-click="order_event('popular')" class="sort-by active">по популярности
+                           <i ng-if="activeSort == 'popular' && !reverseIcon" class="glyphicon glyphicon-sort-by-attributes-alt"></i>
+                            <i ng-if="activeSort == 'popular' && reverseIcon" class="glyphicon glyphicon-sort-by-attributes"></i>
+                        </span>
+                        <span ng-class="{active: activeSort == 'rating'}" ng-click="order_event('rating')" class="sort-by">по рейтингу
+                           <i ng-if="activeSort == 'rating' && !reverseIcon" class="glyphicon glyphicon-sort-by-attributes-alt"></i>
+                            <i ng-if="activeSort == 'rating' && reverseIcon" class="glyphicon glyphicon-sort-by-attributes"></i>
+                        </span>
+                        <span ng-class="{active: activeSort == 'comments'}" ng-click="order_event('comments')" class="sort-by">по отзывам
+                           <i ng-if="activeSort == 'comments' && !reverseIcon" class="glyphicon glyphicon-sort-by-attributes-alt"></i>
+                            <i ng-if="activeSort == 'comments' && reverseIcon" class="glyphicon glyphicon-sort-by-attributes"></i>
+                        </span>
                     </span>
                     </div>
                 </div>

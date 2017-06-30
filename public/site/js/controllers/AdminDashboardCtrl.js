@@ -47,16 +47,23 @@
                 return data;
             };
 
+            var sc = [];
+            _.mapObject($scope.visits, function (sc, index) {
+                _.mapObject(sc, function (key, index) {
+
+                })
+            });
+
+            $scope.labels = ["January", "February", "March", "April", "May", "June", "July"];
+            $scope.series = ['Series A'];
+            $scope.data = [65, 59, 80, 81, 56, 55, 40];
+
 
         });
-        $scope.labels = ["January", "February", "March", "April", "May", "June", "July"];
-        $scope.series = ['Series A', 'Series B'];
-        $scope.data = [
-            [65, 59, 80, 81, 56, 55, 40],
-            [28, 48, 40, 19, 86, 27, 90]
-        ];
 
-        $scope.datasetOverride = [{ yAxisID: 'y-axis-1' }, { yAxisID: 'y-axis-2' }];
+
+
+
 
 
 

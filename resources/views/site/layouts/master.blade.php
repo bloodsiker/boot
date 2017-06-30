@@ -41,6 +41,10 @@
 
 <script src="{{ asset('site/vendor/jquery/dist/jquery.min.js') }}"></script>
 <script src="{{ asset('site/vendor/bootstrap/dist/js/bootstrap.min.js') }}"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.11/jquery.mask.min.js"></script>
+<script>
+    $('.phone-input').mask('+38 (000) 000-00-00');
+</script>
 
 
 <script src="{{ asset('site/vendor/angular-bootstrap/ui-bootstrap-tpls.min.js') }}"></script>

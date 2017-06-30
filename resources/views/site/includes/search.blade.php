@@ -41,7 +41,7 @@
             </uib-tabset>
         </div>
         <!--=======================================BRAND=======================================-->
-        <div style="flex: 20;padding-right: 20px; text-align: left;">
+        <div style="flex: 20;padding-right: 20px; padding-left: 20px; text-align: left;">
             <div class="name-filed">Бренд</div>
             <div style="position: relative;" class="dropdown-limit">
                 <input type="text"
@@ -57,7 +57,7 @@
 
 
         </div>
-        <div style="padding-right: 20px;">
+        <div style="padding-right: 20px; padding-left: 20px;">
             <button ng-click="search_button(active, address_model.address, brand_model)" class="btn btn-yellow">Подобрать</button>
         </div>
     </div>

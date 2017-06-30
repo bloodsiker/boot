@@ -7,7 +7,7 @@
                             <img src="{{ asset('site/img/logo.png') }}" alt="boot">
                         </div></a>
                     <div style="width: 100%;display: flex;flex-direction: column;">
-                        <div class="top-menu">
+                        <div class="top-menu col-xs-12">
                             <div class="menu">
                                 <a href="{{ route('main') }}" class="{{ active('main') }}">Главная</a>
                                 <a href="{{ route('catalog') }}" class="{{ active('catalog') }}">Каталог</a>
@@ -32,7 +32,7 @@
                                 <input type="text"
                                        ng-model="filterTopSearch"
                                        ng-focus="getSearchData()"
-                                       placeholder="Поиск неисправностей"
+                                       placeholder="Поиск сервисных центров / неисправностей"
                                        style="width: 100%;">
                                 <button type="button" class="btn search-button"><span class="glyphicon glyphicon-search"></span></button>
                                 <div ng-show="filterTopSearch" class="searched-box">

@@ -101,6 +101,7 @@
 
         $scope.searchService = function (service) {
             console.log(service);
+            service.title = service.services;
             searchService.setService([service]);
             window.location = '/catalog';
         }

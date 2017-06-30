@@ -105,7 +105,9 @@
         $scope.applyFilterServices = function () {
             $scope.filterService = angular.copy(filterService);
             renderPriceRange();
-            searchService.setService('');
+
+            console.log(filterService[0]);
+            searchService.setService(filterService);
             filtersCatalog();
 
         };
@@ -249,19 +251,51 @@
 
         $scope.activeSort = '';
         $scope.order_event = function (arg) {
-            $scope.activeSort =  arg;
-            if (arg === 'name') {
+
+
+            if (arg === 'name' && $scope.activeSort !== 'name') {
+                $scope.reverseIcon = false;
                 $scope.catalog =  _.sortBy($scope.catalog, 'service_name');
             }
+            if (arg === 'name' && $scope.activeSort === 'name') {
+                $scope.reverseIcon = !$scope.reverseIcon;
+                $scope.catalog = $scope.catalog.reverse();
+            }
 
-            if (arg === 'rating') {
+
+            if (arg === 'rating' && $scope.activeSort !== 'rating') {
+                $scope.reverseIcon = false;
                 var _rating =  _.sortBy($scope.catalog, 'rating');
                 $scope.catalog = _rating.reverse();
             }
-            if (arg === 'comments') {
-                var _comments = _.sortBy($scope.catalog, 'comments');
-                $scope.catalog = _comments.reverse();
+            if (arg === 'rating' && $scope.activeSort === 'rating') {
+                $scope.reverseIcon = !$scope.reverseIcon;
+                $scope.catalog = $scope.catalog.reverse();
             }
+
+
+            if (arg === 'comments' && $scope.activeSort !== 'comments') {
+                $scope.reverseIcon = false;
+                var _rating =  _.sortBy($scope.catalog, 'comments');
+                $scope._comments = _rating.reverse();
+            }
+            if (arg === 'comments' && $scope.activeSort === 'comments') {
+                $scope.reverseIcon = !$scope.reverseIcon;
+                $scope.catalog = $scope.catalog.reverse();
+            }
+
+
+            if (arg === 'popular' && $scope.activeSort !== 'popular') {
+                $scope.reverseIcon = false;
+                var _popular =  _.sortBy($scope.catalog, 'visits');
+                $scope._comments = _popular.reverse();
+            }
+            if (arg === 'popular' && $scope.activeSort === 'popular') {
+                $scope.reverseIcon = !$scope.reverseIcon;
+                $scope.catalog = $scope.catalog.reverse();
+            }
+
+            $scope.activeSort =  arg;
 
         };
 
