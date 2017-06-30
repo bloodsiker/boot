@@ -195,7 +195,7 @@
         <div class="modal-content">
             <form name="help_form">
                 <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                    <button type="button" class="close"  style="font-size: 48px;" data-dismiss="modal" aria-label="Close"><span
                                 aria-hidden="true">&times;</span></button>
                     <h4 class="modal-title">Помощь в подборе</h4>
                 </div>
@@ -213,18 +213,27 @@
                         <div class="form-group">
                             <label>Телефон</label>
                             <input type="text"
-                                   class="form-control"
+                                   class="form-control phone-input"
                                    required
-                                   placeholder="Введите телефон"
+                                   placeholder="+38 (123) 456-78-90"
                                    name="client_phone"
                                    ng-model="client_phone">
                         </div>
+                    <div class="form-group">
+                        <label for="client_comment">Комментарий</label>
+                        <textarea name="client_comment"
+                                  id="client_comment"
+                                  ng-model="client_comment"
+                                  class="form-control"
+                                  cols="30"
+                                  rows="5"></textarea>
+                    </div>
 
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-black" data-dismiss="modal">Отмена</button>
-                    <button type="submit" class="btn btn-yellow" ng-click="helpCall(help_form.$valid, client_name, client_phone)">
-                        Связаться
+                    <button type="submit" class="btn btn-yellow" ng-click="helpCall(help_form.$valid, client_name, client_phone, client_comment)">
+                        Отправить
                     </button>
                 </div>
             </form>
@@ -237,30 +246,98 @@
 
 
 <div class="modal fade" id="call_modal" tabindex="-1" role="dialog">
-    <div class="modal-dialog modal-sm" role="document">
+    <div class="modal-dialog" role="document">
         <div class="modal-content">
             <form name="call_form">
                 <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                    <button type="button" class="close"  style="font-size: 48px;" data-dismiss="modal" aria-label="Close"><span
                                 aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title">Связаться</h4>
+                    <h2 class="modal-title">Связаться</h2>
                 </div>
                 <div class="modal-body">
-                    <div class="form-group">
-                        <label for="client_name">Имя</label>
-                        <input type="text" id="client_name" class="form-control" placeholder="Введите имя"
-                               name="client_name" required ng-model="client_name">
-                    </div>
-                    <div class="form-group">
-                        <label for="client_phone">Телефон</label>
-                        <input type="text" id="client_phone" class="form-control" placeholder="Введите телефон"
-                               name="client_phone" required ng-model="client_phone">
-                    </div>
 
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="client_name">Имя</label>
+                                <input type="text" id="client_name" class="form-control" placeholder="Имя"
+                                       name="client_name" required ng-model="data.client_name">
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="client_phone">Телефон</label>
+                                <input type="text" id="client_phone" class="form-control phone-input" placeholder="+38 (123) 456-78-90"
+                                       name="client_phone" required ng-model="data.client_phone">
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="client_email">Email</label>
+                                <input type="email" id="client_email" class="form-control" placeholder="Email"
+                                       name="client_email" required ng-model="data.client_email">
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group" ng-if="sc.manufacturers.length > 0">
+                                <label for="client_manufacturer">Производитель телефона</label>
+                                <select name="client_manufacturer"
+                                        id="client_manufacturer"
+                                        class="form-control"
+                                        ng-model="data.client_manufacturer">
+                                    <option ng-repeat="manufacturer in sc.manufacturers track by $index" value="@{{ manufacturer.manufacturer }}">@{{ manufacturer.manufacturer }}</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-sm-8">
+                            <div class="form-group" ng-if="sc.price.length > 0">
+                                <label for="client_service">Услуга</label>
+                                <select name="client_service"
+                                        id="client_service"
+                                        ng-change="serviceSelected(data.client_service)"
+                                        class="form-control"
+                                        ng-model="data.client_service">
+                                    <option ng-repeat="price in sc.price track by $index"value="@{{ price.title }}">@{{ price.title }}</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="form-group">
+                                <label for="client_payment_type">Способ оплаты</label>
+                                <select name="client_payment_type"
+                                        class="form-control"
+                                        id="client_payment_type"
+                                        ng-model="data.client_payment_type">
+                                    <option value="@{{ payment_type }}" ng-repeat="payment_type in payment_types track by $index">@{{ payment_type }}</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group" ng-if="sc.exit_master === '1'">
+                                <input type="checkbox" id="client_exit_master" ng-model="data.client_exit_master">
+                                <label for="client_exit_master">Выезд мастера (+50 грн)</label>
+                            </div>
+                        </div>
+                        <div class="col-sm-12" ng-if="sc.price.length > 0">
+                            <h3>Примерная стоимость <small>от</small><b><u> @{{ sc.price[serviceIndex].price_min }}</u></b> <small>до</small>
+                                <b><u>@{{ sc.price[serviceIndex].price_max }}грн</u></b> <small uib-tooltip="Выезд мастера" ng-if="data.client_exit_master"><i>+ 50грн</i></small></h3>
+                        </div>
+                        <div class="col-sm-12">
+                            <div class="form-group">
+                                <label for="client_task_description">Описание проблемы</label>
+                                <textarea name="client_task_description"
+                                          id="client_task_description"
+                                          ng-model="data.client_task_description"
+                                          class="form-control"
+                                          cols="30"
+                                          rows="10"></textarea>
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-black" data-dismiss="modal">Отмена</button>
-                    <button type="submit" class="btn btn-yellow" ng-click="scCall(call_form.$valid, client_name, client_phone, call_sc)">
+                    <button type="submit" class="btn btn-yellow" ng-click="scCall(call_form.$valid, data)">
                         Связаться
                     </button>
                 </div>
@@ -276,7 +353,7 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                <button type="button" class="close" style="font-size: 48px;" data-dismiss="modal" aria-label="Close"><span
                             aria-hidden="true">&times;</span></button>
                 <h4 class="modal-title">Пользовательское соглашение</h4>
             </div>

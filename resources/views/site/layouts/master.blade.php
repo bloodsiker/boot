@@ -15,6 +15,7 @@
     <link rel="stylesheet" href="{{ asset('site/vendor/angular/angular-csp.css') }}">
     <link rel="stylesheet" href="{{ asset('site/vendor/slick-carousel/slick/slick.css') }}">
     <link rel="stylesheet" href="{{ asset('site/vendor/slick-carousel/slick/slick-theme.css') }}">
+    <link rel="stylesheet" href="{{ asset('site/vendor/angular-multi-slider/multislider.css') }}">
     <link rel="stylesheet" href="{{ asset('site/css/app.css') }}">
 </head>
 <body ng-cloak>
@@ -40,6 +41,10 @@
 
 <script src="{{ asset('site/vendor/jquery/dist/jquery.min.js') }}"></script>
 <script src="{{ asset('site/vendor/bootstrap/dist/js/bootstrap.min.js') }}"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.11/jquery.mask.min.js"></script>
+<script>
+    $('.phone-input').mask('+38 (000) 000-00-00');
+</script>
 
 
 <script src="{{ asset('site/vendor/angular-bootstrap/ui-bootstrap-tpls.min.js') }}"></script>
@@ -60,6 +65,7 @@
 <script src="{{ asset('site/vendor/angular-underscore-module/angular-underscore-module.js') }}"></script>
 
 <script src="{{ asset('site/vendor/angular-filter/dist/angular-filter.js') }}"></script>
+<script src="{{ asset('site/vendor/angular-multi-slider/multislider.js') }}"></script>
 
 <!--==============APP=========================-->
 <script src="{{ asset('site/js/app.js') }}"></script>

@@ -100,6 +100,11 @@
         };
 
         $scope.searchService = function (service) {
+<<<<<<< HEAD
+=======
+            console.log(service);
+            service.title = service.services;
+>>>>>>> e70a4f41c34b75a710b735b70caf22c5345f1cfd
             searchService.setService([service]);
             window.location = '/catalog';
         }

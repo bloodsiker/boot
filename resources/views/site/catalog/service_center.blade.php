@@ -37,6 +37,11 @@
                         </div>
                     </div>
                 </div>
+                <div class="row" ng-if="service_center.exit_master === '1'">
+                    <div class="col-md-12">
+                        <h4><span class="glyphicon glyphicon-wrench"></span> Выезд мастера</h4>
+                    </div>
+                </div>
                 <div class="row callback">
                     <div class="col-sm-4">
                         <button class="btn btn-yellow btn-call"
@@ -52,7 +57,6 @@
                         <div class="count" ng-bind="service_center.count_clients"></div>
                     </div>
                 </div>
-
                 <!--=======================================ABOUT=======================================-->
 
                 <div class="row text-center">
@@ -66,7 +70,10 @@
                     </div>
                 </div>
             </div>
+<<<<<<< HEAD
             <!--======================================= MAP =======================================-->
+=======
+>>>>>>> e70a4f41c34b75a710b735b70caf22c5345f1cfd
             <div class="col-sm-6">
                 <ng-map id="map" center="@{{service_center.c1}}, @{{service_center.c2}}" zoom="17">
                     <marker position="@{{service_center.c1}}, @{{service_center.c2}}"
@@ -97,12 +104,14 @@
                 </table>
             </div>
         </div>
-        <hr>
         <div class="row">
             <div class="col-sm-6">
+<<<<<<< HEAD
 
+=======
+>>>>>>> e70a4f41c34b75a710b735b70caf22c5345f1cfd
                 <!--=======================================TAGS=======================================-->
-                <h3 ng-if="service_center.tags.length > 0">Описание</h3>
+                <h3 style="margin-top: 20px;" ng-if="service_center.tags.length > 0">Описание</h3>
                 <div class="tag" ng-repeat="item in service_center.tags" ng-bind="item.tag"></div>
                 <hr ng-if="service_center.tags.length > 0">
                 <!--=======================================ABOUT=======================================-->
@@ -120,15 +129,45 @@
                 <h3 ng-if="service_center.manufacturers.length > 0">Марки телефонов</h3>
                 <p><span ng-repeat="item in service_center.manufacturers" ng-bind="item.manufacturer + ', '"></span></p>
                 <hr ng-if="service_center.manufacturers.length > 0">
+            </div>
 
+<<<<<<< HEAD
 
             </div>
             <div class="col-sm-6">
+=======
+            <div class="col-sm-6">
+                <!--=======================================BUY=======================================-->
+                <h3 style="margin-top: 20px;" ng-if="service_center.price.length > 0">Примерная стоимость работ</h3>
+                <table ng-if="service_center.price.length > 0" class="table table-bordered table-responsive">
+                    <thead>
+                    <tr>
+                        <th>Услуга</th>
+                        <th>от</th>
+                        <th>до</th>
+                        <th>Валюта</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr ng-repeat="item in service_center.price">
+                        <td ng-bind="item.title"></td>
+                        <td ng-bind="item.price_min"></td>
+                        <td ng-bind="item.price_max"></td>
+                        <td ng-bind="item.currency"></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6" ng-if="filteredPhotos.length > 0">
+>>>>>>> e70a4f41c34b75a710b735b70caf22c5345f1cfd
                 <!--=======================================PHOTOS=======================================-->
-                <h3 ng-if="filteredPhotos.length != 0">Фотографии</h3>
+                <h3 >Фотографии</h3>
                 <div class="row photos">
                     <div ng-repeat="photo in service_center.service_photo | filter: 'service_photo' as filteredPhotos">
                         <div class="clearfix" ng-if="$index % 3 == 0"></div>
+<<<<<<< HEAD
                         <div class="col-sm-4" >
                             <img class="photo-item"
                                  alt="@{{service_center.service_name}}"
@@ -136,16 +175,50 @@
                                  data-target="#photoModal"
                                  ng-click="openPhoto(photo.path +photo.file_name)"
                                  ng-src="@{{photo.path +photo.file_name_mini}}">
+=======
+                        <div class="col-sm-6" >
+                            <div style="overflow: hidden;">
+                                <img class="photo-item"
+                                     width="200px"
+                                     alt="@{{service_center.service_name}}"
+                                     data-toggle="modal"
+                                     data-target="#photoModal"
+                                     ng-click="openPhoto(photo.path +photo.file_name)"
+                                     ng-src="@{{photo.path +photo.file_name}}">
+                            </div>
+>>>>>>> e70a4f41c34b75a710b735b70caf22c5345f1cfd
                         </div>
                     </div>
-
                 </div>
-                <hr ng-if="filteredLicense.length != 0 && filteredPhotos.length != 0">
+            </div>
+            <div class="col-md-6" ng-if="filteredCertificate.length > 0">
                 <!--=======================================CERTIFICATE=======================================-->
-                <h3 ng-if="filteredLicense.length != 0">Сертификаты и лицензии</h3>
+                <h3 >Сертификаты</h3>
                 <div class="row certificate">
-                    <div ng-repeat="photo in service_center.service_photo | filter: 'licenses': 'certificate' as filteredLicense">
+                    <div ng-repeat="photo in service_center.service_photo | filter: 'certificate' as filteredCertificate">
                         <div class="clearfix" ng-if="$index % 3 == 0"></div>
+                        <div class="col-sm-6" >
+                            <div style="overflow: hidden;">
+                                <img class="photo-item" width="200px"
+                                     alt="@{{service_center.service_name}}"
+                                     data-toggle="modal"
+                                     data-target="#photoModal"
+                                     ng-click="openPhoto(photo.path + photo.file_name)"
+                                     ng-src="@{{photo.path + photo.file_name}}">
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="col-md-6" ng-if="filteredLicense.length > 0">
+                <!--=======================================CERTIFICATE=======================================-->
+                <h3>Лицензии</h3>
+                <div class="row certificate">
+                    <div ng-repeat="photo in service_center.service_photo | filter: 'licenses' as filteredLicense">
+                        <div class="clearfix" ng-if="$index % 3 == 0"></div>
+<<<<<<< HEAD
                         <div class="col-sm-4" >
                             <img class="photo-item"
                                  alt="@{{service_center.service_name}}"
@@ -153,27 +226,39 @@
                                  data-target="#photoModal"
                                  ng-click="openPhoto(photo.path + photo.file_name)"
                                  ng-src="@{{photo.path + photo.file_name_mini}}">
+=======
+                        <div class="col-sm-6" >
+                            <div style="overflow: hidden;">
+                                <img class="photo-item"
+                                     width="200px"
+                                     alt="@{{service_center.service_name}}"
+                                     data-toggle="modal"
+                                     data-target="#photoModal"
+                                     ng-click="openPhoto(photo.path + photo.file_name)"
+                                     ng-src="@{{photo.path + photo.file_name}}">
+                            </div>
+>>>>>>> e70a4f41c34b75a710b735b70caf22c5345f1cfd
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <hr>
-        <!--=======================================PERSONAL SC=======================================-->
-        <div class="row" ng-if="service_center.personal">
-            <div class="col-xs-12 personal-sc">
-                <h3>Команда сервиса</h3>
-                <slick
-                        infinite=true
-                        dots=true
-                        slides-to-show=3
-                        slides-to-scroll=3
-                        ng-if="service_center.personal"
-                        autoplay=true
 
-                >
+        <div class="row">
+            <!--=======================================PERSONAL SC=======================================-->
+
+            <div class="col-xs-12 personal-sc" ng-if="service_center.personal.length > 0">
+                <hr>
+                <h3>Команда сервиса</h3>
+                <slick infinite=true
+                       dots=true
+                       slides-to-show=3
+                       slides-to-scroll=3
+                       ng-if="service_center.personal"
+                       autoplay=true>
+
                     <div class="slick-item" ng-repeat="person in service_center.personal">
-                        <img ng-src="@{{ person.path + person.avatar }}" alt="@{{person.name}}" align="left"/>
+                        <img width="100px" ng-src="@{{ person.path + person.avatar }}" alt="@{{person.name}}" align="left"/>
                         <h4 ng-bind="person.name"></h4>
                         <p ng-if="person.info" ng-bind="person.info"></p>
                         <p ng-if="person.specialization" ng-bind="person.specialization"></p>
@@ -183,7 +268,9 @@
                 </slick>
             </div>
         </div>
-        <hr>
+
+
+
         <div class="row">
             <div class="comments-section">
                 <div class="col-sm-10">

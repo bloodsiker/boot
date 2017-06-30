@@ -16,6 +16,7 @@
                 <div class="col-sm-12">
                     <div class="box box-primary box-solid">
                         <div class="box-header with-border" >
+<<<<<<< HEAD
                             <h3 class="box-title"><i class="fa fa-area-chart" aria-hidden="true"></i>  Просмотры по услугам</h3>
                         </div>
                         <div class="box-body">
@@ -85,6 +86,77 @@
                             </table>
                         </div>
 
+=======
+                            <h3 class="box-title"><i class="fa fa-area-chart" aria-hidden="true"></i>  Популярные услуги сайта</h3>
+                        </div>
+                        <div class="box-body">
+                            <div class="row">
+                                <div class="col-sm-5">
+                                    <canvas flex id="line"
+                                            class="chart chart-bar"
+                                            chart-data="serviceDataChart"
+                                            chart-labels="serviceSeriesChart"
+                                            chart-series="serviceSeriesChart"
+                                            chart-options="options"
+                                            chart-dataset-override="datasetOverride">
+                                    </canvas>
+                                </div>
+                                <div class="col-sm-7">
+                                    <table class="table">
+                                        <thead>
+                                        <tr>
+                                            <td>Услуга</td>
+                                            <td>Кол-во просмотров</td>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr ng-repeat="item in top_services">
+                                            <td ng-bind="item.services"></td>
+                                            <td ng-bind="item.view"></td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-6" ng-repeat="(visit_key, visit) in visits track by $index">
+                    <div class="box box-primary box-solid">
+                        <div class="box-header with-border" >
+                            <h3 class="box-title"><i class="fa fa-area-chart" aria-hidden="true"></i>Статистика просмотров <b><u>@{{ visit_key }}</u></b></h3>
+                        </div>
+                        <div class="box-body">
+                            <canvas
+                                    ng-if="visit"
+                                    class="chart chart-bar"
+                                    chart-data="data"
+                                    chart-labels="labels"
+                                    chart-series="series"
+                                    chart-options="options">
+                            </canvas>
+
+                            <hr>
+
+                            <table class="table">
+                                <thead>
+                                <tr>
+                                    <td>Дата</td>
+                                    <td>Кол-во просмотров</td>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr ng-repeat="item in visit">
+                                    <td ng-bind="item.date_view"></td>
+                                    <td ng-bind="item.views"></td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+>>>>>>> e70a4f41c34b75a710b735b70caf22c5345f1cfd
                     </div>
                 </div>
             </div>

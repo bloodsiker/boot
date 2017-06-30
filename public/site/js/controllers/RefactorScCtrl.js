@@ -113,8 +113,57 @@
 
             });
         }
+<<<<<<< HEAD
+=======
 
 
+        getModel();
+
+
+
+        $scope.scLogo = [];
+        $scope.$watch('scLogo', function(val, oldVal) {
+            console.log(val.base64);
+            if (val.base64) {
+                model.post('/cabinet' + url + '/add-logo', {logo: val}).then(function (res) {
+                    $scope.scLogo = [];
+                });
+            }
+
+        });
+
+
+
+        $scope.saveGlobalSc = function (valid, sc) {
+            if (valid) {
+                var data = {
+                    info: {
+                        c1: sc.c1,
+                        c2: sc.c2,
+                        service_name: sc.service_name,
+                        city_id: sc.city.id,
+                        city_name: sc.city.city_name,
+                        district_id: sc.district.id,
+                        street: sc.street,
+                        metro_id: sc.metro.id,
+                        number_h: sc.number_h,
+                        number_h_add: sc.number_h_add,
+                        exit_master: sc.exit_master
+                    }
+
+                };
+>>>>>>> e70a4f41c34b75a710b735b70caf22c5345f1cfd
+
+                model.put('/cabinet' + url + '/update', data).then(function (res) {
+                    console.log(res);
+
+                    angular.element('#alert').append(alertSuccess);
+                    $timeout(function () {
+                        angular.element('#alert').html('');
+                    }, 4000)
+                });
+
+<<<<<<< HEAD
         getModel();
 
 
@@ -159,6 +208,8 @@
                     }, 4000)
                 });
 
+=======
+>>>>>>> e70a4f41c34b75a710b735b70caf22c5345f1cfd
             }
         };
 
@@ -299,6 +350,75 @@
 
 
 
+<<<<<<< HEAD
+        $scope.preAdvantage = '';
+        $scope.addAdvantages = function (advantag) {
+            $scope.sc.advantages.push(advantag);
+            $scope.preAdvantage = '';
+        };
+        $scope.removeAdvantages = function (index) {
+            $scope.sc.advantages.splice(index, 1);
+        };
+        $scope.saveAdvantages = function (advantages) {
+            model.put('/cabinet' + url + '/update', {advantages:advantages}).then(function (res) {
+                console.log(res); angular.element('#alert').append(alertSuccess);
+                    $timeout(function () {
+                        angular.element('#alert').html('');
+                    }, 4000)
+=======
+        $scope.prePhone = '';
+        $scope.addPhone = function (phone) {
+            $scope.sc.service_phones.push({phone:phone});
+            $scope.prePhone = '';
+        };
+        $scope.removePhone = function (index) {
+            $scope.sc.service_phones.splice(index, 1);
+        };
+        $scope.savePhones = function (phones) {
+            var data = [];
+
+            phones.forEach(function (key) {
+                data.push(key.phone)
+            });
+            model.put('/cabinet' + url + '/update', {phones:data}).then(function (res) {
+                console.log(res); angular.element('#alert').append(alertSuccess);
+                $timeout(function () {
+                    angular.element('#alert').html('');
+                }, 4000)
+>>>>>>> e70a4f41c34b75a710b735b70caf22c5345f1cfd
+            });
+        };
+
+
+
+
+<<<<<<< HEAD
+=======
+        $scope.preEmail = '';
+        $scope.addEmail = function (email) {
+            $scope.sc.service_emails.push({email:email});
+            $scope.preEmail = '';
+        };
+        $scope.removeEmail = function (index) {
+            $scope.sc.service_emails.splice(index, 1);
+        };
+        $scope.saveEmails = function (emails) {
+            var data = [];
+
+            emails.forEach(function (key) {
+                data.push(key.email)
+            });
+            model.put('/cabinet' + url + '/update', {emails:data}).then(function (res) {
+                console.log(res); angular.element('#alert').append(alertSuccess);
+                $timeout(function () {
+                    angular.element('#alert').html('');
+                }, 4000)
+            });
+        };
+
+
+
+
         $scope.preAdvantage = '';
         $scope.addAdvantages = function (advantag) {
             $scope.sc.advantages.push(advantag);
@@ -319,6 +439,7 @@
 
 
 
+>>>>>>> e70a4f41c34b75a710b735b70caf22c5345f1cfd
         $scope.preTag = '';
         $scope.addTags = function (tag) {
             $scope.sc.tags.push(tag);
@@ -399,9 +520,15 @@
 
 
         $scope.saveAbout = function () {
+<<<<<<< HEAD
 
             var text = angular.element('#aboutSc .wysihtml5-sandbox').contents().find("body").html();
 
+=======
+
+            var text = angular.element('#aboutSc .wysihtml5-sandbox').contents().find("body").html();
+
+>>>>>>> e70a4f41c34b75a710b735b70caf22c5345f1cfd
             model.put('/cabinet' + url + '/update', {about:text}).then(function (res) {
                 console.log(res); angular.element('#alert').append(alertSuccess);
                 $timeout(function () {
@@ -467,6 +594,7 @@
         $scope.newPersonalSpecialization='';
         $scope.newPersonalPhoto='';
         $scope.addPersonFile = [];
+<<<<<<< HEAD
 
 
         $scope.addPersonal = function (valid, name, info, work_exp, specialization, photo) {
@@ -493,6 +621,34 @@
 
         $scope.deletePersonal = function (personal, index, idPerson) {
 
+=======
+
+
+        $scope.addPersonal = function (valid, name, info, work_exp, specialization, photo) {
+            if (valid) {
+                model.post('/cabinet' + url + '/add-personal', {
+                    name: name,
+                    info: info,
+                    work_exp:work_exp,
+                    specialization: specialization,
+                    avatar: {
+                        data: photo
+                    }
+                }).then(function (success) {
+                    if ($scope.sc.personal) {
+                        $scope.sc.personal.push(success.data[0]);
+                    } else {
+                        $scope.sc.personal = [];
+                        $scope.sc.personal.push(success.data[0]);
+                    }
+                });
+
+            }
+        };
+
+        $scope.deletePersonal = function (personal, index, idPerson) {
+
+>>>>>>> e70a4f41c34b75a710b735b70caf22c5345f1cfd
             model.delete('/cabinet' + url + '/delete-personal/'+idPerson.id).then(function () {
                 personal.splice(index, 1);
             });

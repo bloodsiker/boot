@@ -121,6 +121,25 @@ img {
 [data-toggle] {
   cursor: pointer; }
 
+<<<<<<< HEAD
+=======
+.modal {
+  text-align: center;
+  padding: 0 !important; }
+
+.modal:before {
+  content: '';
+  display: inline-block;
+  height: 100%;
+  vertical-align: middle;
+  margin-right: -4px; }
+
+.modal-dialog {
+  display: inline-block;
+  text-align: left;
+  vertical-align: middle; }
+
+>>>>>>> e70a4f41c34b75a710b735b70caf22c5345f1cfd
 .fade {
   opacity: 1;
   transition: 0.3s linear all; }
@@ -192,9 +211,8 @@ img {
   .nav-bar .menu a {
     border: 1.2px solid transparent;
     border-radius: 4px;
-    padding: 7px; }
-    .nav-bar .menu a:not(:first-child) {
-      margin-left: 20px; }
+    padding: 7px;
+    display: inline-block; }
     .nav-bar .menu a:hover {
       border-color: #ffca13;
       text-decoration: none; }
@@ -682,8 +700,11 @@ img {
     .page-sc .tag:not(:first-child) {
       margin-left: 3px; }
   .page-sc .photos .photo-item {
+    margin-left: 5px;
+    max-width: initial;
     margin-top: 10px;
-    cursor: pointer; }
+    cursor: pointer;
+    vertical-align: top; }
   .page-sc .photos .panorama {
     margin-top: 10px;
     position: relative;
@@ -1000,4 +1021,11 @@ img {
   max-height: 300px;
   overflow: auto; }
 
+<<<<<<< HEAD
+=======
+.angular-multi-slider div.handle {
+  background-color: #ffca13 !important;
+  filter: none !important; }
+
+>>>>>>> e70a4f41c34b75a710b735b70caf22c5345f1cfd
 /*# sourceMappingURL=app.css.map */

@@ -7,7 +7,8 @@
         'slick',
         'angular-rating',
         'angular.filter',
-        'underscore'
+        'underscore',
+        'angularMultiSlider'
     ]);
 })();
 
@@ -44,6 +45,7 @@
     function TopSearchCtrl($scope, model, searchService) {
 
         $scope.filterTopSearch = '';
+<<<<<<< HEAD
         $scope.services = '';
         $scope.catalog = '';
 
@@ -56,11 +58,29 @@
             if (!$scope.services) {
                 model.get('/catalog').then(function (success) {
                     $scope.catalog = success.data;
+=======
+
+
+        $scope.getSearchData = function () {
+            if (!$scope.services_search) {
+                model.get('/services').then(function (success) {
+                    $scope.services_search = success.data;
+                    console.log(success.data);
+                });
+            }
+            if (!$scope.catalog_search) {
+                model.get('/catalog').then(function (success) {
+                    $scope.catalog_search = success.data;
+>>>>>>> e70a4f41c34b75a710b735b70caf22c5345f1cfd
                 });
             }
         };
         $scope.selectServiceSearch = function (service) {
             service.services = service.title;
+<<<<<<< HEAD
+=======
+            console.log(service);
+>>>>>>> e70a4f41c34b75a710b735b70caf22c5345f1cfd
             searchService.setService([service]);
             window.location = '/catalog';
         };

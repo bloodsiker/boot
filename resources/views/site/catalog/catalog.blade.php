@@ -95,11 +95,33 @@
                                 <button class="btn btn-yellow" ng-click="applyRadius(); isOpenRadius = false">Применить</button>
                             </div>
                         </div>
+<<<<<<< HEAD
                         <div ng-if="false" style="display: inline-block; margin-left: 10px;">
                             <span class="filter-panel">
                                 Цена
                             </span>
                             <input style="display: inline-block;width: 150px;vertical-align: top;" type="range" min="0" max="100" step="1" value="50">
+=======
+                        <div ng-if="filterService.length == 1" style="vertical-align: top;display: inline-block; float: right;">
+                            <span class="filter-panel">
+                                Цена: до @{{ filterService[0].price_max }}грн
+                            </span>
+                            <input style="display: block;vertical-align: top;"
+                                   type="range"
+                                   ng-if="filterService[0].price_max"
+                                   min="@{{ filterService[0]._price_min+1 }}"
+                                   max="@{{ filterService[0]._price_max }}"
+                                   step="1" ng-model="filterService[0].price_max">
+
+                            <div style="width: 200px; margin-top: 5px; vertical-align: bottom;">
+                                <input type="number" style="width: 33%;" step="0.01" ng-model="filterService[0].price_min">
+                                <span style="color: #ffffff;">грн</span>
+                                <input type="number" style="width: 33%; margin-left: 12px;"  step="0.01" ng-model="filterService[0].price_max">
+                                <span style="color: #ffffff;">грн</span>
+
+                            </div>
+
+>>>>>>> e70a4f41c34b75a710b735b70caf22c5345f1cfd
                         </div>
 
                     </div>
@@ -109,13 +131,22 @@
                              class="chips btn btn-yellow fade"
                              ng-repeat="filter in filterService track by $index"
                              ng-click="removeFilterService($index, filter)">
-                            @{{filter}} <span class="glyphicon glyphicon-remove"></span>
+                            @{{filter.title}} <span class="glyphicon glyphicon-remove"></span>
                         </div>
                         <div ng-if="timeFilter"
                              class="chips btn btn-yellow fade"
                              ng-click="removeFilterTime()">
                             @{{_timeFilter.day}} c @{{ _timeFilter.start_time | date: 'HH:mm' }} до @{{ _timeFilter.end_time | date: 'HH:mm' }} <span class="glyphicon glyphicon-remove"></span>
                         </div>
+                        <div ng-if="timeFilter"
+                             class="chips btn btn-yellow fade"
+                             ng-click="removeFilterTime()">
+                            @{{_timeFilter.day}} c @{{ _timeFilter.start_time | date: 'HH:mm' }} до @{{ _timeFilter.end_time | date: 'HH:mm' }} <span class="glyphicon glyphicon-remove"></span>
+                        </div>
+                    </div>
+
+                    <div ng-if="catalog.length" style="padding-left: 15px; margin-top: 20px;">
+                        <span style="color: #ffca13;">Найдено <b><u>@{{ catalog.length }}</u></b> сервисных центров, соответствующих Вашему запросу </span>
                     </div>
 
                     <div ng-if="catalog.length" style="padding-left: 15px; margin-top: 20px;">
@@ -136,9 +167,28 @@
                 <div class="row sort">
                     <div class="col-xs-12">
                     <span>Сортировать:
+<<<<<<< HEAD
                         <span ng-class="{active: activeSort == 'name'}" ng-click="order_event('name')" class="sort-by active">по имени <i ng-if="activeSort == 'name'" class="glyphicon glyphicon-sort-by-attributes-alt"></i></span>
                         <span ng-class="{active: activeSort == 'rating'}" ng-click="order_event('rating')" class="sort-by">по рейтингу <i ng-if="activeSort == 'rating'" class="glyphicon glyphicon-sort-by-attributes-alt"></i></span>
                         <span ng-class="{active: activeSort == 'comments'}" ng-click="order_event('comments')" class="sort-by">по отзывам  <i ng-if="activeSort == 'comments'"  class="glyphicon glyphicon-sort-by-attributes-alt"></i></span>
+=======
+                        <span ng-class="{active: activeSort == 'name'}" ng-click="order_event('name')" class="sort-by active">по имени
+                            <i ng-if="activeSort == 'name' && !reverseIcon" class="glyphicon glyphicon-sort-by-attributes-alt"></i>
+                            <i ng-if="activeSort == 'name' && reverseIcon" class="glyphicon glyphicon-sort-by-attributes"></i>
+                        </span>
+                        <span ng-class="{active: activeSort == 'popular'}" ng-click="order_event('popular')" class="sort-by active">по популярности
+                           <i ng-if="activeSort == 'popular' && !reverseIcon" class="glyphicon glyphicon-sort-by-attributes-alt"></i>
+                            <i ng-if="activeSort == 'popular' && reverseIcon" class="glyphicon glyphicon-sort-by-attributes"></i>
+                        </span>
+                        <span ng-class="{active: activeSort == 'rating'}" ng-click="order_event('rating')" class="sort-by">по рейтингу
+                           <i ng-if="activeSort == 'rating' && !reverseIcon" class="glyphicon glyphicon-sort-by-attributes-alt"></i>
+                            <i ng-if="activeSort == 'rating' && reverseIcon" class="glyphicon glyphicon-sort-by-attributes"></i>
+                        </span>
+                        <span ng-class="{active: activeSort == 'comments'}" ng-click="order_event('comments')" class="sort-by">по отзывам
+                           <i ng-if="activeSort == 'comments' && !reverseIcon" class="glyphicon glyphicon-sort-by-attributes-alt"></i>
+                            <i ng-if="activeSort == 'comments' && reverseIcon" class="glyphicon glyphicon-sort-by-attributes"></i>
+                        </span>
+>>>>>>> e70a4f41c34b75a710b735b70caf22c5345f1cfd
                     </span>
                     </div>
                 </div>
@@ -207,8 +257,12 @@
                             <span class="glyphicon glyphicon-comment"></span>
                             <span ng-bind="(item.comments | number) + ' отзывов'"></span>
                         </div>
-                        <button class="btn btn-yellow" data-toggle="modal" data-target="#call_modal" ng-click="openScCall(item.id)">Связаться</button>
+                    </div>
+                </div>
 
+                <div class="row" ng-if="catalog.length > 0 && catalog.length >= limitCatalog">
+                    <div class="col-xs-12 text-center">
+                        <button ng-click="limitCatalogCount()" style="margin-bottom: 20px;" class="btn btn-yellow">Показать еще</button>
                     </div>
                 </div>
 
@@ -258,7 +312,6 @@
 
                             </div>
                             <a ng-href="@{{ '/sc/'+info.id }}" style="margin-bottom: 0;" class="btn btn-black" >Посмотреть</a>
-                            <button style="margin-bottom: 0;" class="btn btn-yellow" data-toggle="modal" data-target="#call_modal" ng-click="openScCall(info.id)">Связаться</button>
                         </div>
                     </info-window>
 
