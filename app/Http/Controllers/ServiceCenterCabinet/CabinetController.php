@@ -53,7 +53,7 @@ class CabinetController extends Controller
     {
         $end = Carbon::now()->toDateString();
         $start = Carbon::now()->addDay(-30)->toDateString();
-        $service_centers = Auth::user()->service_centers->toArray();
+        $service_centers = Auth::user()->service_centers->where('enabled', 0)->toArray();
         $statistic = [];
         foreach ($service_centers as $sc){
             $statistic['visits'][$sc['service_name']] = $this->visitsRepository->visitsBetween($sc['id'], $start, $end);
