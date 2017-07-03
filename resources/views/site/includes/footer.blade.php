@@ -319,6 +319,13 @@
                                 <label for="client_exit_master">Выезд мастера (+50 грн)</label>
                             </div>
                         </div>
+                        <div class="col-sm-12">
+                            <div class="form-group" ng-if="data.client_exit_master">
+                                <label for="client_address">Адрес</label>
+                                <input type="text" class="form-control" id="client_address" ng-model="data.client_address">
+                            </div>
+                        </div>
+
                         <div class="col-sm-12" ng-if="sc.price.length > 0">
                             <h3>Примерная стоимость <small>от</small><b><u> @{{ sc.price[serviceIndex].price_min }}</u></b> <small>до</small>
                                 <b><u>@{{ sc.price[serviceIndex].price_max }}грн</u></b> <small uib-tooltip="Выезд мастера" ng-if="data.client_exit_master"><i>+ 50грн</i></small></h3>

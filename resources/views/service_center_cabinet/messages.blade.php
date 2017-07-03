@@ -7,7 +7,6 @@
         <section class="content-header">
             <h1>
                 Mailbox
-                <small>13 new messages</small>
             </h1>
             <ol class="breadcrumb">
                 <li><a href="/cabinet/"><i class="fa fa-dashboard"></i> Dashboard</a></li>
@@ -29,11 +28,13 @@
                         </div>
                         <div class="box-body no-padding">
                             <ul class="nav nav-pills nav-stacked">
-                                <li class="active"><a href="#"><i class="fa fa-inbox"></i> Входящие<span class="label label-primary pull-right">12</span></a></li>
-                                <li><a href="#"><i class="fa fa-envelope-o"></i> В работе <span class="label label-warning pull-right">65</span></a></li>
-                                <li><a href="#"><i class="fa fa-filter"></i>Ожидает подтверждения <span class="label label-warning pull-right">65</span></a>
-                                <li><a href="#"><i class="fa fa-remove"></i> Отклонена <span class="label label-warning pull-right">65</span></a></li>
-                                </li>
+                                <li ng-class="{active: activeFilter == ''}"><a href ng-click="filterMessages('all','')"><i class="fa fa-inbox"></i> Все</a></li>
+                                <li ng-class="{active: activeFilter == 1}"><a href ng-click="filterMessages('status_id',1)"><i class="fa fa-filter"></i>Ожидают подтверждения </a>
+                                <li ng-class="{active: activeFilter == 2}"><a href ng-click="filterMessages('status_id',2)"><i class="fa fa-clock-o" aria-hidden="true"></i> В работе </a></li>
+                                <li ng-class="{active: activeFilter == 4}"><a href ng-click="filterMessages('status_id',4)"><i class="fa fa-check" aria-hidden="true"></i> Ожидают закрытия </a></li>
+                                <li ng-class="{active: activeFilter == 6}"><a href ng-click="filterMessages('status_id',6)"><i class="fa fa-check" aria-hidden="true"></i> Закрытые </a></li>
+                                <li ng-class="{active: activeFilter == 3}"><a href ng-click="filterMessages('status_id',3)"><i class="fa fa-remove"></i> Отклоненные </a></li>
+                                <li ng-class="{active: activeFilter == 'stars'}"><a href ng-click="filterMessages('favorite','1')"><i class="fa fa-star text-yellow"></i> Помеченные </a></li>
                             </ul>
                         </div>
                         <!-- /.box-body -->
@@ -51,63 +52,101 @@
                                     <span class="glyphicon glyphicon-search form-control-feedback"></span>
                                 </div>
                             </div>
-                            <!-- /.box-tools -->
                         </div>
-                        <!-- /.box-header -->
                         <div class="box-body no-padding">
                             <div class="mailbox-controls text-right">
                                 <div>
-                                    1-50/200
-                                    <div class="btn-group">
-                                        <button type="button" class="btn btn-default btn-sm"><i class="fa fa-chevron-left"></i></button>
-                                        <button type="button" class="btn btn-default btn-sm"><i class="fa fa-chevron-right"></i></button>
-                                    </div>
-                                    <!-- /.btn-group -->
+                                    Всего: <b>@{{ messages.length }}</b> заявок
                                 </div>
-                                <!-- /.pull-right -->
                             </div>
                             <div class="table-responsive mailbox-messages">
                                 <table class="table table-hover table-striped">
                                     <tbody>
-                                    <tr ng-repeat="message in messages">
-                                        <td class="mailbox-star"><a href="#"><i class="fa fa-star text-yellow"></i></a></td>
-                                        <td class="mailbox-name"><a href="read-mail.html" ng-bind="message.name"></a></td>
-                                        <td class="mailbox-subject"><b ng-bind="message.services"></b> - Trying to find a solution to this problem...
+                                    <tr ng-repeat="message in messages | filter: activeFilterObject | limitTo: limitMessages as filteredMessages">
+                                        <td class="mailbox-star"><a href ng-click="updateMessage(message, 'favorite')">
+                                                <i ng-if="message.favorite == '0'" class="fa fa-star-o text-yellow"></i>
+                                                <i ng-if="message.favorite == '1'" class="fa fa-star text-yellow"></i>
+                                            </a></td>
+                                        <td class="mailbox-name"><a href ng-click="openMessage(message.id)" ng-bind="message.name"></a></td>
+                                        <td class="mailbox-subject"><b ng-bind="message.status.status"></b> - @{{message.services}}
                                         </td>
                                         <td class="mailbox-attachment"></td>
                                         <td class="mailbox-date" ng-bind="message.created_at"></td>
                                     </tr>
                                     </tbody>
                                 </table>
-                                <!-- /.table -->
                             </div>
-                            <!-- /.mail-box-messages -->
                         </div>
-                        <!-- /.box-body -->
                         <div class="box-footer no-padding">
-                            <div class="mailbox-controls text-right">
+                            <div class="mailbox-controls">
                                 <div>
-                                    1-50/200
-                                    <div class="btn-group">
-                                        <button type="button" class="btn btn-default btn-sm"><i class="fa fa-chevron-left"></i></button>
-                                        <button type="button" class="btn btn-default btn-sm"><i class="fa fa-chevron-right"></i></button>
+                                    <button type="button" ng-if="limitMessages <= messages.length" ng-click="addLimitMessages()" class="btn btn-default btn-sm">Показать еще</button>
+                                    <div class="pull-right">
+                                        Всего: <b>@{{ messages.length }}</b> заявок
                                     </div>
-                                    <!-- /.btn-group -->
                                 </div>
-                                <!-- /.pull-right -->
                             </div>
                         </div>
                     </div>
-                    <!-- /. box -->
                 </div>
-                <!-- /.col -->
-            </div>
-            <!-- /.row -->
-            <div>
-
             </div>
         </section>
     </div>
+
+
+
+    <script type="text/ng-template" id="readMessage.html">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="box box-primary">
+                    <div class="box-header with-border">
+                        <h3 class="box-title">Заявка </h3>
+                    </div>
+                    <!-- /.box-header -->
+                    <div class="box-body no-padding">
+                        <div class="mailbox-read-info">
+                            <h3>@{{ message.services }} <span class="mailbox-read-time pull-right">@{{ message.updated_at }}</span></h3>
+                            <h5>От: @{{ message.name }}<span class="mailbox-read-time pull-right">@{{ message.email }}</span></h5>
+                            <h5>Телефон: @{{ message.phone }}</h5>
+                            <h5>Оплата: <strong>@{{ message.cost_of_work_min }}грн</strong>  — <strong>@{{ message.cost_of_work_max }}грн</strong> <span class="mailbox-read-time pull-right">@{{ message.payment_method }}</span></h5>
+                            <h5>По адресу: @{{ message.service_center.address }}</h5>
+                            <h5 ng-if="message.deadline">Приблизительная дата выполнения работы: @{{ message.deadline }}</h5>
+                            <h5 ng-if="message.exit_master ===  '1'">Адрес клиента: @{{ message.client_address }}<span class="pull-right"><b class="fa fa-exclamation-triangle"></b> Выезд мастера</span></h5>
+
+                        </div>
+                        <!-- /.mailbox-controls -->
+                        <div class="mailbox-read-message" ng-bind="message.task_description"></div>
+                        <!-- /.mailbox-read-message -->
+                    </div>
+                    <!-- /.box-footer -->
+                    <div class="box-footer"  ng-if="message.status_id === '1' || message.status_id === '2'">
+                        <div class="input-group">
+                            <label for="deadline">Приблизительная дата выполнения работы</label>
+                            <input type="text" class="form-control"
+                                   uib-datepicker-popup="@{{format}}"
+                                   ng-model="dt"
+                                   id="deadline"
+                                   is-open="calendar.opened"
+                                   datepicker-options="dateOptions"
+                                   ng-required="true" />
+                            <span class="input-group-btn"  style="vertical-align: bottom;">
+                                    <button type="button" class="btn btn-default" ng-click="calendarOpen()"><i class="glyphicon glyphicon-calendar"></i></button>
+                                </span>
+                        </div>
+                    </div>
+                    <div class="box-footer"  ng-if="message.status_id === '1' || message.status_id === '2'">
+                        <div class="pull-right">
+                            <button ng-if="message.status_id === '1'" type="button" class="btn btn-default"><i class="fa fa-remove"></i> Отклонить</button>
+                            <button ng-if="message.status_id === '1'" type="button" class="btn btn-success"><i class="fa fa-check"></i> Принять</button>
+                            <button ng-if="message.status_id === '2'" type="button" class="btn btn-success"><i class="fa fa-check"></i> Выполнить</button>
+                        </div>
+                    </div>
+                    <!-- /.box-footer -->
+                </div>
+                <!-- /. box -->
+            </div>
+        </div>
+    </script>
 
 
 @endsection

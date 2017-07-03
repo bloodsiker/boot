@@ -241,6 +241,7 @@
                     </div>
                 </div>
 
+                <div class="clearfix"></div>
 
                 {{--============================ТЕЛЕФОНЫ==================================--}}
                 <div class="col-md-6">
@@ -302,6 +303,7 @@
                     </div>
                 </div>
 
+                <div class="clearfix"></div>
                 {{--============================Преимущества==================================--}}
                 <div class="col-md-6">
                     <div class="box box-primary box-solid collapsed-box">
@@ -362,6 +364,7 @@
                     </div>
                 </div>
 
+                <div class="clearfix"></div>
                 {{--============================Бренды==================================--}}
                 <div class="col-md-12">
                     <div class="box box-primary box-solid collapsed-box">

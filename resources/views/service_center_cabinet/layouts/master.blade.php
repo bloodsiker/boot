@@ -150,6 +150,7 @@
 
 
 <script src="{{ asset('site/vendor/angular/angular.js') }}"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-i18n/1.6.4/angular-locale_ru-ru.min.js"></script>
 <script src="{{ asset('site/vendor/angular-animate/angular-animate.js') }}"></script>
 <script src="{{ asset('site/vendor/angular-aria/angular-aria.js') }}"></script>
 <script src="{{ asset('site/vendor/angular-messages/angular-messages.js') }}"></script>
