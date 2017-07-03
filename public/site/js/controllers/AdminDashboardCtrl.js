@@ -10,10 +10,15 @@
         $scope.options = {
             scales: {
                 yAxes: [{
-
+                    ticks: {
+                        suggestedMin: 0,    // minimum will be 0, unless there is a lower value.
+                        // OR //
+                        beginAtZero: true   // minimum value will be 0.
+                    }
                 }],
                 xAxes: [{
-                    display: false
+                    display: false,
+
                 }]
             }
         };
@@ -31,36 +36,22 @@
 
             $scope.visits = success.data.visits;
 
-            $scope.visitData = function (visit) {
-                var data = [];
-                visit.forEach(function (key) {
-                    data.push(key.views);
-                });
-                return data;
-            };
-
-            $scope.visitlabels = function (visit) {
-                var data = [];
-                visit.forEach(function (key) {
-                    data.push(key.date_view);
-                });
-                return data;
-            };
-
-            $scope.labels = ["January", "February", "March", "April", "May", "June", "July"];
-            $scope.series = ['Series A'];
-            $scope.data = [65, 59, 80, 81, 56, 55, 40];
-
+            var ojectsSc = {};
+            _.mapObject($scope.visits, function (key, index) {
+                ojectsSc[index] = {
+                    name: index,
+                    data: [],
+                    series: [],
+                    labels: []
+                };
+                _.mapObject(key, function (sc) {
+                    ojectsSc[index].data.push(sc.views);
+                    ojectsSc[index].series.push(sc.date_view);
+                    ojectsSc[index].labels.push(sc.date_view);
+                })
+            });
+            $scope.chartsData = ojectsSc;
 
         });
-
-
-
-
-
-
-
-
-
     }
 })();

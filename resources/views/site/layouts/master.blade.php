@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" ng-app="App" ng-controller="IndexCtrl">
+<html data-lang="ru" data-ng-app="App" data-ng-controller="IndexCtrl">
 
 <head>
     <meta charset="utf-8">
@@ -18,8 +18,8 @@
     <link rel="stylesheet" href="{{ asset('site/vendor/angular-multi-slider/multislider.css') }}">
     <link rel="stylesheet" href="{{ asset('site/css/app.css') }}">
 </head>
-<body ng-cloak>
-<div ng-controller="@yield('controller')" ng-cloak>
+<body data-ng-cloak>
+<div data-ng-controller="@yield('controller')" data-ng-cloak>
 
     <main style="min-height: 100vh; padding-bottom: 108px;">
         @include('site.includes.header')

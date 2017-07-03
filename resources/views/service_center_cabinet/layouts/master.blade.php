@@ -61,6 +61,12 @@
             <div class="navbar-custom-menu">
                 <ul class="nav navbar-nav">
                     <!-- User Account: style can be found in dropdown.less -->
+                    <li>
+                        <a href="{{ route('cabinet.messages') }}">
+                            <i class="fa fa-envelope-o"></i>
+                            <span class="label label-warning">4</span>
+                        </a>
+                    </li>
                     <li class="bg-blue">
                         <a href="{{ route('main') }}">На сайт <i class="fa fa-sign-out"></i></a>
                     </li>
@@ -177,6 +183,7 @@
 <script src="{{ asset('site/js/controllers/AddScCtrl.js') }}"></script>
 <script src="{{ asset('site/js/controllers/RefactorScCtrl.js') }}"></script>
 <script src="{{ asset('site/js/controllers/SettingsScController.js') }}"></script>
+<script src="{{ asset('site/js/controllers/MessagesCtrl.js') }}"></script>
 
 <script src="{{ URL::to('admin/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js') }}"></script>
 <script>
