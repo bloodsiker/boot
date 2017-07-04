@@ -2,7 +2,7 @@
     <tr>
         <td width="5" style="background: #fff"></td>
         <td class="" style="background: #fff" width="70">
-            <a href="{{ route('main') }}"><img src="{{ asset('site/img/logo.png') }}" width="70" alt=""></a>
+            <a href="{{ route('main') }}"><img src="http://boot.com.ua/site/img/logo.png" width="70" alt=""></a>
         </td>
         <td width="5" style="background: #fff"></td>
         <td class="" width="590">

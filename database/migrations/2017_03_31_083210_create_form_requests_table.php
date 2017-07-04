@@ -36,6 +36,7 @@ class CreateFormRequestsTable extends Migration
             $table->integer('status_id')->unsigned();
             $table->text('cancel_comment');
             $table->boolean('favorite')->default(0);
+            $table->boolean('notif_email')->default(0);
             $table->timestamps();
 
             $table->foreign('service_center_id')

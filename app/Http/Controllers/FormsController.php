@@ -146,6 +146,6 @@ class FormsController extends Controller
 //            $message->from('info@boot.com.ua', 'BOOT');
 //            $message->to(config('mail.support_email'))->to('do@generalse.com')->subject('Новая заявка для сервисного центра ');
 //        });
-        return view('site.emails.thanks_sc_register');
+        //return view('site.emails.thanks_sc_register');
     }
 }

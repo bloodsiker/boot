@@ -13,7 +13,7 @@ class Kernel extends ConsoleKernel
      * @var array
      */
     protected $commands = [
-        '\App\Console\Commands\TestCron',
+        '\App\Console\Commands\NotificationCron',
     ];
 
     /**
@@ -26,7 +26,7 @@ class Kernel extends ConsoleKernel
     {
         // $schedule->command('inspire')
         //          ->hourly();
-        $schedule->command('TestCron:sendEmail')
+        $schedule->command('NotificationEmail:sendEmail')
             ->everyMinute();
     }
 
