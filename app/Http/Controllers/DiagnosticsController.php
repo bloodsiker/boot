@@ -154,7 +154,7 @@ class DiagnosticsController extends Controller
         if($action == 'pick_up_service'){
             //Пишем в статистику, что по таким услугам был запрос на подбор сервисного центр
             ServicesView::create([
-                'user_id' => Auth::user()->roleUser() ? Auth::user()->id : null,
+                'user_id' => (Auth::user() && Auth::user()->roleUser()) ? Auth::user()->id : null,
                 'type_device' => $request->type_device,
                 'services' => $request->service,
                 'date_view' => Carbon::now()->format('Y-m-d')

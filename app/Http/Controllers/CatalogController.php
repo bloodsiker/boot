@@ -46,7 +46,7 @@ class CatalogController extends Controller
         if(Session::has('pick_up_service')){
             ServicesView::create([
                 'service_center_id' => $id,
-                'user_id' => Auth::user()->roleUser() ? Auth::user()->id : null,
+                'user_id' => (Auth::user() && Auth::user()->roleUser()) ? Auth::user()->id : null,
                 'services' => Session::get('pick_up_service'),
                 'date_view' => Carbon::now()->format('Y-m-d')
             ]);
