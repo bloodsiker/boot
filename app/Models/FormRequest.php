@@ -12,7 +12,7 @@ class FormRequest extends Model
     protected $fillable = [
         'r_id', 'service_center_id', 'user_id', 'city', 'name', 'phone', 'email',
         'manufacturer', 'services', 'cost_of_work_min', 'cost_of_work_max', 'cost_of_work_end', 'task_description',
-        'payment_method', 'exit_master', 'comment', 'status'
+        'payment_method', 'exit_master', 'client_address', 'comment', 'status_id'
     ];
 
 
@@ -28,9 +28,17 @@ class FormRequest extends Model
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function tags()
+    public function messages()
     {
         return $this->hasMany('App\Models\FormRequestMessage', 'request_id', 'id');
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function status()
+    {
+        return $this->hasOne('App\Models\RequestStatus', 'id', 'status_id');
     }
 
 

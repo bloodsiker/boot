@@ -45,6 +45,12 @@
             <td><strong>Выезд мастера:</strong></td>
             <td>{{ $data['exit_master'] == 1 ? 'Да' : 'Нет' }}</td>
         </tr>
+        @if($data['exit_master'] == 1)
+            <tr>
+                <td><strong>Адрес клиента:</strong></td>
+                <td>{{ $data['client_address'] }}</td>
+            </tr>
+        @endif
     </table>
     <br>
     <hr>

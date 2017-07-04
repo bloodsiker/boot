@@ -2,8 +2,8 @@
 
 @section('content')
 
-    <h3>Выша заявка #{{ $user_request->r_id }} на услугу &laquo;{{ $user_request->services  }}&raquo; перешла в статус &laquo;{{ $user_request->status }}&raquo;</h3>
-    @if($user_request->status == 'Отклонена')
+    <h3>Ваша заявка #{{ $user_request->r_id }} на услугу &laquo;{{ $user_request->services  }}&raquo; перешла в статус &laquo;{{ $status->status }}&raquo;</h3>
+    @if($status->status == 'Отклонена')
         <h3>Комментарий от сервисного центра:</h3>
         <table class="content" width="100%" cellpadding="5" cellspacing="0" style="background: #f17c70; color: #fff">
             <tr>
@@ -30,7 +30,7 @@
         </tr>
         <tr>
             <td><strong>Стоимость работы (ориентировочно):</strong></td>
-            <td>{{ $user_request->cost_of_work }}</td>
+            <td>{{ $user_request->cost_of_work_min }} - {{ $user_request->cost_of_work_max }} {{ ($user_request->exit_master == 1) ? '(Выезд мастера + 50грн)' : null }} </td>
         </tr>
         <tr>
             <td><strong>Описание задачи:</strong></td>
@@ -42,8 +42,14 @@
         </tr>
         <tr>
             <td><strong>Выезд мастера:</strong></td>
-            <td>{{ $user_request->exit_master }}</td>
+            <td>{{ $user_request->exit_master ? 'Да' : 'Нет' }}</td>
         </tr>
+        @if($user_request->exit_master == 1)
+            <tr>
+                <td><strong>Адрес клиента:</strong></td>
+                <td>{{ $user_request->client_address }}</td>
+            </tr>
+        @endif
     </table>
     <br>
     <hr>

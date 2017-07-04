@@ -112,7 +112,8 @@ class FormsController extends Controller
             'task_description' => isset($request->task_description) ? $request->task_description : null,
             'payment_method' => $request->payment_type,
             'exit_master' => $request->exit_master,
-            'status' => 'Ожидает подтверждения',
+            'client_address' => isset($request->client_address) ? $request->client_address : null,
+            'status_id' => 1,
             'created_at' => Carbon::now()
         ];
 
