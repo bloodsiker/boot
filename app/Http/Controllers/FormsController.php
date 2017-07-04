@@ -125,9 +125,9 @@ class FormsController extends Controller
         $user = $service_center->user;
 
         // Отправляем письмо сервисному центру
-        Mail::send('site.emails.request_sc', compact('data', 'service_center', 'user'), function ($message) use ($service_center) {
+        Mail::send('site.emails.request_sc', compact('data', 'service_center', 'user'), function ($message) use ($service_center, $user) {
             $message->from('info@boot.com.ua', 'BOOT');
-            $message->to('maldini2@ukr.net')->to('do@generalse.com')->subject('Новая заявка для сервисного центра ' . $service_center->service_name);
+            $message->to($user->email)->subject('Новая заявка для сервисного центра ' . $service_center->service_name);
         });
 
         // Отправляем письмо оператору
