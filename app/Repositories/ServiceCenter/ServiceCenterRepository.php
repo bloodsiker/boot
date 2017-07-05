@@ -76,7 +76,9 @@ class ServiceCenterRepository implements ServiceCenterRepositoryInterface
             }
             $user->change_email = 1;
         }
+
         $user->name = $requestData->name;
+
 
         if(isset($requestData->passFirst) && !empty($requestData->passFirst)){
             $user->password = bcrypt($requestData->passFirst);
@@ -131,7 +133,7 @@ class ServiceCenterRepository implements ServiceCenterRepositoryInterface
         $sc = ServiceCenter::find($id);
 
         $file = $requestData->logo['base64'];
-        $img_name = $sc->service_name . '-' . $requestData->logo['filename'];
+        $img_name = $sc->id . '-' . $requestData->logo['filename'];
         Storage::makeDirectory('/sc_uploads/logo/' . $sc->id);
         $path = "/sc_uploads/logo/{$sc->id}/";
         $path_img = $path . $img_name;
@@ -158,7 +160,7 @@ class ServiceCenterRepository implements ServiceCenterRepositoryInterface
         $sc->city_id = $requestData->info['city_id'];
         $sc->metro_id = $requestData->info['metro_id'];
         $sc->district_id = $requestData->info['district_id'];
-        $sc->address = 'Украина, ' . $requestData->info['city_name'] . ', ' . $requestData->info['street'];
+        $sc->address = 'Украина, ' . $requestData->info['city_name'] . ', ' . $requestData->info['street'] . ', ' . $requestData->info['number_h'];
         $sc->street = $requestData->info['street'];
         $sc->number_h = $requestData->info['number_h'];
         $sc->number_h_add = $requestData->info['number_h_add'];
@@ -372,7 +374,7 @@ class ServiceCenterRepository implements ServiceCenterRepositoryInterface
         $sc = ServiceCenter::find($id);
 
         $file = $requestData->avatar['data']['base64'];
-        $img_name = str_random() . '-' . $sc->service_name . ".jpg";
+        $img_name = str_random() . '-' . $sc->id . ".jpg";
         Storage::makeDirectory('/sc_uploads/avatars/' . $sc->id);
         $path = "/sc_uploads/avatars/{$sc->id}/";
         $path_img = $path . $img_name;
@@ -418,7 +420,7 @@ class ServiceCenterRepository implements ServiceCenterRepositoryInterface
 
         $file = $requestData->photo['data']['base64'];
 
-        $img_name = str_random() . '-' . $sc->service_name . ".jpg";
+        $img_name = str_random() . '-' . $sc->id . ".jpg";
         $img_mini = 'mini-' . $img_name;
         Storage::makeDirectory("/sc_uploads/{$requestData->type}/{$sc->id}");
         $path = "/sc_uploads/{$requestData->type}/{$sc->id}/";
