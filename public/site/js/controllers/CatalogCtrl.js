@@ -62,6 +62,7 @@
 
         var getServices = function () {
             model.get('/services').then(function (success) {
+
                 success.data.map(function (key) {
                     key.active = false;
                     key.price_min = 0;
@@ -71,7 +72,12 @@
 
                 if (searchService.service_model().length > 0) {
                     var s = searchService.service_model()[0];
-                    s.title = s.services;
+
+                    if (s.services) {
+                        s.title = s.services;
+                    }
+
+
                     s.price_min = s.min_price ? parseFloat(s.min_price) : 0;
                     s.price_max = s.max_price ? parseFloat(s.max_price) : 0;
                     $scope.filterService = [s];

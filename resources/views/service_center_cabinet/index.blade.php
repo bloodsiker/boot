@@ -33,9 +33,9 @@
                                             <div class="col-md-3">
                                                 <label for="logoSc">
                                                     <div style="cursor: pointer; position: relative;">
-                                                        <img ng-if="!scLogo.base64 && !sc.logo" style="max-width: 100%;" src="http://fakeimg.pl/200x140/?text=Foto" alt="add personal" >
-                                                        <img ng-if="scLogo.base64 && !sc.logo" style="max-width: 100%;" ng-src="@{{'data:'+scLogo.filetype+';base64,'+scLogo.base64}}" alt="@{{sc.service_name}}">
-                                                        <img ng-if="sc.logo && !scLogo.base64" style="max-width: 100%;" ng-src="@{{sc.logo}}" alt="@{{sc.service_name}}">
+                                                        <img ng-if="!scLogo.base64 && !sc.logo" style="max-width: 100%;" src="http://fakeimg.pl/200x140/?text=Logo" alt="add personal" >
+                                                        <img ng-if="scLogo.base64.length > 0" style="max-width: 100%;" ng-src="@{{'data:'+scLogo.filetype+';base64,'+scLogo.base64}}" alt="@{{sc.service_name}}">
+                                                        <img ng-if="sc.logo && scLogo.base64.length == 0" style="max-width: 100%;" ng-src="@{{sc.logo}}" alt="@{{sc.service_name}}">
                                                         <span style="position: absolute; bottom: 8px; right: 5px;" class="fa fa-camera"></span>
                                                         <input type="file" ng-hide="true" id="logoSc" ng-model="scLogo" accept="image/*" base-sixty-four-input>
                                                     </div>

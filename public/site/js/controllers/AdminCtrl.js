@@ -23,10 +23,14 @@
         // };
 
 
-        $scope.addSettingsSc = function (event, valid, settings) {
+        $scope.addSettingsIndex = function (event, valid, settings) {
+            console.log(event, valid, settings);
             valid && settings.passFirst == settings.passLast ? console.log('ok') :  event.preventDefault();
+        };
 
-
+        $scope.addSettingsPass = function (event, valid, settings) {
+            console.log(event, valid, settings);
+            valid && settings.passFirst == settings.passLast ? console.log('ok') :  event.preventDefault();
         };
 
         $scope.deleteService = function (id) {

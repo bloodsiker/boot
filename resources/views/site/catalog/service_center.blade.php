@@ -11,16 +11,17 @@
 @section('content')
 
     <div class="container page-sc">
+
+        <div class="row header-info">
+            <div class="col-sm-8">
+                <h1 class="title" ng-bind="service_center.service_name"></h1>
+            </div>
+            <div class="col-sm-4 text-right">
+                <img class="logo-cs" style="width: 200px;" ng-src="@{{service_center.logo ? service_center.logo : 'http://fakeimg.pl/350x200/?text=Logo'}}" alt="@{{service_center.service_name}}">
+            </div>
+        </div>
         <div class="row">
             <div class="col-sm-6">
-                <div class="row header-info">
-                    <div class="col-sm-7">
-                        <h1 class="title" ng-bind="service_center.service_name">Технодоктор</h1>
-                    </div>
-                    <div class="col-sm-5">
-                        <img class="logo-cs" ng-src="@{{service_center.logo ? service_center.logo : 'http://fakeimg.pl/350x200/?text=Logo'}}" alt="@{{service_center.service_name}}">
-                    </div>
-                </div>
                 <div class="row">
                     <div class="col-xs-12">
                         <div class="info-sc"><i class="glyphicon glyphicon-time"></i> <span class="text" style="font-size: 18px;" ng-bind="'Сегодня: c '+ service_center.work_days[week_day-1].start_time+' по '+service_center.work_days[week_day-1].end_time"></span></div>
