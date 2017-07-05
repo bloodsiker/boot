@@ -49,7 +49,7 @@
                        typeahead-min-length="0"
                        placeholder="Все варианты"
                        ng-model="brand_model"
-                       uib-typeahead="item as item.manufacturer for item in brands | filter:$viewValue"
+                       uib-typeahead="item as item.manufacturer for item in brands | filter:$viewValue | orderBy: 'manufacturer'"
                        class="form-control">
                 <span ng-if="brand_model" ng-click="reset_brand()" class="glyphicon glyphicon-remove
         reset-input"></span>

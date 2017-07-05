@@ -20,7 +20,6 @@
 
 
         $rootScope.helpCall = function (valid, name, phone, comment) {
-            console.log(valid, name, phone);
             if (valid) {
                 model.post('/forms/main', {
                     name: name,
@@ -35,6 +34,25 @@
                 });
             }
         };
+
+
+        $rootScope.supportCall = function (valid, name, phone, comment) {
+            if (valid) {
+                model.post('/support', {
+                    name: name,
+                    phone: phone,
+                    comment: comment
+                }).then(function (success) {
+                    $('#success_call_modal').modal('show');
+                }, function (err) {
+                    $('#success_call_modal').modal('show');
+                });
+            }
+        };
+
+
+
+
 
 
 

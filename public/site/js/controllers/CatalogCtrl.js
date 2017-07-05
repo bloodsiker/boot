@@ -48,7 +48,6 @@
                 $scope.catalog.forEach(function (key) {
                     key.price.forEach(function (price) {
                         if (price.title === $scope.filterService[0].title) {
-                            console.log('fffff');
                             parseFloat($scope.filterService[0].price_max) <= parseFloat(price.price_max) ? $scope.filterService[0].price_max = parseFloat(price.price_max) : '';
                             parseFloat($scope.filterService[0].price_min) >= parseFloat(price.price_min) ? $scope.filterService[0].price_min = parseFloat(price.price_min) : '';
                             $scope.filterService[0]._price_max = $scope.filterService[0].price_max;
@@ -112,7 +111,6 @@
             $scope.filterService = angular.copy(filterService);
             renderPriceRange();
 
-            console.log(filterService[0]);
             searchService.setService(filterService);
             filtersCatalog();
 
@@ -178,7 +176,6 @@
         var _timeFilter = angular.copy($scope._timeFilter);
         $scope.applyTime = function () {
             $scope._timeFilter.indexDay = $scope.week_days.indexOf($scope._timeFilter.day);
-            console.log($scope._timeFilter);
             $scope.timeFilter = angular.copy($scope._timeFilter);
             filtersCatalog();
             // post server  ==========================
@@ -313,8 +310,7 @@
                 $scope.map = map;
 
                 $scope.callbackFunc = function(param) {
-                    console.log('I know where '+ param +' are. ');
-                    console.log('You are at' + $scope.map.getCenter());
+                    $scope.map.getCenter()
                 };
 
                 var markers = [];
@@ -351,7 +347,6 @@
         var filtersCatalog = function () {
 
             $rootScope.$watch('updateSearch', function () {
-                console.log('update');
 
                 var address = searchService.address_model();
                 $scope.address = searchService.address_model();
@@ -373,7 +368,6 @@
 
                 var globalFilter = [];
 
-                console.log(address);
                 $scope.catalog = angular.copy($scope._catalog);
                 if (address && address.address) {
                     angular.forEach($scope._catalog, function (key) {
@@ -394,7 +388,6 @@
                     $scope.catalog = _.union(streetCatalog, radiusCatalog, metroCatalog, districtCatalog);
                 }
                 if (brand) {
-                    console.log('brand');
                     angular.forEach($scope.catalog, function (key) {
                         angular.forEach(key.manufacturers, function (b) {
                             b === brand.manufacturer ? brandCatalog.push(key) : '';
@@ -405,8 +398,6 @@
 
                 if (services) {
                     if (services.length > 1) {
-                        console.log('service');
-                        console.log(services);
 
                         angular.forEach(services, function (service) {
                             angular.forEach($scope.catalog, function (key) {
@@ -419,16 +410,11 @@
                     }
 
                     if (services.length === 1 ) {
-                        console.log('service 1');
-                        console.log(services);
-
                         angular.forEach($scope.catalog, function (key) {
                             angular.forEach(key.price, function (price) {
                                 if (price.title === services[0].title) {
-                                    console.log('title ok');
                                     if (price.price_max <= services[0].price_max &&
                                         price.price_min >= services[0].price_min) {
-                                        console.log('ok');
                                         servicesCatalog.push(key)
                                     }
                                 }
@@ -441,7 +427,6 @@
 
 
                 if (time) {
-                    console.log('time');
                     angular.forEach($scope.catalog, function (key) {
                         var _start = Date.parse(time.start_time);
                         var _end = Date.parse(time.end_time);
