@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Services\AdminLogService;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
@@ -10,7 +11,20 @@ use Illuminate\Support\Facades\DB;
 
 class LoginController extends Controller
 {
-    /**  Service Center **/
+    /**
+     * @var AdminLogService
+     */
+    private $adminLog;
+
+    /**  Service Center *
+     * @param AdminLogService $adminLog
+     */
+
+    public function __construct(AdminLogService $adminLog)
+    {
+
+        $this->adminLog = $adminLog;
+    }
 
     public function getServiceLogin()
     {
@@ -29,8 +43,10 @@ class LoginController extends Controller
 
         if(Auth::attempt(['email' => $request->email, 'password' => $request->password])){
             if(Auth::user()->roleSc()){
+                $this->adminLog->log('Ввошел в кабинет сервисного центра');
                 return redirect()->route('cabinet.dashboard');
             } elseif (Auth::user()->roleAdmin()){
+                $this->adminLog->log('Ввошел в админский кабинет сервисного центра');
                 return redirect()->route('cabinet.admin.user.list');
             }
             Auth::logout();
