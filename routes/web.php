@@ -16,6 +16,7 @@ Route::group(['middleware' => ['web', 'session.page']], function (){
     Route::get('/', 'SiteController@getIndex')->name('main');
     Route::get('about', 'SiteController@getAbout')->name('about');
     Route::get('support', 'SiteController@getSupport')->name('support');
+    Route::post('support', 'SiteController@postSupport')->name('support');
     Route::get('diagnostics', 'DiagnosticsController@getIndex')->name('diagnostics');
     Route::post('diagnostic', 'DiagnosticsController@postDiagnostic')->name('diagnostic');
 
