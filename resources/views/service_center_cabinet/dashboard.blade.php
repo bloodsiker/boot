@@ -5,7 +5,7 @@
 
     <div ng-controller="AdminDashboardController" ng-cloak>
         <section class="content-header">
-            <h1 ng-bind="sc.service_name"></h1>
+            <h1>Dashboard</h1>
             <ol class="breadcrumb">
                 <li><a href="/cabinet/dashboard"><i class="fa fa-dashboard"></i> Главная</a></li>
                 <li class="active">Cервисный центр</li>
@@ -62,9 +62,9 @@
                             <canvas
                                     ng-if="visit"
                                     class="chart chart-bar"
-                                    chart-data="data"
-                                    chart-labels="labels"
-                                    chart-series="series"
+                                    chart-data="chartsData[visit_key].data"
+                                    chart-labels="chartsData[visit_key].labels"
+                                    chart-series="chartsData[visit_key].series"
                                     chart-options="options">
                             </canvas>
 

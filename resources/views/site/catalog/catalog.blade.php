@@ -144,7 +144,7 @@
     <div class="container-fluid" style="min-height: 100vh;">
 
         <div class="row">
-            <div class="col-sm-6 col-xs-12">
+            <div class="col-sm-6 col-lg-5 col-xs-12">
 
                 <!--=======================================SORT=======================================-->
                 <div class="row sort">
@@ -225,14 +225,16 @@
 
                         </div>
                     </div>
-                    <div class="col-md-4" style="display: flex; flex-direction: column;">
-                        <img ng-if="item.logo" class="logo-cs" ng-src="@{{item.logo}}" alt="@{{item.service_name}}">
+                    <div class="col-md-4 text-right">
+                        <img ng-if="item.logo" class="logo-cs" style="width: 150px;" ng-src="@{{item.logo}}" alt="@{{item.service_name}}">
 
-                        <div style="flex: auto"></div>
-                        <rating value="item.rating" disabled max="5"></rating>
-                        <div class="text-right">
+                        <div class="text-right badge-catalog">
                             <span class="glyphicon glyphicon-comment"></span>
-                            <span ng-bind="(item.comments | number) + ' отзывов'"></span>
+                            <span style="vertical-align: text-bottom;" ng-bind="(item.comments | number)"></span>
+                        </div>
+                        <div class="text-right badge-catalog">
+                            <span class="glyphicon glyphicon-star"></span>
+                            <span style="vertical-align: text-bottom;" ng-bind="(item.rating | number)"></span>
                         </div>
                     </div>
                 </div>
@@ -247,7 +249,7 @@
 
 
             </div>
-            <div class="col-sm-6 hidden-xs catalog-map">
+            <div class="col-sm-6 col-lg-7 hidden-xs catalog-map">
 
                 <ng-map id="map"
                         center='current-position'

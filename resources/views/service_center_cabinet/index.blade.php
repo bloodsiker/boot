@@ -33,9 +33,9 @@
                                             <div class="col-md-3">
                                                 <label for="logoSc">
                                                     <div style="cursor: pointer; position: relative;">
-                                                        <img ng-if="!scLogo.base64 && !sc.logo" style="max-width: 100%;" src="http://fakeimg.pl/200x140/?text=Foto" alt="add personal" >
-                                                        <img ng-if="scLogo.base64 && !sc.logo" style="max-width: 100%;" ng-src="@{{'data:'+scLogo.filetype+';base64,'+scLogo.base64}}" alt="@{{sc.service_name}}">
-                                                        <img ng-if="sc.logo && !scLogo.base64" style="max-width: 100%;" ng-src="@{{sc.logo}}" alt="@{{sc.service_name}}">
+                                                        <img ng-if="!scLogo.base64 && !sc.logo" style="max-width: 100%;" src="http://fakeimg.pl/200x140/?text=Logo" alt="add personal" >
+                                                        <img ng-if="scLogo.base64.length > 0" style="max-width: 100%;" ng-src="@{{'data:'+scLogo.filetype+';base64,'+scLogo.base64}}" alt="@{{sc.service_name}}">
+                                                        <img ng-if="sc.logo && scLogo.base64.length == 0" style="max-width: 100%;" ng-src="@{{sc.logo}}" alt="@{{sc.service_name}}">
                                                         <span style="position: absolute; bottom: 8px; right: 5px;" class="fa fa-camera"></span>
                                                         <input type="file" ng-hide="true" id="logoSc" ng-model="scLogo" accept="image/*" base-sixty-four-input>
                                                     </div>
@@ -102,8 +102,6 @@
                                                     <input type="text" class="form-control" ng-model="sc.number_h_add">
                                                 </div>
                                             </div>
-<<<<<<< HEAD
-=======
                                             <div class="col-md-12">
                                                 <div class="form-group">
                                                     <label>
@@ -111,7 +109,6 @@
                                                     Выезд мастера</label>
                                                 </div>
                                             </div>
->>>>>>> e70a4f41c34b75a710b735b70caf22c5345f1cfd
                                         </div>
                                     </div>
                                     <div class="col-md-4">
@@ -131,76 +128,8 @@
 
                             <div class="box-footer text-right">
                                 <button type="button" class="btn btn-primary" ng-click="saveGlobalSc(saveGlobalForm.$valid, sc)">Сохранить</button>
-<<<<<<< HEAD
                             </div>
                         </form>
-=======
-                            </div>
-                        </form>
-                    </div>
-                </div>
-
-
-
-
-                {{--============================ТЕЛЕФОНЫ==================================--}}
-                <div class="col-md-6">
-                    <div class="box box-primary box-solid collapsed-box">
-                        <div class="box-header with-border">
-                            <h3 class="box-title"><i class="fa fa-phone" aria-hidden="true"></i>  Телефоны</h3>
-                            <div class="box-tools pull-right">
-                                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-plus"></i>
-                                </button>
-                            </div>
-                        </div>
-                        <div class="box-body">
-                            <table class="table">
-                                <tr ng-repeat="phone in sc.service_phones track by $index">
-                                    <td ng-bind="phone"></td>
-                                    <td class="text-right"><i style="cursor: pointer;" ng-click="removePhone($index)" class="fa fa-trash"></i></td>
-                                </tr>
-                            </table>
-                            <div class="input-group input-group-sm">
-                                <input type="text" class="form-control" ng-model="prePhone" placeholder='телефон'>
-                                <span class="input-group-btn">
-                                  <button type="button" ng-disabled="!prePhone" ng-click="addPhone(prePhone)"  class="btn btn-info btn-flat">добавить</button>
-                                </span>
-                            </div>
-                        </div>
-                        <div class="box-footer text-right" >
-                            <button type="button" class="btn btn-primary" ng-click="savePhones(sc.service_phones)">Сохранить</button>
-                        </div>
-                    </div>
-                </div>
-
-                {{--============================ПОЧТА==================================--}}
-                <div class="col-md-6">
-                    <div class="box box-primary box-solid collapsed-box">
-                        <div class="box-header with-border">
-                            <h3 class="box-title"><i class="fa fa-envelope" aria-hidden="true"></i>  Почтовые ящики</h3>
-                            <div class="box-tools pull-right">
-                                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-plus"></i>
-                                </button>
-                            </div>
-                        </div>
-                        <div class="box-body">
-                            <table class="table">
-                                <tr ng-repeat="email in sc.service_emails track by $index">
-                                    <td ng-bind="email"></td>
-                                    <td class="text-right"><i style="cursor: pointer;" ng-click="removeEmail($index)" class="fa fa-trash"></i></td>
-                                </tr>
-                            </table>
-                            <div class="input-group input-group-sm">
-                                <input type="email" class="form-control" ng-model="preEmail" placeholder='Email'>
-                                <span class="input-group-btn">
-                                  <button type="button" ng-disabled="!preEmail" ng-click="addEmail(preEmail)" class="btn btn-info btn-flat">добавить</button>
-                                </span>
-                            </div>
-                        </div>
-                        <div class="box-footer text-right" >
-                            <button type="button" class="btn btn-primary" ng-click="saveEmails(sc.service_emails)">Сохранить</button>
-                        </div>
->>>>>>> e70a4f41c34b75a710b735b70caf22c5345f1cfd
                     </div>
                 </div>
 
@@ -311,184 +240,20 @@
                         </div>
                     </div>
                 </div>
-<<<<<<< HEAD
 
-                {{--============================Преимущества==================================--}}
-                <div class="col-md-6">
-                    <div class="box box-primary box-solid collapsed-box">
-                        <div class="box-header with-border">
-                            <h3 class="box-title"><i class="fa fa-certificate" aria-hidden="true"></i>  Преимущества</h3>
-                            <div class="box-tools pull-right">
-                                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-plus"></i>
-                                </button>
-                            </div>
-                        </div>
-                        <div class="box-body">
-                            <table class="table">
-                                <tr ng-repeat="advantage in sc.advantages track by $index">
-                                    <td ng-bind="advantage"></td>
-                                    <td class="text-right"><i style="cursor: pointer;" ng-click="removeAdvantages($index)" class="fa fa-trash"></i></td>
-                                </tr>
-                            </table>
-                            <div class="input-group input-group-sm">
-                                <input type="text" class="form-control" ng-model="preAdvantage" placeholder='напр. "Прозрачная ценовая политика"'>
-                                <span class="input-group-btn">
-                                  <button type="button" ng-disabled="!preAdvantage" ng-click="addAdvantages(preAdvantage)"  class="btn btn-info btn-flat">добавить</button>
-                                </span>
-                            </div>
-                        </div>
-                        <div class="box-footer text-right" >
-                            <button type="button" class="btn btn-primary" ng-click="saveAdvantages(sc.advantages)">Сохранить</button>
-                        </div>
-                    </div>
-                </div>
-
-                {{--============================Теги==================================--}}
-                <div class="col-md-6">
-                    <div class="box box-primary box-solid collapsed-box">
-                        <div class="box-header with-border">
-                            <h3 class="box-title"><i class="fa fa-tags" aria-hidden="true"></i>  Теги</h3>
-                            <div class="box-tools pull-right">
-                                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-plus"></i>
-                                </button>
-                            </div>
-                        </div>
-                        <div class="box-body">
-                            <table class="table">
-                                <tr ng-repeat="tag in sc.tags track by $index">
-                                    <td ng-bind="tag"></td>
-                                    <td class="text-right"><i style="cursor: pointer;" ng-click="removeTags($index)" class="fa fa-trash"></i></td>
-                                </tr>
-                            </table>
-                            <div class="input-group input-group-sm">
-                                <input type="text" class="form-control" ng-model="preTag" placeholder='напр. "Выезд мастера"'>
-                                <span class="input-group-btn">
-                                  <button type="button" ng-disabled="!preTag" ng-click="addTags(preTag)" class="btn btn-info btn-flat">добавить</button>
-                                </span>
-                            </div>
-                        </div>
-                        <div class="box-footer text-right" >
-                            <button type="button" class="btn btn-primary" ng-click="saveTags(sc.tags)">Сохранить</button>
-                        </div>
-                    </div>
-                </div>
-
-                {{--============================Бренды==================================--}}
-                <div class="col-md-12">
-                    <div class="box box-primary box-solid collapsed-box">
-                        <div class="box-header with-border">
-                            <h3 class="box-title"><i class="fa fa-mobile" aria-hidden="true"></i>  Бренды</h3>
-                            <div class="box-tools pull-right">
-                                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-plus"></i>
-                                </button>
-                            </div>
-                        </div>
-                        <div class="box-body">
-                            <div>
-                                <input type="checkbox" aria-label="Select All"
-                                       ng-checked="isChecked()"
-                                       md-indeterminate="isIndeterminate()"
-                                       ng-click="toggleAll()">
-                                <span ng-if="isChecked()">Снять отметки</span>
-                                <span ng-if="!isChecked()">Выбрать все</span>
-
-                            </div>
-                            <div class="row">
-                                <div class="col-xs-3" ng-repeat="item in brands track by $index">
-                                    <input type="checkbox" ng-checked="exists(item, selected)" ng-click="toggle(item, selected)"> @{{ item.manufacturer }}
-                                </div>
-                            </div>
-                        </div>
-                        <div class="box-footer text-right" >
-                            <button type="button" class="btn btn-primary" ng-click="saveBrands(sc.manufacturers)">Сохранить</button>
-                        </div>
-                    </div>
-                </div>
-
-                {{--============================О компании==================================--}}
-                <div class="col-md-12">
-                    <div class="box box-primary box-solid collapsed-box">
-                        <div class="box-header with-border">
-                            <h3 class="box-title"><i class="fa fa-file-text-o" aria-hidden="true"></i> О компании</h3>
-                            <div class="box-tools pull-right">
-                                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-plus"></i>
-                                </button>
-                            </div>
-                        </div>
-                        <div class="box-body" id="aboutSc">
-                            <textarea style="width:100%;" class="aboutSc" name="about" ng-model="sc.about"></textarea>
-                        </div>
-                        <div class="box-footer text-right" >
-                            <button type="button" class="btn btn-primary" ng-click="saveAbout()">Сохранить</button>
-                        </div>
-                    </div>
-                </div>
-
-                {{--============================ГАЛЕРЕЯ==================================--}}
-                <div class="col-md-12">
-                    <div class="box box-primary box-solid collapsed-box">
-                        <div class="box-header with-border">
-                            <h3 class="box-title"><i class="fa fa-file-image-o" aria-hidden="true"></i> Фотографии, cертификаты и лицензии</h3>
-=======
-
+                <div class="clearfix"></div>
 
                 {{--============================ТЕЛЕФОНЫ==================================--}}
                 <div class="col-md-6">
                     <div class="box box-primary box-solid collapsed-box">
                         <div class="box-header with-border">
                             <h3 class="box-title"><i class="fa fa-phone" aria-hidden="true"></i>  Телефоны</h3>
->>>>>>> e70a4f41c34b75a710b735b70caf22c5345f1cfd
                             <div class="box-tools pull-right">
                                 <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-plus"></i>
                                 </button>
                             </div>
                         </div>
                         <div class="box-body">
-<<<<<<< HEAD
-
-                            <div class="row">
-                                <div class="col-sm-6 col-md-3" ng-repeat="photo in sc.service_photo">
-                                    <div class="thumbnail">
-                                        <img ng-src="@{{photo.path + photo.file_name_mini}}" alt="@{{'Фото ' + sc.service_name}}">
-                                        <div class="caption">
-                                            <p ng-if="photo.type === 'service_photo'">Фото</p>
-                                            <p ng-if="photo.type === 'certificate'">Сертификат</p>
-                                            <p ng-if="photo.type === 'licenses'">Лицензия</p>
-                                            <p>
-                                                <button class="btn btn-primary" type="button" ng-click="deletePhoto(sc.service_photo, photo, $index)">Удалить</button>
-                                                <button class="btn btn-default" type="button" ng-click="showPhoto(photo)">Посмотреть</button>
-                                            </p>
-                                        </div>
-                                    </div>
-                                </div>
-
-
-
-                                <div class="col-sm-6 col-md-3" >
-                                    <form name="addPhotoForm" novalidate>
-                                    <div class="thumbnail">
-                                        <img ng-if="!addPhotoFile.base64" src="http://fakeimg.pl/200x140/?text=Foto" alt="add personal" >
-                                        <img ng-if="addPhotoFile.base64" ng-src="@{{'data:'+addPhotoFile.filetype+';base64,'+addPhotoFile.base64}}" alt="@{{sc.service_name}}">
-
-                                        <div class="caption">
-                                            <select class="form-control" ng-model="addPhotoType" aria-label="Тип фото" required>
-                                                <option value="service_photo">Фото</option>
-                                                <option value="certificate">Сертификат</option>
-                                                <option value="licenses">Лицензия</option>
-                                            </select>
-                                            <p style="margin-top: 10px;">
-                                                <label class="btn btn-default" style="width: 50%;float: left;" role="button" >
-                                                    <i class="fa fa-file-image-o" aria-hidden="true"></i> Выбрать
-                                                    <input type="file" ng-hide="true" accept="image/*" aria-label="Фото" ng-model="addPhotoFile" base-sixty-four-input required>
-                                                </label>
-                                                <button type="button" style="width: 50%;" class="btn btn-default" ng-click="addPhoto(addPhotoForm.$valid, addPhotoType, addPhotoFile)"><i class="fa fa-plus" aria-hidden="true"></i> Добавить</button>
-                                            </p>
-                                        </div>
-                                    </div>
-                                    </form>
-                                </div>
-                            </div>
-=======
                             <table class="table">
                                 <tr ng-repeat="phone in sc.service_phones track by $index">
                                     <td ng-bind="phone.phone"></td>
@@ -504,18 +269,10 @@
                         </div>
                         <div class="box-footer text-right" >
                             <button type="button" class="btn btn-primary" ng-click="savePhones(sc.service_phones)">Сохранить</button>
->>>>>>> e70a4f41c34b75a710b735b70caf22c5345f1cfd
                         </div>
                     </div>
                 </div>
 
-<<<<<<< HEAD
-                 {{--============================ПЕРСОНАЛ==================================--}}
-                <div class="col-md-12">
-                    <div class="box box-primary box-solid collapsed-box">
-                        <div class="box-header with-border">
-                            <h3 class="box-title"><i class="fa fa-users" aria-hidden="true"></i> Команда сервиса</h3>
-=======
                 {{--============================ПОЧТА==================================--}}
                 <div class="col-md-6">
                     <div class="box box-primary box-solid collapsed-box">
@@ -546,6 +303,7 @@
                     </div>
                 </div>
 
+                <div class="clearfix"></div>
                 {{--============================Преимущества==================================--}}
                 <div class="col-md-6">
                     <div class="box box-primary box-solid collapsed-box">
@@ -606,35 +364,21 @@
                     </div>
                 </div>
 
+                <div class="clearfix"></div>
                 {{--============================Бренды==================================--}}
                 <div class="col-md-12">
                     <div class="box box-primary box-solid collapsed-box">
                         <div class="box-header with-border">
                             <h3 class="box-title"><i class="fa fa-mobile" aria-hidden="true"></i>  Бренды</h3>
->>>>>>> e70a4f41c34b75a710b735b70caf22c5345f1cfd
                             <div class="box-tools pull-right">
                                 <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-plus"></i>
                                 </button>
                             </div>
                         </div>
                         <div class="box-body">
-<<<<<<< HEAD
-
-
-
-                            <div class="row">
-                                <div class="col-sm-6 col-md-3" ng-repeat="person in sc.personal">
-                                    <div class="thumbnail">
-                                        <img ng-src="@{{person.path + person.file_name_mini}}" alt="@{{person.name}}">
-                                        <div class="caption">
-                                            <h3 ng-bind="person.name"></h3>
-                                            <p ng-bind="'Должность:  '+ person.info"></p>
-                                            <p ng-bind="'Специализация:  '+ person.specialization"></p>
-                                            <p ng-bind="'Опыт работы:  '+ person.work_exp"></p>
-                                            <p>
-                                                <button class="btn btn-danger" type="button" ng-click="deletePersonal(sc.personal, $index, person)">Удалить</button>
-                                                <button class="btn btn-primary" type="button" ng-click="showPerson(person)">Посмотреть</button>
-=======
+                            <div style="margin-bottom: 10px;">
+                                <input type="text" class="form-control" placeholder="Поиск.." ng-model="filterBrand">
+                            </div>
                             <div>
                                 <input type="checkbox" aria-label="Select All"
                                        ng-checked="isChecked()"
@@ -642,10 +386,9 @@
                                        ng-click="toggleAll()">
                                 <span ng-if="isChecked()">Снять отметки</span>
                                 <span ng-if="!isChecked()">Выбрать все</span>
-
                             </div>
                             <div class="row">
-                                <div class="col-xs-3" ng-repeat="item in brands track by $index">
+                                <div class="col-xs-3" ng-repeat="item in brands | filter: filterBrand track by $index">
                                     <input type="checkbox" ng-checked="exists(item, selected)" ng-click="toggle(item, selected)"> @{{ item.manufacturer }}
                                 </div>
                             </div>
@@ -698,7 +441,6 @@
                                             <p>
                                                 <button class="btn btn-primary" type="button" ng-click="deletePhoto(sc.service_photo, photo, $index)">Удалить</button>
                                                 <button class="btn btn-default" type="button" ng-click="showPhoto(photo)">Посмотреть</button>
->>>>>>> e70a4f41c34b75a710b735b70caf22c5345f1cfd
                                             </p>
                                         </div>
                                     </div>
@@ -706,46 +448,6 @@
 
 
 
-<<<<<<< HEAD
-
-
-                                <div class="col-sm-6 col-md-3" >
-                                    <form name="addPersonForm" novalidate>
-                                        <div class="thumbnail">
-                                            <img ng-if="!addPersonFile.base64" src="http://fakeimg.pl/200x140/?text=Foto" alt="add personal" >
-                                            <img ng-if="addPersonFile.base64" ng-src="@{{'data:'+addPersonFile.filetype+';base64,'+addPersonFile.base64}}" alt="@{{sc.service_name}}">
-
-                                            <div class="caption">
-
-                                                <div class="form-group">
-                                                    <label>ФИО</label>
-                                                    <input type="text" class="form-control" ng-model="newPersonalName" placeholder="Иванов Иван Иванович" required>
-                                                </div>
-
-                                                <div class="form-group">
-                                                    <label>Должность</label>
-                                                    <input type="text" class="form-control" ng-model="newPersonalInfo" placeholder="Старший мастер">
-                                                </div>
-
-                                                <div class="form-group">
-                                                    <label>Специализация</label>
-                                                    <input type="text" class="form-control" ng-model="newPersonalSpecialization" placeholder="Мастер по ремонту смартфонов">
-                                                </div>
-                                                <div class="form-group">
-                                                    <label>Опыт работы</label>
-                                                    <input type="text" class="form-control" ng-model="newPersonalWorkExp" placeholder="10 лет">
-                                                </div>
-
-                                                <p style="margin-top: 10px;">
-                                                    <label class="btn btn-default" style="width: 50%;float: left;" role="button" >
-                                                        <i class="fa fa-file-image-o" aria-hidden="true"></i> Фото
-                                                        <input type="file" ng-hide="true" accept="image/*" aria-label="Фото" ng-model="addPersonFile" base-sixty-four-input required>
-                                                    </label>
-                                                    <button ng-disabled="!addPersonForm.$valid" type="button" style="width: 50%;" class="btn btn-primary" ng-click="addPersonal(addPersonForm.$valid, newPersonalName, newPersonalInfo, newPersonalWorkExp, newPersonalSpecialization,  addPersonFile)" ><i class="fa fa-plus" aria-hidden="true"></i> Добавить</button>
-                                                </p>
-                                            </div>
-                                        </div>
-=======
                                 <div class="col-sm-6 col-md-3" >
                                     <form name="addPhotoForm" novalidate>
                                     <div class="thumbnail">
@@ -767,7 +469,6 @@
                                             </p>
                                         </div>
                                     </div>
->>>>>>> e70a4f41c34b75a710b735b70caf22c5345f1cfd
                                     </form>
                                 </div>
                             </div>
@@ -775,36 +476,6 @@
                     </div>
                 </div>
 
-<<<<<<< HEAD
-            </div>
-        </section>
-
-
-
-
-
-        <script type="text/ng-template" id="photoShow.html">
-            <div class="modal-body">
-                <img ng-src="@{{photoUrl}}" alt="@{{title}}">
-            </div>
-        </script>
-
-        <script type="text/ng-template" id="personShow.html">
-            <div class="modal-header">
-                <h3 ng-bind="name"></h3>
-            </div>
-            <div class="modal-body">
-                <img ng-src="@{{photoUrl}}" alt="@{{title}}">
-            </div>
-            <div class="modal-footer">
-                <p ng-bind="'Должность:  '+ info"></p>
-                <p ng-bind="'Специализация:  '+ specialization"></p>
-                <p ng-bind="'Опыт работы:  '+ work_exp"></p>
-            </div>
-        </script>
-
-
-=======
                  {{--============================ПЕРСОНАЛ==================================--}}
                 <div class="col-md-12">
                     <div class="box box-primary box-solid collapsed-box">
@@ -911,7 +582,6 @@
         </script>
 
 
->>>>>>> e70a4f41c34b75a710b735b70caf22c5345f1cfd
 
     </div>
 

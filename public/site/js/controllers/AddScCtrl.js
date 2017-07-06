@@ -79,19 +79,19 @@
                 renderMap(street);
             };
 
-            // $scope.dragMap = function () {
-            //
-            //     $scope.sc.c1 = $scope.map.markers[0].position.lat();
-            //     $scope.sc.c2 = $scope.map.markers[0].position.lng();
-            //
-            //     $http({
-            //         method: 'get',
-            //         url: "https://maps.googleapis.com/maps/api/geocode/json?latlng="+$scope.sc.c1+','+$scope.sc.c2
-            //     }).then(function (success) {
-            //         $scope.sc.number_h = success.data.results[0].address_components[0].long_name;
-            //     });
-            //
-            // };
+            $scope.dragMap = function () {
+
+                $scope.sc.c1 = $scope.map.markers[0].position.lat();
+                $scope.sc.c2 = $scope.map.markers[0].position.lng();
+
+                $http({
+                    method: 'get',
+                    url: "https://maps.googleapis.com/maps/api/geocode/json?latlng="+$scope.sc.c1+','+$scope.sc.c2
+                }).then(function (success) {
+                    $scope.sc.number_h = success.data.results[0].address_components[0].long_name;
+                });
+
+            };
 
             $scope.changeNumberH = function () {
                 var n = $scope.sc.number_h;

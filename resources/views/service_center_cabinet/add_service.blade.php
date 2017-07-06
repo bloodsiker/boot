@@ -96,6 +96,8 @@
         <div class="col-md-12">
             <ng-map id="map" center="@{{sc.c1}}, @{{sc.c2}}" zoom="14">
                 <marker position="@{{sc.c1}}, @{{sc.c2}}"
+                        draggable="true"
+                        on-dragend="dragMap()"
                         cursor="default"
                         icon="{url:'/site/img/marker-map.png'}">
 

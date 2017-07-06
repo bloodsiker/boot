@@ -20,7 +20,6 @@
 
 
         $rootScope.helpCall = function (valid, name, phone, comment) {
-            console.log(valid, name, phone);
             if (valid) {
                 model.post('/forms/main', {
                     name: name,
@@ -35,6 +34,25 @@
                 });
             }
         };
+
+
+        $rootScope.supportCall = function (valid, name, phone, comment) {
+            if (valid) {
+                model.post('/support', {
+                    name: name,
+                    phone: phone,
+                    comment: comment
+                }).then(function (success) {
+                    $('#success_call_modal').modal('show');
+                }, function (err) {
+                    $('#success_call_modal').modal('show');
+                });
+            }
+        };
+
+
+
+
 
 
 
@@ -58,6 +76,7 @@
                 client_manufacturer: $scope.sc.manufacturers.length > 0 ? $scope.sc.manufacturers[0].manufacturer : '',
                 client_service: $scope.sc.price.length > 0 ? $scope.sc.price[0].title : '',
                 client_task_description: '',
+                client_address: ''
 
             };
 
@@ -107,6 +126,7 @@
                     manufacturer: data.client_manufacturer,
                     service: data.client_service,
                     payment_type: data.client_payment_type,
+                    client_address: data.client_address,
                     exit_master: data.client_exit_master,
                     task_description: data.client_task_description,
                     cost_of_work_min: $scope.sc.price.length > 0 ? $scope.sc.price[$scope.serviceIndex].price_min : '',

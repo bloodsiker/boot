@@ -119,12 +119,14 @@
 
 
 
-        $scope.scLogo = [];
+        $scope.scLogo = {
+            base64: ''
+        };
         $scope.$watch('scLogo', function(val, oldVal) {
             console.log(val.base64);
             if (val.base64) {
                 model.post('/cabinet' + url + '/add-logo', {logo: val}).then(function (res) {
-                    $scope.scLogo = [];
+                    // $scope.scLogo = [];
                 });
             }
 

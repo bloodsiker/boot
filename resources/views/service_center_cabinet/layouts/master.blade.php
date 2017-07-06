@@ -61,6 +61,12 @@
             <div class="navbar-custom-menu">
                 <ul class="nav navbar-nav">
                     <!-- User Account: style can be found in dropdown.less -->
+                    <li>
+                        <a href="{{ route('cabinet.messages') }}">
+                            <i class="fa fa-envelope-o"></i>
+                            <span class="label label-warning">4</span>
+                        </a>
+                    </li>
                     <li class="bg-blue">
                         <a href="{{ route('main') }}">На сайт <i class="fa fa-sign-out"></i></a>
                     </li>
@@ -76,28 +82,13 @@
                                     <small>Зарегистрирован </small>
                                 </p>
                             </li>
-                            <!-- Menu Body -->
-                            <li class="user-body">
-                                <div class="row">
-                                    <div class="col-xs-4 text-center">
-                                        <a href="#">Followers</a>
-                                    </div>
-                                    <div class="col-xs-4 text-center">
-                                        <a href="#">Sales</a>
-                                    </div>
-                                    <div class="col-xs-4 text-center">
-                                        <a href="#">Friends</a>
-                                    </div>
-                                </div>
-                                <!-- /.row -->
-                            </li>
                             <!-- Menu Footer-->
                             <li class="user-footer">
                                 <div class="pull-left">
-                                    <a href="#" class="btn btn-default btn-flat">Профиль</a>
+                                    <a href="{{ route('cabinet.settings') }}" class="btn btn-default btn-flat">Профиль</a>
                                 </div>
                                 <div class="pull-right">
-                                    <a href="{{ route('admin.logout') }}" class="btn btn-default btn-flat">Выход</a>
+                                    <a href="{{ route('cabinet.logout') }}" class="btn btn-default btn-flat">Выход</a>
                                 </div>
                             </li>
                         </ul>
@@ -144,6 +135,7 @@
 
 
 <script src="{{ asset('site/vendor/angular/angular.js') }}"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-i18n/1.6.4/angular-locale_ru-ru.min.js"></script>
 <script src="{{ asset('site/vendor/angular-animate/angular-animate.js') }}"></script>
 <script src="{{ asset('site/vendor/angular-aria/angular-aria.js') }}"></script>
 <script src="{{ asset('site/vendor/angular-messages/angular-messages.js') }}"></script>
@@ -177,6 +169,7 @@
 <script src="{{ asset('site/js/controllers/AddScCtrl.js') }}"></script>
 <script src="{{ asset('site/js/controllers/RefactorScCtrl.js') }}"></script>
 <script src="{{ asset('site/js/controllers/SettingsScController.js') }}"></script>
+<script src="{{ asset('site/js/controllers/MessagesCtrl.js') }}"></script>
 
 <script src="{{ URL::to('admin/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js') }}"></script>
 <script>
