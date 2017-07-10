@@ -18,12 +18,17 @@
                             <div class="text-right">
                                 {{--<a style="font-size: 24px; white-space: nowrap; text-decoration: none;" href="tel:0800256357"><span class="glyphicon glyphicon-phone-alt"></span> 0 800 256-357</a>--}}
                                 {{--<br>--}}
-                                @if(Auth::check())
-                                    <a href="{{ route('cabinet.dashboard') }}" class="sign-in">В кабинет</a> |
-                                    <a href="{{ route('cabinet.logout') }}" class="exit">Выход</a>
+                                @if(Auth::user())
+                                    @if(Auth::user()->roleSc())
+                                        <a href="{{ route('cabinet') }}" class="sign-in">В кабинет</a> |
+                                        <a href="{{ route('cabinet.logout') }}" class="registration">Выйти</a>
+                                    @elseif(Auth::user()->roleUser())
+                                        <a href="{{ route('user.dashboard') }}" class="sign-in">В профиль</a> |
+                                        <a href="{{ route('user.logout') }}" class="registration">Выйти</a>
+                                    @endif
                                 @else
-                                    <a href="{{ route('service.login') }}" class="sign-in">Вход</a> |
-                                    <a href="{{ route('service.registration') }}" class="registration">Зарегистрировать сервис-центр</a>
+                                    <a href="{{ route('user.login') }}" class="sign-in">Пользователь</a> |
+                                    <a href="{{ route('service.login') }}" class="registration">Сервисный центер</a>
                                 @endif
                             </div>
                         </div>

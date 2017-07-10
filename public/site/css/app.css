@@ -68,7 +68,9 @@ body {
 
 hr {
   margin: 0; }
-
+.no-padding{
+  padding: 0!important;
+}
 img {
   max-width: 100%; }
 
@@ -969,17 +971,57 @@ img {
     margin-left: 0;
     border-radius: 0 0 3px 0; }
 
+.boot-registration__columns {
+  display: table;
+  table-layout: fixed;
+  direction: rtl;
+}
+
+.boot-registration__column {
+  display: table-cell;
+  vertical-align: top;
+  direction: ltr;
+}
 .form-sign-in {
-  margin-top: 200px;
+  margin-top: 150px;
   margin-bottom: 210px;
   border: 1px solid #9c9c9c;
-  padding: 20px;
   box-shadow: 0px 3px 10px #6d6d6d; }
   .form-sign-in input, .form-sign-in label {
     width: 100%; }
   .form-sign-in .btn {
-    float: right;
     margin-top: 10px; }
+
+.login-box-sc {
+  padding: 50px;
+}
+.login-form-sc {
+  border-left: 1px solid #9c9c9c;
+  background: #fdf9ea;
+}
+.form-separator {
+  position: relative;
+  margin: 20px 0;
+  text-align: center;
+}
+.form-separator-text {
+  position: relative;
+  z-index: 1;
+  display: inline-block;
+  max-width: 60%;
+  padding: 0 20px;
+  line-height: normal;
+  background: #ffffff;
+  color: #464646;
+}
+.form-separator:after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 100%;
+  border-top: 1px solid #cdd0c5;
+}
 
 .footer {
   padding-top: 10px;

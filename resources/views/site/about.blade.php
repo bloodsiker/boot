@@ -26,7 +26,10 @@
                 <p> Касательно регистрации, обновления информации и других вопросов для Сервисных Центров – партнеров - e-mail:
                     <a href="mailTo:partners@boot.com.ua">partners@boot.com.ua</a></p>
                 <p>Мы всегда рады видеть Вас на нашем портале!</p>
-
+                <br>
+                <iframe src='https://onedrive.live.com/embed?cid=FF61CA473D9952C1&resid=FF61CA473D9952C1%2194642&authkey=AJCPPZ0Maxv1q6c&em=2&wdAr=1.7777777777777777&wdEaa=1' width='100%' height='691px' frameborder='0'>Это внедренный файл <a target='_blank' href='https://office.com'>Microsoft Office</a> на платформе <a target='_blank' href='https://office.com/webapps'>Office Online</a>.</iframe>
+                <br>
+                <br>
 
             </div>
         </div>

@@ -23,7 +23,7 @@ class SocialAuthController extends Controller
      * Auth Facebook
      * @return mixed
      */
-    public function facebookScRedirect()
+    public function facebookRedirect()
     {
         return Socialite::driver('facebook')->redirect();
     }
@@ -47,7 +47,7 @@ class SocialAuthController extends Controller
 
         } elseif (Auth::user()->roleUser()){
 
-            return redirect()->route('auth');
+            return redirect()->route('user.dashboard');
 
         }
 

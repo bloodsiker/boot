@@ -38,97 +38,63 @@
                     </div><!-- /.panel-heading -->
                     <div class="panel-body no-padding"  style="margin-top: 15px">
 
+                        @include('user_profile.includes.message-block')
+
                         <section class="comment-list">
 
-                            <form class="form-horizontal" action="" method="POST">
+                            <form class="form-horizontal" action="{{ route('user.setting') }}" method="POST">
                                 <fieldset>
+                                    {{ csrf_field() }}
+
+                                    @if(!empty(Auth::user()->password))
+
+                                        <div class="form-group">
+                                            <label class="col-md-4 control-label" for="old_password">Текущий пароль</label>
+                                            <div class="col-md-6">
+                                                <div class="input-group">
+                                                    <div class="input-group-addon">
+                                                        <i class="fa fa-key">
+                                                        </i>
+                                                    </div>
+                                                    <input id="old_password" name="old_password" type="text"
+                                                           placeholder="Текущий пароль"
+                                                           required
+                                                           class="form-control input-md">
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    @endif
 
                                     <div class="form-group">
-                                        <label class="col-md-4 control-label" for="name">Имя</label>
+                                        <label class="col-md-4 control-label" for="password">Новый пароль</label>
                                         <div class="col-md-6">
                                             <div class="input-group">
                                                 <div class="input-group-addon">
-                                                    <i class="fa fa-user">
+                                                    <i class="fa fa-key">
                                                     </i>
                                                 </div>
-                                                <input id="name" name="name" type="text"
-                                                       placeholder="Имя"
-                                                       value="{{ Auth::user()->name }}"
+                                                <input id="password" name="password" type="text"
+                                                       placeholder="Новый пароль"
+                                                       required
                                                        class="form-control input-md">
                                             </div>
                                         </div>
                                     </div>
 
-                                    <!-- File Button -->
                                     <div class="form-group">
-                                        <label class="col-md-4 control-label" for="avatar">Аватар</label>
-                                        <div class="col-md-6">
-                                            <input id="avatar" name="avatar" class="input-file"
-                                                   type="file">
-                                        </div>
-                                    </div>
-
-
-                                    <div class="form-group">
-                                        <label class="col-md-4 control-label" for="address">Адрес</label>
+                                        <label class="col-md-4 control-label" for="password_confrim">Повторите новый пароль</label>
                                         <div class="col-md-6">
                                             <div class="input-group">
                                                 <div class="input-group-addon">
-                                                    <i class="fa fa-street-view"></i>
+                                                    <i class="fa fa-key">
+                                                    </i>
                                                 </div>
-                                                <input id="address"
-                                                       name="address"
-                                                       type="text"
-                                                       placeholder="Адрес"
-                                                       value="{{ Auth::user()->address }}"
+                                                <input id="password_confrim" name="password_confrim" type="text"
+                                                       placeholder="Повторите новый пароль"
+                                                       required
                                                        class="form-control input-md">
                                             </div>
-                                        </div>
-                                    </div>
-
-
-                                    <!-- Text input-->
-                                    <div class="form-group">
-                                        <label class="col-md-4 control-label" for="phone">Телефон</label>
-                                        <div class="col-md-6">
-                                            <div class="input-group">
-                                                <div class="input-group-addon">
-                                                    <i class="fa fa-phone"></i>
-
-                                                </div>
-                                                <input id="phone" name="phone" type="text"
-                                                       placeholder="Телефон"
-                                                       value="{{ Auth::user()->phone }}"
-                                                       class="form-control input-md">
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <!-- Text input-->
-                                    <div class="form-group">
-                                        <label class="col-md-4 control-label" for="email">Email</label>
-                                        <div class="col-md-6">
-                                            <div class="input-group">
-                                                <div class="input-group-addon">
-                                                    <i class="fa fa-envelope-o"></i>
-
-                                                </div>
-                                                <input id="email" name="email" type="text"
-                                                       placeholder="Email"
-                                                       value="{{ Auth::user()->email }}"
-                                                       disabled
-                                                       class="form-control input-md">
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <!-- Textarea -->
-                                    <div class="form-group">
-                                        <label class="col-md-4 control-label" for="about_me">О себе</label>
-                                        <div class="col-md-6">
-                                            <textarea class="form-control" rows="4"
-                                                      id="about_me"
-                                                      name="about_me">{{ Auth::user()->about_me }}</textarea>
                                         </div>
                                     </div>
 
@@ -136,7 +102,11 @@
                                     <div class="form-group">
                                         <label class="col-md-4 control-label"></label>
                                         <div class="col-md-6">
-                                            <button class="btn btn-success"><span class="glyphicon glyphicon-thumbs-up"></span> Обновить профиль</button>
+                                            @if(!empty(Auth::user()->password))
+                                                <button class="btn btn-success"><i class="fa fa-cog  fa-spin fa-fw" aria-hidden="true"></i> Установить пароль</button>
+                                            @else
+                                                <button class="btn btn-success"><i class="fa fa-cog  fa-spin fa-fw" aria-hidden="true"></i> Изменить пароль</button>
+                                            @endif
                                         </div>
                                     </div>
 

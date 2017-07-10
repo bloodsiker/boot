@@ -11,61 +11,244 @@
 
 @section('content')
 
-    <div class="container">
+
+    <div class="container user_profile">
+
         <div class="row">
+            <div class="col-sm-3">
 
-            <div class="col-md-10 col-md-offset-1 boot-registration__columns form-sign-in">
-                <div class="row">
+                @include('user_profile.includes.sidebar')
 
-                    <div class="col-md-6 no-padding boot-registration__column">
-                        <div class="login-box-sc">
-                            @if(Session::has('message'))
+            </div>
+            <div class="col-sm-9">
+
+                <!--  statitics -->
+                <div class="row hidden">
+                    <div class="col-lg-3">
+                        <div class="panel panel-info">
+                            <div class="panel-heading">
                                 <div class="row">
-                                    <div class="col-md-12 error">
-                                        {{ Session::get('message') }}
+                                    <div class="col-xs-6">
+                                        <i class="fa fa-envelope-o fa-5x"></i>
+                                    </div>
+                                    <div class="col-xs-6 text-right">
+                                        <p class="announcement-heading">1</p>
+                                        <!--	<p class="announcement-text">Users</p> -->
                                     </div>
                                 </div>
-                            @endif
-                            <div style="text-align: center">
-                                <h3>Войти</h3>
-                                <a href="{{ route('auth.facebook') }}" class="btn btn-primary btn-block">facebook</a>
-                                <div class="form-separator">
-                                    <span class="form-separator-text">или заполните форму</span>
+                            </div>
+                            <a href="#">
+                                <div class="panel-footer announcement-bottom">
+                                    <div class="row">
+                                        <div class="col-xs-6">
+                                            Сообщения
+                                        </div>
+                                        <div class="col-xs-6 text-right">
+                                            <i class="fa fa-arrow-circle-right"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-lg-3">
+                        <div class="panel panel-warning">
+                            <div class="panel-heading">
+                                <div class="row">
+                                    <div class="col-xs-6">
+                                        <i class="fa fa-comment-o fa-5x"></i>
+                                    </div>
+                                    <div class="col-xs-6 text-right">
+                                        <p class="announcement-heading">12</p>
+                                        <!-- <p class="announcement-text"> Items</p> -->
+                                    </div>
                                 </div>
                             </div>
+                            <a href="#">
+                                <div class="panel-footer announcement-bottom">
+                                    <div class="row">
+                                        <div class="col-xs-6">
+                                            Избранные
+                                        </div>
+                                        <div class="col-xs-6 text-right">
+                                            <i class="fa fa-arrow-circle-right"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-lg-3">
+                        <div class="panel panel-danger">
+                            <div class="panel-heading">
+                                <div class="row">
+                                    <div class="col-xs-6">
+                                        <i class="fa fa-bell-o fa-5x"></i>
+                                    </div>
+                                    <div class="col-xs-6 text-right">
+                                        <p class="announcement-heading">18</p>
+                                        <p class="announcement-text">Crawl</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <a href="#">
+                                <div class="panel-footer announcement-bottom">
+                                    <div class="row">
+                                        <div class="col-xs-6">
+                                            Requests
+                                        </div>
+                                        <div class="col-xs-6 text-right">
+                                            <i class="fa fa-arrow-circle-right"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-lg-3">
+                        <div class="panel panel-success">
+                            <div class="panel-heading">
+                                <div class="row">
+                                    <div class="col-xs-6">
+                                        <i class="fa fa-comments fa-5x"></i>
+                                    </div>
+                                    <div class="col-xs-6 text-right">
+                                        <p class="announcement-heading">56</p>
+                                        <p class="announcement-text"> Orders!</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <a href="#">
+                                <div class="panel-footer announcement-bottom">
+                                    <div class="row">
+                                        <div class="col-xs-6">
+                                            Complete
+                                        </div>
+                                        <div class="col-xs-6 text-right">
+                                            <i class="fa fa-arrow-circle-right"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </div><!-- /.row -->
+                <!--  statitics -->
 
-                            <form action="{{ route('service.login') }}" method="post" class="">
-                                {{ csrf_field() }}
-                                <label>
-                                    Email:
-                                    <input type="text" name="email" class="form-control" required/>
-                                </label>
-                                <label>
-                                    Пароль:
-                                    <input type="password" name="password" class="form-control" required/>
-                                </label>
-                                <button class="btn btn-warning pull-right">Вход</button>
-                                <div class="clearfix"></div>
+
+                <div class="panel rounded shadow panel-teal">
+                    <div class="panel-heading">
+                        <div class="pull-left">
+                            <h3 class="panel-title">Последние сообщения</h3>
+                        </div>
+                        <div class="pull-right">
+                            <form action="#" class="form-horizontal mr-5 mt-3">
+                                <div class="form-group no-margin no-padding has-feedback">
+
+                                </div>
                             </form>
                         </div>
-                    </div>
+                        <div class="clearfix"></div>
+                    </div><!-- /.panel-heading -->
+                    <div class="panel-sub-heading inner-all">
+                        <div class="pull-left">
+                            <ul class="list-inline no-margin">
+                                <li>
+                                    <div class="ckbox ckbox-theme">
 
-                    <div class="col-md-6 no-padding boot-registration__column">
-                        <div class="login-box-sc login-form-sc" style="min-height: 413px; padding-top: 50px">
-                            <h2>Нет аккаунта?</h2>
-                            <p>Присоединяйтесь к нам!</p>
-                            <p>После регистрации у вас будет возможность отслеживать статусы выполнения выших заказов.</p>
-                            <p>Вести диалог с сервисным центром по конкретном заказе</p>
-                            <p>Добавлять понравившиеся сервисные центры в избранные</p>
-                            <br>
-                            <a href="{{ route('user.registration') }}" class="btn btn-warning pull-right">Зарегистрировать</a>
-                            <div class="clearfix"></div>
+                                        <label for="checkbox-group"></label>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="btn-group">
+                                        <button class="btn btn-default btn-sm tooltips" type="button" data-toggle="tooltip" data-container="body" title="" data-original-title="Archive"><i class="fa fa-list" aria-hidden="true"></i></button>
+                                        <button class="btn btn-default btn-sm tooltips" type="button" data-toggle="tooltip" data-container="body" title="" data-original-title="Report Spam"><i class="fa fa-th" aria-hidden="true"></i></button>
+                                        <button class="btn btn-default btn-sm tooltips" type="button" data-toggle="tooltip" data-container="body" title="" data-original-title="Delete"> <i class="fa fa-th-large" aria-hidden="true"></i></button>
+                                    </div>
+                                </li>
+                                <li class="hidden-xs">
+                                    <div class="btn-group">
+                                        <button type="button" class="btn btn-default btn-sm">Sort by</button>
+                                        <button type="button" class="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown">
+                                            <span class="caret"></span>
+                                            <span class="sr-only">Toggle Dropdown</span>
+                                        </button>
+                                        <ul class="dropdown-menu" role="menu">
+                                            <li><a href="#"><i class="fa fa-edit"></i> Last login</a></li>
+                                            <li><a href="#"><i class="fa fa-ban"></i> Age</a></li>
+                                            <!-- <li class="divider"></li> -->
+                                            <li><a href="#"><i class="fa fa-trash-o"></i> Height</a></li>
+                                            <li><a href="#"><i class="fa fa-trash-o"></i> Photo</a></li>
+                                            <li><a href="#"><i class="fa fa-trash-o"></i> Created date</a></li>
+                                            <li><a href="#"><i class="fa fa-trash-o"></i> Horoscope</a></li>
+                                        </ul>
+                                    </div>
+                                </li>
+                                <li class="hidden-xs hidden">
+                                    <div class="btn-group">
+                                        <button type="button" class="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown">
+                                            <i class="fa fa-cog"></i> <span class="caret"></span>
+                                        </button>
+                                        <ul class="dropdown-menu pull-right" role="menu">
+                                            <li class="dropdown-header">Display settings :</li>
+                                            <li class="active"><a href="#"><i class="fa fa-list" aria-hidden="true"></i> Single column view</a></li>
+                                            <li><a href="#"><i class="fa fa-th" aria-hidden="true"></i> Photo view</a></li>
+                                            <li><a href="#"><i class="fa fa-th-large" aria-hidden="true"></i> Two columns view</a></li>
+                                            <!-- <li class="dropdown-header">Configure inbox</li> -->
+                                            <li><a href="#">Details view</a></li>
+                                        </ul>
+                                    </div>
+                                </li>
+                            </ul>
                         </div>
-                    </div>
-                </div>
+                        <div class="pull-right">
+                            <ul class="list-inline no-margin">
+                                <li class="hidden-xs"><span class="text-muted">Showing 1-50 of 2,051 messages</span></li>
+                                <li>
+                                    <div class="btn-group">
+                                        <a href="#" class="btn btn-sm btn-default"><i class="fa fa-angle-left"></i></a>
+                                        <a href="#" class="btn btn-sm btn-default"><i class="fa fa-angle-right"></i></a>
+                                    </div>
+                                </li>
+
+                            </ul>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div><!-- /.panel-sub-heading -->
+                    <div class="panel-body no-padding">
+
+
+                        <section class="comment-list">
+                            <!-- First Comment -->
+                            <article class="row">
+                                <div class="col-md-2 col-sm-2 hidden-xs">
+                                    <figure class="thumbnail">
+                                        <img class="img-responsive" src="http://www.keita-gaming.com/assets/profile/default-avatar-c5d8ec086224cb6fc4e395f4ba3018c2.jpg" />
+                                        <figcaption class="text-center">username</figcaption>
+                                    </figure>
+                                </div>
+                                <div class="col-md-10 col-sm-10">
+                                    <div class="panel panel-default arrow left">
+                                        <div class="panel-body">
+                                            <header class="text-left">
+                                                <div class="comment-user"><i class="fa fa-user"></i> That Guy</div>
+                                                <time class="comment-date" datetime="16-12-2014 01:05"><i class="fa fa-clock-o"></i> Dec 16, 2014</time>
+                                            </header>
+                                            <div class="comment-post">
+                                                <p>
+                                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                                                </p>
+                                            </div>
+                                            <p class="text-right"><a href="#" class="btn btn-default btn-sm"><i class="fa fa-reply"></i> reply</a></p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </article>
+                        </section>
+
+                    </div><!-- /.panel-body -->
+                </div><!-- /.panel -->
             </div>
-
-
         </div>
     </div>
 

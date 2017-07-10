@@ -252,52 +252,11 @@
 
         // ================= ORDER BY
 
-        $scope.activeSort = '';
-        $scope.order_event = function (arg) {
+        $scope.activeSort = 'visits';
+        $scope.reverseCatalog = true;
+        $scope.order_event = function (arg, reverse) {
 
-
-            if (arg === 'name' && $scope.activeSort !== 'name') {
-                $scope.reverseIcon = false;
-                $scope.catalog =  _.sortBy($scope.catalog, 'service_name');
-            }
-            if (arg === 'name' && $scope.activeSort === 'name') {
-                $scope.reverseIcon = !$scope.reverseIcon;
-                $scope.catalog = $scope.catalog.reverse();
-            }
-
-
-            if (arg === 'rating' && $scope.activeSort !== 'rating') {
-                $scope.reverseIcon = false;
-                var _rating =  _.sortBy($scope.catalog, 'rating');
-                $scope.catalog = _rating.reverse();
-            }
-            if (arg === 'rating' && $scope.activeSort === 'rating') {
-                $scope.reverseIcon = !$scope.reverseIcon;
-                $scope.catalog = $scope.catalog.reverse();
-            }
-
-
-            if (arg === 'comments' && $scope.activeSort !== 'comments') {
-                $scope.reverseIcon = false;
-                var _rating =  _.sortBy($scope.catalog, 'comments');
-                $scope._comments = _rating.reverse();
-            }
-            if (arg === 'comments' && $scope.activeSort === 'comments') {
-                $scope.reverseIcon = !$scope.reverseIcon;
-                $scope.catalog = $scope.catalog.reverse();
-            }
-
-
-            if (arg === 'popular' && $scope.activeSort !== 'popular') {
-                $scope.reverseIcon = false;
-                var _popular =  _.sortBy($scope.catalog, 'visits');
-                $scope._comments = _popular.reverse();
-            }
-            if (arg === 'popular' && $scope.activeSort === 'popular') {
-                $scope.reverseIcon = !$scope.reverseIcon;
-                $scope.catalog = $scope.catalog.reverse();
-            }
-
+            $scope.reverseCatalog = reverse;
             $scope.activeSort =  arg;
 
         };

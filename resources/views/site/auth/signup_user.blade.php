@@ -15,16 +15,23 @@
         <div class="row">
             <div class="col-md-6 col-md-offset-3 form-sign-in">
                 <div class="login-box-sc">
-                    <form action="{{ route('service.registration') }}" method="post" class="">
-                        <h4>Регистрация сервисного центра</h4>
+                    @if(Session::has('message'))
+                        <div class="row">
+                            <div class="col-md-12 error">
+                                {{ Session::get('message') }}
+                            </div>
+                        </div>
+                    @endif
+                    <form action="{{ route('user.registration') }}" method="post" class="">
+                        <h4>Регистрация пользователя</h4>
                         {{ csrf_field() }}
                         <label>
                             Имя:
-                            <input type="text" name="name" class="form-control" required/>
+                            <input type="text" name="name" class="form-control" value="{{ old('name') }}" required/>
                         </label>
                         <label>
                             Email:
-                            <input type="text" name="email" class="form-control" required/>
+                            <input type="text" name="email" class="form-control" value="{{ old('email') }}" required/>
                         </label>
                         <label>
                             Пароль:

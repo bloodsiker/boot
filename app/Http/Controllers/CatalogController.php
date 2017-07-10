@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Comments;
+use App\Models\ServiceCenter;
 use App\Models\ServicesView;
 use App\Repositories\VisitsServiceCenter\VisitsRepositoryInterface;
 use Auth;
@@ -52,8 +53,10 @@ class CatalogController extends Controller
             ]);
         }
 
+        $service_center = ServiceCenter::where('id',$id)->select('service_name')->first();
+
         $data_seo = json_decode(DB::table('seo_meta')->where('title', 'sc_view')->get());
-        return view('site.catalog.service_center', compact('data_seo'));
+        return view('site.catalog.service_center', compact('data_seo', 'service_center'));
     }
 
 

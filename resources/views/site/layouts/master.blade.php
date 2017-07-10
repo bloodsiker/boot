@@ -12,10 +12,12 @@
     <meta name="_token"  content="{{ csrf_token() }}">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="{{ asset('site/vendor/bootstrap/dist/css/bootstrap.min.css') }}">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('site/vendor/angular/angular-csp.css') }}">
     <link rel="stylesheet" href="{{ asset('site/vendor/slick-carousel/slick/slick.css') }}">
     <link rel="stylesheet" href="{{ asset('site/vendor/slick-carousel/slick/slick-theme.css') }}">
     <link rel="stylesheet" href="{{ asset('site/vendor/angular-multi-slider/multislider.css') }}">
+    <link rel="stylesheet" href="{{ asset('site/css/user_profile.css') }}">
     <link rel="stylesheet" href="{{ asset('site/css/app.css') }}">
 </head>
 <body data-ng-cloak>

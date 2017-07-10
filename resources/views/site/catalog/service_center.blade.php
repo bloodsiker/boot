@@ -1,8 +1,8 @@
 @extends('site.layouts.master')
 
-@section('title', $data_seo[0]->title_name )
+@section('title', $data_seo[0]->title_name . ' ' . $service_center->service_name)
 
-@section('description', $data_seo[0]->description)
+@section('description', $data_seo[0]->description . ' ' . $service_center->service_name)
 
 @section('keywords', $data_seo[0]->keywords)
 

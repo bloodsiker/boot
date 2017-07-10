@@ -29,8 +29,10 @@ Route::group(['middleware' => ['web', 'session.page']], function (){
     Route::post('forms/sc', 'FormsController@ScRequest')->name('form.sc');
     Route::get('html', 'FormsController@html')->name('form.sc');
 
+    Route::get('user/login', 'LoginController@getUserLogin')->name('user.login');
+    Route::post('user/login', 'LoginController@postUserLogin')->name('user.login');
     Route::get('user/registration', 'RegisterController@getUserIndex')->name('user.registration');
-    Route::post('user/registration', 'RegisterController@postUserIndex')->name('user.create');
+    Route::post('user/registration', 'RegisterController@postUserRegister')->name('user.registration');
 
     Route::get('service-center/login', 'LoginController@getServiceLogin')->name('service.login');
     Route::post('service-center/login', 'LoginController@postServiceLogin')->name('service.login');
@@ -39,13 +41,26 @@ Route::group(['middleware' => ['web', 'session.page']], function (){
 
 
     Route::get('/auth', 'SocialAuthController@auth')->name('auth');
-    Route::get('/auth/sc/facebook', 'SocialAuthController@facebookScRedirect')->name('auth.sc.facebook');
+    Route::get('/auth/facebook', 'SocialAuthController@facebookRedirect')->name('auth.facebook');
     Route::get('/auth/facebook/callback', 'SocialAuthController@facebookCallback')->name('auth.facebook.callback');
 
     Route::get('load', 'ImportController@load')->name('load');
     Route::get('excel', 'ImportController@excel')->name('excel');
 
 });
+
+Route::group(['middleware' => ['user.profile']], function (){
+    Route::get('user/dashboard', 'UserProfile\ProfileController@getDashboard')->name('user.dashboard');
+    Route::get('user/profile', 'UserProfile\ProfileController@getProfile')->name('user.profile');
+    Route::post('user/profile', 'UserProfile\ProfileController@postProfile')->name('user.profile');
+    Route::get('user/setting', 'UserProfile\ProfileController@getSetting')->name('user.setting');
+    Route::post('user/setting', 'UserProfile\ProfileController@postSetting')->name('user.setting');
+
+    Route::get('user/requests', 'UserProfile\UserRequestController@getIndex')->name('user.requests');
+
+    Route::get('user/logout', 'UserProfile\ProfileController@getLogout')->name('user.logout');
+});
+
 
 // Route Cabinet Service Center
 require_once ('service_route.php');

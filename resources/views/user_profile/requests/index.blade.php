@@ -25,7 +25,7 @@
                 <div class="panel rounded shadow panel-teal">
                     <div class="panel-heading">
                         <div class="pull-left">
-                            <h3 class="panel-title">Настройки</h3>
+                            <h3 class="panel-title">Заявки</h3>
                         </div>
                         <div class="pull-right">
                             <form action="#" class="form-horizontal mr-5 mt-3">
@@ -38,84 +38,41 @@
                     </div><!-- /.panel-heading -->
                     <div class="panel-body no-padding"  style="margin-top: 15px">
 
-                        @include('user_profile.includes.message-block')
+                        <section class="content">
+                            <div class="col-md-12">
+                                <div class="panel panel-default">
+                                    <div class="panel-body">
+                                        <div class="table-container">
+                                            <table class="table table-filter">
+                                                <tbody>
+                                                <tr>
+                                                    <td>
+                                                        <a href="javascript:;" class="star">
+                                                            <i class="glyphicon glyphicon-star"></i>
+                                                        </a>
+                                                    </td>
+                                                    <td>
+                                                        <div class="media">
+                                                            <div class="media-body">
+                                                                <span class="media-meta pull-right">Febrero 13, 2016</span>
+                                                                <h4 class="title">
+                                                                    Lorem Impsum
+                                                                    <span class="pull-right pagado">(Pagado)</span>
+                                                                </h4>
+                                                                <p class="summary">Ut enim ad minim veniam, quis nostrud exercitation...</p>
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                </tr>
 
-                        <section class="comment-list">
-
-                            <form class="form-horizontal" action="{{ route('user.setting') }}" method="POST">
-                                <fieldset>
-                                    {{ csrf_field() }}
-
-                                    @if(!empty(Auth::user()->password))
-
-                                        <div class="form-group">
-                                            <label class="col-md-4 control-label" for="old_password">Текущий пароль</label>
-                                            <div class="col-md-6">
-                                                <div class="input-group">
-                                                    <div class="input-group-addon">
-                                                        <i class="fa fa-key">
-                                                        </i>
-                                                    </div>
-                                                    <input id="old_password" name="old_password" type="text"
-                                                           placeholder="Текущий пароль"
-                                                           required
-                                                           class="form-control input-md">
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                    @endif
-
-                                    <div class="form-group">
-                                        <label class="col-md-4 control-label" for="password">Новый пароль</label>
-                                        <div class="col-md-6">
-                                            <div class="input-group">
-                                                <div class="input-group-addon">
-                                                    <i class="fa fa-key">
-                                                    </i>
-                                                </div>
-                                                <input id="password" name="password" type="text"
-                                                       placeholder="Новый пароль"
-                                                       required
-                                                       class="form-control input-md">
-                                            </div>
+                                                </tbody>
+                                            </table>
                                         </div>
                                     </div>
+                                </div>
+                            </div>
 
-                                    <div class="form-group">
-                                        <label class="col-md-4 control-label" for="password_confrim">Повторите новый пароль</label>
-                                        <div class="col-md-6">
-                                            <div class="input-group">
-                                                <div class="input-group-addon">
-                                                    <i class="fa fa-key">
-                                                    </i>
-                                                </div>
-                                                <input id="password_confrim" name="password_confrim" type="text"
-                                                       placeholder="Повторите новый пароль"
-                                                       required
-                                                       class="form-control input-md">
-                                            </div>
-                                        </div>
-                                    </div>
-
-
-                                    <div class="form-group">
-                                        <label class="col-md-4 control-label"></label>
-                                        <div class="col-md-6">
-                                            @if(!empty(Auth::user()->password))
-                                                <button class="btn btn-success"><i class="fa fa-cog  fa-spin fa-fw" aria-hidden="true"></i> Установить пароль</button>
-                                            @else
-                                                <button class="btn btn-success"><i class="fa fa-cog  fa-spin fa-fw" aria-hidden="true"></i> Изменить пароль</button>
-                                            @endif
-                                        </div>
-                                    </div>
-
-                                </fieldset>
-                            </form>
                         </section>
-
-
-
                     </div><!-- /.panel-body -->
                 </div><!-- /.panel -->
 
