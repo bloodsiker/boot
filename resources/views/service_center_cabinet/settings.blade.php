@@ -13,7 +13,15 @@
     <section class="content">
 
             <div class="row">
-                {{--============================График работы==================================--}}
+                <div class="col-md-12">
+                    @if(Session::has('message'))
+                        <div class="row">
+                            <div class="col-md-4 col-md-offset-4 success">
+                                {{ Session::get('message') }}
+                            </div>
+                        </div>
+                    @endif
+                </div>
                 <div class="col-sm-6">
                     <form name="settingForm" action="{{ route('cabinet.settings') }}" method="post" ng-submit="addSettingsIndex($event, settingForm.$valid, settings)" novalidate>
 
@@ -28,13 +36,6 @@
                         <div class="box-body">
                             <div class="row">
                                 {{ csrf_field() }}
-                                @if(Session::has('message'))
-                                    <div class="row">
-                                        <div class="col-md-4 col-md-offset-4 success">
-                                            {{ Session::get('message') }}
-                                        </div>
-                                    </div>
-                                @endif
                                 <div class="col-md-12" >
                                     @if(Auth::user()->change_email == 0)
                                         <div>Email можно изменить только один раз!</div>

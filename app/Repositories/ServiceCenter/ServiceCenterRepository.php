@@ -77,10 +77,11 @@ class ServiceCenterRepository implements ServiceCenterRepositoryInterface
             $user->change_email = 1;
         }
 
-        $user->name = $requestData->name;
+        if($requestData->has('name')){
+            $user->name = $requestData->name;
+        }
 
-
-        if(isset($requestData->passFirst) && !empty($requestData->passFirst)){
+        if($requestData->has('passFirst') && !empty($requestData->passFirst)){
             $user->password = bcrypt($requestData->passFirst);
         }
         if($user->update()){
