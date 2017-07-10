@@ -148,23 +148,23 @@
 
                 <!--=======================================SORT=======================================-->
                 <div class="row sort">
-                    <div class="col-xs-12">
+                    <div class="col-xs-12" style="user-select: none; ">
                     <span>Сортировать:
-                        <span ng-class="{active: activeSort == 'name'}" ng-click="order_event('name')" class="sort-by active">по имени
-                            <i ng-if="activeSort == 'name' && !reverseIcon" class="glyphicon glyphicon-sort-by-attributes-alt"></i>
-                            <i ng-if="activeSort == 'name' && reverseIcon" class="glyphicon glyphicon-sort-by-attributes"></i>
+                        <span ng-class="{active: activeSort == 'service_name'}" ng-click="order_event('service_name', !reverseCatalog)" class="sort-by active">по имени
+                            <i ng-if="activeSort == 'service_name' && !reverseCatalog" class="glyphicon glyphicon-sort-by-alphabet"></i>
+                            <i ng-if="activeSort == 'service_name' && reverseCatalog" class="glyphicon glyphicon-sort-by-alphabet-alt"></i>
                         </span>
-                        <span ng-class="{active: activeSort == 'popular'}" ng-click="order_event('popular')" class="sort-by active">по популярности
-                           <i ng-if="activeSort == 'popular' && !reverseIcon" class="glyphicon glyphicon-sort-by-attributes-alt"></i>
-                            <i ng-if="activeSort == 'popular' && reverseIcon" class="glyphicon glyphicon-sort-by-attributes"></i>
+                        <span ng-class="{active: activeSort == 'visits'}" ng-click="order_event('visits', !reverseCatalog)" class="sort-by active">по популярности
+                           <i ng-if="activeSort == 'visits' && !reverseCatalog" class="glyphicon glyphicon-sort-by-order"></i>
+                            <i ng-if="activeSort == 'visits' && reverseCatalog" class="glyphicon glyphicon-sort-by-order-alt"></i>
                         </span>
-                        <span ng-class="{active: activeSort == 'rating'}" ng-click="order_event('rating')" class="sort-by">по рейтингу
-                           <i ng-if="activeSort == 'rating' && !reverseIcon" class="glyphicon glyphicon-sort-by-attributes-alt"></i>
-                            <i ng-if="activeSort == 'rating' && reverseIcon" class="glyphicon glyphicon-sort-by-attributes"></i>
+                        <span ng-class="{active: activeSort == 'rating'}" ng-click="order_event('rating', !reverseCatalog)" class="sort-by">по рейтингу
+                           <i ng-if="activeSort == 'rating' && !reverseCatalog" class="glyphicon glyphicon-sort-by-order"></i>
+                            <i ng-if="activeSort == 'rating' && reverseCatalog" class="glyphicon glyphicon-sort-by-order-alt"></i>
                         </span>
-                        <span ng-class="{active: activeSort == 'comments'}" ng-click="order_event('comments')" class="sort-by">по отзывам
-                           <i ng-if="activeSort == 'comments' && !reverseIcon" class="glyphicon glyphicon-sort-by-attributes-alt"></i>
-                            <i ng-if="activeSort == 'comments' && reverseIcon" class="glyphicon glyphicon-sort-by-attributes"></i>
+                        <span ng-class="{active: activeSort == 'comments'}" ng-click="order_event('comments', !reverseCatalog)" class="sort-by">по отзывам
+                           <i ng-if="activeSort == 'comments' && !reverseCatalog" class="glyphicon glyphicon-sort-by-order"></i>
+                            <i ng-if="activeSort == 'comments' && reverseCatalog" class="glyphicon glyphicon-sort-by-order-alt"></i>
                         </span>
                     </span>
                     </div>
@@ -188,7 +188,7 @@
                 </div>
                 <!--=======================================CATALOG ITEM=======================================-->
                 <div class="row catalog-item"
-                     ng-repeat="item in catalog | limitTo: limitCatalog track by $index">
+                     ng-repeat="item in catalog | limitTo: limitCatalog | orderBy: activeSort: reverseCatalog">
 
                     <div class="col-md-8">
                         <a class="title-sc" ng-href="@{{ '/sc/'+item.id }}" ng-bind="item.service_name"></a>
