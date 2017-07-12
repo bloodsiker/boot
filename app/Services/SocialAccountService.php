@@ -14,12 +14,13 @@ class SocialAccountService
 
     /**
      * @param ProviderUser $providerUser
+     * @param $provider
      * @param $role
      * @return mixed
      */
-    public function createOrGetUser(ProviderUser $providerUser, $role)
+    public function createOrGetUser(ProviderUser $providerUser, $provider, $role)
     {
-        $account = SocialAccount::whereProvider('facebook')
+        $account = SocialAccount::whereProvider($provider)
             ->whereProviderUserId($providerUser->getId())
             ->first();
 
@@ -29,7 +30,7 @@ class SocialAccountService
 
             $account = new SocialAccount([
                 'provider_user_id' => $providerUser->getId(),
-                'provider' => 'facebook'
+                'provider' => $provider
             ]);
 
             $user = User::whereEmail($providerUser->getEmail())->first();

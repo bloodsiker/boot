@@ -8,7 +8,7 @@
     <title>Document</title>
 </head>
 <body>
-<a href="{{ route('auth.sc.facebook') }}">Facebook</a>
+<a href="{{ route('auth.google') }}">Google</a>
 
 @if(Auth::user())
     <h1>Hello {{ Auth::user()->name }}</h1>

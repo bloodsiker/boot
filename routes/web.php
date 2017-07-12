@@ -44,6 +44,9 @@ Route::group(['middleware' => ['web', 'session.page']], function (){
     Route::get('/auth/facebook', 'SocialAuthController@facebookRedirect')->name('auth.facebook');
     Route::get('/auth/facebook/callback', 'SocialAuthController@facebookCallback')->name('auth.facebook.callback');
 
+    Route::get('/auth/google', 'SocialAuthController@googleRedirect')->name('auth.google');
+    Route::get('/auth/google/callback', 'SocialAuthController@googleCallback')->name('auth.google.callback');
+
     Route::get('load', 'ImportController@load')->name('load');
     Route::get('excel', 'ImportController@excel')->name('excel');
 

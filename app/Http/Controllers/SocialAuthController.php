@@ -37,19 +37,37 @@ class SocialAuthController extends Controller
     {
         $role = Role::where('role', 'user')->first();
 
-        $user = $service->createOrGetUser(Socialite::driver('facebook')->user(), $role->id);
+        $user = $service->createOrGetUser(Socialite::driver('facebook')->user(), 'facebook', $role->id);
 
         auth()->login($user);
 
-        if(Auth::user()->roleSc()){
+        return redirect()->route('user.dashboard');
+    }
 
-            return redirect()->route('cabinet.dashboard');
 
-        } elseif (Auth::user()->roleUser()){
 
-            return redirect()->route('user.dashboard');
+    /**
+     * Auth google
+     * @return mixed
+     */
+    public function googleRedirect()
+    {
+        return Socialite::driver('google')->redirect();
+    }
 
-        }
+    /**
+     * Auth Google
+     * @param SocialAccountService $service
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function googleCallback(SocialAccountService $service)
+    {
+        $role = Role::where('role', 'user')->first();
 
+        $user = $service->createOrGetUser(Socialite::driver('google')->user(), 'google', $role->id);
+
+        auth()->login($user);
+
+        return redirect()->route('user.dashboard');
     }
 }
