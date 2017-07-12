@@ -16,9 +16,12 @@ class IsServiceCenter
      */
     public function handle($request, Closure $next)
     {
-        if (Auth::user() && (Auth::user()->roleSc() || Auth::user()->roleAdmin())) {
-            return $next($request);
+        if (Auth::user()) {
+            if (Auth::user()->roleSc() || Auth::user()->roleAdmin()){
+                return $next($request);
+            }
+            return redirect('/service-center/login')->with(['message' => 'У вас нету прав доступа в эту часть кабинета!']);
         }
-        return redirect('/service-center/login')->with(['message' => 'У вас нету прав доступа в эту часть кабинета!']);
+        return redirect('/service-center/login')->with(['message' => 'Вы не авторизованы']);
     }
 }
