@@ -18,6 +18,8 @@
     <!-- AdminLTE Skins. Choose a skin from the css/skins
          folder instead of downloading all of them to reduce the load. -->
     <link rel="stylesheet" href="{{ URL::to('admin/dist/css/skins/_all-skins.min.css') }}">
+    {{--<link rel="stylesheet" href="{{ URL::to('admin/dist/css/skins/skin-black.css') }}">--}}
+
 
     <!-- DataTables -->
     <link rel="stylesheet" href="{{ URL::to('admin/plugins/datatables/dataTables.bootstrap.css') }}">
@@ -25,6 +27,7 @@
     <link rel="stylesheet" href="{{ URL::to('admin/plugins/datepicker/datepicker3.css') }}">
     <!-- bootstrap wysihtml5 - text editor -->
     <link rel="stylesheet" href="{{ URL::to('admin/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css') }}">
+
     <link rel="stylesheet" href="{{ URL::to('admin/dist/css/style.css') }}">
     <link rel="stylesheet" href="{{ asset('site/vendor/angular/angular-csp.css') }}">
 
@@ -44,7 +47,7 @@
 
     <![endif]-->
 </head>
-<body class="hold-transition skin-blue sidebar-mini" ng-app="App" ng-cloak>
+<body class="hold-transition skin-yellow sidebar-mini" ng-app="App" ng-cloak>
 <div class="wrapper" ng-controller="AdminController">
 
     <header class="main-header">
@@ -64,10 +67,10 @@
                     <li>
                         <a href="{{ route('cabinet.messages') }}">
                             <i class="fa fa-envelope-o"></i>
-                            <span class="label label-warning">4</span>
+                            {{--<span class="label label-success">4</span>--}}
                         </a>
                     </li>
-                    <li class="bg-blue">
+                    <li>
                         <a href="{{ route('main') }}">На сайт <i class="fa fa-sign-out"></i></a>
                     </li>
                     <li class="dropdown user user-menu">
