@@ -63,4 +63,33 @@ class FormRequest extends Model
         return $builder
             ->where('r_id', $r_id);
     }
+
+
+    /**
+     * @param $status
+     * @return string
+     */
+    public static function getColorStatus($status)
+    {
+        switch ($status)
+        {
+            case 1:
+                return 'expect';
+                break;
+            case 2:
+                return 'in_work';
+                break;
+            case 3:
+                return 'cancel';
+                break;
+            case 4:
+                return 'pend';
+                break;
+            case 6:
+                return 'pend';
+                break;
+            default:
+                return 'expect';
+        }
+    }
 }

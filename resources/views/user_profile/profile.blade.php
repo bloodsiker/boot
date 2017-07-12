@@ -45,7 +45,7 @@
                             <div class="col-sm-9">
                                 <section class="comment-list">
 
-                                    <form class="form-horizontal" action="{{ route('user.profile') }}" method="POST">
+                                    <form class="form-horizontal" action="{{ route('user.profile') }}" method="POST" enctype="multipart/form-data">
                                         {{ csrf_field() }}
                                         <fieldset>
                                             <div class="form-group">

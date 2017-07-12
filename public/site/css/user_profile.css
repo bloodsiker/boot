@@ -337,7 +337,9 @@ form .form-group {
 @import url(//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css);
 /*Comment List styles*/
 .comment-list .row {
+    margin-top: 10px;
     margin-bottom: 0px;
+    padding: 10px;
 }
 .comment-list .panel .panel-heading {
     padding: 4px 15px;
@@ -419,119 +421,245 @@ form .form-group {
 /*	--------------------------------------------------
 	:: Table Filter
 	-------------------------------------------------- */
-/*.panel {*/
-    /*border: 1px solid #ddd;*/
-    /*background-color: #fcfcfc;*/
-/*}*/
-/*.panel .btn-group {*/
-    /*margin: 15px 0 30px;*/
-/*}*/
-/*.panel .btn-group .btn {*/
-    /*transition: background-color .3s ease;*/
-/*}*/
-/*.table-filter {*/
-    /*background-color: #fff;*/
-    /*border-bottom: 1px solid #eee;*/
-/*}*/
-/*.table-filter tbody tr:hover {*/
-    /*background-color: #eee;*/
-/*}*/
-/*.table-filter tbody tr td {*/
-    /*padding: 10px;*/
-    /*vertical-align: middle;*/
-    /*border-top-color: #eee;*/
-/*}*/
-/*.table-filter tbody tr.selected td {*/
-    /*background-color: #eee;*/
-/*}*/
-/*.table-filter tr td:first-child {*/
-    /*width: 38px;*/
-/*}*/
-/*.table-filter tr td:nth-child(1) {*/
-    /*width: 35px;*/
-/*}*/
-/*.ckbox {*/
-    /*position: relative;*/
-/*}*/
-/*.ckbox input[type="checkbox"] {*/
-    /*opacity: 0;*/
-/*}*/
-/*.ckbox label {*/
-    /*-webkit-user-select: none;*/
-    /*-moz-user-select: none;*/
-    /*-ms-user-select: none;*/
-    /*user-select: none;*/
-/*}*/
-/*.ckbox label:before {*/
-    /*content: '';*/
-    /*top: 1px;*/
-    /*left: 0;*/
-    /*width: 18px;*/
-    /*height: 18px;*/
-    /*display: block;*/
-    /*position: absolute;*/
-    /*border-radius: 2px;*/
-    /*border: 1px solid #bbb;*/
-    /*background-color: #fff;*/
-/*}*/
-/*.ckbox input[type="checkbox"]:checked + label:before {*/
-    /*border-color: #2BBCDE;*/
-    /*background-color: #2BBCDE;*/
-/*}*/
-/*.ckbox input[type="checkbox"]:checked + label:after {*/
-    /*top: 3px;*/
-    /*left: 3.5px;*/
-    /*content: '\e013';*/
-    /*color: #fff;*/
-    /*font-size: 11px;*/
-    /*font-family: 'Glyphicons Halflings';*/
-    /*position: absolute;*/
-/*}*/
-/*.table-filter .star {*/
-    /*color: #ccc;*/
-    /*text-align: center;*/
-    /*display: block;*/
-/*}*/
-/*.table-filter .star.star-checked {*/
-    /*color: #F0AD4E;*/
-/*}*/
-/*.table-filter .star:hover {*/
-    /*color: #ccc;*/
-/*}*/
-/*.table-filter .star.star-checked:hover {*/
-    /*color: #F0AD4E;*/
-/*}*/
-/*.table-filter .media-photo {*/
-    /*width: 35px;*/
-/*}*/
-/*.table-filter .media-body {*/
+.panel {
+    border: 1px solid #ddd;
+    background-color: #fcfcfc;
+}
+.panel .btn-group {
+    margin: 15px 0 30px;
+}
+.panel .btn-group .btn {
+    transition: background-color .3s ease;
+}
+.table-filter {
+    background-color: #fff;
+    border-bottom: 1px solid #eee;
+}
+.table-filter tbody tr:hover {
+    background-color: #fcfcfc;
+}
+.table-filter tbody tr td {
+    padding: 10px;
+    vertical-align: middle;
+    border-top-color: #eee;
+}
+.table-filter tbody tr.selected td {
+    background-color: #eee;
+}
+.table-filter tr td:nth-child(1) {
+    width: 100px;
+    vertical-align: top;
+}
 
-    /*!* Had to use this style to force the div to expand (wasn't necessary with my bootstrap version 3.3.6) *!*/
-/*}*/
-/*.table-filter .media-meta {*/
-    /*font-size: 11px;*/
-    /*color: #999;*/
-/*}*/
-/*.table-filter .media .title {*/
-    /*color: #2BBCDE;*/
-    /*font-size: 14px;*/
-    /*font-weight: bold;*/
-    /*line-height: normal;*/
-    /*margin: 0;*/
-/*}*/
-/*.table-filter .media .title span {*/
-    /*font-size: .8em;*/
-    /*margin-right: 20px;*/
-/*}*/
-/*.table-filter .media .title span.pagado {*/
-    /*color: #5cb85c;*/
-/*}*/
-/*.table-filter .media .title span.pendiente {*/
-    /*color: #f0ad4e;*/
-/*}*/
-/*.table-filter .media .title span.cancelado {*/
-    /*color: #d9534f;*/
-/*}*/
-/*.table-filter .media .summary {*/
-    /*font-size: 14px;*/
-/*}*/
+.r_id {
+    font-size: 12px;
+    color: #656262;
+    font-weight: bold;
+}
+.ckbox {
+    position: relative;
+}
+.ckbox input[type="checkbox"] {
+    opacity: 0;
+}
+.ckbox label {
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+.ckbox label:before {
+    content: '';
+    top: 1px;
+    left: 0;
+    width: 18px;
+    height: 18px;
+    display: block;
+    position: absolute;
+    border-radius: 2px;
+    border: 1px solid #bbb;
+    background-color: #fff;
+}
+.ckbox input[type="checkbox"]:checked + label:before {
+    border-color: #2BBCDE;
+    background-color: #2BBCDE;
+}
+.ckbox input[type="checkbox"]:checked + label:after {
+    top: 3px;
+    left: 3.5px;
+    content: '\e013';
+    color: #fff;
+    font-size: 11px;
+    font-family: 'Glyphicons Halflings';
+    position: absolute;
+}
+.table-filter .star {
+    color: #ccc;
+    text-align: center;
+    display: block;
+}
+.table-filter .star.star-checked {
+    color: #F0AD4E;
+}
+.table-filter .star:hover {
+    color: #ccc;
+}
+.table-filter .star.star-checked:hover {
+    color: #F0AD4E;
+}
+.table-filter .media-photo {
+    width: 35px;
+}
+.table-filter .media-body {
+
+    /* Had to use this style to force the div to expand (wasn't necessary with my bootstrap version 3.3.6) */
+}
+.table-filter .media-meta {
+    font-size: 11px;
+    color: #999;
+}
+.table-filter .media .title {
+    color: #2BBCDE;
+    font-size: 14px;
+    font-weight: bold;
+    line-height: normal;
+    margin: 0;
+}
+.table-filter .media .title span {
+    font-size: .8em;
+    margin-right: 20px;
+}
+span.expect {
+    color: #1e85b8;
+}
+span.in_work {
+    color: #5cb85c;
+}
+span.pend {
+    color: #f0ad4e;
+}
+span.cancel {
+    color: #d9534f;
+}
+.table-filter .media .summary {
+    font-size: 14px;
+}
+.user_request_ul{
+    list-style-type: none;
+    padding-left: 20px;
+}
+.status_desc{
+    font-size: 12px;
+    color: #807e7e;
+}
+
+
+/*	--------------------------------------------------
+	:: Chat
+	-------------------------------------------------- */
+
+.new_message_head button {
+    background: rgba(0, 0, 0, 0) none repeat scroll 0 0;
+    border: medium none;
+}
+.new_message_head {
+    background: #f5f3f3 none repeat scroll 0 0;
+    float: left;
+    font-size: 13px;
+    font-weight: 600;
+    padding: 18px 10px;
+    width: 100%;
+}
+.message_section {
+    border: 1px solid #dddddd;
+    margin-bottom: 20px;
+}
+.chat_time{
+    margin-bottom: -15px;
+    padding:0;
+}
+.time_mess{
+    font-size: 12px;
+    color: #7b7a7a;
+    font-style: italic;
+}
+.chat_area {
+    float: left;
+    height: 300px;
+    overflow-x: hidden;
+    overflow-y: auto;
+    width: 100%;
+}
+.chat_area li {
+    padding: 14px 14px 0;
+}
+.chat_area li .chat-img1 img {
+    height: 40px;
+    width: 40px;
+}
+.chat_area .chat-body1 {
+    margin-left: 50px;
+}
+.chat-body1 p {
+    background: #f5f3f3 none repeat scroll 0 0;
+    padding: 10px;
+}
+.chat_area .admin_chat .chat-body1 {
+    margin-left: 0;
+    margin-right: 50px;
+}
+.chat_area li:last-child {
+    padding-bottom: 10px;
+}
+.message_write {
+    background: #f5f3f3 none repeat scroll 0 0;
+    float: left;
+    padding: 15px;
+    width: 100%;
+}
+
+.message_write textarea.form-control {
+    height: 70px;
+    padding: 10px;
+}
+.chat_bottom {
+    float: left;
+    margin-top: 13px;
+    width: 100%;
+}
+.upload_btn {
+    color: #777777;
+}
+.sub_menu_ > li a, .sub_menu_ > li {
+    float: left;
+    width:100%;
+}
+.member_list li:hover {
+    background: #428bca none repeat scroll 0 0;
+    color: #fff;
+    cursor:pointer;
+}
+
+
+
+.well {
+    padding: 0 20px;
+}
+.input-search-rid {
+    margin: 20px auto;
+    width: 100%;
+}
+input.btn.btn-lg,
+input.btn.btn-lg:focus {
+    outline: none;
+    width: 60%;
+    height: 50px;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+}
+.find_rid {
+    width: 40%;
+    height: 50px;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+}

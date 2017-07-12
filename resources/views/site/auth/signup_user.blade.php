@@ -27,11 +27,11 @@
                         {{ csrf_field() }}
                         <label>
                             Имя:
-                            <input type="text" name="name" class="form-control" value="{{ old('name') }}" required/>
+                            <input type="text" name="name" class="form-control" value="{{ Request::old('name') }}" required/>
                         </label>
                         <label>
                             Email:
-                            <input type="text" name="email" class="form-control" value="{{ old('email') }}" required/>
+                            <input type="text" name="email" class="form-control" value="{{ Request::old('email') }}" required/>
                         </label>
                         <label>
                             Пароль:

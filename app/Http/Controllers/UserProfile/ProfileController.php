@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\UserProfile;
 
+use App\Models\FormRequestMessage;
 use App\Models\User;
 use App\Services\AdminLogService;
 use Auth;
@@ -9,6 +10,7 @@ use Hash;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
+use Intervention\Image\ImageManagerStatic as Image;
 
 class ProfileController extends Controller
 {
@@ -31,7 +33,31 @@ class ProfileController extends Controller
     public function getDashboard()
     {
         $data_seo = json_decode(DB::table('seo_meta')->where('title', 'user_dashboard')->get());
-        return view('user_profile.index', compact('data_seo'));
+
+        $last_messages = DB::table('form_request_message')
+            ->leftJoin('form_requests', function ($join) {
+                $join->on('form_requests.id', '=', 'form_request_message.request_id')
+                    ->whereNotNull('form_request_message.service_center_id');
+            })
+            ->leftJoin('service_centers', function ($join) {
+                $join->on('service_centers.id', '=', 'form_request_message.service_center_id')
+                    ->whereNotNull('form_request_message.service_center_id');
+            })
+
+            ->select('form_request_message.id',
+                'service_centers.service_name',
+                'service_centers.logo',
+                'form_requests.r_id',
+                'form_request_message.message',
+                'form_request_message.created_at')
+            ->where('form_requests.user_id', Auth::user()->id)
+            ->orderByDesc('form_request_message.id')
+            ->take(5)
+            ->get();
+
+        //dd($last_messages);
+
+        return view('user_profile.index', compact('data_seo', 'last_messages'));
     }
 
 
@@ -56,7 +82,21 @@ class ProfileController extends Controller
         $user->address = $request->address;
         $user->phone = $request->phone;
         $user->about_me = $request->about_me;
+
+        if ($request->hasFile('avatar')) {
+            $file = $request->file('avatar');
+            $path = '/user_upload/avatars/';
+            $destinationPath =  public_path() . $path;
+            $filename = str_random(20) .'.' . $file->getClientOriginalExtension() ?: 'png';
+            if ($request->hasFile('avatar')) {
+                $request->file('avatar')->move($destinationPath, $filename);
+                Image::make(public_path() . $path . $filename)->resize(200, 200)->save(public_path() . $path . $filename);
+            }
+
+            $user->avatar = $path . $filename;
+        }
         $user->update();
+
         return redirect()->back()->with(['message' => 'Профиль обновлен!']);
     }
 
