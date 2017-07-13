@@ -2,7 +2,8 @@
 
 namespace App\Http\Controllers\UserProfile;
 
-use App\Models\FormRequestMessage;
+use App\Services\SocialAccountService;
+use App\Models\SocialAccount;
 use App\Models\User;
 use App\Services\AdminLogService;
 use Auth;
@@ -11,6 +12,8 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
 use Intervention\Image\ImageManagerStatic as Image;
+use Laravel\Socialite\Facades\Socialite;
+use Session;
 
 class ProfileController extends Controller
 {
@@ -107,7 +110,46 @@ class ProfileController extends Controller
     public function getSetting()
     {
         $data_seo = json_decode(DB::table('seo_meta')->where('title', 'user_setting')->get());
-        return view('user_profile.setting', compact('data_seo'));
+
+        $account['facebook'] = SocialAccount::whereProvider('facebook')
+            ->where('user_id', Auth::id())
+            ->first();
+        $account['google'] = SocialAccount::whereProvider('google')
+            ->where('user_id', Auth::id())
+            ->first();
+
+        return view('user_profile.setting', compact('data_seo', 'account'));
+    }
+
+    /**
+     * @param SocialAccountService $service
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function linkSocialGoogleAccount(SocialAccountService $service)
+    {
+        Session::push('social_google', 'true');
+        return redirect()->route('auth.google');
+    }
+
+
+    /**
+     * @param SocialAccountService $service
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function linkSocialFacebookAccount(SocialAccountService $service)
+    {
+        Session::push('social_facebook', 'true');
+        return redirect()->route('auth.facebook');
+    }
+
+    /**
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function unlinkSocialAccount(Request $request)
+    {
+        SocialAccount::whereProvider($request->provider)->where('user_id', Auth::id())->delete();
+        return redirect()->back()->with(['message' => $request->provider . ' аккаунт отвязан']);
     }
 
 

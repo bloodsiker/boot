@@ -52,4 +52,21 @@ class SocialAccountService
 
         }
     }
+
+    /**
+     * @param ProviderUser $providerUser
+     * @param $provider
+     */
+    public function linkSocialAccount(ProviderUser $providerUser, $provider)
+    {
+        $account = new SocialAccount([
+            'provider_user_id' => $providerUser->getId(),
+            'provider' => $provider
+        ]);
+
+        $user = User::whereEmail(\Auth::user()->email)->first();
+
+        $account->user()->associate($user);
+        $account->save();
+    }
 }

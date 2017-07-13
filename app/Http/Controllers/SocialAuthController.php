@@ -7,6 +7,7 @@ use App\Services\SocialAccountService;
 use Auth;
 use Illuminate\Http\Request;
 use Laravel\Socialite\Facades\Socialite;
+use Session;
 
 /**
  * Class SocialAuthController
@@ -35,6 +36,11 @@ class SocialAuthController extends Controller
      */
     public function facebookCallback(SocialAccountService $service)
     {
+        if(Session::has('social_facebook')){
+            $service->linkSocialAccount(Socialite::driver('facebook')->user(), 'facebook');
+            Session::forget('social_facebook');
+            return redirect()->route('user.setting')->with(['message' => ' facebook аккаунт привязан']);
+        }
         $role = Role::where('role', 'user')->first();
 
         $user = $service->createOrGetUser(Socialite::driver('facebook')->user(), 'facebook', $role->id);
@@ -62,9 +68,41 @@ class SocialAuthController extends Controller
      */
     public function googleCallback(SocialAccountService $service)
     {
+        if(Session::has('social_google')){
+            $service->linkSocialAccount(Socialite::driver('google')->user(), 'google');
+            Session::forget('social_google');
+            return redirect()->route('user.setting')->with(['message' => ' google аккаунт привязан']);
+        }
         $role = Role::where('role', 'user')->first();
 
         $user = $service->createOrGetUser(Socialite::driver('google')->user(), 'google', $role->id);
+
+        auth()->login($user);
+
+        return redirect()->route('user.dashboard');
+    }
+
+
+    public function linkedinRedirect()
+    {
+        return Socialite::driver('linkedin')->redirect();
+    }
+
+    /**
+     * Auth Google
+     * @param SocialAccountService $service
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function linkedinCallback(SocialAccountService $service)
+    {
+        if(Session::has('social_linkedin')){
+            $service->linkSocialAccount(Socialite::driver('linkedin')->user(), 'linkedin');
+            Session::forget('social_linkedin');
+            return redirect()->route('user.setting')->with(['message' => ' linkedin аккаунт привязан']);
+        }
+        $role = Role::where('role', 'user')->first();
+
+        $user = $service->createOrGetUser(Socialite::driver('linkedin')->user(), 'linkedin', $role->id);
 
         auth()->login($user);
 

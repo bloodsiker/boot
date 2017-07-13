@@ -23,7 +23,7 @@
             <div class="col-sm-9">
 
                 <div class="panel rounded shadow panel-teal">
-                    <div class="panel-heading">
+                    <div class="panel-heading panel-heading-black">
                         <div class="pull-left">
                             <h3 class="panel-title">Заявка #{{ $user_request->r_id }}</h3>
                         </div>

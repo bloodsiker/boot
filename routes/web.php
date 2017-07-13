@@ -47,6 +47,9 @@ Route::group(['middleware' => ['web', 'session.page']], function (){
     Route::get('/auth/google', 'SocialAuthController@googleRedirect')->name('auth.google');
     Route::get('/auth/google/callback', 'SocialAuthController@googleCallback')->name('auth.google.callback');
 
+    Route::get('/auth/linkedin', 'SocialAuthController@linkedinRedirect')->name('auth.linkedin');
+    Route::get('/auth/linkedin/callback', 'SocialAuthController@linkedinCallback')->name('auth.linkedin.callback');
+
     Route::get('load', 'ImportController@load')->name('load');
     Route::get('excel', 'ImportController@excel')->name('excel');
 
@@ -56,8 +59,12 @@ Route::group(['middleware' => ['user.profile']], function (){
     Route::get('user/dashboard', 'UserProfile\ProfileController@getDashboard')->name('user.dashboard');
     Route::get('user/profile', 'UserProfile\ProfileController@getProfile')->name('user.profile');
     Route::post('user/profile', 'UserProfile\ProfileController@postProfile')->name('user.profile');
+
     Route::get('user/setting', 'UserProfile\ProfileController@getSetting')->name('user.setting');
     Route::post('user/setting', 'UserProfile\ProfileController@postSetting')->name('user.setting');
+    Route::get('user/social/link/google', 'UserProfile\ProfileController@linkSocialGoogleAccount')->name('user.social.link.google');
+    Route::get('user/social/link/facebook', 'UserProfile\ProfileController@linkSocialFacebookAccount')->name('user.social.link.facebook');
+    Route::post('user/social/unlink', 'UserProfile\ProfileController@unlinkSocialAccount')->name('user.social.unlink');
 
     Route::get('user/requests', 'UserProfile\UserRequestController@getIndex')->name('user.requests');
     Route::get('user/request/search', 'UserProfile\UserRequestController@findRequestByRid')->name('user.request.find');
