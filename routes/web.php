@@ -64,6 +64,7 @@ Route::group(['middleware' => ['user.profile']], function (){
     Route::post('user/setting', 'UserProfile\ProfileController@postSetting')->name('user.setting');
     Route::get('user/social/link/google', 'UserProfile\ProfileController@linkSocialGoogleAccount')->name('user.social.link.google');
     Route::get('user/social/link/facebook', 'UserProfile\ProfileController@linkSocialFacebookAccount')->name('user.social.link.facebook');
+    Route::get('user/social/link/linkedin', 'UserProfile\ProfileController@linkSocialLinkedinAccount')->name('user.social.link.linkedin');
     Route::post('user/social/unlink', 'UserProfile\ProfileController@unlinkSocialAccount')->name('user.social.unlink');
 
     Route::get('user/requests', 'UserProfile\UserRequestController@getIndex')->name('user.requests');

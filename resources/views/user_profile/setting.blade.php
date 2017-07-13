@@ -169,6 +169,24 @@
                                 </form>
                             </div>
 
+                            <div class="form-group" style="padding-left: 15px">
+                                <form class="form-horizontal" action="{{ route('user.social.unlink') }}" method="POST">
+                                    <fieldset>
+                                        {{ csrf_field() }}
+                                        <div class="btn btn-primary col-md-4">linkedin</div>
+                                        <div class="col-md-6">
+                                            @if(isset($account['linkedin']))
+                                                <input type="hidden" name="provider" value="linkedin">
+                                                <span class="btn btn-success">Аккаунт привязан</span>
+                                                <button class="btn btn-default"><i class="fa fa-close"></i> Отвязать</button>
+                                            @else
+                                                <a href="{{ route('user.social.link.linkedin') }}" class="btn btn-default"><i class="fa fa-check"></i> Привязать</a>
+                                            @endif
+                                        </div>
+                                    </fieldset>
+                                </form>
+                            </div>
+
                         </section>
                     </div><!-- /.panel-body -->
                 </div><!-- /.panel -->

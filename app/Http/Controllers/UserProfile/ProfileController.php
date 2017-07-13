@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\UserProfile;
 
-use App\Services\SocialAccountService;
 use App\Models\SocialAccount;
 use App\Models\User;
 use App\Services\AdminLogService;
@@ -12,7 +11,6 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
 use Intervention\Image\ImageManagerStatic as Image;
-use Laravel\Socialite\Facades\Socialite;
 use Session;
 
 class ProfileController extends Controller
@@ -117,15 +115,18 @@ class ProfileController extends Controller
         $account['google'] = SocialAccount::whereProvider('google')
             ->where('user_id', Auth::id())
             ->first();
+        $account['linkedin'] = SocialAccount::whereProvider('linkedin')
+            ->where('user_id', Auth::id())
+            ->first();
 
         return view('user_profile.setting', compact('data_seo', 'account'));
     }
 
+
     /**
-     * @param SocialAccountService $service
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function linkSocialGoogleAccount(SocialAccountService $service)
+    public function linkSocialGoogleAccount()
     {
         Session::push('social_google', 'true');
         return redirect()->route('auth.google');
@@ -133,14 +134,24 @@ class ProfileController extends Controller
 
 
     /**
-     * @param SocialAccountService $service
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function linkSocialFacebookAccount(SocialAccountService $service)
+    public function linkSocialFacebookAccount()
     {
         Session::push('social_facebook', 'true');
         return redirect()->route('auth.facebook');
     }
+
+
+    /**
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function linkSocialLinkedinAccount()
+    {
+        Session::push('social_linkedin', 'true');
+        return redirect()->route('auth.linkedin');
+    }
+
 
     /**
      * @param Request $request

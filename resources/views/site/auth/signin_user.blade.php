@@ -31,6 +31,7 @@
                                 <div class="btn-group btn-group-justified" role="group" aria-label="...">
                                     <a href="{{ route('auth.facebook') }}" class="btn btn-primary">facebook</a>
                                     <a href="{{ route('auth.google') }}" class="btn btn-danger">google+</a>
+                                    <a href="{{ route('auth.linkedin') }}" class="btn btn-primary">linkedin</a>
                                 </div>
 
                                 <div class="form-separator">
