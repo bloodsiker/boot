@@ -28,7 +28,12 @@
                             @endif
                             <div style="text-align: center">
                                 <h3>Войти</h3>
-                                <a href="{{ route('auth.facebook') }}" class="btn btn-primary btn-block">facebook</a>
+                                <div class="btn-group btn-group-justified" role="group" aria-label="...">
+                                    <a href="{{ route('auth.facebook') }}" class="btn btn-primary">facebook</a>
+                                    <a href="{{ route('auth.google') }}" class="btn btn-danger">google+</a>
+                                    <a href="{{ route('auth.linkedin') }}" class="btn btn-primary">linkedin</a>
+                                </div>
+
                                 <div class="form-separator">
                                     <span class="form-separator-text">или заполните форму</span>
                                 </div>

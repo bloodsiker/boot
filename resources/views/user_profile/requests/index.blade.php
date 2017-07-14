@@ -23,16 +23,12 @@
             <div class="col-sm-9">
 
                 <div class="panel rounded shadow panel-teal">
-                    <div class="panel-heading">
+                    <div class="panel-heading panel-heading-black">
                         <div class="pull-left">
                             <h3 class="panel-title">Заявки</h3>
                         </div>
                         <div class="pull-right">
-                            <form action="#" class="form-horizontal mr-5 mt-3">
-                                <div class="form-group no-margin no-padding has-feedback">
-
-                                </div>
-                            </form>
+                            <a href="{{ route('user.request.find') }}" class="btn btn-warning">Найти заявку</a>
                         </div>
                         <div class="clearfix"></div>
                     </div><!-- /.panel-heading -->
@@ -43,28 +39,36 @@
                                 <div class="panel panel-default">
                                     <div class="panel-body">
                                         <div class="table-container">
+
+                                            @include('user_profile.includes.message-block')
+
                                             <table class="table table-filter">
                                                 <tbody>
-                                                <tr>
-                                                    <td>
-                                                        <a href="javascript:;" class="star">
-                                                            <i class="glyphicon glyphicon-star"></i>
-                                                        </a>
-                                                    </td>
-                                                    <td>
-                                                        <div class="media">
-                                                            <div class="media-body">
-                                                                <span class="media-meta pull-right">Febrero 13, 2016</span>
-                                                                <h4 class="title">
-                                                                    Lorem Impsum
-                                                                    <span class="pull-right pagado">(Pagado)</span>
-                                                                </h4>
-                                                                <p class="summary">Ut enim ad minim veniam, quis nostrud exercitation...</p>
-                                                            </div>
-                                                        </div>
-                                                    </td>
-                                                </tr>
-
+                                                @if(count($list_request))
+                                                    @foreach($list_request as $request)
+                                                        <tr>
+                                                            <td>
+                                                                <a href="{{ route('user.request', ['r_id' => $request->r_id]) }}" class="r_id">#{{ $request->r_id }}</a>
+                                                            </td>
+                                                            <td>
+                                                                <div class="media">
+                                                                    <div class="media-body">
+                                                                        <span class="media-meta pull-right">{{ $request->created_at }}</span>
+                                                                        <h4 class="title">
+                                                                            <a href="{{ route('sc', ['id' => $request->service_center['id']]) }}">{{ $request->service_center['service_name'] }}</a>
+                                                                            <span class="pull-right {{ \App\Models\FormRequest::getColorStatus($request->status_id) }}">{{ $request->status['status'] }}</span>
+                                                                        </h4>
+                                                                        <p class="summary">{{ $request->services }}</p>
+                                                                    </div>
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                    @endforeach
+                                                @else
+                                                    <tr>
+                                                        <td class="text-center"><h2>Вы еще не создавали заявок</h2></td>
+                                                    </tr>
+                                                @endif
                                                 </tbody>
                                             </table>
                                         </div>

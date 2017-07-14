@@ -7,4 +7,5 @@ Disallow: /seo/
 Disallow: /cabinet/
 Disallow: /admin-panel/
 Disallow: /crm-panel/
-Host: boot.com.ua/
+Disallow: /user/
+Host: https://boot.com.ua/

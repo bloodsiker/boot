@@ -38,7 +38,6 @@ class RegisterController extends Controller
 
         $findUser = User::whereEmail($request->email)->first();
         if($findUser){
-
             return redirect()->back()->with(['message' => 'Пользователь с таким email уже зарегистрирован!']);
         }
 
@@ -46,12 +45,13 @@ class RegisterController extends Controller
         $user->name = $request->name;
         $user->email = $request->email;
         $user->password = bcrypt($request->password);
+        $user->avatar = '/site/img/logo_user_default.png';
         $user->role_id = $role_id;
 
         $user->save();
         Auth::login($user, true);
 
-        return redirect()->route('cabinet');
+        return redirect()->route('user.dashboard');
     }
 
 

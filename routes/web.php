@@ -44,6 +44,12 @@ Route::group(['middleware' => ['web', 'session.page']], function (){
     Route::get('/auth/facebook', 'SocialAuthController@facebookRedirect')->name('auth.facebook');
     Route::get('/auth/facebook/callback', 'SocialAuthController@facebookCallback')->name('auth.facebook.callback');
 
+    Route::get('/auth/google', 'SocialAuthController@googleRedirect')->name('auth.google');
+    Route::get('/auth/google/callback', 'SocialAuthController@googleCallback')->name('auth.google.callback');
+
+    Route::get('/auth/linkedin', 'SocialAuthController@linkedinRedirect')->name('auth.linkedin');
+    Route::get('/auth/linkedin/callback', 'SocialAuthController@linkedinCallback')->name('auth.linkedin.callback');
+
     Route::get('load', 'ImportController@load')->name('load');
     Route::get('excel', 'ImportController@excel')->name('excel');
 
@@ -53,10 +59,20 @@ Route::group(['middleware' => ['user.profile']], function (){
     Route::get('user/dashboard', 'UserProfile\ProfileController@getDashboard')->name('user.dashboard');
     Route::get('user/profile', 'UserProfile\ProfileController@getProfile')->name('user.profile');
     Route::post('user/profile', 'UserProfile\ProfileController@postProfile')->name('user.profile');
+
     Route::get('user/setting', 'UserProfile\ProfileController@getSetting')->name('user.setting');
     Route::post('user/setting', 'UserProfile\ProfileController@postSetting')->name('user.setting');
+    Route::get('user/social/link/google', 'UserProfile\ProfileController@linkSocialGoogleAccount')->name('user.social.link.google');
+    Route::get('user/social/link/facebook', 'UserProfile\ProfileController@linkSocialFacebookAccount')->name('user.social.link.facebook');
+    Route::get('user/social/link/linkedin', 'UserProfile\ProfileController@linkSocialLinkedinAccount')->name('user.social.link.linkedin');
+    Route::post('user/social/unlink', 'UserProfile\ProfileController@unlinkSocialAccount')->name('user.social.unlink');
 
     Route::get('user/requests', 'UserProfile\UserRequestController@getIndex')->name('user.requests');
+    Route::get('user/request/search', 'UserProfile\UserRequestController@findRequestByRid')->name('user.request.find');
+    Route::post('user/request/bind', 'UserProfile\UserRequestController@bindRequestToUser')->name('user.request.bind');
+    Route::post('user/request/change_status', 'UserProfile\UserRequestController@changeStatusByRequest')->name('user.request.change_status');
+    Route::get('user/request/{r_id}', 'UserProfile\UserRequestController@getRequestByRid')->name('user.request')->where('r_id', '[0-9]+');
+    Route::post('user/request/{r_id}/send_message', 'UserProfile\UserRequestController@sendMessageByRequest')->name('user.request.send_message');
 
     Route::get('user/logout', 'UserProfile\ProfileController@getLogout')->name('user.logout');
 });

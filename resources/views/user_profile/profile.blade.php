@@ -23,7 +23,7 @@
             <div class="col-sm-9">
 
                 <div class="panel rounded shadow panel-teal">
-                    <div class="panel-heading">
+                    <div class="panel-heading panel-heading-black">
                         <div class="pull-left">
                             <h3 class="panel-title">Информация о пользователе</h3>
                         </div>
@@ -45,7 +45,7 @@
                             <div class="col-sm-9">
                                 <section class="comment-list">
 
-                                    <form class="form-horizontal" action="{{ route('user.profile') }}" method="POST">
+                                    <form class="form-horizontal" action="{{ route('user.profile') }}" method="POST" enctype="multipart/form-data">
                                         {{ csrf_field() }}
                                         <fieldset>
                                             <div class="form-group">
