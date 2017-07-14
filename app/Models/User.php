@@ -55,6 +55,15 @@ class User extends Authenticatable
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
+    public function favorite_service()
+    {
+        return $this->belongsToMany('App\Models\ServiceCenter', 'favorite_service_center', 'user_id', 'service_center_id');
+    }
+
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
     public function logs()
     {
         return $this->hasMany('App\Models\AdminLogs', 'user_id', 'id');
