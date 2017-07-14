@@ -69,14 +69,37 @@
             <div class="navbar-custom-menu">
                 <ul class="nav navbar-nav">
                     <!-- User Account: style can be found in dropdown.less -->
+
                     <li>
-                        <a href="{{ route('cabinet.messages') }}">
-                            <i class="fa fa-envelope-o"></i>
-                            {{--<span class="label label-success">4</span>--}}
+                        <a href="{{ route('main') }}">
+                            <i class="fa fa-home"></i>
+                            Главная
                         </a>
                     </li>
                     <li>
-                        <a href="{{ route('main') }}">На сайт <i class="fa fa-sign-out"></i></a>
+                        <a href="{{ route('catalog') }}">
+                            <i class="fa fa-list"></i>
+                            Каталог
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ route('diagnostics') }}">
+                            <i class="fa fa-wrench"></i>
+                            Диагностика
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ route('cabinet.messages') }}">
+                            <i class="fa fa-eye"></i>
+                            Посмотреть на сайте
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ route('cabinet.messages') }}">
+                            <i class="fa fa-envelope-o"></i>
+                            Заявки
+                            {{--<span class="label label-success">4</span>--}}
+                        </a>
                     </li>
                     <li class="dropdown user user-menu">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
