@@ -263,12 +263,10 @@
                             <div class="input-group input-group-sm">
                                 <input type="text" class="form-control" ng-model="prePhone">
                                 <span class="input-group-btn">
-                                  <button type="button" ng-disabled="!prePhone" ng-click="addPhone(prePhone)"  class="btn btn-black btn-flat">добавить</button>
+                                  <button type="button" ng-disabled="!prePhone" ng-click="addPhone(prePhone);savePhones(sc.service_phones)"
+                                          class="btn btn-black btn-flat">добавить</button>
                                 </span>
                             </div>
-                        </div>
-                        <div class="box-footer text-right" >
-                            <button type="button" class="btn btn-yellow" ng-click="savePhones(sc.service_phones)">Сохранить</button>
                         </div>
                     </div>
                 </div>
@@ -293,12 +291,10 @@
                             <div class="input-group input-group-sm">
                                 <input type="email" class="form-control" ng-model="preEmail" required>
                                 <span class="input-group-btn">
-                                  <button type="button" ng-disabled="!preEmail" ng-click="addEmail(preEmail)" class="btn btn-black btn-flat">добавить</button>
+                                  <button type="button" ng-disabled="!preEmail" ng-click="addEmail(preEmail);saveEmails(sc.service_emails)"
+                                          class="btn btn-black btn-flat">добавить</button>
                                 </span>
                             </div>
-                        </div>
-                        <div class="box-footer text-right" >
-                            <button type="button" class="btn btn-yellow" ng-click="saveEmails(sc.service_emails)">Сохранить</button>
                         </div>
                     </div>
                 </div>
@@ -324,12 +320,10 @@
                             <div class="input-group input-group-sm">
                                 <input type="text" class="form-control" ng-model="preAdvantage" placeholder='напр. "Прозрачная ценовая политика"'>
                                 <span class="input-group-btn">
-                                  <button type="button" ng-disabled="!preAdvantage" ng-click="addAdvantages(preAdvantage)"  class="btn btn-black btn-flat">добавить</button>
+                                  <button type="button" ng-disabled="!preAdvantage" ng-click="addAdvantages
+                                  (preAdvantage);saveAdvantages(sc.advantages)"  class="btn btn-black btn-flat">добавить</button>
                                 </span>
                             </div>
-                        </div>
-                        <div class="box-footer text-right" >
-                            <button type="button" class="btn btn-yellow" ng-click="saveAdvantages(sc.advantages)">Сохранить</button>
                         </div>
                     </div>
                 </div>
@@ -354,12 +348,10 @@
                             <div class="input-group input-group-sm">
                                 <input type="text" class="form-control" ng-model="preTag" placeholder='напр. "Выезд мастера"'>
                                 <span class="input-group-btn">
-                                  <button type="button" ng-disabled="!preTag" ng-click="addTags(preTag)" class="btn btn-black btn-flat">добавить</button>
+                                  <button type="button" ng-disabled="!preTag" ng-click="addTags(preTag);saveTags(sc.tags)" class="btn
+                                  btn-black btn-flat">добавить</button>
                                 </span>
                             </div>
-                        </div>
-                        <div class="box-footer text-right" >
-                            <button type="button" class="btn btn-yellow" ng-click="saveTags(sc.tags)">Сохранить</button>
                         </div>
                     </div>
                 </div>
