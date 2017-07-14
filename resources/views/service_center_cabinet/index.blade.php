@@ -257,7 +257,7 @@
                             <table class="table">
                                 <tr ng-repeat="phone in sc.service_phones track by $index">
                                     <td ng-bind="phone.phone"></td>
-                                    <td class="text-right"><i style="cursor: pointer;" ng-click="removePhone($index)" class="fa fa-trash"></i></td>
+                                    <td class="text-right"><i style="cursor: pointer;" ng-click="removePhone($index);savePhones(sc.service_phones)" class="fa fa-trash"></i></td>
                                 </tr>
                             </table>
                             <div class="input-group input-group-sm">
@@ -285,7 +285,7 @@
                             <table class="table">
                                 <tr ng-repeat="email in sc.service_emails track by $index">
                                     <td ng-bind="email.email"></td>
-                                    <td class="text-right"><i style="cursor: pointer;" ng-click="removeEmail($index)" class="fa fa-trash"></i></td>
+                                    <td class="text-right"><i style="cursor: pointer;" ng-click="removeEmail($index);saveEmails(sc.service_emails)" class="fa fa-trash"></i></td>
                                 </tr>
                             </table>
                             <div class="input-group input-group-sm">
@@ -314,7 +314,7 @@
                             <table class="table">
                                 <tr ng-repeat="advantage in sc.advantages track by $index">
                                     <td ng-bind="advantage"></td>
-                                    <td class="text-right"><i style="cursor: pointer;" ng-click="removeAdvantages($index)" class="fa fa-trash"></i></td>
+                                    <td class="text-right"><i style="cursor: pointer;" ng-click="removeAdvantages($index);saveAdvantages(sc.advantages)" class="fa fa-trash"></i></td>
                                 </tr>
                             </table>
                             <div class="input-group input-group-sm">
@@ -342,7 +342,7 @@
                             <table class="table">
                                 <tr ng-repeat="tag in sc.tags track by $index">
                                     <td ng-bind="tag"></td>
-                                    <td class="text-right"><i style="cursor: pointer;" ng-click="removeTags($index)" class="fa fa-trash"></i></td>
+                                    <td class="text-right"><i style="cursor: pointer;" ng-click="removeTags($index);saveTags(sc.tags)" class="fa fa-trash"></i></td>
                                 </tr>
                             </table>
                             <div class="input-group input-group-sm">
