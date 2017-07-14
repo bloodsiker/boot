@@ -56,7 +56,7 @@
                                                         <i class="fa fa-key">
                                                         </i>
                                                     </div>
-                                                    <input id="old_password" name="old_password" type="text"
+                                                    <input id="old_password" name="old_password" type="password"
                                                            placeholder="Текущий пароль"
                                                            required
                                                            class="form-control input-md">
@@ -74,7 +74,7 @@
                                                     <i class="fa fa-key">
                                                     </i>
                                                 </div>
-                                                <input id="password" name="password" type="text"
+                                                <input id="password" name="password" type="password"
                                                        placeholder="Новый пароль"
                                                        required
                                                        class="form-control input-md">
@@ -90,7 +90,7 @@
                                                     <i class="fa fa-key">
                                                     </i>
                                                 </div>
-                                                <input id="password_confrim" name="password_confrim" type="text"
+                                                <input id="password_confrim" name="password_confrim" type="password"
                                                        placeholder="Повторите новый пароль"
                                                        required
                                                        class="form-control input-md">

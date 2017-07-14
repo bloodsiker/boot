@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers\UserProfile;
 
+use App\Facades\AdminLog;
 use App\Models\SocialAccount;
 use App\Models\User;
-use App\Services\AdminLogService;
 use Auth;
 use Hash;
 use Illuminate\Http\Request;
@@ -15,19 +15,6 @@ use Session;
 
 class ProfileController extends Controller
 {
-
-    /**
-     * @var AdminLogService
-     */
-    private $adminLog;
-
-    public function __construct(AdminLogService $adminLog)
-    {
-
-        $this->adminLog = $adminLog;
-    }
-
-
     /**
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
@@ -195,7 +182,7 @@ class ProfileController extends Controller
      */
     public function getLogout()
     {
-        $this->adminLog->log('Вышел из провиля');
+        AdminLog::log('Вышел из провиля');
         Auth::logout();
         return redirect()->route('user.login');
     }

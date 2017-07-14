@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Facades\AdminLog;
 use App\Models\Role;
 use App\Services\SocialAccountService;
-use Auth;
 use Illuminate\Http\Request;
 use Laravel\Socialite\Facades\Socialite;
 use Session;
@@ -46,6 +46,7 @@ class SocialAuthController extends Controller
         $user = $service->createOrGetUser(Socialite::driver('facebook')->user(), 'facebook', $role->id);
 
         auth()->login($user);
+        AdminLog::log('Ввошел в профиль через facebook');
 
         return redirect()->route('user.dashboard');
     }
@@ -78,6 +79,7 @@ class SocialAuthController extends Controller
         $user = $service->createOrGetUser(Socialite::driver('google')->user(), 'google', $role->id);
 
         auth()->login($user);
+        AdminLog::log('Ввошел в профиль через google');
 
         return redirect()->route('user.dashboard');
     }
@@ -105,6 +107,7 @@ class SocialAuthController extends Controller
         $user = $service->createOrGetUser(Socialite::driver('linkedin')->user(), 'linkedin', $role->id);
 
         auth()->login($user);
+        AdminLog::log('Ввошел в профиль через linkedin');
 
         return redirect()->route('user.dashboard');
     }

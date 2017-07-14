@@ -7,7 +7,6 @@ use App\Models\ServiceCenter;
 use App\Repositories\ServiceCenter\ServiceCenterRepositoryInterface;
 use App\Repositories\ServicesView\ServicesViewRepositoryInterface;
 use App\Repositories\VisitsServiceCenter\VisitsRepositoryInterface;
-use App\Services\AdminLogService;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -28,20 +27,14 @@ class CabinetController extends Controller
      * @var ServicesViewRepositoryInterface
      */
     private $servicesView;
-    /**
-     * @var AdminLogService
-     */
-    private $adminLog;
 
     public function __construct(ServiceCenterRepositoryInterface $sc,
                                 VisitsRepositoryInterface $visitsRepository,
-                                ServicesViewRepositoryInterface $servicesView,
-                                AdminLogService $adminLog)
+                                ServicesViewRepositoryInterface $servicesView)
     {
         $this->sc = $sc;
         $this->visitsRepository = $visitsRepository;
         $this->servicesView = $servicesView;
-        $this->adminLog = $adminLog;
     }
 
     /**
@@ -313,7 +306,7 @@ class CabinetController extends Controller
      */
     public function getLogout()
     {
-        $this->adminLog->log('Вышел из кабинета сервисного центра');
+        AdminLog::log('Вышел из кабинета сервисного центра');
         Auth::logout();
         return redirect()->route('main');
     }
