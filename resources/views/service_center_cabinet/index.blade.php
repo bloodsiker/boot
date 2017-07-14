@@ -127,7 +127,7 @@
 
 
                             <div class="box-footer text-right">
-                                <button type="button" class="btn btn-primary" ng-click="saveGlobalSc(saveGlobalForm.$valid, sc)">Сохранить</button>
+                                <button type="button" class="btn btn-yellow" ng-click="saveGlobalSc(saveGlobalForm.$valid, sc)">Сохранить</button>
                             </div>
                         </form>
                     </div>
@@ -171,7 +171,7 @@
                         </div>
 
                         <div class="box-footer text-right" >
-                            <button type="button" class="btn btn-primary" ng-click="saveGraphic(sc.work_days)">Сохранить</button>
+                            <button type="button" class="btn btn-yellow" ng-click="saveGraphic(sc.work_days)">Сохранить</button>
                         </div>
                     </div>
                 </div>
@@ -229,14 +229,14 @@
                                         </tr>
 
                                     </table>
-                                    <button type="button" ng-disabled="!addPriceForm.$valid" ng-click="addPrice(addPriceForm.$valid, sc, newPriceTitle, newPriceCostMin, newPriceCostMax, newPriceCurrency)" class="btn btn-info">добавить</button>
+                                    <button type="button" ng-disabled="!addPriceForm.$valid" ng-click="addPrice(addPriceForm.$valid, sc, newPriceTitle, newPriceCostMin, newPriceCostMax, newPriceCurrency)" class="btn btn-black">добавить</button>
 
 
                                 </form>
                             </table>
                         </div>
                         <div class="box-footer text-right" >
-                            <button type="button" class="btn btn-primary" ng-click="saveScPrice(true, price_list)">Сохранить</button>
+                            <button type="button" class="btn btn-yellow" ng-click="saveScPrice(true, price_list)">Сохранить</button>
                         </div>
                     </div>
                 </div>
@@ -257,18 +257,16 @@
                             <table class="table">
                                 <tr ng-repeat="phone in sc.service_phones track by $index">
                                     <td ng-bind="phone.phone"></td>
-                                    <td class="text-right"><i style="cursor: pointer;" ng-click="removePhone($index)" class="fa fa-trash"></i></td>
+                                    <td class="text-right"><i style="cursor: pointer;" ng-click="removePhone($index);savePhones(sc.service_phones)" class="fa fa-trash"></i></td>
                                 </tr>
                             </table>
                             <div class="input-group input-group-sm">
                                 <input type="text" class="form-control" ng-model="prePhone">
                                 <span class="input-group-btn">
-                                  <button type="button" ng-disabled="!prePhone" ng-click="addPhone(prePhone)"  class="btn btn-info btn-flat">добавить</button>
+                                  <button type="button" ng-disabled="!prePhone" ng-click="addPhone(prePhone);savePhones(sc.service_phones)"
+                                          class="btn btn-black btn-flat">добавить</button>
                                 </span>
                             </div>
-                        </div>
-                        <div class="box-footer text-right" >
-                            <button type="button" class="btn btn-primary" ng-click="savePhones(sc.service_phones)">Сохранить</button>
                         </div>
                     </div>
                 </div>
@@ -287,18 +285,16 @@
                             <table class="table">
                                 <tr ng-repeat="email in sc.service_emails track by $index">
                                     <td ng-bind="email.email"></td>
-                                    <td class="text-right"><i style="cursor: pointer;" ng-click="removeEmail($index)" class="fa fa-trash"></i></td>
+                                    <td class="text-right"><i style="cursor: pointer;" ng-click="removeEmail($index);saveEmails(sc.service_emails)" class="fa fa-trash"></i></td>
                                 </tr>
                             </table>
                             <div class="input-group input-group-sm">
                                 <input type="email" class="form-control" ng-model="preEmail" required>
                                 <span class="input-group-btn">
-                                  <button type="button" ng-disabled="!preEmail" ng-click="addEmail(preEmail)" class="btn btn-info btn-flat">добавить</button>
+                                  <button type="button" ng-disabled="!preEmail" ng-click="addEmail(preEmail);saveEmails(sc.service_emails)"
+                                          class="btn btn-black btn-flat">добавить</button>
                                 </span>
                             </div>
-                        </div>
-                        <div class="box-footer text-right" >
-                            <button type="button" class="btn btn-primary" ng-click="saveEmails(sc.service_emails)">Сохранить</button>
                         </div>
                     </div>
                 </div>
@@ -318,18 +314,16 @@
                             <table class="table">
                                 <tr ng-repeat="advantage in sc.advantages track by $index">
                                     <td ng-bind="advantage"></td>
-                                    <td class="text-right"><i style="cursor: pointer;" ng-click="removeAdvantages($index)" class="fa fa-trash"></i></td>
+                                    <td class="text-right"><i style="cursor: pointer;" ng-click="removeAdvantages($index);saveAdvantages(sc.advantages)" class="fa fa-trash"></i></td>
                                 </tr>
                             </table>
                             <div class="input-group input-group-sm">
                                 <input type="text" class="form-control" ng-model="preAdvantage" placeholder='напр. "Прозрачная ценовая политика"'>
                                 <span class="input-group-btn">
-                                  <button type="button" ng-disabled="!preAdvantage" ng-click="addAdvantages(preAdvantage)"  class="btn btn-info btn-flat">добавить</button>
+                                  <button type="button" ng-disabled="!preAdvantage" ng-click="addAdvantages
+                                  (preAdvantage);saveAdvantages(sc.advantages)"  class="btn btn-black btn-flat">добавить</button>
                                 </span>
                             </div>
-                        </div>
-                        <div class="box-footer text-right" >
-                            <button type="button" class="btn btn-primary" ng-click="saveAdvantages(sc.advantages)">Сохранить</button>
                         </div>
                     </div>
                 </div>
@@ -348,18 +342,16 @@
                             <table class="table">
                                 <tr ng-repeat="tag in sc.tags track by $index">
                                     <td ng-bind="tag"></td>
-                                    <td class="text-right"><i style="cursor: pointer;" ng-click="removeTags($index)" class="fa fa-trash"></i></td>
+                                    <td class="text-right"><i style="cursor: pointer;" ng-click="removeTags($index);saveTags(sc.tags)" class="fa fa-trash"></i></td>
                                 </tr>
                             </table>
                             <div class="input-group input-group-sm">
                                 <input type="text" class="form-control" ng-model="preTag" placeholder='напр. "Выезд мастера"'>
                                 <span class="input-group-btn">
-                                  <button type="button" ng-disabled="!preTag" ng-click="addTags(preTag)" class="btn btn-info btn-flat">добавить</button>
+                                  <button type="button" ng-disabled="!preTag" ng-click="addTags(preTag);saveTags(sc.tags)" class="btn
+                                  btn-black btn-flat">добавить</button>
                                 </span>
                             </div>
-                        </div>
-                        <div class="box-footer text-right" >
-                            <button type="button" class="btn btn-primary" ng-click="saveTags(sc.tags)">Сохранить</button>
                         </div>
                     </div>
                 </div>
@@ -394,7 +386,7 @@
                             </div>
                         </div>
                         <div class="box-footer text-right" >
-                            <button type="button" class="btn btn-primary" ng-click="saveBrands(sc.manufacturers)">Сохранить</button>
+                            <button type="button" class="btn btn-yellow" ng-click="saveBrands(sc.manufacturers)">Сохранить</button>
                         </div>
                     </div>
                 </div>
@@ -413,7 +405,7 @@
                             <textarea style="width:100%;" class="aboutSc" name="about" ng-model="sc.about"></textarea>
                         </div>
                         <div class="box-footer text-right" >
-                            <button type="button" class="btn btn-primary" ng-click="saveAbout()">Сохранить</button>
+                            <button type="button" class="btn btn-yellow" ng-click="saveAbout()">Сохранить</button>
                         </div>
                     </div>
                 </div>
@@ -439,7 +431,7 @@
                                             <p ng-if="photo.type === 'certificate'">Сертификат</p>
                                             <p ng-if="photo.type === 'licenses'">Лицензия</p>
                                             <p>
-                                                <button class="btn btn-primary" type="button" ng-click="deletePhoto(sc.service_photo, photo, $index)">Удалить</button>
+                                                <button class="btn btn-yellow" type="button" ng-click="deletePhoto(sc.service_photo, photo, $index)">Удалить</button>
                                                 <button class="btn btn-default" type="button" ng-click="showPhoto(photo)">Посмотреть</button>
                                             </p>
                                         </div>
@@ -501,7 +493,7 @@
                                             <p ng-bind="'Опыт работы:  '+ person.work_exp"></p>
                                             <p>
                                                 <button class="btn btn-danger" type="button" ng-click="deletePersonal(sc.personal, $index, person)">Удалить</button>
-                                                <button class="btn btn-primary" type="button" ng-click="showPerson(person)">Посмотреть</button>
+                                                <button class="btn btn-yellow" type="button" ng-click="showPerson(person)">Посмотреть</button>
                                             </p>
                                         </div>
                                     </div>
@@ -543,7 +535,7 @@
                                                         <i class="fa fa-file-image-o" aria-hidden="true"></i> Фото
                                                         <input type="file" ng-hide="true" accept="image/*" aria-label="Фото" ng-model="addPersonFile" base-sixty-four-input required>
                                                     </label>
-                                                    <button ng-disabled="!addPersonForm.$valid" type="button" style="width: 50%;" class="btn btn-primary" ng-click="addPersonal(addPersonForm.$valid, newPersonalName, newPersonalInfo, newPersonalWorkExp, newPersonalSpecialization,  addPersonFile)" ><i class="fa fa-plus" aria-hidden="true"></i> Добавить</button>
+                                                    <button ng-disabled="!addPersonForm.$valid" type="button" style="width: 50%;" class="btn btn-yellow" ng-click="addPersonal(addPersonForm.$valid, newPersonalName, newPersonalInfo, newPersonalWorkExp, newPersonalSpecialization,  addPersonFile)" ><i class="fa fa-plus" aria-hidden="true"></i> Добавить</button>
                                                 </p>
                                             </div>
                                         </div>

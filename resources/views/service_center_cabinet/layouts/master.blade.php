@@ -30,6 +30,7 @@
 
     <link rel="stylesheet" href="{{ URL::to('admin/dist/css/style.css') }}">
     <link rel="stylesheet" href="{{ asset('site/vendor/angular/angular-csp.css') }}">
+    <link rel="stylesheet" href="{{ asset('site/css/admin.css') }}">
 
 
     <style>
@@ -47,7 +48,7 @@
 
     <![endif]-->
 </head>
-<body class="hold-transition skin-yellow sidebar-mini" ng-app="App" ng-cloak>
+<body class="hold-transition skin-black sidebar-mini" ng-app="App" ng-cloak>
 <div class="wrapper" ng-controller="AdminController">
 
     <header class="main-header">
@@ -59,6 +60,10 @@
         <nav class="navbar navbar-static-top">
             <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
                 <span class="sr-only">Toggle navigation</span>
+            </a>
+
+            <a href="{{ route('cabinet.messages') }}">
+                Посмотреть на сайте
             </a>
 
             <div class="navbar-custom-menu">
