@@ -121,4 +121,21 @@ class UserRequestController extends Controller
 
         return redirect()->route('user.requests')->with(['message' => 'Заявка привязана к вашему аккаунту']);
     }
+
+
+    /**
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function changeStatusByRequest(Request $request)
+    {
+        $user_request = FormRequest::find($request->id);
+        if($request->has('cost_of_work_end')){
+            $user_request->cost_of_work_end = $request->cost_of_work_end;
+        }
+        $user_request->status_id = $request->status_id;
+        $user_request->update();
+
+        return redirect()->back()->with(['message' => 'Вы отметили заявку как Выполнена(Закрыта)']);
+    }
 }

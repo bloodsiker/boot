@@ -38,6 +38,8 @@
                     </div><!-- /.panel-heading -->
                     <div class="panel-body no-padding"  style="margin-top: 15px">
 
+                        @include('user_profile.includes.message-block')
+
                         <section class="content">
                             <div class="col-md-12">
                                 <div class="panel panel-default">
@@ -131,6 +133,22 @@
                                                                         <td class="text-right">{{ $user_request->client_address }}</td>
                                                                     </tr>
                                                                 @endif
+
+                                                                @if($user_request->status_id == 4)
+                                                                    <form action="{{ route('user.request.change_status') }}" method="post">
+                                                                        {{ csrf_field() }}
+                                                                        <input type="hidden" name="status_id" value="6">
+                                                                        <input type="hidden" name="id" value="{{ $user_request->id }}">
+                                                                        <tr>
+                                                                            <td>Подтвердите выполнение задания и окончательную стоимость</td>
+                                                                            <td class="text-right"><input type="number" step="0.01" name="cost_of_work_end" required> ГРН</td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td></td>
+                                                                            <td class="text-right"><button class="btn btn-success">Отметить как выполненая</button></td>
+                                                                        </tr>
+                                                                    </form>
+                                                                @endif
                                                                 </tbody>
                                                             </table>
                                                         </div>
@@ -147,7 +165,7 @@
                                     <div class="row">
                                         <div class="new_message_head">
                                             <div class="pull-left">
-                                                Общение с сервисным центром
+                                                Диалог с сервисным центром
                                             </div>
                                         </div><!--new_message_head-->
 

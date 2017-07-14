@@ -70,6 +70,7 @@ Route::group(['middleware' => ['user.profile']], function (){
     Route::get('user/requests', 'UserProfile\UserRequestController@getIndex')->name('user.requests');
     Route::get('user/request/search', 'UserProfile\UserRequestController@findRequestByRid')->name('user.request.find');
     Route::post('user/request/bind', 'UserProfile\UserRequestController@bindRequestToUser')->name('user.request.bind');
+    Route::post('user/request/change_status', 'UserProfile\UserRequestController@changeStatusByRequest')->name('user.request.change_status');
     Route::get('user/request/{r_id}', 'UserProfile\UserRequestController@getRequestByRid')->name('user.request')->where('r_id', '[0-9]+');
     Route::post('user/request/{r_id}/send_message', 'UserProfile\UserRequestController@sendMessageByRequest')->name('user.request.send_message');
 
