@@ -33,6 +33,11 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
+    /**
+     * @var string
+     */
+    protected $primaryKey = 'id';
+
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
@@ -53,7 +58,7 @@ class User extends Authenticatable
 
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
     public function favorite_service()
     {

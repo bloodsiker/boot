@@ -5,11 +5,13 @@ namespace App\Http\Controllers\UserProfile;
 use App\Models\FormRequest;
 use App\Models\FormRequestMessage;
 use App\Models\ServiceCenter;
+use App\Models\User;
 use Auth;
 use Carbon\Carbon;
 use DB;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Mail;
 
 class UserRequestController extends Controller
 {
@@ -73,14 +75,25 @@ class UserRequestController extends Controller
     {
         $user_request = FormRequest::where('r_id', $r_id)->with('service_center')->first();
 
-        FormRequestMessage::create(
-            [
-                'request_id' => $user_request->id,
-                'user_id' => Auth::user()->id,
-                'message' => $request->message,
-                'created_at' => Carbon::now(),
-            ]
-        );
+        $data = [
+            'request_id' => $user_request->id,
+            'user_id' => Auth::user()->id,
+            'message' => $request->message,
+            'created_at' => Carbon::now(),
+        ];
+
+        $send_ok = FormRequestMessage::create($data);
+
+        if($send_ok){
+            $user_id = $user_request->service_center['user_id'];
+            $user = User::where('id', $user_id)->first();
+
+            Mail::send('site.emails.user_message_from_request', compact('data', 'r_id'), function ($message) use ($r_id, $user) {
+                $message->from('info@boot.com.ua', 'BOOT');
+                $message->to($user->email)->subject('Новое сообщение от клиента по заявке #' . $r_id);
+            });
+
+        }
         return redirect()->back();
     }
 
