@@ -108,7 +108,7 @@ class CabinetController extends Controller
         }
         $service = ServiceCenter::where('id', $id)->select('service_name')->first();
         $service_name = $service->service_name;
-        return view('service_center_cabinet.index', compact('service_name'));
+        return view('service_center_cabinet.index', compact('service_name', 'id'));
     }
 
     /**
