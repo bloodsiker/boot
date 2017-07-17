@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Support\Facades\Auth;
@@ -72,6 +73,16 @@ class User extends Authenticatable
     public function logs()
     {
         return $this->hasMany('App\Models\AdminLogs', 'user_id', 'id');
+    }
+
+
+    /**
+     * Update last online time User
+     * @return bool
+     */
+    public function updateLastOnline()
+    {
+        return self::where('id', Auth::id())->update(['last_online' => Carbon::now()]);
     }
 
 

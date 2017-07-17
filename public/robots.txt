@@ -1,2 +1,11 @@
 User-agent: *
 Disallow:
+
+Disallow: /adm/
+Disallow: /adm/auth/
+Disallow: /seo/
+Disallow: /cabinet/
+Disallow: /admin-panel/
+Disallow: /crm-panel/
+Disallow: /user/
+Host: https://boot.com.ua/
