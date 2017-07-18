@@ -28,6 +28,7 @@
                                     <th>Название</th>
                                     <th>Статус</th>
                                     <th>Верификация</th>
+                                    <th>Уровеь заполненности</th>
                                     <th width="70"></th>
                                 </tr>
                                 </thead>
@@ -39,6 +40,7 @@
                                         <td>{{ $sc->service_name }}</td>
                                         <td>{{ $sc->enabled == 0 ? '' : 'Удален' }}</td>
                                         <td>{{ $sc->verified == 0 ? '' : 'Верифицирован' }}</td>
+                                        <td>{{ $sc->level_verified }}%</td>
                                         <td class="text-center"><a href="{{ route('cabinet.admin.service', ['id' => $sc->id]) }}"><i class="fa fa-eye"></i></a></td>
                                     </tr>
                                 @endforeach

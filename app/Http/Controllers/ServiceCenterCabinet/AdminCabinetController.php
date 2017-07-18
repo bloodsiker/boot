@@ -14,12 +14,12 @@ class AdminCabinetController extends Controller
     /**
      * @var ServiceCenterRepositoryInterface
      */
-    private $centerRepository;
+    private $sc;
 
-    public function __construct(ServiceCenterRepositoryInterface $centerRepository)
+    public function __construct(ServiceCenterRepositoryInterface $sc)
     {
 
-        $this->centerRepository = $centerRepository;
+        $this->sc = $sc;
     }
 
     /**
@@ -62,7 +62,107 @@ class AdminCabinetController extends Controller
     {
         $service = ServiceCenter::where('id', $id)->select('service_name')->first();
         $service_name = $service->service_name;
-        return view('service_center_cabinet.index', compact('service_name', 'id'));
+        return view('service_center_cabinet.admin.service_center', compact('service_name', 'id'));
+    }
+
+
+    public function putUpdateService(Request $request, $id)
+    {
+        // Основная информация
+        if($request->has('info')){
+            $this->sc->updateServiceCenter($request, $id);
+        }
+
+        if($request->has('about')){
+            $this->sc->updateAboutServiceCenter($request, $id);
+        }
+
+        // Рабочий график
+        if($request->has('work_days')){
+            $this->sc->updateWorkingDays($request, $id);
+        }
+
+        // Телефоны
+        if($request->has('phones')){
+            $this->sc->updatePhones($request, $id);
+        }
+
+        //Emails
+        if($request->has('emails')){
+            $this->sc->updateEmails($request, $id);
+        }
+
+        // Преимущества
+        if($request->has('advantages')){
+            $this->sc->updateAdvantages($request, $id);
+        }
+
+        // Теги
+        if($request->has('tags')){
+            $this->sc->updateTags($request, $id);
+        }
+
+        //Бренды
+        if($request->has('manufacturers')){
+            $this->sc->updateManufacturer($request, $id);
+        }
+
+        // Цены
+        if($request->has('price')){
+            $this->sc->updatePrice($request, $id);
+        }
+
+        return response()->json(['res' => $request->all()], 200);
+    }
+
+
+    /**
+     * @param Request $request
+     * @param $id
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function postAddPersonalService(Request $request, $id)
+    {
+        $sc_personal = $this->sc->addPersonal($request, $id);
+        return response()->json([$sc_personal], 200);
+    }
+
+
+    /**
+     * @param Request $request
+     * @param $id
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function postAddPhotoService(Request $request, $id)
+    {
+        $sc_photo = $this->sc->addPhoto($request, $id);
+        return response()->json([$sc_photo], 200);
+    }
+
+
+    /**
+     * Delete personal from Service Center
+     * @param $id
+     * @param $id_person
+     * @return string
+     */
+    public function deletePersonalService($id, $id_person)
+    {
+        $this->sc->deletePersonal($id, $id_person);
+        return json_encode(["status" => 200]);
+    }
+
+
+    /**
+     * Delete photo from Service Center
+     * @param $id
+     * @param $id_photo
+     * @return string
+     */
+    public function deletePhotoService($id, $id_photo)
+    {
+        $this->sc->deletePhoto($id, $id_photo);
+        return json_encode(["status" => 200]);
     }
 
 

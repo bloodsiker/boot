@@ -34,6 +34,11 @@ Route::group(['middleware' => ['service.center']], function (){
         Route::get('cabinet/admin/user/{id}/list-sc', 'ServiceCenterCabinet\AdminCabinetController@getUserListSc')->name('cabinet.admin.user.list.sc');
         Route::get('cabinet/admin/list-sc', 'ServiceCenterCabinet\AdminCabinetController@getListSc')->name('cabinet.admin.list.sc');
         Route::get('cabinet/admin/sc/{id}', 'ServiceCenterCabinet\AdminCabinetController@getService')->name('cabinet.admin.service')->where('id', '[0-9]+');
+        Route::put ('cabinet/admin/sc/{id}/update', 'ServiceCenterCabinet\AdminCabinetController@putUpdateService')->name('cabinet.admin.update.service')->where('id', '[0-9]+');
+        Route::post ('cabinet/admin/sc/{id}/add-personal', 'ServiceCenterCabinet\AdminCabinetController@postAddPersonalService')->name('cabinet.admin.add.personal.service')->where('id', '[0-9]+');
+        Route::delete ('cabinet/admin/sc/{id}/delete-personal/{id_person}', 'ServiceCenterCabinet\AdminCabinetController@deletePersonalService')->name('cabinet.admin.delete.personal.service');
+        Route::post ('cabinet/admin/sc/{id}/add-photo', 'ServiceCenterCabinet\AdminCabinetController@postAddPhotoService')->name('cabinet.admin.add.photo.service')->where('id', '[0-9]+');
+        Route::delete ('cabinet/admin/sc/{id}/delete-photo/{id_photo}', 'ServiceCenterCabinet\AdminCabinetController@deletePhotoService')->name('cabinet.admin.delete.photo.service');
         Route::get ('cabinet/admin/messages', 'ServiceCenterCabinet\AdminCabinetController@getMessages')->name('cabinet.admin.messages');
         Route::get ('cabinet/admin/requests', 'ServiceCenterCabinet\AdminCabinetController@allRequest')->name('cabinet.admin.requests');
     });

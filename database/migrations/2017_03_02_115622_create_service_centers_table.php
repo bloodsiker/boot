@@ -30,6 +30,7 @@ class CreateServiceCentersTable extends Migration
             $table->boolean('exit_master')->defoult(0);
             $table->boolean('enabled')->defoult(0);
             $table->boolean('verified')->defoult(0);
+            $table->integer('level_verified')->defoult(0);
             $table->timestamps();
 
             $table->foreign('user_id')
