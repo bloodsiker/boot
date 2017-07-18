@@ -32,6 +32,9 @@ Route::group(['middleware' => ['service.center']], function (){
     Route::group(['middleware' => ['admin']], function (){
         Route::get('cabinet/admin/user-list', 'ServiceCenterCabinet\AdminCabinetController@getUserList')->name('cabinet.admin.user.list');
         Route::get('cabinet/admin/user/{id}/list-sc', 'ServiceCenterCabinet\AdminCabinetController@getUserListSc')->name('cabinet.admin.user.list.sc');
+        Route::get('cabinet/admin/list-sc', 'ServiceCenterCabinet\AdminCabinetController@getListSc')->name('cabinet.admin.list.sc');
         Route::get('cabinet/admin/sc/{id}', 'ServiceCenterCabinet\AdminCabinetController@getService')->name('cabinet.admin.service')->where('id', '[0-9]+');
+        Route::get ('cabinet/admin/messages', 'ServiceCenterCabinet\AdminCabinetController@getMessages')->name('cabinet.admin.messages');
+        Route::get ('cabinet/admin/requests', 'ServiceCenterCabinet\AdminCabinetController@allRequest')->name('cabinet.admin.requests');
     });
 });

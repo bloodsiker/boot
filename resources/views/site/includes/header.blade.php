@@ -20,15 +20,18 @@
                                 {{--<br>--}}
                                 @if(Auth::user())
                                     @if(Auth::user()->roleSc())
-                                        <a href="{{ route('cabinet') }}" class="sign-in">В кабинет</a> |
+                                        <a href="{{ route('cabinet.dashboard') }}" class="sign-in">В кабинет</a> |
                                         <a href="{{ route('cabinet.logout') }}" class="registration">Выйти</a>
                                     @elseif(Auth::user()->roleUser())
                                         <a href="{{ route('user.dashboard') }}" class="sign-in">В профиль</a> |
                                         <a href="{{ route('user.logout') }}" class="registration">Выйти</a>
+                                    @elseif(Auth::user()->roleAdmin())
+                                        <a href="{{ route('cabinet.admin.user.list') }}" class="sign-in">В кабинет</a> |
+                                        <a href="{{ route('cabinet.logout') }}" class="registration">Выйти</a>
                                     @endif
                                 @else
                                     <a href="{{ route('user.login') }}" class="sign-in">Пользователь</a> |
-                                    <a href="{{ route('service.login') }}" class="registration">Сервисный центер</a>
+                                    <a href="{{ route('service.login') }}" class="registration">Сервисный центр</a>
                                 @endif
                             </div>
                         </div>
