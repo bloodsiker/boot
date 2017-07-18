@@ -19,8 +19,8 @@ class ViewComposerServiceProvider extends ServiceProvider
         view()->composer('service_center_cabinet.includes.sidebar', function($view){
             if(Auth::user()->roleSc()){
                 $service_centers = Auth::user()->service_centers()->enabled()->get();
+                $view->with('service_centers', $service_centers);
             }
-            $view->with('service_centers', $service_centers);
         });
     }
 

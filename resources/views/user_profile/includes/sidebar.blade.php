@@ -3,8 +3,8 @@
         <a href="{{ route('user.dashboard') }}"><i class="fa fa-inbox"></i> Dashboard</a>
     </li>
 
-    <li class="">
-        <a href="#"><i class="fa fa-certificate"></i> Избранные</a>
+    <li class="{{ active(['user.favorite']) }}">
+        <a href="{{ route('user.favorite') }}"><i class="fa fa-certificate"></i> Избранные</a>
     </li>
     <li class="{{ active(['user.requests', 'user.request', 'user.request.find']) }}">
         <a href="{{ route('user.requests') }}">

@@ -53,10 +53,22 @@
 
     <header class="main-header">
         <!-- Logo -->
-        <a href="{{ route('admin.cabinet') }}" class="logo">
-            <span class="logo-mini">Adm</span>
-            <span class="logo-lg">Admin</span>
-        </a>
+        @if(Auth::user()->roleAdmin())
+
+            <a href="{{ route('cabinet.admin.user.list') }}" class="logo">
+                <span class="logo-mini">Adm</span>
+                <span class="logo-lg">Admin</span>
+            </a>
+
+        @elseif(Auth::user()->roleSc())
+
+            <a href="{{ route('cabinet.dashboard') }}" class="logo">
+                <span class="logo-mini">Adm</span>
+                <span class="logo-lg">Admin</span>
+            </a>
+
+        @endif
+
         <nav class="navbar navbar-static-top">
             <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
                 <span class="sr-only">Toggle navigation</span>
@@ -85,17 +97,32 @@
                         </a>
                     </li>
                     <li>
-                        <a href="{{ route('cabinet.messages') }}">
-                            <i class="fa fa-eye"></i>
-                            Посмотреть на сайте
-                        </a>
+                        @if(Route::currentRouteName() == 'cabinet.service' || Route::currentRouteName() == 'cabinet.admin.service')
+                            <a href="{{ route('sc', ['id' => $id]) }}">
+                                <i class="fa fa-eye"></i>
+                                Посмотреть на сайте
+                            </a>
+                        @else
+                            <a href="{{ route('main') }}">
+                                <i class="fa fa-eye"></i>
+                                Посмотреть на сайте
+                            </a>
+                        @endif
                     </li>
                     <li>
-                        <a href="{{ route('cabinet.messages') }}">
-                            <i class="fa fa-envelope-o"></i>
-                            Заявки
-                            {{--<span class="label label-success">4</span>--}}
-                        </a>
+                        @if(Auth::user()->roleAdmin())
+                            <a href="{{ route('cabinet.admin.messages') }}">
+                                <i class="fa fa-envelope-o"></i>
+                                Заявки
+                                {{--<span class="label label-success">4</span>--}}
+                            </a>
+                        @elseif(Auth::user()->roleSc())
+                            <a href="{{ route('cabinet.messages') }}">
+                                <i class="fa fa-envelope-o"></i>
+                                Заявки
+                                {{--<span class="label label-success">4</span>--}}
+                            </a>
+                        @endif;
                     </li>
                     <li class="dropdown user user-menu">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">

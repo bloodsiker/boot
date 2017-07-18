@@ -26,6 +26,7 @@ class CreateUsersTable extends Migration
             $table->unsignedTinyInteger('change_email')->default(0);
             $table->rememberToken();
             $table->timestamps();
+            $table->dateTime('last_online');
 
             $table->foreign('role_id')
                 ->references('id')->on('roles')

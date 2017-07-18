@@ -69,13 +69,18 @@
                 <div class="modal-body">
                     <div class="row comment-item">
                         <div class="col-sm-4">
-                            <img class="avatar" src="{{ asset('site/img/logo_user_default.png') }}" alt="client-user">
+                            @if(Auth::check() && Auth::user()->roleUser())
+                                <img class="avatar" src="{{ asset(Auth::user()->avatar) }}" alt="client-user">
+                            @else
+                                <img class="avatar" src="{{ asset('site/img/logo_user_default.png') }}" alt="client-user">
+                            @endif
                             <h4 class="name">
                                 <input type="text"
                                        ng-minlength="2"
                                        required
                                        ng-class="{'input-error': add_comment.user_name.length == 0 && add_comment_valid}"
                                        ng-model="add_comment.user_name" placeholder="Иванов Иван Иванович"
+                                       value="{{ (Auth::check() && Auth::user()->roleUser()) ? Auth::user()->name : '' }}"
                                        class="input "/>
                             </h4>
                             <div class="device-name">Устройство
@@ -209,6 +214,7 @@
                                    required
                                    placeholder="Введите имя"
                                    name="client_name"
+                                   value="{{ (Auth::check() && Auth::user()->roleUser()) ? Auth::user()->name : '' }}"
                                    ng-model="client_name">
                         </div>
                         <div class="form-group">
@@ -218,6 +224,7 @@
                                    required
                                    placeholder="+38 (123) 456-78-90"
                                    name="client_phone"
+                                   value="{{ (Auth::check() && Auth::user()->roleUser()) ? Auth::user()->phone : '' }}"
                                    ng-model="client_phone">
                         </div>
                     <div class="form-group">
@@ -261,22 +268,34 @@
                         <div class="col-sm-6">
                             <div class="form-group">
                                 <label for="client_name">Имя</label>
-                                <input type="text" id="client_name" class="form-control" placeholder="Имя"
-                                       name="client_name" required ng-model="data.client_name">
+                                <input type="text" id="client_name" class="form-control"
+                                       placeholder="Имя"
+                                       name="client_name"
+                                       value="{{ (Auth::check() && Auth::user()->roleUser()) ? Auth::user()->name : '' }}"
+                                       required
+                                       ng-model="data.client_name">
                             </div>
                         </div>
                         <div class="col-sm-6">
                             <div class="form-group">
                                 <label for="client_phone">Телефон</label>
-                                <input type="text" id="client_phone" class="form-control phone-input" placeholder="+38 (123) 456-78-90"
-                                       name="client_phone" required ng-model="data.client_phone">
+                                <input type="text" id="client_phone" class="form-control phone-input"
+                                       placeholder="+38 (123) 456-78-90"
+                                       name="client_phone"
+                                       value="{{ (Auth::check() && Auth::user()->roleUser()) ? Auth::user()->phone : '' }}"
+                                       required
+                                       ng-model="data.client_phone">
                             </div>
                         </div>
                         <div class="col-sm-6">
                             <div class="form-group">
                                 <label for="client_email">Email</label>
-                                <input type="email" id="client_email" class="form-control" placeholder="Email"
-                                       name="client_email" required ng-model="data.client_email">
+                                <input type="email" id="client_email" class="form-control"
+                                       placeholder="Email"
+                                       name="client_email"
+                                       value="{{ (Auth::check() && Auth::user()->roleUser()) ? Auth::user()->email : '' }}"
+                                       required
+                                       ng-model="data.client_email">
                             </div>
                         </div>
                         <div class="col-sm-6">
@@ -322,7 +341,9 @@
                         <div class="col-sm-12">
                             <div class="form-group" ng-if="data.client_exit_master">
                                 <label for="client_address">Адрес</label>
-                                <input type="text" class="form-control" id="client_address" ng-model="data.client_address">
+                                <input type="text" class="form-control" id="client_address"
+                                       value="{{ (Auth::check() && Auth::user()->roleUser()) ? Auth::user()->address : '' }}"
+                                       ng-model="data.client_address">
                             </div>
                         </div>
 

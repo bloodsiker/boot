@@ -6,6 +6,8 @@
 
 @section('keywords', $data_seo[0]->keywords)
 
+@section('og:image', asset('site/img/index.jpg'))
+
 @section('controller', 'CatalogCtrl')
 
 

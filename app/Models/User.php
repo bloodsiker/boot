@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Support\Facades\Auth;
@@ -33,6 +34,11 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
+    /**
+     * @var string
+     */
+    protected $primaryKey = 'id';
+
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
@@ -53,11 +59,30 @@ class User extends Authenticatable
 
 
     /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function favorite_service()
+    {
+        return $this->belongsToMany('App\Models\ServiceCenter', 'favorite_service_center', 'user_id', 'service_center_id');
+    }
+
+
+    /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
     public function logs()
     {
         return $this->hasMany('App\Models\AdminLogs', 'user_id', 'id');
+    }
+
+
+    /**
+     * Update last online time User
+     * @return bool
+     */
+    public function updateLastOnline()
+    {
+        return self::where('id', Auth::id())->update(['last_online' => Carbon::now()]);
     }
 
 

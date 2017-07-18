@@ -35,7 +35,6 @@ class ServicesViewRepository implements ServicesViewRepositoryInterface
      */
     public function topViewServices()
     {
-        ServicesView::select()->get();
         return DB::table('service_center_views_services')
             ->select(DB::raw('count(*) as view, services'))
             ->groupBy('services')

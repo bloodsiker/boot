@@ -57,6 +57,9 @@ Route::group(['middleware' => ['web', 'session.page']], function (){
 
 Route::group(['middleware' => ['user.profile']], function (){
     Route::get('user/dashboard', 'UserProfile\ProfileController@getDashboard')->name('user.dashboard');
+
+    Route::get('user/favorite', 'UserProfile\FavoriteController@getIndex')->name('user.favorite');
+
     Route::get('user/profile', 'UserProfile\ProfileController@getProfile')->name('user.profile');
     Route::post('user/profile', 'UserProfile\ProfileController@postProfile')->name('user.profile');
 

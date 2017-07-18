@@ -17,6 +17,7 @@ class IsAdmin
     public function handle($request, Closure $next)
     {
         if (Auth::user() &&  Auth::user()->role_id == 1) {
+            Auth::user()->updateLastOnline();
             return $next($request);
         }
         return redirect('/adm/auth')->with(['message' => 'У вас нету прав доступа в эту часть кабинета!']);
