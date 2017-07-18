@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html data-lang="ru" data-ng-app="App" data-ng-controller="IndexCtrl">
+<html data-lang="ru" data-ng-app="App" data-ng-controller="IndexCtrl" prefix="og: http://ogp.me/ns#">
 
 <head>
     <meta charset="utf-8">
@@ -11,6 +11,14 @@
     <meta name="keywords" content="@yield('keywords')">
     <meta name="_token"  content="{{ csrf_token() }}">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta property="og:site_name" content="Boot" />
+    <meta property="og:title" content="@yield('title')" />
+    <meta property="og:description" content="@yield('description')" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="{{ URL::current() }}" />
+    <meta property="og:image:url" content="@yield('og:image')" />
+    <meta property="og:image:url" content="{{ asset('site/img/logo.png') }}" />
+    <meta property="fb:app_id" content="1389757617737224">
     <link rel="stylesheet" href="{{ asset('site/vendor/bootstrap/dist/css/bootstrap.min.css') }}">
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('site/vendor/angular/angular-csp.css') }}">
