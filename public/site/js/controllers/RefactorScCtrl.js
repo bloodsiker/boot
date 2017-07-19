@@ -111,11 +111,41 @@
                 brands(success.data);
 
 
+                $scope.progressBarAdminShow = true;
             });
         }
 
 
         getModel();
+
+
+        $scope.progressBarAdmin = function () {
+            var countProgress = 0;
+
+            // console.log($scope.sc.service_phones.length);
+
+            var arrProgress = [
+                $scope.sc.service_phones.length,
+                $scope.sc.price.length,
+                $scope.sc.service_emails.length,
+                $scope.sc.manufacturers.length,
+                $scope.sc.advantages.length,
+                $scope.sc.tags.length,
+                $scope.sc.about,
+                $scope.sc.service_photo.length,
+                $scope.sc.personal.length
+            ];
+            arrProgress.forEach(function (key) {
+                key && key !== 'null' ? countProgress ++ : '';
+            });
+
+            var procent = (100 / 9) * countProgress;
+
+            $scope.procent = procent;
+
+            return procent+'%';
+
+        };
 
 
 
@@ -134,6 +164,9 @@
 
 
 
+
+
+
         $scope.saveGlobalSc = function (valid, sc) {
             if (valid) {
                 var data = {
@@ -148,7 +181,8 @@
                         metro_id: sc.metro.id,
                         number_h: sc.number_h,
                         number_h_add: sc.number_h_add,
-                        exit_master: sc.exit_master
+                        exit_master: sc.exit_master,
+                        level_verified: $scope.procent
                     }
 
                 };
@@ -291,7 +325,7 @@
                     }
                 });
 
-                model.put('/cabinet' + url + '/update', {price:$scope.sc.price}).then(function (res) {
+                model.put('/cabinet' + url + '/update', {price:$scope.sc.price, level_verified: $scope.procent}).then(function (res) {
                     console.log(res); angular.element('#alert').append(alertSuccess);
                     $timeout(function () {
                         angular.element('#alert').html('');
@@ -316,7 +350,7 @@
             phones.forEach(function (key) {
                 data.push(key.phone)
             });
-            model.put('/cabinet' + url + '/update', {phones:data}).then(function (res) {
+            model.put('/cabinet' + url + '/update', {phones:data, level_verified: $scope.procent}).then(function (res) {
                 console.log(res); angular.element('#alert').append(alertSuccess);
                 $timeout(function () {
                     angular.element('#alert').html('');
@@ -341,7 +375,7 @@
             emails.forEach(function (key) {
                 data.push(key.email)
             });
-            model.put('/cabinet' + url + '/update', {emails:data}).then(function (res) {
+            model.put('/cabinet' + url + '/update', {emails:data, level_verified: $scope.procent}).then(function (res) {
                 console.log(res); angular.element('#alert').append(alertSuccess);
                 $timeout(function () {
                     angular.element('#alert').html('');
@@ -361,7 +395,7 @@
             $scope.sc.advantages.splice(index, 1);
         };
         $scope.saveAdvantages = function (advantages) {
-            model.put('/cabinet' + url + '/update', {advantages:advantages}).then(function (res) {
+            model.put('/cabinet' + url + '/update', {advantages:advantages, level_verified: $scope.procent}).then(function (res) {
                 console.log(res); angular.element('#alert').append(alertSuccess);
                     $timeout(function () {
                         angular.element('#alert').html('');
@@ -381,7 +415,7 @@
             $scope.sc.tags.splice(index, 1);
         };
         $scope.saveTags = function (tags) {
-            model.put('/cabinet' + url + '/update', {tags:tags}).then(function (res) {
+            model.put('/cabinet' + url + '/update', {tags:tags, level_verified: $scope.procent}).then(function (res) {
                 console.log(res); angular.element('#alert').append(alertSuccess);
                     $timeout(function () {
                         angular.element('#alert').html('');
@@ -391,7 +425,7 @@
 
 
         $scope.saveBrands = function (brands) {
-            model.put('/cabinet' + url + '/update', {manufacturers:brands}).then(function (res) {
+            model.put('/cabinet' + url + '/update', {manufacturers:brands, level_verified: $scope.procent}).then(function (res) {
                 console.log(res); angular.element('#alert').append(alertSuccess);
                 $timeout(function () {
                     angular.element('#alert').html('');
@@ -455,7 +489,7 @@
 
             var text = angular.element('#aboutSc .wysihtml5-sandbox').contents().find("body").html();
 
-            model.put('/cabinet' + url + '/update', {about:text}).then(function (res) {
+            model.put('/cabinet' + url + '/update', {about:text, level_verified: $scope.procent}).then(function (res) {
                 console.log(res); angular.element('#alert').append(alertSuccess);
                 $timeout(function () {
                     angular.element('#alert').html('');
@@ -473,7 +507,8 @@
             if (valid) {
                 model.post('/cabinet' + url + '/add-photo', {
                     type: type,
-                    photo: {data: photo}
+                    photo: {data: photo},
+                    level_verified: $scope.procent
                 }).then(function (success) {
                     if ($scope.sc.service_photo) {
                         $scope.sc.service_photo.push(success.data[0])
@@ -531,7 +566,8 @@
                     specialization: specialization,
                     avatar: {
                         data: photo
-                    }
+                    },
+                    level_verified: $scope.procent
                 }).then(function (success) {
                     if ($scope.sc.personal) {
                         $scope.sc.personal.push(success.data[0]);
