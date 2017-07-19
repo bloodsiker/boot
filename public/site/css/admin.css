@@ -93,3 +93,38 @@
     box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125); }
 
 /*# sourceMappingURL=admin.css.map */
+
+/****  Admin comments   ***/
+
+.glyphicon { margin-right:5px;}
+.rating .glyphicon {font-size: 22px;}
+.rating-num { margin-top:0px;font-size: 54px; }
+.progress { margin-bottom: 5px;}
+.progress-bar { text-align: left; }
+.rating-desc .col-md-3 {padding-right: 0px;}
+.sr-only-rating { margin-left: 5px;overflow: visible;clip: auto; }
+
+.btn-grey{
+    background-color:#D8D8D8;
+    color:#FFF;
+}
+.comment-avatar {
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    border-radius: 50%;
+    width: 70px;
+    height: 70px;
+    margin-right: 10px;
+}
+.review-block-name{
+    font-size:14px;
+    margin:4px 0;
+}
+.review-block-title{
+    font-size:15px;
+    font-weight:700;
+    margin-bottom:10px;
+}
+.review-block-description{
+    font-size:14px;
+}

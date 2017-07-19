@@ -70,6 +70,7 @@ class CatalogController extends Controller
     {
         $comment = new Comments();
         $comment->service_center_id = $id;
+        $comment->user_id = (Auth::user() && Auth::user()->roleUser()) ? Auth::user()->id : null;
         $comment->user_name = $request->user_name;
         $comment->device = $request->device_name;
         $comment->service = $request->service_name;

@@ -49,6 +49,7 @@ Route::group(['middleware' => ['service.center']], function (){
 
                 Route::get ('comments', 'ServiceCenterCabinet\Admin\CommentController@allComments')->name('cabinet.admin.comments');
                 Route::get ('comment/{id}', 'ServiceCenterCabinet\Admin\CommentController@getComment')->name('cabinet.admin.comment');
+                Route::post ('comment/{id}/published', 'ServiceCenterCabinet\Admin\CommentController@publishedComment')->name('cabinet.admin.comment.published');
             });
         });
     });

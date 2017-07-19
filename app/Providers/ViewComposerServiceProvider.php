@@ -2,8 +2,7 @@
 
 namespace App\Providers;
 
-use App\Models\ServiceCenter;
-use App\Models\User;
+use App\Models\Comments;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\ServiceProvider;
 
@@ -21,6 +20,11 @@ class ViewComposerServiceProvider extends ServiceProvider
                 $service_centers = Auth::user()->service_centers()->enabled()->get();
                 $view->with('service_centers', $service_centers);
             }
+        });
+
+        view()->composer('service_center_cabinet.includes.sidebar', function($view){
+            $new_comments = Comments::where('status', 0)->get()->count();
+            $view->with('new_comments', $new_comments);
         });
     }
 

@@ -95,6 +95,7 @@ class Comments extends Model
 //        return $rating;
 //    }
 
+
     /**
      * Кол-вл комментариев
      * @param $id
@@ -104,5 +105,35 @@ class Comments extends Model
     {
         $count = parent::where('service_center_id', $id)->get()->count();
         return $count;
+    }
+
+
+    /**
+     * Процент для прогресса рейтинга в админ панели
+     * @param $rating
+     * @return int
+     */
+    public static function percentProgress($rating)
+    {
+        switch ($rating)
+        {
+            case 1:
+                return 20;
+                break;
+            case 2:
+                return 40;
+                break;
+            case 3:
+                return 60;
+                break;
+            case 4:
+                return 80;
+                break;
+            case 5:
+                return 100;
+                break;
+            default:
+                return 100;
+        }
     }
 }
