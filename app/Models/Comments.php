@@ -16,7 +16,7 @@ class Comments extends Model
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function serviceCenter()
+    public function service_center()
     {
         return $this->belongsTo('App\Models\ServiceCenter');
     }

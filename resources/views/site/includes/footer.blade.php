@@ -162,7 +162,7 @@
                             aria-hidden="true">&times;</span></button>
             </div>
             <div class="modal-body">
-                <h4>Комментарий добавлен</h4>
+                <h4>Комментарий отправлен на модерацию, в скором времени он появиться на сайте</h4>
             </div>
             <div class="modal-footer">
                 <button type="button" style="width: 100%;" class="btn btn-black" data-dismiss="modal">Понятно!</button>

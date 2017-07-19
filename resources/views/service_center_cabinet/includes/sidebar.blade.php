@@ -20,6 +20,15 @@
                 </a>
             </li>
 
+
+            <li class="{{ active(['cabinet.admin.comments', 'cabinet.admin.comment']) }} ">
+                <a href="{{ route('cabinet.admin.comments') }}">
+                    <i class="fa fa-comments"></i> <span>Коментарии</span>
+                    <span class="pull-right-container">
+            </span>
+                </a>
+            </li>
+
         @elseif(Auth::user()->roleSc())
 
             <li>
