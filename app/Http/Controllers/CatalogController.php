@@ -11,6 +11,7 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
+use Mail;
 
 class CatalogController extends Controller
 {
@@ -85,13 +86,18 @@ class CatalogController extends Controller
                 $comment->r_compliance_cost +
                 $comment->r_price_quality +
                 $comment->r_service) / 5, 0);
-        $comment->status = 1;
+        $comment->status = 0;
         $comment->created_at = Carbon::now();
         if($comment->save()){
+            // Отправляем email
+            $service_center = ServiceCenter::find($id);
+            Mail::send('site.emails.new_comment_operator', compact('comment', 'service_center'), function ($message) use ($service_center) {
+                $message->from('info@boot.com.ua', 'BOOT');
+                $message->to(config('mail.support_email'))->subject('Новый комментарий сервисному центру ' . $service_center->service_name);
+            });
+
             return response(['status' => 200]);
         }
-
-        // Отправляем email
         return response(['status' => 400]);
     }
 }

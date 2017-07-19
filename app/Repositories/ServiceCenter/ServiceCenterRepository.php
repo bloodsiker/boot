@@ -168,6 +168,7 @@ class ServiceCenterRepository implements ServiceCenterRepositoryInterface
         $sc->c1 = $requestData->info['c1'];
         $sc->c2 = $requestData->info['c2'];
         $sc->exit_master = $requestData->info['exit_master'];
+        $sc->level_verified = isset($requestData->info['level_verified']) ? $requestData->info['level_verified'] : $sc->level_verified;
         $sc->updated_at = Carbon::now();
         $sc->update();
 
@@ -184,6 +185,7 @@ class ServiceCenterRepository implements ServiceCenterRepositoryInterface
     {
         $sc = ServiceCenter::find($id);
         $sc->about = $requestData->about;
+        $sc->level_verified = isset($requestData->level_verified) ? $requestData->level_verified : $sc->level_verified;
         $sc->update();
         return true;
     }
@@ -225,6 +227,8 @@ class ServiceCenterRepository implements ServiceCenterRepositoryInterface
     public function updatePhones($requestData, $id)
     {
         $sc = ServiceCenter::find($id);
+        $sc->level_verified = isset($requestData->level_verified) ? $requestData->level_verified : $sc->level_verified;
+        $sc->update();
 
         if(is_array($requestData->phones)){
             DB::table('service_center_phone')->where('service_center_id', '=', $sc->id)->delete();
@@ -249,6 +253,8 @@ class ServiceCenterRepository implements ServiceCenterRepositoryInterface
     public function updateEmails($requestData, $id)
     {
         $sc = ServiceCenter::find($id);
+        $sc->level_verified = isset($requestData->level_verified) ? $requestData->level_verified : $sc->level_verified;
+        $sc->update();
 
         if(is_array($requestData->emails)){
             DB::table('service_center_email')->where('service_center_id', '=', $sc->id)->delete();
@@ -273,6 +279,8 @@ class ServiceCenterRepository implements ServiceCenterRepositoryInterface
     public function updateAdvantages($requestData, $id)
     {
         $sc = ServiceCenter::find($id);
+        $sc->level_verified = isset($requestData->level_verified) ? $requestData->level_verified : $sc->level_verified;
+        $sc->update();
 
         if(is_array($requestData->advantages)){
             DB::table('service_center_advantages')->where('service_center_id', '=', $sc->id)->delete();
@@ -297,6 +305,8 @@ class ServiceCenterRepository implements ServiceCenterRepositoryInterface
     public function updateTags($requestData, $id)
     {
         $sc = ServiceCenter::find($id);
+        $sc->level_verified = isset($requestData->level_verified) ? $requestData->level_verified : $sc->level_verified;
+        $sc->update();
 
         if(is_array($requestData->tags)){
             DB::table('service_center_vs_tags')->where('service_center_id', '=', $sc->id)->delete();
@@ -321,6 +331,8 @@ class ServiceCenterRepository implements ServiceCenterRepositoryInterface
     public function updateManufacturer($requestData, $id)
     {
         $sc = ServiceCenter::find($id);
+        $sc->level_verified = isset($requestData->level_verified) ? $requestData->level_verified : $sc->level_verified;
+        $sc->update();
 
         if(is_array($requestData->manufacturers)){
             DB::table('service_center_vs_manufacturer')->where('service_center_id', '=', $sc->id)->delete();
@@ -345,6 +357,8 @@ class ServiceCenterRepository implements ServiceCenterRepositoryInterface
     public function updatePrice($requestData, $id)
     {
         $sc = ServiceCenter::find($id);
+        $sc->level_verified = isset($requestData->level_verified) ? $requestData->level_verified : $sc->level_verified;
+        $sc->update();
 
         if(is_array($requestData->price)){
             DB::table('service_center_price')->where('service_center_id', '=', $sc->id)->delete();
@@ -373,6 +387,8 @@ class ServiceCenterRepository implements ServiceCenterRepositoryInterface
     public function addPersonal($requestData, $id)
     {
         $sc = ServiceCenter::find($id);
+        $sc->level_verified = isset($requestData->level_verified) ? $requestData->level_verified : $sc->level_verified;
+        $sc->update();
 
         $file = $requestData->avatar['data']['base64'];
         $img_name = str_random() . '-' . $sc->id . ".jpg";
@@ -418,6 +434,8 @@ class ServiceCenterRepository implements ServiceCenterRepositoryInterface
     public function addPhoto($requestData, $id)
     {
         $sc = ServiceCenter::find($id);
+        $sc->level_verified = isset($requestData->level_verified) ? $requestData->level_verified : $sc->level_verified;
+        $sc->update();
 
         $file = $requestData->photo['data']['base64'];
 

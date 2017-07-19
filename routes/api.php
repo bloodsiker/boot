@@ -26,4 +26,5 @@ Route::get('services', 'Api\ServicesController@getServices')->name('api.services
 
 Route::get('catalog', 'Api\CatalogController@getIndex')->name('api.catalog');
 Route::get('sc/{id}', 'Api\CatalogController@getServiceCenter')->name('api.sc');
+Route::get('admin/sc/{id}', 'Api\CatalogController@getServiceCenter')->name('api.admin.sc');
 Route::get('sc/{id}/comments', 'Api\CommentController@commentsByServiceCenter')->name('api.comments');
