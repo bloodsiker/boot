@@ -93,8 +93,7 @@ class CatalogController extends Controller
             $service_center = ServiceCenter::find($id);
             Mail::send('site.emails.new_comment_operator', compact('comment', 'service_center'), function ($message) use ($service_center) {
                 $message->from('info@boot.com.ua', 'BOOT');
-                //$message->to(config('mail.support_email'))->subject('Новый комментарий сервисному центру ' . $service_center->service_name);
-                $message->to('maldini2@ukr.net')->subject('Новый комментарий сервисному центру ' . $service_center->service_name);
+                $message->to(config('mail.support_email'))->subject('Новый комментарий сервисному центру ' . $service_center->service_name);
             });
 
             return response(['status' => 200]);
