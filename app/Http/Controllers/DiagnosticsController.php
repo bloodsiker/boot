@@ -126,17 +126,6 @@ class DiagnosticsController extends Controller
                 $i++;
             }
 
-//            $service = array_column($result, 'services');
-//            $list = [];
-//            foreach ($service as $value){
-//                $sc = DB::table('service_center_price as sep')
-//                    ->join('service_centers as sc', 'sep.service_center_id', '=', 'sc.id')
-//                    ->where('sep.title', $value)
-//                    ->orderBy('sep.price', 'DESC')
-//                    ->get();
-//                array_push($list, $sc);
-//            }
-
             // Пишем статистику просмотров диагностики
             DiagnosticRequest::create([
                 'type_device' => $request->type_device,
@@ -156,7 +145,7 @@ class DiagnosticsController extends Controller
             ServicesView::create([
                 'user_id' => (Auth::user() && Auth::user()->roleUser()) ? Auth::user()->id : null,
                 'type_device' => $request->type_device,
-                'services' => $request->service,
+                'services' => $request->services,
                 'date_view' => Carbon::now()->format('Y-m-d')
             ]);
             Session::put('pick_up_service', $request->service);

@@ -13,7 +13,7 @@ class ServicesView extends Model
 {
     protected $table = 'service_center_views_services';
 
-    protected $fillable = ['service_center_id', 'user_id', 'services', 'date_view'];
+    protected $fillable = ['service_center_id', 'user_id', 'type_device', 'services', 'date_view'];
 
     public $timestamps = false;
 }
