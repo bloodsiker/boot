@@ -99,11 +99,22 @@
             $scope.results = [];
         };
 
-        $scope.searchService = function (service) {
-            console.log(service);
-            service.title = service.services;
-            searchService.setService([service]);
-            window.location = '/catalog';
+        $scope.searchService = function (service, type) {
+            $http({
+                method: 'post',
+                url: '/diagnostic',
+                data: {action: 'pick_up_service', type_device: type, services:service.services},
+                headers: { 'X-CSRF-TOKEN': token }
+            }).then(function (success) {
+                console.log(success);
+                service.title = service.services;
+                searchService.setService([service]);
+                window.location = success.data;
+
+            });
+
+
+
         }
 
         // ===================================

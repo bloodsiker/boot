@@ -138,7 +138,7 @@
                                             <td>
                                                 <button style="font-size: 14px;"
                                                         class="btn btn-yellow btn-sm"
-                                                        ng-click="searchService(rez)">
+                                                        ng-click="searchService(rez, activeType)">
                                                     <span class="glyphicon glyphicon-search"></span>
                                                     Подобрать сервисный центр
                                                 </button>
