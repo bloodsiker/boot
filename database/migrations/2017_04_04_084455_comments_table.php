@@ -17,6 +17,7 @@ class CommentsTable extends Migration
             $table->increments('id');
             $table->integer('service_center_id')->unsigned();
             $table->string('user_name');
+            $table->string('user_id', 50)->nullable();
             $table->string('device');
             $table->string('service');
             $table->string('service_number');

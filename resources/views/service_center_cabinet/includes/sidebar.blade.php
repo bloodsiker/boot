@@ -25,7 +25,8 @@
                 <a href="{{ route('cabinet.admin.comments') }}">
                     <i class="fa fa-comments"></i> <span>Коментарии</span>
                     <span class="pull-right-container">
-            </span>
+                        <small class="label pull-right bg-green">{{ $new_comments }}</small>
+                    </span>
                 </a>
             </li>
 
