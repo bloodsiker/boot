@@ -3,9 +3,11 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="nav-bar">
-                    <a href="/"><div style="padding: 5px; width: 100px; background-color: #ffca13;">
+                    <a href="/">
+                        <div class="logo-box">
                             <img src="{{ asset('site/img/logo.png') }}" alt="boot">
-                        </div></a>
+                        </div>
+                    </a>
                     <div style="width: 100%;display: flex;flex-direction: column;">
                         <div class="top-menu col-xs-12">
                             <div class="menu">
@@ -15,7 +17,7 @@
                                 <a href="{{ route('about') }}" class="{{ active('about') }}">О проекте</a>
                                 <a href="{{ route('support') }}" class="{{ active('support') }}">Служба поддержки</a>
                             </div>
-                            <div class="text-right">
+                            <div class="text-right sign-box">
                                 {{--<a style="font-size: 24px; white-space: nowrap; text-decoration: none;" href="tel:0800256357"><span class="glyphicon glyphicon-phone-alt"></span> 0 800 256-357</a>--}}
                                 {{--<br>--}}
                                 @if(Auth::user())

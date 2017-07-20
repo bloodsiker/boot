@@ -303,6 +303,14 @@
         };
 
 
+        $scope.like = function (service) {
+            service.favorite = !service.favorite;
+            model.post('/catalog/favorite', {id:service.id, favorite: service.favorite}).then(function (success) {
+                console.log(success);
+            });
+        };
+
+
         var filtersCatalog = function () {
 
             $rootScope.$watch('updateSearch', function () {

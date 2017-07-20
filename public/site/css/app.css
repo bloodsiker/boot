@@ -193,6 +193,7 @@ img {
   -webkit-background-size: cover;
   background-size: cover; }
 
+
 .nav-bar {
   display: flex; }
   .nav-bar .top-menu {
@@ -1068,3 +1069,92 @@ img {
   text-align: center; }
 
 /*# sourceMappingURL=app.css.map */
+
+
+.logo-box {
+    padding: 5px;
+    width: 100px;
+    background-color: #ffca13;
+}
+.coast-range {
+    vertical-align: top;
+    display: inline-block;
+    float: right;
+}
+@media screen and (max-width: 768px) {
+    h1 {
+        font-size: 20px !important;
+    }
+    h2 {
+        font-size: 18px !important;
+    }
+    h3 {
+        font-size: 16px !important;
+    }
+    p, h4 {
+        font-size: 14px !important;
+    }
+    .nav-bar {
+        display: block;
+    }
+    .logo-box {
+        text-align: center;
+        width: 100%;
+    }
+    .logo-box img {
+        width: 60px;
+    }
+    .nav-bar .top-menu {
+        padding: 20px 10px;
+        display: block;
+    }
+    .nav-bar .menu {
+        display: block;
+    }
+    .sign-box {
+        text-align: center;
+        padding: 20px 10px;
+    }
+    .nav-bar .search-box {
+        display: block;
+        padding: 3px;
+    }
+    .nav-bar .search-box .form {
+        height: 30px;
+    }
+    .home {
+        padding-top: 10px;
+        padding-bottom: 10px;
+    }
+    .search .btn-yellow {
+        margin-top: 10px;
+        width: 100%;
+    }
+    .advantages, .diagnostics-home, .help-home, .advantages-more {
+        padding: 20px 10px;
+    }
+    .diagnostics-home .btn {
+        width: 100%;
+        overflow: hidden;
+        -ms-text-overflow: clip;
+        text-overflow: clip;
+    }
+    .dropdown, .dropup {
+        display: inline;
+    }
+    .coast-range {
+        float: none;
+    }
+    .need-help-catalog {
+        width: 100%;
+    }
+    .catalog-item {
+        width: 100%;
+    }
+    .badge-catalog {
+        width: 30px;
+    }
+
+
+
+}
