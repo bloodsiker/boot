@@ -3,12 +3,13 @@
 namespace App\Repositories\ServiceCenter;
 
 use App\Models\Comments;
+use App\Models\FavoriteService;
 use App\Models\FormRequest;
 use App\Models\ServiceCenter;
 use App\Models\ServiceVisit;
 use App\Models\User;
 use Carbon\Carbon;
-use Illuminate\Support\Facades\Auth;
+use Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Intervention\Image\ImageManagerStatic as Image;
@@ -37,6 +38,18 @@ class ServiceCenterRepository implements ServiceCenterRepositoryInterface
             return $visits;
         });
 
+        $user_id = Auth::id();
+        $service_center->map(function ($auth) use($user_id) {
+            $auth['auth'] = $user_id;
+            return $auth;
+        });
+
+        $service_center->map(function ($favorite) use($user_id) {
+            $favorite['favorite'] = FavoriteService::isFavorite($favorite->id, $user_id);
+            return $favorite;
+        });
+
+
         return $service_center;
     }
 
@@ -64,17 +77,26 @@ class ServiceCenterRepository implements ServiceCenterRepositoryInterface
     {
         $user = User::find(Auth::id());
         if(isset($requestData->email)){
-            if(Auth::user()->email == $requestData->email){
-                return redirect()->back()->with(['message' => 'Действующий и новый email идентичные!']);
+            if(!empty($requestData->email)){
+
+                if ($user->email != $requestData->email){
+                    if(!User::where('email', $requestData->email)->first()){
+
+                        if($user->change_email != 1){
+                            $user->email = $requestData->email;
+                            $user->change_email = 1;
+                        } else {
+                            return redirect()->back()->with(['message' => 'Вы не можете изменить email более одного раза!']);
+                        }
+
+                    } else {
+                        return redirect()->back()->with(['message' => 'Email ' . $requestData->email . ' занят!']);
+                    }
+                }
+
+            } else {
+                return redirect()->back()->with(['message' => 'email не может быть пустым!']);
             }
-            if(User::where('email', $requestData->email)->first()){
-                return redirect()->back()->with(['message' => 'Email ' . $requestData->email . ' занят!']);
-            }
-            $user->email = $requestData->email;
-            if($user->change_email == 1){
-                return redirect()->back()->with(['message' => 'Вы не можете изменить email более одного раза!']);
-            }
-            $user->change_email = 1;
         }
 
         if($requestData->has('name')){

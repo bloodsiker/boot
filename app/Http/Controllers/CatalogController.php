@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Comments;
+use App\Models\FavoriteService;
 use App\Models\ServiceCenter;
 use App\Models\ServicesView;
 use App\Repositories\VisitsServiceCenter\VisitsRepositoryInterface;
@@ -34,6 +35,33 @@ class CatalogController extends Controller
     {
         $data_seo = json_decode(DB::table('seo_meta')->where('title', 'catalog')->get());
         return view('site.catalog.catalog', compact('data_seo'));
+    }
+
+
+    /**
+     * Add favorite service center
+     * @param Request $request
+     * @return \Illuminate\Contracts\Routing\ResponseFactory|\Symfony\Component\HttpFoundation\Response
+     */
+    public function addFavorite(Request $request)
+    {
+        if($request->favorite == 1){
+            if(Auth::user() && Auth::user()->roleUser()){
+                FavoriteService::create([
+                    'user_id' => Auth::id(),
+                    'service_center_id' => $request->id
+                ]);
+                return response(['status' => 200]);
+            }
+            return response(['status' => 403]);
+
+        } elseif($request->favorite == 0) {
+            if(Auth::user() && Auth::user()->roleUser()){
+                FavoriteService::where(['user_id' => Auth::id()], ['service_center_id' => $request->id])->first()->delete();
+                return response(['status' => 200]);
+            }
+            return response(['status' => 403]);
+        }
     }
 
 

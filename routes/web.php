@@ -21,6 +21,7 @@ Route::group(['middleware' => ['web', 'session.page']], function (){
     Route::post('diagnostic', 'DiagnosticsController@postDiagnostic')->name('diagnostic');
 
     Route::get('catalog', 'CatalogController@getIndex')->name('catalog');
+    Route::post('catalog/favorite', 'CatalogController@addFavorite')->name('catalog.add.favorite');
     Route::get('sc/{id}', 'CatalogController@getServiceCenter')->name('sc');
     Route::post('sc/{id}/add-comments', 'CatalogController@postAddCommentsServiceCenter')->name('sc.add.comments');
 
