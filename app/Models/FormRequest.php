@@ -5,6 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * Заявки на ремонт
+ * Class FormRequest
+ * @package App\Models
+ */
 class FormRequest extends Model
 {
     protected $table = 'form_requests';
@@ -66,10 +71,41 @@ class FormRequest extends Model
 
 
     /**
+     * User cabinet status request
      * @param $status
      * @return string
      */
     public static function getColorStatus($status)
+    {
+        switch ($status)
+        {
+            case 1:
+                return 'expect';
+                break;
+            case 2:
+                return 'in_work';
+                break;
+            case 3:
+                return 'cancel';
+                break;
+            case 4:
+                return 'pend';
+                break;
+            case 6:
+                return 'pend';
+                break;
+            default:
+                return 'expect';
+        }
+    }
+
+
+    /**
+     * CRM color status request
+     * @param $status
+     * @return string
+     */
+    public static function colorStatusScRequest($status)
     {
         switch ($status)
         {

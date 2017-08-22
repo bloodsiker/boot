@@ -47,6 +47,14 @@ Route::group(['middleware' => ['service.center']], function (){
                 Route::get ('messages', 'ServiceCenterCabinet\Admin\RequestController@getMessages')->name('cabinet.admin.messages');
                 Route::get ('requests', 'ServiceCenterCabinet\Admin\RequestController@allRequest')->name('cabinet.admin.requests');
 
+                Route::get ('help-requests', 'ServiceCenterCabinet\Admin\RequestController@getHelpRequests')->name('cabinet.admin.help-requests');
+                Route::get ('help-request/{id}', 'ServiceCenterCabinet\Admin\RequestController@getHelpRequest')->name('cabinet.admin.help-request');
+                Route::post ('help-request/{id}/change_status', 'ServiceCenterCabinet\Admin\RequestController@changeStatusByHelpRequest')->name('cabinet.admin.help-request.change_status');
+
+                Route::get ('sc-requests', 'ServiceCenterCabinet\Admin\RequestController@getRequestsBySc')->name('cabinet.admin.sc-requests');
+                Route::get ('sc-request/{id}', 'ServiceCenterCabinet\Admin\RequestController@getRequestBySc')->name('cabinet.admin.sc-request');
+                Route::post ('sc-request/{id}/change_status', 'ServiceCenterCabinet\Admin\RequestController@changeStatusByRequest')->name('cabinet.admin.sc-request.change_status');
+
                 Route::get ('comments', 'ServiceCenterCabinet\Admin\CommentController@allComments')->name('cabinet.admin.comments');
                 Route::get ('comment/{id}', 'ServiceCenterCabinet\Admin\CommentController@getComment')->name('cabinet.admin.comment');
                 Route::post ('comment/{id}/published', 'ServiceCenterCabinet\Admin\CommentController@publishedComment')->name('cabinet.admin.comment.published');

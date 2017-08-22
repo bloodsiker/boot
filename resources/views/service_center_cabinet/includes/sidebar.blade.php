@@ -30,6 +30,25 @@
                 </a>
             </li>
 
+
+            <li class="{{ active(['cabinet.admin.sc-requests', 'cabinet.admin.sc-request']) }} ">
+                <a href="{{ route('cabinet.admin.sc-requests') }}">
+                    <i class="fa fa-envelope-o"></i> <span>Заявки</span>
+                    <span class="pull-right-container">
+                        <small class="label pull-right bg-green">{{ $new_sc_request }}</small>
+                    </span>
+                </a>
+            </li>
+
+            <li class="{{ active(['cabinet.admin.help-requests', 'cabinet.admin.help-request']) }} ">
+                <a href="{{ route('cabinet.admin.help-requests') }}">
+                    <i class="fa fa-envelope-o"></i> <span>Помощь в подборе</span>
+                    <span class="pull-right-container">
+                        <small class="label pull-right bg-green">{{ $new_help_request }}</small>
+                    </span>
+                </a>
+            </li>
+
         @elseif(Auth::user()->roleSc())
 
             <li>

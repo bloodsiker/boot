@@ -27,7 +27,6 @@ class FormsController extends Controller
      */
     public function __construct(UserRequestService $requestService)
     {
-
         $this->requestService = $requestService;
     }
 
@@ -64,7 +63,7 @@ class FormsController extends Controller
         // send the email
         Mail::send('site.emails.help', ['data' => $data], function ($message) {
             $message->from('info@boot.com.ua', 'BOOT');
-            $message->to('maldini2@ukr.net')->cc('info@boot.com.ua')->subject('Помощь в подборе сервисного центра');
+            $message->to('maldini2@ukr.net')->cc(config('mail.support_email'))->subject('Помощь в подборе сервисного центра');
         });
 
 //        $content = [

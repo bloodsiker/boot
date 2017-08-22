@@ -128,3 +128,24 @@
 .review-block-description{
     font-size:14px;
 }
+
+.status-request {
+    text-align: center;
+    color: #fff;
+}
+.expect {
+    background: #1e85b8;
+}
+.in_work {
+    background: #5cb85c;
+}
+.pend {
+    background: orange;
+}
+.cancel {
+    background: #d9534f;
+}
+.cancel_comment, .operator_comment {
+    padding: 10px;
+    background: #000;
+}

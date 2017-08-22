@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Facades\AdminLog;
+use App\Services\AdminLogService;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
@@ -10,6 +11,17 @@ use Illuminate\Support\Facades\DB;
 
 class LoginController extends Controller
 {
+
+    /**
+     * @var AdminLogService
+     */
+    private $logService;
+
+    public function __construct(AdminLogService $logService)
+    {
+        $this->logService = $logService;
+    }
+
     /**
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
@@ -32,10 +44,10 @@ class LoginController extends Controller
 
         if(Auth::attempt(['email' => $request->email, 'password' => $request->password])){
             if(Auth::user()->roleSc()){
-                AdminLog::log('Ввошел в кабинет сервисного центра');
+                $this->logService->log('Ввошел в кабинет сервисного центра');
                 return redirect()->route('cabinet.dashboard');
             } elseif (Auth::user()->roleAdmin()){
-                AdminLog::log('Ввошел в админский кабинет сервисного центра');
+                $this->logService->log('Ввошел в админский кабинет сервисного центра');
                 return redirect()->route('cabinet.admin.user.list');
             }
             Auth::logout();
@@ -70,7 +82,7 @@ class LoginController extends Controller
 
         if(Auth::attempt(['email' => $request->email, 'password' => $request->password])){
             if(Auth::user()->roleUser()){
-                AdminLog::log('Ввошел в профиль');
+                $this->logService->log('Ввошел в профиль');
                 return redirect()->route('user.dashboard');
             }
             Auth::logout();

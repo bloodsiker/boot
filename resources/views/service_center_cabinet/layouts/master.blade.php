@@ -185,6 +185,7 @@
 <script src="{{ URL::to('admin/plugins/slimScroll/jquery.slimscroll.min.js') }}"></script>
 <!-- AdminLTE App -->
 <script src="{{ URL::to('admin/dist/js/app.min.js') }}"></script>
+<script src="{{ URL::to('admin/dist/js/admin.js') }}"></script>
 
 
 

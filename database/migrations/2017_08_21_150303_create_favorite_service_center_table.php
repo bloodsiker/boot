@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateFavoritServiceCenterTable extends Migration
+class CreateFavoriteServiceCenterTable extends Migration
 {
     /**
      * Run the migrations.
@@ -27,6 +27,7 @@ class CreateFavoritServiceCenterTable extends Migration
                 ->references('id')->on('service_centers')
                 ->onDelete('cascade')
                 ->onUpdate('cascade');
+
         });
     }
 
