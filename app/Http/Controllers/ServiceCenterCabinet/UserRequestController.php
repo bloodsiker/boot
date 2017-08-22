@@ -17,53 +17,21 @@ class UserRequestController extends Controller
     /**
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function getMessages()
+    public function getRequests()
     {
-        return view('service_center_cabinet.messages');
-    }
-
-
-    /**
-     * Update messages
-     * @param Request $request
-     * @return string
-     */
-    public function putMessages(Request $request)
-    {
-        if($request->has('favorite')){
-            $message = FormRequest::find($request->id);
-            $message->favorite = $request->favorite;
-            $message->update();
-            return json_encode(["status" => 200]);
-        }
-
-    }
-
-
-    /**
-     * @return \Illuminate\Contracts\Routing\ResponseFactory|\Symfony\Component\HttpFoundation\Response
-     */
-    public function allRequest()
-    {
-        $service_centers = Auth::user()->service_centers->toArray();
-        $array_id = array_column($service_centers, 'id');
-        $all = FormRequest::select('id', 'email', 'name', 'created_at', 'phone', 'services', 'status_id', 'manufacturer', 'favorite')
+        $serviceCenters = Auth::user()->service_centers->toArray();
+        $array_id = array_column($serviceCenters, 'id');
+        $allRequests = FormRequest::select('id',  'service_center_id', 'email', 'name', 'created_at', 'phone', 'services', 'status_id', 'manufacturer', 'favorite')
             ->whereIn('service_center_id', $array_id)->orderBy('id', 'desc')->get();
-        $all->load('status');
-
-        return response($all);
+        $allRequests->load('status', 'service_center');
+        return view('service_center_cabinet.messages', compact('allRequests'));
     }
 
 
-    /**
-     * @param Request $request
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
-     */
-    public function openMessage(Request $request)
+    public function getRequest($id)
     {
-        $message = FormRequest::find($request->id);
-        $message->load('service_center', 'status');
-        $message['messages'] = DB::table('form_request_message')
+        $requestInfo = FormRequest::find($id);
+        $requestInfo['messages'] = DB::table('form_request_message')
             ->leftJoin('users', function ($join) {
                 $join->on('users.id', '=', 'form_request_message.user_id')
                     ->whereNotNull('form_request_message.user_id');
@@ -79,9 +47,28 @@ class UserRequestController extends Controller
                 'form_request_message.message',
                 'form_request_message.created_at')
             ->get();
-
-        return response($message);
+        dd($requestInfo);
+        return view('service_center_cabinet.view_request', compact('requestInfo'));
     }
+
+
+    /**
+     * Update messages
+     * @param Request $request
+     * @return string
+     */
+    public function putRequests(Request $request)
+    {
+        if($request->has('favorite')){
+            $message = FormRequest::find($request->id);
+            $message->favorite = $request->favorite;
+            $message->update();
+            return json_encode(["status" => 200]);
+        }
+
+    }
+
+
 
 
     /**
