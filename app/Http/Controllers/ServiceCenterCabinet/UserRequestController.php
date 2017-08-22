@@ -47,7 +47,6 @@ class UserRequestController extends Controller
                 'form_request_message.message',
                 'form_request_message.created_at')
             ->get();
-        dd($requestInfo);
         return view('service_center_cabinet.view_request', compact('requestInfo'));
     }
 

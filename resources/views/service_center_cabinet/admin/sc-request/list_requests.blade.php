@@ -43,7 +43,7 @@
                                         <td>{{ $requestH->phone }}</td>
                                         <td>{{ $requestH->email }}</td>
                                         <td class="status-request {{ \App\Models\FormRequest::colorStatusScRequest($requestH->status_id) }}">{{ $requestH->status->status }}</td>
-                                        <td></td>
+                                        <td data-time="{{ $requestH->created_at }}" data-status="{{($requestH->status_id)}}" data-res="20" class="response-time"></td>
                                         <td>{{ $requestH->created_at }}</td>
                                         <td class="text-center"><a href="{{ route('cabinet.admin.sc-request', ['id' => $requestH->id]) }}"><i class="fa fa-eye"></i></a></td>
                                     </tr>

@@ -181,11 +181,15 @@
 <!-- datepicker -->
 <script src="{{ URL::to('admin/plugins/datepicker/bootstrap-datepicker.js') }}"></script>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/locale/ru.js"></script>
+
 <!-- Slimscroll -->
 <script src="{{ URL::to('admin/plugins/slimScroll/jquery.slimscroll.min.js') }}"></script>
 <!-- AdminLTE App -->
 <script src="{{ URL::to('admin/dist/js/app.min.js') }}"></script>
 <script src="{{ URL::to('admin/dist/js/admin.js') }}"></script>
+
 
 
 

@@ -63,5 +63,32 @@ $(document).on('click', '#request-close', function (e) {
     $('#cancel-completed').on('click', function (e) {
         e.preventDefault();
         $('.operator_comment').remove();
-    })
+    });
+
+
 });
+
+// Время реагирования
+(function () {
+    $(document).ready(function() {
+        var tdList = document.getElementsByClassName('response-time');
+
+
+        var timerId = setTimeout(function tick() {
+            for(var i = 0; i < tdList.length; i++) {
+                var status = tdList[i].getAttribute('data-status');
+                if (status === '1') {
+                    var DATE = tdList[i].getAttribute('data-time');
+                    var res = tdList[i].getAttribute('data-res');
+                    var resTime = moment(DATE, "YYYY-MM-DD hh:mm:ss").add(res, 'minutes').fromNow();
+                    tdList[i].innerHTML = resTime;
+                }
+            }
+            timerId = setTimeout(tick, 1000);
+        }, 1000);
+
+
+    });
+})();
+
+
