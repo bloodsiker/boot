@@ -27,6 +27,7 @@
                                     <th>Имя</th>
                                     <th>Телефон</th>
                                     <th>Комментарий</th>
+                                    <th>Комментарий оператора</th>
                                     <th>Статус</th>
                                     <th>Дата создания</th>
                                     <th width="70"></th>
@@ -39,6 +40,7 @@
                                         <td>{{ $requestH->user_name }}</td>
                                         <td>{{ $requestH->phone }}</td>
                                         <td>{{ $requestH->comment }}</td>
+                                        <td>{{ $requestH->comment_operator }}</td>
                                         <td class="status-request {{ \App\Models\UserRequest::colorStatusHelpRequest($requestH->status) }}">{{ $requestH->status }}</td>
                                         <td>{{ $requestH->created_at }}</td>
                                         <td class="text-center"><a href="{{ route('cabinet.admin.help-request', ['id' => $requestH->id]) }}"><i class="fa fa-eye"></i></a></td>

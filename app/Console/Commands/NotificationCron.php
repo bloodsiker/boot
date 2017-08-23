@@ -44,5 +44,6 @@ class NotificationCron extends Command
     public function handle()
     {
        $this->requestService->notificationEmail();
+       $this->requestService->notificationEmailOverdueRequest();
     }
 }

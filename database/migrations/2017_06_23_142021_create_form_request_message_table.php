@@ -18,6 +18,7 @@ class CreateFormRequestMessageTable extends Migration
             $table->integer('request_id')->unsigned();
             $table->string('user_id', 50)->nullable();
             $table->string('service_center_id', 50)->nullable();
+            $table->boolean('sys_info')->default(0);
             $table->text('message');
             $table->timestamps();
 

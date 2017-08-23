@@ -5,6 +5,7 @@ namespace App\Http\Controllers\ServiceCenterCabinet\Admin;
 use App\Models\FormRequest;
 use App\Models\ServiceCenter;
 use App\Models\UserRequest;
+use DB;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -116,9 +117,26 @@ class RequestController extends Controller
     {
         $requestInfo = FormRequest::find($id);
         $requestInfo->load('status', 'service_center');
+        $requestInfo['messages'] = DB::table('form_request_message')
+            ->leftJoin('users', function ($join) {
+                $join->on('users.id', '=', 'form_request_message.user_id')
+                    ->whereNotNull('form_request_message.user_id');
+            })
+
+            ->leftJoin('service_centers', function ($join) {
+                $join->on('service_centers.id', '=', 'form_request_message.service_center_id')
+                    ->whereNotNull('form_request_message.service_center_id');
+            })
+            ->select('form_request_message.id',
+                'users.name as user_name',
+                'service_centers.service_name',
+                'form_request_message.message',
+                'form_request_message.sys_info',
+                'form_request_message.created_at')
+            ->where('form_request_message.request_id', $requestInfo->id)
+            ->get();
         $sc = ServiceCenter::find($requestInfo->service_center->id);
         $sc->load('service_phones', 'service_emails', 'city', 'metro', 'district');
-        //dd($sc);
         return view('service_center_cabinet.admin.sc-request.view_request', compact('requestInfo', 'sc'));
     }
 

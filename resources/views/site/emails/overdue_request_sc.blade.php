@@ -3,7 +3,7 @@
 @section('content')
 
     <h3>У вас просроченная заявка #{{ $req->r_id }} для сервисного центра &laquo;{{ $service_center->service_name }}&raquo;</h3>
-    <p>С момента получания заявки прошло более 20мин. Примите меры!</p>
+    <p>С момента получания заявки прошло более {{ $addTime }}. Примите меры!</p>
     <hr>
     <h4>Данные клиента:</h4>
     <table border="1" cellpadding="5" cellspacing="0" width="100%">

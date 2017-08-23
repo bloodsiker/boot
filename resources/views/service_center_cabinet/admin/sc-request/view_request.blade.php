@@ -18,7 +18,7 @@
                 <div class="col-sm-7">
                     <div class="box box-primary box-solid">
                         <div class="box-header with-border" >
-                            <h3 class="box-title"><i class="fa fa-envelope-o" aria-hidden="true"></i>  Заявка #{{ $requestInfo->id }} </h3>
+                            <h3 class="box-title"><i class="fa fa-envelope-o" aria-hidden="true"></i>  Заявка #{{ $requestInfo->r_id }} </h3>
                         </div>
                         <div class="box-body">
                             <table class="table table-bordered table-striped">
@@ -194,6 +194,71 @@
                                 </tr>
                                 </tbody>
                             </table>
+
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="col-sm-12">
+                    <div class="box box-primary box-solid">
+                        <div class="box-header with-border" >
+                            <h3 class="box-title"><i class="fa fa-envelope-o" aria-hidden="true"></i> Диалог сервисного центра с клиентом</h3>
+                        </div>
+                        <div class="box-body">
+                            <ul class="timeline timeline-inverse">
+
+                                @foreach($requestInfo['messages'] as $message)
+                                    @if($message->sys_info == 1)
+                                        <li>
+                                            @if(!empty($message->user_name))
+                                                <i class="fa fa-user bg-blue"></i>
+                                            @else
+                                                <i class="fa fa-user bg-yellow"></i>
+                                            @endif
+
+                                            <div class="timeline-item">
+                                                <span class="time"><i class="fa fa-clock-o"></i> {{ $message->created_at }}</span>
+
+                                                @if(!empty($message->user_name))
+                                                    <h3 class="timeline-header no-border"><b>{{ $message->user_name }}</b><small> Клиент </small> {{ $message->message }}</h3>
+                                                @else
+                                                    <h3 class="timeline-header no-border"><b>{{ $message->service_name }}</b><small> Сервисный центер </small> {{ $message->message }}</h3>
+                                                @endif
+                                            </div>
+                                        </li>
+                                    @else
+                                        <li>
+                                            @if(!empty($message->user_name))
+                                                <i class="fa fa-comments bg-blue"></i>
+                                            @else
+                                                <i class="fa fa-comments bg-yellow"></i>
+                                            @endif
+
+                                            <div class="timeline-item">
+                                                <span class="time"><i class="fa fa-clock-o"></i> {{ $message->created_at }}</span>
+
+
+                                                @if(!empty($message->user_name))
+                                                    <h3 class="timeline-header"><b>{{ $message->user_name }}</b> <small>Клиент</small></h3>
+                                                @else
+                                                    <h3 class="timeline-header"><b>{{ $message->service_name }} <small>Сервисный центер</small></b></h3>
+                                                @endif
+
+                                                <div class="timeline-body">
+                                                    {{ $message->message }}
+                                                </div>
+                                            </div>
+                                        </li>
+                                    @endif
+                                @endforeach
+
+                                    @if(count($requestInfo['messages']) > 0)
+                                        <li>
+                                            <i class="fa fa-clock-o bg-gray"></i>
+                                        </li>
+                                    @endif
+                            </ul>
 
                         </div>
                     </div>

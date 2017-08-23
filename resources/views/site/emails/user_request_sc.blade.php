@@ -3,12 +3,23 @@
 @section('content')
 
     <h3>Ваша заявка #{{ $user_request->r_id }} на услугу &laquo;{{ $user_request->services  }}&raquo; перешла в статус &laquo;{{ $status->status }}&raquo;</h3>
-    @if($status->status == 'Отклонена')
+    @if($user_request->status_id == 3)
         <h3>Комментарий от сервисного центра:</h3>
         <table class="content" width="100%" cellpadding="5" cellspacing="0" style="background: #f17c70; color: #fff">
             <tr>
                 <td>
                     <span>{{ !empty($user_request->cancel_comment) ? $user_request->cancel_comment : 'Причина не указана!' }}</span>
+                </td>
+            </tr>
+        </table>
+    @endif
+
+    @if($user_request->status_id == 4)
+        <h3>Окончательная стоимость работы:</h3>
+        <table class="content" width="100%" cellpadding="5" cellspacing="0" style="background: #f17c70; color: #fff">
+            <tr>
+                <td>
+                    <span>{{ $user_request->cost_of_work_end }}</span>
                 </td>
             </tr>
         </table>

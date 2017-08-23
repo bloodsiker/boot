@@ -116,7 +116,7 @@
                                                                     <td class="text-right">{{ $user_request->cost_of_work_min }} - {{ $user_request->cost_of_work_max }}  {{ ($user_request->exit_master == 1) ? '(Выезд мастера + 50грн)' : null }}</td>
                                                                 </tr>
                                                                 <tr>
-                                                                    <td>Окончательная стоимость работы: <br><span class="status_desc">указывается вами на этапе (Выполнена, ожитает закрытия)</span></td>
+                                                                    <td>Окончательная стоимость работы: <br><span class="status_desc">указывается исполнителем на этапе (Выполнена, ожитает закрытия)</span></td>
                                                                     <td class="text-right">{{ $user_request->cost_of_work_end }}</td>
                                                                 </tr>
                                                                 <tr>
@@ -139,10 +139,6 @@
                                                                         {{ csrf_field() }}
                                                                         <input type="hidden" name="status_id" value="6">
                                                                         <input type="hidden" name="id" value="{{ $user_request->id }}">
-                                                                        <tr>
-                                                                            <td>Подтвердите выполнение задания и окончательную стоимость</td>
-                                                                            <td class="text-right"><input type="number" step="0.01" name="cost_of_work_end" required> ГРН</td>
-                                                                        </tr>
                                                                         <tr>
                                                                             <td></td>
                                                                             <td class="text-right"><button class="btn btn-success">Отметить как выполненая</button></td>
