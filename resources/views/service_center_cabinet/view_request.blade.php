@@ -55,15 +55,15 @@
                                     </tr>
                                     <tr>
                                         <td>Телефон клиента</td>
-                                        <td>{{ $requestInfo->phone }}</td>
+                                        <td>{{ ($requestInfo->status_id != 1 && $requestInfo->status_id != 3) ? $requestInfo->phone : 'Нужно принять заявку' }}</td>
                                     </tr>
                                     <tr>
                                         <td>Email клиента</td>
-                                        <td>{{ $requestInfo->email }}</td>
+                                        <td>{{ ($requestInfo->status_id != 1 && $requestInfo->status_id != 3) ? $requestInfo->email : 'Нужно принять заявку' }}</td>
                                     </tr>
                                     <tr>
                                         <td>Адрес клиента</td>
-                                        <td>{{ $requestInfo->client_address }}</td>
+                                        <td>{{ ($requestInfo->status_id != 1 && $requestInfo->status_id != 3) ? $requestInfo->client_address : 'Нужно принять заявку' }}</td>
                                     </tr>
                                     <tr>
                                         <td>Комментарий клиента</td>

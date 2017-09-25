@@ -143,6 +143,13 @@ class UserRequestController extends Controller
                     $message->from('info@boot.com.ua', 'BOOT');
                     $message->to($user_request->email)->subject('Ваша заявка перешла в статус ' . $status->status);
                 });
+
+                // Отправляем письмо оператору
+                Mail::send('site.emails.user_request_sc', compact('user_request', 'service_center', 'user', 'status'), function ($message) use ($user_request, $status) {
+                    $message->from('info@boot.com.ua', 'BOOT');
+                    $message->to(config('mail.support_email'))->subject('Заявка #' . $user_request->r_id . ' перешла в статус ' . $status->status);
+                });
+
                 $message = "Заявка перешла в статус (" . $status->status . "). Клиент проинформирован о смене статуса в заявке.";
             }
         }
@@ -174,6 +181,11 @@ class UserRequestController extends Controller
                     $message->from('info@boot.com.ua', 'BOOT');
                     $message->to($user_request->email)->subject('Ваша заявка перешла в статус ' . $status->status);
                 });
+
+                Mail::send('site.emails.user_request_sc', compact('user_request', 'service_center', 'user', 'status'), function ($message) use ($user_request, $status) {
+                    $message->from('info@boot.com.ua', 'BOOT');
+                    $message->to(config('mail.support_email'))->subject('Заявка #' . $user_request->r_id . ' перешла в статус ' . $status->status);
+                });
                 $message = "Заявка перешла в статус (" . $status->status . "). Клиент проинформирован о смене статуса в заявке.";
             }
         }
@@ -197,7 +209,7 @@ class UserRequestController extends Controller
 
             if(isset($request->client_notification)){
 
-                // Уведомляем пользователя о том, что в заявке изменился статус
+                // Уведомляем пользователя о том, что в заявке выставлен дедлайн
                 Mail::send('site.emails.request_add_deadline', compact('user_request'), function ($message) use ($user_request) {
                     $message->from('info@boot.com.ua', 'BOOT');
                     $message->to($user_request->email)->subject('Исполнитель выставил ориентировочное время выполнения работы');

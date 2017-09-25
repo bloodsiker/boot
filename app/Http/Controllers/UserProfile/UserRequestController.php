@@ -138,6 +138,7 @@ class UserRequestController extends Controller
 
 
     /**
+     * Клиент переводит заявку в другой статус
      * @param Request $request
      * @return \Illuminate\Http\RedirectResponse
      */

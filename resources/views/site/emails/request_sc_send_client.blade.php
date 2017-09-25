@@ -2,7 +2,9 @@
 
 @section('content')
 
-    <h3>Новая заявка #{{ $data['r_id'] }} для сервисного центра &laquo;{{ $service_center->service_name }}&raquo;</h3>
+    <h3><b>{{ $data['name'] }}</b> Вы оставили заявку #{{ $data['r_id'] }} для сервисного центра &laquo;{{ $service_center->service_name }}&raquo;</h3>
+    <p>Вы получите уведомление о принятии Вашей заявки на e-mail. <br>
+        Также, Вы можете отслеживать все статусы Ваших заявок в <a href="{{route('user.login')}}">Личном Кабинете</a> сайта и вести переписку с Исполнителем.</p>
     <hr>
     <h4>Данные клиента:</h4>
     <table border="1" cellpadding="5" cellspacing="0" width="100%">
@@ -51,43 +53,6 @@
                 <td>{{ $data['client_address'] }}</td>
             </tr>
         @endif
-    </table>
-    <br>
-    <hr>
-    <h4>Данные сервисного цента:</h4>
-    <table border="1" cellpadding="5" cellspacing="0" width="100%">
-        <tr>
-            <td><strong>Адрес:</strong></td>
-            <td>{{ $service_center->address . ',' .  $service_center->number_h_add }}</td>
-        </tr>
-        <tr>
-            <td><strong>Телефон(ы):</strong></td>
-            <td>
-                @if(count($service_center->service_phones))
-                    <ul>
-                        @foreach($service_center->service_phones as $phone)
-                            <li>{{ $phone->phone }}</li>
-                        @endforeach
-                    </ul>
-                @else
-                    <p>Телефон не указан</p>
-                @endif
-            </td>
-        </tr>
-        <tr>
-            <td><strong>E-mail:</strong></td>
-            <td>
-                @if(count($service_center->service_emails))
-                    <ul>
-                        @foreach($service_center->service_emails as $email)
-                            <li>{{ $email->email }}</li>
-                        @endforeach
-                    </ul>
-                @else
-                    <p>{{ $user->email }}</p>
-                @endif
-            </td>
-        </tr>
     </table>
 
 @endsection

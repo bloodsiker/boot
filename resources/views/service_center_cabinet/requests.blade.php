@@ -39,8 +39,8 @@
                                         <td>{{ $requestH->r_id }}</td>
                                         <td>{{ $requestH->service_center->service_name }}</td>
                                         <td>{{ $requestH->name }}</td>
-                                        <td>{{ $requestH->phone }}</td>
-                                        <td>{{ $requestH->email }}</td>
+                                        <td>{{ ($requestH->status_id != 1 && $requestH->status_id != 3) ? $requestH->phone : null}}</td>
+                                        <td>{{ ($requestH->status_id != 1 && $requestH->status_id != 3) ? $requestH->email : null }}</td>
                                         <td class="status-request {{ \App\Models\FormRequest::colorStatusScRequest($requestH->status_id) }}">{{ $requestH->status->status }}</td>
                                         <td>{{ $requestH->created_at }}</td>
                                         <td class="text-center"><a href="{{ route('cabinet.request', ['id' => $requestH->id]) }}"><i class="fa fa-eye"></i></a></td>
