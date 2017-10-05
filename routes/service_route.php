@@ -20,11 +20,11 @@ Route::group(['middleware' => ['service.center']], function (){
         Route::put ('sc/{id}/enabled', 'ServiceCenterCabinet\CabinetController@enabledService')->name('cabinet.enabled.service');
         Route::get ('sc/list-disabled', 'ServiceCenterCabinet\CabinetController@listDisabledService')->name('cabinet.list-disabled.service');
 
-        Route::get ('messages', 'ServiceCenterCabinet\UserRequestController@getMessages')->name('cabinet.messages');
-        Route::put ('messages', 'ServiceCenterCabinet\UserRequestController@putMessages')->name('cabinet.messages');
-        Route::get ('open/message', 'ServiceCenterCabinet\UserRequestController@openMessage')->name('cabinet.open.message');
-        Route::get ('requests', 'ServiceCenterCabinet\UserRequestController@allRequest')->name('cabinet.requests');
-        Route::get ('request/change_status', 'ServiceCenterCabinet\UserRequestController@changeStatus')->name('cabinet.request.change_status');
+        Route::get ('requests', 'ServiceCenterCabinet\UserRequestController@getRequests')->name('cabinet.requests');
+        Route::get ('request/{id}', 'ServiceCenterCabinet\UserRequestController@getRequest')->name('cabinet.request');
+        Route::put ('requests', 'ServiceCenterCabinet\UserRequestController@putRequests')->name('cabinet.requests');
+        Route::post ('request/{r_id}/send-message', 'ServiceCenterCabinet\UserRequestController@sendMessageByRequest')->name('cabinet.request.send_message');
+        Route::put ('request/{id}/change_status', 'ServiceCenterCabinet\UserRequestController@changeStatus')->name('cabinet.request.change_status');
 
         Route::get('add/service', 'ServiceCenterCabinet\CabinetController@getAddService')->name('cabinet.add.service');
         Route::post('add/service', 'ServiceCenterCabinet\CabinetController@postAddService')->name('cabinet.add.service');

@@ -35,7 +35,7 @@
                 <a href="{{ route('cabinet.admin.sc-requests') }}">
                     <i class="fa fa-envelope-o"></i> <span>Заявки</span>
                     <span class="pull-right-container">
-                        <small class="label pull-right bg-green">{{ $new_sc_request }}</small>
+                        <small class="label pull-right bg-green">{{ $new_sc_all_request }}</small>
                     </span>
                 </a>
             </li>

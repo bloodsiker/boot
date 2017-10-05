@@ -123,16 +123,22 @@ class FormsController extends Controller
 
         $user = $service_center->user;
 
+        // Отправляем письмо клиенту, который оставил заявку
+        Mail::send('site.emails.request_sc_send_client', compact('data', 'service_center'), function ($message) use ($service_center, $data) {
+            $message->from('info@boot.com.ua', 'BOOT');
+            $message->to($data['email'])->cc('maildini2@ukr.net')->subject('Спасибо! Вы создали заявку #' . $data['r_id']);
+        });
+
         // Отправляем письмо сервисному центру
         Mail::send('site.emails.request_sc', compact('data', 'service_center', 'user'), function ($message) use ($service_center, $user) {
             $message->from('info@boot.com.ua', 'BOOT');
-            $message->to($user->email)->subject('Новая заявка для сервисного центра ' . $service_center->service_name);
+            $message->to($user->email)->cc('maildini2@ukr.net')->subject('Новая заявка для сервисного центра ' . $service_center->service_name);
         });
 
         // Отправляем письмо оператору
-        Mail::send('site.emails.request_sc', compact('data', 'service_center', 'user'), function ($message) use ($service_center) {
+        Mail::send('site.emails.request_sc_operator', compact('data', 'service_center', 'user'), function ($message) use ($service_center) {
             $message->from('info@boot.com.ua', 'BOOT');
-            $message->to(config('mail.support_email'))->subject('Новая заявка для сервисного центра ' . $service_center->service_name);
+            $message->to(config('mail.support_email'))->cc('maildini2@ukr.net')->subject('Новая заявка для сервисного центра ' . $service_center->service_name);
         });
 
         return json_encode(["status" => 200]);

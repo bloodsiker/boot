@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Facades\AdminLog;
 use App\Services\AdminLogService;
+use App\Services\ReturnToPreviousPage;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
@@ -63,7 +64,7 @@ class LoginController extends Controller
     public function getUserLogin()
     {
         $data_seo = json_decode(DB::table('seo_meta')->where('title', 'user_login')->get());
-
+        //dd(\Redirect::back()->getTargetUrl());
         return view('site.auth.signin_user', compact('data_seo'));
     }
 
@@ -83,7 +84,8 @@ class LoginController extends Controller
         if(Auth::attempt(['email' => $request->email, 'password' => $request->password])){
             if(Auth::user()->roleUser()){
                 $this->logService->log('Ввошел в профиль');
-                return redirect()->route('user.dashboard');
+                $prevPage = new ReturnToPreviousPage();
+                return redirect()->to($prevPage->redirectToPrev());
             }
             Auth::logout();
             return redirect()->back()->with(['message' => 'У Вас нету доступа в эту часть кабинета!']);

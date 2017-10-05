@@ -135,6 +135,15 @@ class ServiceCenter extends Model
 
 
     /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function service_request()
+    {
+        return $this->hasMany('App\Models\FormRequest', 'service_center_id', 'id');
+    }
+
+
+    /**
      * @param Builder $builder
      * @param int $enabled
      * @return mixed

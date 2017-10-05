@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Facades\AdminLog;
 use App\Models\Role;
+use App\Services\ReturnToPreviousPage;
 use App\Services\SocialAccountService;
 use Illuminate\Http\Request;
 use Laravel\Socialite\Facades\Socialite;
@@ -48,7 +49,8 @@ class SocialAuthController extends Controller
         auth()->login($user);
         AdminLog::log('Ввошел в профиль через facebook');
 
-        return redirect()->route('user.dashboard');
+        $prevPage = new ReturnToPreviousPage();
+        return redirect()->to($prevPage->redirectToPrev());
     }
 
 
@@ -81,7 +83,8 @@ class SocialAuthController extends Controller
         auth()->login($user);
         AdminLog::log('Ввошел в профиль через google');
 
-        return redirect()->route('user.dashboard');
+        $prevPage = new ReturnToPreviousPage();
+        return redirect()->to($prevPage->redirectToPrev());
     }
 
 
@@ -109,6 +112,7 @@ class SocialAuthController extends Controller
         auth()->login($user);
         AdminLog::log('Ввошел в профиль через linkedin');
 
-        return redirect()->route('user.dashboard');
+        $prevPage = new ReturnToPreviousPage();
+        return redirect()->to($prevPage->redirectToPrev());
     }
 }

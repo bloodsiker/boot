@@ -121,5 +121,6 @@ return [
     ],
 
     'support_email' => 'partners@boot.com.ua',
+    //'support_email' => 'do@generalse.com',
 
 ];

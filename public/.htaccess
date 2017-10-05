@@ -80,9 +80,3 @@ FileETag MTime Size
  ExpiresDefault "access plus 1 year"
 </filesmatch>
 </ifmodule>
-
-#Запрет отдачи HTTP-заголовков Vary браузерам семейства MSIE
-<IfModule mod_setenvif.c>
- BrowserMatch "MSIE" force-no-vary
- BrowserMatch "Mozilla/4.[0-9]{2}" force-no-vary
-</IfModule>

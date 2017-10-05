@@ -20,7 +20,6 @@
     <link rel="stylesheet" href="{{ URL::to('admin/dist/css/skins/_all-skins.min.css') }}">
     {{--<link rel="stylesheet" href="{{ URL::to('admin/dist/css/skins/skin-black.css') }}">--}}
 
-
     <!-- DataTables -->
     <link rel="stylesheet" href="{{ URL::to('admin/plugins/datatables/dataTables.bootstrap.css') }}">
     <!-- Date Picker -->
@@ -110,17 +109,11 @@
                         @endif
                     </li>
                     <li>
-                        @if(Auth::user()->roleAdmin())
-                            <a href="{{ route('cabinet.admin.messages') }}">
+                        @if(Auth::user()->roleSc())
+                            <a href="{{ route('cabinet.requests') }}">
                                 <i class="fa fa-envelope-o"></i>
                                 Заявки
-                                {{--<span class="label label-success">4</span>--}}
-                            </a>
-                        @elseif(Auth::user()->roleSc())
-                            <a href="{{ route('cabinet.messages') }}">
-                                <i class="fa fa-envelope-o"></i>
-                                Заявки
-                                {{--<span class="label label-success">4</span>--}}
+                                <span class="label label-success">{{ $new_sc_request > 0 ? $new_sc_request : null }}</span>
                             </a>
                         @endif
                     </li>

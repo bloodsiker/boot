@@ -46,7 +46,7 @@
                                                 <tbody>
                                                 @if(count($list_request))
                                                     @foreach($list_request as $request)
-                                                        <tr>
+                                                        <tr class="tr-user-request" onclick="document.location = '{{ route('user.request', ['r_id' => $request->r_id]) }}';">
                                                             <td>
                                                                 <a href="{{ route('user.request', ['r_id' => $request->r_id]) }}" class="r_id">#{{ $request->r_id }}</a>
                                                             </td>
@@ -55,7 +55,7 @@
                                                                     <div class="media-body">
                                                                         <span class="media-meta pull-right">{{ $request->created_at }}</span>
                                                                         <h4 class="title">
-                                                                            <a href="{{ route('sc', ['id' => $request->service_center['id']]) }}">{{ $request->service_center['service_name'] }}</a>
+                                                                            <span style="color: #337ab7; font-size: 14px;">{{ $request->service_center['service_name'] }}</span>
                                                                             <span class="pull-right {{ \App\Models\FormRequest::getColorStatus($request->status_id) }}">{{ $request->status['status'] }}</span>
                                                                         </h4>
                                                                         <p class="summary">{{ $request->services }}</p>

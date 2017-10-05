@@ -4,6 +4,7 @@ namespace App\Http\Controllers\UserProfile;
 
 use App\Models\FormRequest;
 use App\Models\FormRequestMessage;
+use App\Models\RequestStatus;
 use App\Models\ServiceCenter;
 use App\Models\User;
 use Auth;
@@ -137,18 +138,28 @@ class UserRequestController extends Controller
 
 
     /**
+     * Клиент переводит заявку в другой статус
      * @param Request $request
      * @return \Illuminate\Http\RedirectResponse
      */
     public function changeStatusByRequest(Request $request)
     {
         $user_request = FormRequest::find($request->id);
-        if($request->has('cost_of_work_end')){
-            $user_request->cost_of_work_end = $request->cost_of_work_end;
-        }
         $user_request->status_id = $request->status_id;
         $user_request->update();
 
-        return redirect()->back()->with(['message' => 'Вы отметили заявку как Выполнена(Закрыта)']);
+        $status = RequestStatus::find($user_request->status_id);
+
+        $data = [
+            'request_id' => $user_request->id,
+            'user_id' => Auth::user()->id,
+            'sys_info' => 1,
+            'message' => 'Изменил статус заявки на (' . $status->status . ')',
+            'created_at' => Carbon::now(),
+        ];
+
+        FormRequestMessage::create($data);
+
+        return redirect()->back()->with(['message' => 'Вы отметили заявку как ' . $status->status]);
     }
 }

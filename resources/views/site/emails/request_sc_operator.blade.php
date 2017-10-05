@@ -6,25 +6,20 @@
     <p>Зайдите, пожалуйста, в <a href="{{ route('service.login') }}">личный кабинет</a> сайта, раздел "Заявки" для просмотра деталей и принятия заявки в работу</p>
     <hr>
     <h4>Данные клиента:</h4>
-    @if($data['status_id'] != 1)
-        <table border="1" cellpadding="5" cellspacing="0" width="100%">
-            <tr>
-                <td><strong>Имя:</strong></td>
-                <td>{{ $data['name'] }}</td>
-            </tr>
-            <tr>
-                <td><strong>Телефон:</strong></td>
-                <td>{{ $data['phone'] }}</td>
-            </tr>
-            <tr>
-                <td><strong>Email:</strong></td>
-                <td>{{ $data['email'] }}</td>
-            </tr>
-        </table>
-    @else
-        <p>Станут доступными после принятия заявки в личном кабинете.</p>
-    @endif
-
+    <table border="1" cellpadding="5" cellspacing="0" width="100%">
+        <tr>
+            <td><strong>Имя:</strong></td>
+            <td>{{ $data['name'] }}</td>
+        </tr>
+        <tr>
+            <td><strong>Телефон:</strong></td>
+            <td>{{ $data['phone'] }}</td>
+        </tr>
+        <tr>
+            <td><strong>Email:</strong></td>
+            <td>{{ $data['email'] }}</td>
+        </tr>
+    </table>
     <h4>Информация о заявке:</h4>
     <table border="1" cellpadding="5" cellspacing="0" width="100%">
         <tr>

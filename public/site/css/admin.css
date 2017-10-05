@@ -146,6 +146,18 @@
     background: #d9534f;
 }
 .cancel_comment, .operator_comment {
+    margin-top: 10px;
     padding: 10px;
     background: #000;
+}
+.request-deadline, .request-completed {
+    margin-top: 10px;
+    padding: 10px;
+    background: #ecebeb;
+}
+.message_write {
+    margin: 50px 25px 20px 59px;
+}
+.chat_bottom {
+    padding-top: 10px;
 }
