@@ -6,7 +6,6 @@
     function IndexCtrl($scope, $rootScope, model, $uibModal, $timeout, $anchorScroll, _, searchService) {
 
 
-
         $scope.topScroll = function () {
             $anchorScroll();
         };
@@ -61,52 +60,60 @@
 
         $rootScope.openScCall = function (sc) {
 
-            $scope.serviceIndex = 0;
-            $scope.sc = angular.copy(sc);
-            console.log($scope.sc);
+            if (client.auth) {
+                $('#call_modal').modal('toggle');
+                $scope.serviceIndex = 0;
+                $scope.sc = angular.copy(sc);
+                console.log($scope.sc);
 
-            $scope.serviceSelected = function (data) {
-                _.mapObject($scope.sc.price, function (key, index) {
-                    key.title === data ? $scope.serviceIndex = index : '';
-                });
-            };
-            $scope.payment_types = ['Наличные',];
-            $scope.data = {
-                client_payment_type: 'Наличные',
-                client_manufacturer: $scope.sc.manufacturers.length > 0 ? $scope.sc.manufacturers[0].manufacturer : '',
-                client_service: $scope.sc.price.length > 0 ? $scope.sc.price[0].title : '',
-                client_task_description: '',
-                client_address: ''
-
-            };
-
-            if (searchService.service_model().length == 1) {
-                var ser = searchService.service_model()[0].title;
-                console.log(ser);
-                if ($scope.sc.price.length > 0) {
+                $scope.serviceSelected = function (data) {
                     _.mapObject($scope.sc.price, function (key, index) {
-                        if (key.title === ser) {
-                            $scope.data.client_service = ser;
-                            $scope.serviceIndex = index
-                        }
+                        key.title === data ? $scope.serviceIndex = index : '';
                     });
+                };
+                $scope.payment_types = ['Наличные'];
+                $scope.data = {
+                    client_payment_type: 'Наличные',
+                    client_manufacturer: $scope.sc.manufacturers.length > 0 ? $scope.sc.manufacturers[0].manufacturer : '',
+                    client_service: $scope.sc.price.length > 0 ? $scope.sc.price[0].title : '',
+                    client_task_description: '',
+                    client_address: client.address,
+                    client_name: client.name,
+                    client_phone: client.phone,
+                    client_email: client.email,
+
+                };
+
+                if (searchService.service_model().length == 1) {
+                    var ser = searchService.service_model()[0].title;
+                    console.log(ser);
+                    if ($scope.sc.price.length > 0) {
+                        _.mapObject($scope.sc.price, function (key, index) {
+                            if (key.title === ser) {
+                                $scope.serviceIndex = index
+                            }
+                        });
+                    }
+
+                }
+                if (searchService.brand_model()) {
+                    console.log(searchService.brand_model());
+
+                    var brand = searchService.brand_model().manufacturer;
+
+                    if ($scope.sc.manufacturers.length > 0) {
+                        _.mapObject($scope.sc.manufacturers, function (key) {
+                            if (key.manufacturer === brand) {
+                                $scope.data.client_manufacturer = brand;
+                            }
+                        });
+                    }
                 }
 
+            } else {
+                $('#auth_error').modal('toggle');
             }
-            if (searchService.brand_model()) {
-                console.log(searchService.brand_model());
 
-                var brand = searchService.brand_model().manufacturer;
-
-                if ($scope.sc.manufacturers.length > 0) {
-                    _.mapObject($scope.sc.manufacturers, function (key) {
-                        if (key.manufacturer === brand) {
-                            $scope.data.client_manufacturer = brand;
-                        }
-                    });
-                }
-
-            }
 
 
 

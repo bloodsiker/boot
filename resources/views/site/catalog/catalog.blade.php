@@ -97,7 +97,7 @@
                                 <button class="btn btn-yellow" ng-click="applyRadius(); isOpenRadius = false">Применить</button>
                             </div>
                         </div>
-                        <div ng-if="filterService.length == 1" style="vertical-align: top;display: inline-block; float: right;">
+                        <div ng-if="filterService.length == 1" class="coast-range">
                             <span class="filter-panel">
                                 Цена: до @{{ filterService[0].price_max }}грн
                             </span>
@@ -224,7 +224,9 @@
                                 <span style="font-weight: 900;">M</span>
                                 <span class="text" ng-bind="item.metro.address"></span>
                             </div>
-
+                            <a class="btn btn-yellow btn-call" href="/sc/@{{item.id}}">
+                                Заказать
+                            </a>
                         </div>
                     </div>
                     <div class="col-md-4 text-right">
@@ -238,7 +240,18 @@
                             <span class="glyphicon glyphicon-star"></span>
                             <span style="vertical-align: text-bottom;" ng-bind="(item.rating | number)"></span>
                         </div>
+
+                        <div ng-hide="true" class="text-right" uib-tooltip="Избранное" style="float: right;">
+                            <span style="font-size: 18px; cursor: pointer; vertical-align: text-top;"
+                                  ng-if="true"
+                                  ng-click="like(item)"
+                                  ng-style="{color: item.favorite ? 'red': ''}"
+                                  ng-class="{'glyphicon-heart-empty': !item.favorite, 'glyphicon-heart': item.favorite}"
+                                  class="glyphicon"></span>
+                        </div>
+
                     </div>
+
                 </div>
 
                 <div class="row" ng-if="catalog.length > 0 && catalog.length >= limitCatalog">

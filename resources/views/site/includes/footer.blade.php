@@ -194,6 +194,26 @@
 
 
 
+<!--==============MODAL REGISTER REDIRECT=========================-->
+
+<div class="modal fade" id="auth_error" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-sm" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
+            </div>
+            <div class="modal-body text-center">
+                <h4>Чтобы оставить заявку нужно быть авторизированным</h4>
+            </div>
+            <div class="modal-footer">
+                <a href="/user/login" style="width: 100%;" class="btn btn-black">Авторизироваться</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+
 <!--==============MODAL HELP CALL SC=========================-->
 
 <div class="modal fade" id="help_modal" tabindex="-1" role="dialog">
@@ -305,7 +325,7 @@
                                         id="client_manufacturer"
                                         class="form-control"
                                         ng-model="data.client_manufacturer">
-                                    <option ng-repeat="manufacturer in sc.manufacturers track by $index" value="@{{ manufacturer.manufacturer }}">@{{ manufacturer.manufacturer }}</option>
+                                    <option ng-repeat="manufacturer in sc.manufacturers | orderBy: 'manufacturer' track by $index" value="@{{ manufacturer.manufacturer }}">@{{ manufacturer.manufacturer }}</option>
                                 </select>
                             </div>
                         </div>
