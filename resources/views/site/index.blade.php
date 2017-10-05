@@ -96,7 +96,7 @@
             <div class="row">
                 <div class="col-sm-12 text-center">
                     <h3>Определите поломку Вашего устройства, <br> сориентируйтесь по цене, <br> и выберите ближайший сервис-центр</h3>
-                    <a href="/diagnostics" class="btn btn-yellow">Провести диагностику устройства</a>
+                    <a href="/diagnostics" class="btn btn-yellow out-diagnostics">Провести диагностику устройства</a>
                 </div>
             </div>
         </div>
@@ -107,7 +107,7 @@
                 <div class="col-xs-12 text-center">
                     <h3>Нужна помощь <br> в подборе сервис-центра?</h3>
                     <p>Оставьте свой телефон, мы перезвоним в течение 3 минут и <br> бесплатно подберем вам идеальный сервис-центр</p>
-                    <button class="btn btn-yellow" data-toggle="modal" data-target="#help_modal">Подобрать</button>
+                    <button class="btn btn-yellow help-pick-up" data-toggle="modal" data-target="#help_modal">Подобрать</button>
                 </div>
             </div>
         </div>

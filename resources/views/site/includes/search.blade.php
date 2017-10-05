@@ -58,7 +58,14 @@
 
         </div>
         <div style="padding-right: 20px; padding-left: 20px;">
-            <button ng-click="search_button(active, address_model.address, brand_model)" class="btn btn-yellow">Подобрать</button>
+            <button ng-click="search_button(active, address_model.address, brand_model)"
+                    class="btn btn-yellow
+                    @if(\Route::currentRouteName() == 'main')
+                        main-search-sc
+                    @elseif(\Route::currentRouteName() == 'catalog')
+                        catalog-search-sc
+                    @endif
+                    ">Подобрать</button>
         </div>
     </div>
 </div>

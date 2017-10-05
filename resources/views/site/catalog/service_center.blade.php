@@ -17,7 +17,7 @@
                 <h1 class="title" ng-bind="service_center.service_name"></h1>
             </div>
             <div class="col-sm-4 text-right">
-                <img class="logo-cs" style="width: 200px;" ng-src="@{{service_center.logo ? service_center.logo : 'http://fakeimg.pl/350x200/?text=Logo'}}" alt="@{{service_center.service_name}}">
+                <img class="logo-cs" style="width: 200px;" ng-src="@{{service_center.logo}}" alt="@{{service_center.service_name}}">
             </div>
         </div>
         <div class="row">
@@ -46,10 +46,8 @@
                 <div class="row callback">
                     <div class="col-sm-4">
                         <button class="btn btn-yellow btn-call"
-                                data-toggle="modal"
-                                data-target="#call_modal"
                                 ng-click="openScCall(service_center)">
-                            Связаться
+                            Заказать
                         </button>
                     </div>
                     <div class="col-sm-8 count-clients">
