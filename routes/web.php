@@ -40,6 +40,9 @@ Route::group(['middleware' => ['web', 'session.page']], function (){
     Route::get('service-center/registration', 'RegisterController@getServiceRegister')->name('service.registration');
     Route::post('service-center/registration', 'RegisterController@postServiceRegister')->name('service.registration');
 
+    Route::get('user/password/recovery', 'RecoveryPasswordController@getRecovery')->name('user.password.recovery');
+    Route::post('user/password/send-email', 'RecoveryPasswordController@sendResetLinkEmail')->name('user.password.send-email');
+
 
     Route::get('/auth', 'SocialAuthController@auth')->name('auth');
     Route::get('/auth/facebook', 'SocialAuthController@facebookRedirect')->name('auth.facebook');

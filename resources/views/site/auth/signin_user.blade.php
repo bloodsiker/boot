@@ -49,6 +49,7 @@
                                     Пароль:
                                     <input type="password" name="password" class="form-control" required/>
                                 </label>
+                                <a href="{{ route('user.password.recovery') }}">Напомнить пароль?</a>
                                 <button class="btn btn-warning pull-right">Вход</button>
                                 <div class="clearfix"></div>
                             </form>

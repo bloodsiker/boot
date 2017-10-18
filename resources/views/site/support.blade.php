@@ -66,7 +66,7 @@
 
                     </div>
                     <div class="modal-footer">
-                        <button type="submit" class="btn btn-yellow" ng-click="supportCall(help_form.$valid, client_name, client_phone, client_comment)">
+                        <button type="submit" class="btn btn-yellow send-support" ng-click="supportCall(help_form.$valid, client_name, client_phone, client_comment)">
                             Отправить
                         </button>
                     </div>
