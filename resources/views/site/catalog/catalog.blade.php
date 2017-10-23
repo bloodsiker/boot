@@ -151,28 +151,29 @@
                 <!--=======================================SORT=======================================-->
                 <div class="row sort">
                     <div class="col-xs-12" style="user-select: none; ">
-                    <span>Сортировать:
-                        <span ng-class="{active: activeSort == 'service_name'}" ng-click="order_event('service_name', !reverseCatalog)" class="sort-by active">по имени
-                            <i ng-if="activeSort == 'service_name' && !reverseCatalog" class="glyphicon glyphicon-sort-by-alphabet"></i>
-                            <i ng-if="activeSort == 'service_name' && reverseCatalog" class="glyphicon glyphicon-sort-by-alphabet-alt"></i>
-                        </span>
-                        <span ng-class="{active: activeSort == 'visits'}" ng-click="order_event('visits', !reverseCatalog)" class="sort-by active">по популярности
-                           <i ng-if="activeSort == 'visits' && !reverseCatalog" class="glyphicon glyphicon-sort-by-order"></i>
-                            <i ng-if="activeSort == 'visits' && reverseCatalog" class="glyphicon glyphicon-sort-by-order-alt"></i>
-                        </span>
-                        <span ng-class="{active: activeSort == 'rating'}" ng-click="order_event('rating', !reverseCatalog)" class="sort-by">по рейтингу
-                           <i ng-if="activeSort == 'rating' && !reverseCatalog" class="glyphicon glyphicon-sort-by-order"></i>
-                            <i ng-if="activeSort == 'rating' && reverseCatalog" class="glyphicon glyphicon-sort-by-order-alt"></i>
-                        </span>
-                        <span ng-class="{active: activeSort == 'comments'}" ng-click="order_event('comments', !reverseCatalog)" class="sort-by">по отзывам
-                           <i ng-if="activeSort == 'comments' && !reverseCatalog" class="glyphicon glyphicon-sort-by-order"></i>
-                            <i ng-if="activeSort == 'comments' && reverseCatalog" class="glyphicon glyphicon-sort-by-order-alt"></i>
-                        </span>
-                    </span>
+                        <div>
+                            <label for="sortCatalog">Сортировать по: </label>
+                            <div class="input-group">
+                                <select class="form-control" ng-model="activeSort" ng-change="order_event(activeSort)" name="sortCatalog" id="sortCatalog">
+                                    <option value="service_name">названию</option>
+                                    <option value="visits">популярности</option>
+                                    <option value="rating">рейтингу</option>
+                                    <option value="comments">отзывам</option>
+                                </select>
+                                <span class="input-group-btn">
+                                    <button class="btn btn-yellow" type="button" ng-click="reverseCatalog = !reverseCatalog">
+                                        <i ng-if="!reverseCatalog" style="transform: translateY(3px);" class="glyphicon glyphicon-chevron-down"></i>
+                                        <i ng-if="reverseCatalog" class="glyphicon glyphicon-chevron-up"></i>
+                                    </button>
+                                </span>
+                            </div>
+
+                        </div>
+
                     </div>
                 </div>
 
-                <!--=======================need help=======================-->
+                {{--<!--=======================need help=======================-->
                 <div class="row need-help-catalog">
                     <div class="col-md-12 text-center">
                         <h3>Нужна помощь <br> в подборе сервис-центра?</h3>
@@ -181,7 +182,7 @@
                             сервис-центр</p>
                         <button class="btn btn-black" data-toggle="modal" data-target="#help_modal">Подобрать</button>
                     </div>
-                </div>
+                </div>--}}
                 <!--=======================end need help=======================-->
                 <div class="row" ng-if="catalog.length == 0">
                     <div class="col-xs-12 text-center">
@@ -333,8 +334,8 @@
 
     </div>
 
-    <button ng-if="showButtonTop > 400" class="btn btn-small btn-yellow fade" style="position: fixed; left: 10px; bottom: 10px; z-index: 10;" ng-click="topScroll()">
-        <span class="glyphicon glyphicon-arrow-up"></span>наверх
+    <button ng-if="showButtonTop > 400" class="btn btn-small btn-yellow fade" style="position: fixed;right: 2px;bottom: 0;z-index: 10;height: 36px;" ng-click="topScroll()">
+        <span class="glyphicon glyphicon-arrow-up"></span>
     </button>
 
 @endsection

@@ -12,7 +12,7 @@
                         <div class="top-menu col-xs-12">
                             <div class="menu">
                                 <a href="{{ route('main') }}" class="{{ active('main') }}">Главная</a>
-                                <a href="{{ route('catalog') }}" class="{{ active('catalog') }}">Каталог</a>
+                                {{--<a href="{{ route('catalog') }}" class="{{ active('catalog') }}">Каталог</a>--}}
                                 <a href="{{ route('diagnostics') }} " class="{{ active('diagnostics') }}">Диагностика</a>
                                 <a href="{{ route('about') }}" class="{{ active('about') }}">О проекте</a>
                                 <a href="{{ route('support') }}" class="{{ active('support') }}">Служба поддержки</a>
@@ -37,7 +37,7 @@
                                 @endif
                             </div>
                         </div>
-                        <div class="search-box" ng-controller="TopSearchCtrl">
+                        {{--<div class="search-box" ng-controller="TopSearchCtrl">
                             <div class="form">
                                 <input type="text"
                                        ng-model="filterTopSearch"
@@ -64,7 +64,7 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </div>--}}
                     </div>
 
                 </div>
