@@ -145,7 +145,7 @@
 
     <div class="container" style="min-height: 100vh;">
 
-        <div class="row">
+        <div class="row" style="display: flex; align-items: stretch;">
             <div class="col-sm-6 col-lg-5 col-xs-12">
 
                 <!--=======================================SORT=======================================-->
@@ -266,10 +266,11 @@
             </div>
             <div class="col-sm-6 col-lg-7 hidden-xs catalog-map">
 
-                <ng-map id="map"
+                <div style="position: sticky; position: -webkit-sticky;position: -moz-sticky;position: -ms-sticky;position: -o-sticky;top: 0px;">
+                    <ng-map id="map"
                         center='current-position'
                         geo-callback="callbackFunc('you')"
-                        style="position: fixed; top: 0; width:inherit; z-index:0;">
+                        style="">
 
                     <info-window id="foo">
                         <div ng-non-bindable="">
@@ -325,6 +326,7 @@
                            editable="false" ></shape>
 
                 </ng-map>
+                </div>
             </div>
         </div>
 

@@ -18,7 +18,7 @@ class SiteController extends Controller
     public function getIndex()
     {
         $data_seo = json_decode(DB::table('seo_meta')->where('title', 'main_page')->get());
-        return view('site.index', compact('data_seo'));
+        return view('site.catalog.catalog', compact('data_seo'));
     }
 
     /**
