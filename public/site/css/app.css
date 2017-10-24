@@ -256,8 +256,8 @@ img {
       padding: 10px; }
 
 .home {
-  padding-top: 50px;
-  padding-bottom: 50px;
+  padding-top: 20px;
+  padding-bottom: 20px;
   background: url("../img/home.jpg") center center;
   -webkit-background-size: cover;
   background-size: cover; }
@@ -1044,7 +1044,10 @@ img {
       color: #cccccc; }
 
 .error-input {
-  border: 2px solid #F44336; }
+  border: 1px solid #F44336; }
+
+.yellow-input {
+  border: 2px solid #ffca13; }
 
 .dropdown-limit .dropdown-menu {
   max-height: 300px;

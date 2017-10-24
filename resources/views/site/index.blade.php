@@ -33,11 +33,6 @@
             </div>
         </div>
     </div>
-    {{--<div class="container">--}}
-        {{--<div class="search-home">--}}
-
-        {{--</div>--}}
-    {{--</div>--}}
     <div class="container">
         <div class="advantages">
             <div class="row">

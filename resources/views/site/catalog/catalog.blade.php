@@ -19,9 +19,9 @@
             <div class="row">
                 <div class="col-xs-12 text-center">
                     <div class="home">
-                        <h1>Мгновенный поиск сервисных центров по <br> ремонту смартфонов в Днепре</h1>
+                        {{--<h1>Мгновенный поиск сервисных центров по <br> ремонту смартфонов в Днепре</h1>
                         <h2>Наш сервис помогает владельцам смартфонов, сэкономить <br> время и деньги на качественный ремонт устройства, тем, что
-                            <br> позволяет найти ближайший сертифицированный сервис-центр <br> за 3 минуты</h2>
+                            <br> позволяет найти ближайший сертифицированный сервис-центр <br> за 3 минуты</h2>--}}
                         {{--<a href="{{ route('catalog') }}" class="btn btn-yellow">Найти ближайший сервис-центр</a>--}}
 
                         <div class="row">
@@ -105,7 +105,7 @@
                                                 <button class="btn btn-yellow" ng-click="applyRadius(); isOpenRadius = false">Применить</button>
                                             </div>
                                         </div>
-                                        <div ng-if="filterService.length == 1" class="coast-range">
+                                        <div ng-if="filterService.length == 1" class="coast-range pull-right">
                             <span class="filter-panel">
                                 Цена: до @{{ filterService[0].price_max }}грн
                             </span>
