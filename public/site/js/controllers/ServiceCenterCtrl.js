@@ -1,8 +1,8 @@
 (function () {
     angular.module('App')
         .controller('PageServiceCenterCtrl', PageServiceCenterCtrl);
-    PageServiceCenterCtrl.$inject = ['$scope', '$rootScope', 'NgMap', 'model', '_'];
-    function PageServiceCenterCtrl($scope, $rootScope, NgMap, model, _) {
+    PageServiceCenterCtrl.$inject = ['$scope', '$rootScope', 'NgMap', 'model', '_', 'localeStore'];
+    function PageServiceCenterCtrl($scope, $rootScope, NgMap, model, _, localeStore) {
 
         // ================= MAP =====================
 
@@ -81,5 +81,12 @@
                 });
             }
         };
+
+        if (localeStore.get('modal_auth')) {
+            console.log(localeStore.get('modal_auth') || false);
+            localeStore.remove('modal_auth');
+            $('#auth_error').modal('toggle');
+
+        }
     }
 })();

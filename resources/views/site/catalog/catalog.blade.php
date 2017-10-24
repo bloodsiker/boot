@@ -43,7 +43,7 @@
                         </div>
                         <!--=======================================TIME=======================================-->
 
-                        <div uib-dropdown auto-close="outsideClick" is-open="openedTime">
+                        <div uib-dropdown apped-to-body="true" auto-close="outsideClick" is-open="openedTime">
                             <span class="filter-panel"
                                   uib-dropdown-toggle>
                                 Время работы <span class="glyphicon glyphicon-chevron-down"></span>
@@ -78,11 +78,11 @@
                             </div>
                         </div>
 
-                        <div uib-dropdown auto-close="outsideClick" is-open="isOpenRadius">
-                            <span class="filter-panel" uib-dropdown-toggle>
+                        <div uib-dropdown apped-to-body="true" auto-close="outsideClick" is-open="isOpenRadius">
+                            <span class="filter-panel" uib-dropdown-toggle tooltip-append-to-body="true">
                                 Радиус <span class="glyphicon glyphicon-chevron-down"></span>
                             </span>
-                            <div class="popover bottom fade in" style="top: 20px; left: 0; min-width: 250px;" uib-dropdown-menu>
+                            <div tooltip-append-to-body="true" class="popover bottom fade in" style="top: 20px; left: 0; min-width: 250px;" uib-dropdown-menu>
                                 <div class="arrow" style="left: 30px;"></div>
                                 <div class="popover-inner">
                                     <div class="popover-content">
@@ -143,36 +143,37 @@
     </div>
     <!--=======================================CATALOG=======================================-->
 
-    <div class="container-fluid" style="min-height: 100vh;">
+    <div class="container" style="min-height: 100vh; position: relative; z-index: 0">
 
-        <div class="row">
+        <div class="row" style="display: flex; align-items: stretch;">
             <div class="col-sm-6 col-lg-5 col-xs-12">
 
                 <!--=======================================SORT=======================================-->
-                <div class="row sort">
-                    <div class="col-xs-12" style="user-select: none; ">
-                    <span>Сортировать:
-                        <span ng-class="{active: activeSort == 'service_name'}" ng-click="order_event('service_name', !reverseCatalog)" class="sort-by active">по имени
-                            <i ng-if="activeSort == 'service_name' && !reverseCatalog" class="glyphicon glyphicon-sort-by-alphabet"></i>
-                            <i ng-if="activeSort == 'service_name' && reverseCatalog" class="glyphicon glyphicon-sort-by-alphabet-alt"></i>
-                        </span>
-                        <span ng-class="{active: activeSort == 'visits'}" ng-click="order_event('visits', !reverseCatalog)" class="sort-by active">по популярности
-                           <i ng-if="activeSort == 'visits' && !reverseCatalog" class="glyphicon glyphicon-sort-by-order"></i>
-                            <i ng-if="activeSort == 'visits' && reverseCatalog" class="glyphicon glyphicon-sort-by-order-alt"></i>
-                        </span>
-                        <span ng-class="{active: activeSort == 'rating'}" ng-click="order_event('rating', !reverseCatalog)" class="sort-by">по рейтингу
-                           <i ng-if="activeSort == 'rating' && !reverseCatalog" class="glyphicon glyphicon-sort-by-order"></i>
-                            <i ng-if="activeSort == 'rating' && reverseCatalog" class="glyphicon glyphicon-sort-by-order-alt"></i>
-                        </span>
-                        <span ng-class="{active: activeSort == 'comments'}" ng-click="order_event('comments', !reverseCatalog)" class="sort-by">по отзывам
-                           <i ng-if="activeSort == 'comments' && !reverseCatalog" class="glyphicon glyphicon-sort-by-order"></i>
-                            <i ng-if="activeSort == 'comments' && reverseCatalog" class="glyphicon glyphicon-sort-by-order-alt"></i>
-                        </span>
-                    </span>
+                <div class="row">
+                    <div class="col-xs-12">
+                        <div style="position: relative;">
+                            <label for="sortCatalog">Сортировать по: </label>
+                            <div class="input-group">
+                                <select class="form-control" ng-model="activeSort" ng-change="order_event(activeSort)" name="sortCatalog" id="sortCatalog">
+                                    <option value="service_name">названию</option>
+                                    <option value="visits">популярности</option>
+                                    <option value="rating">рейтингу</option>
+                                    <option value="comments">отзывам</option>
+                                </select>
+                                <span class="input-group-btn">
+                                    <button class="btn btn-yellow" type="button" ng-click="reverseCatalog = !reverseCatalog">
+                                        <i ng-if="!reverseCatalog" style="transform: translateY(3px);" class="glyphicon glyphicon-chevron-down"></i>
+                                        <i ng-if="reverseCatalog" class="glyphicon glyphicon-chevron-up"></i>
+                                    </button>
+                                </span>
+                            </div>
+
+                        </div>
+
                     </div>
                 </div>
 
-                <!--=======================need help=======================-->
+                {{--<!--=======================need help=======================-->
                 <div class="row need-help-catalog">
                     <div class="col-md-12 text-center">
                         <h3>Нужна помощь <br> в подборе сервис-центра?</h3>
@@ -181,7 +182,7 @@
                             сервис-центр</p>
                         <button class="btn btn-black" data-toggle="modal" data-target="#help_modal">Подобрать</button>
                     </div>
-                </div>
+                </div>--}}
                 <!--=======================end need help=======================-->
                 <div class="row" ng-if="catalog.length == 0">
                     <div class="col-xs-12 text-center">
@@ -198,12 +199,12 @@
                             <span class="glyphicon glyphicon-time"></span>
                             <span class="text" ng-bind="'Сегодня: c '+ item.work_days[indexDay].start_time+' по '+item.work_days[indexDay].end_time"></span>
 
-                            <span uib-dropdown auto-close="outsideClick" is-open="openedServiceMore">
+                            <span uib-dropdown auto-close="outsideClick">
                             <span style="font-size: 10px; cursor: pointer;" uib-dropdown-toggle>Посмотреть все</span>
-                                <div class="popover bottom fade in" style="top: 20px;" uib-dropdown-menu>
+                                <div class="popover bottom fade in" style="top: 12px;" uib-dropdown-menu>
                                     <div style="left: 20px;" class="arrow"></div>
                                     <div class="popover-inner">
-                                        <div class="popover-content" ng-mouseleave="openedServiceMore = false">
+                                        <div class="popover-content">
                                             <ul>
                                                 <li style="list-style: none;"
                                                     ng-repeat="work in item.work_days"
@@ -224,7 +225,7 @@
                                 <span style="font-weight: 900;">M</span>
                                 <span class="text" ng-bind="item.metro.address"></span>
                             </div>
-                            <a class="btn btn-yellow btn-call" href="/sc/@{{item.id}}">
+                            <a class="btn btn-yellow btn-call" ng-click="sendCallSCCatalog(item.id)">
                                 Заказать
                             </a>
                         </div>
@@ -256,6 +257,21 @@
 
                 <div class="row" ng-if="catalog.length > 0 && catalog.length >= limitCatalog">
                     <div class="col-xs-12 text-center">
+                       {{-- <div class="text-center">
+                            <ul uib-pagination
+                                first-text="<<"
+                                last-text=">>"
+                                previous-text="<"
+                                next-text=">"
+                                total-items="catalog.length"
+                                ng-model="catalogPage"
+                                max-size="4"
+                                class="pagination-sm"
+                                boundary-links="true"
+                                force-ellipses="true"></ul>
+                        </div>--}}
+
+
                         <button ng-click="limitCatalogCount()" style="margin-bottom: 20px;" class="btn btn-yellow">Показать еще</button>
                     </div>
                 </div>
@@ -266,10 +282,10 @@
             </div>
             <div class="col-sm-6 col-lg-7 hidden-xs catalog-map">
 
-                <ng-map id="map"
+                <div style="position: sticky; position: -webkit-sticky;position: -moz-sticky;position: -ms-sticky;position: -o-sticky;top: 0px;">
+                    <ng-map id="map"
                         center='current-position'
-                        geo-callback="callbackFunc('you')"
-                        style="position: fixed; top: 0; width:inherit; z-index:0;">
+                        geo-callback="callbackFunc('you')">
 
                     <info-window id="foo">
                         <div ng-non-bindable="">
@@ -325,14 +341,15 @@
                            editable="false" ></shape>
 
                 </ng-map>
+                </div>
             </div>
         </div>
 
 
     </div>
 
-    <button ng-if="showButtonTop > 400" class="btn btn-small btn-yellow fade" style="position: fixed; left: 10px; bottom: 10px; z-index: 10;" ng-click="topScroll()">
-        <span class="glyphicon glyphicon-arrow-up"></span>наверх
+    <button ng-if="showButtonTop > 400" class="btn btn-small btn-yellow fade" style="position: fixed;right: 2px;bottom: 0;z-index: 10;height: 36px;" ng-click="topScroll()">
+        <span class="glyphicon glyphicon-arrow-up"></span>
     </button>
 
 @endsection

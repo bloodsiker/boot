@@ -74,11 +74,14 @@ class DiagnosticsController extends Controller
                     ->distinct()
                     ->where('type_device', $type_device)
                     ->where('problem_know', $problem_know)
-                    ->orderBy('problem_know')
                     ->get()
                     ->toArray();
                 $result['problem_watching'] = array_unique(array_column($result_know, 'problem_watching'));
                 $result['problem_description'] = array_unique(array_column($result_know, 'problem_description'));
+
+                if($request->has('problem_watching')) {
+                    $result_know = $result_know->where('problem_watching',$problem_watching);
+                }
             }
 
             if($problem_watching !== false){
@@ -86,7 +89,6 @@ class DiagnosticsController extends Controller
                     ->distinct()
                     ->where('type_device', $type_device)
                     ->where('problem_watching',  $problem_watching)
-                    ->orderBy('problem_watching')
                     ->get()
                     ->toArray();
                 $result['problem_know'] = array_unique(array_column($result_watching, 'problem_know'));
@@ -98,7 +100,6 @@ class DiagnosticsController extends Controller
                     ->distinct()
                     ->where('type_device', $type_device)
                     ->where('problem_description', $problem_description)
-                    ->orderBy('spare_part')
                     ->get()
                     ->toArray();
                 $result['problem_know'] = array_unique(array_column($result_description, 'problem_know'));

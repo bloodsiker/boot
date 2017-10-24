@@ -11,6 +11,12 @@
     <meta name="keywords" content="@yield('keywords')">
     <meta name="_token"  content="{{ csrf_token() }}">
     <meta name="auth"  content="{{ Auth::check() }}">
+    @if (Auth::check())
+        <meta name="address"  content="{{ Auth::user()->address }}">
+        <meta name="user"  content="{{ Auth::user()->name }}">
+        <meta name="phone"  content="{{ Auth::user()->phone }}">
+        <meta name="email"  content="{{ Auth::user()->email }}">
+    @endif
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta property="og:site_name" content="Boot" />
     <meta property="og:title" content="@yield('title')" />
@@ -105,6 +111,7 @@
 <script src="{{ asset('site/js/model/model.js') }}"></script>
 
 <script src="{{ asset('site/js/services/searchService.js') }}"></script>
+<script src="{{ asset('site/js/services/localeStoreService.js') }}"></script>
 <script src="{{ asset('site/js/controllers/IndexCtrl.js') }}"></script>
 <script src="{{ asset('site/js/controllers/DiagnosticCtrl.js') }}"></script>
 
