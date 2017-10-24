@@ -14,7 +14,7 @@
 
         $scope.firstStep = function () {
             model
-                .post('/diagnostic', {action: 'type_device', type_device: 'phone'})
+                .post('/diagnostics', {action: 'type_device', type_device: 'phone'})
                 .then(function (success) {
                     console.log(success);
                     $scope.problems_know = success.data.problem_know;
@@ -34,7 +34,7 @@
             if (!problem_know_select && !problem_know_select && !problem_description_select) {
                 $scope.firstStep();
             } else {
-                model.post('/diagnostic', {
+                model.post('/diagnostics', {
                     action: 'problem_description',
                     type_device: 'phone',
                     problem_know: problem_know_select || false,
