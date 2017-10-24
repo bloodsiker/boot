@@ -43,7 +43,7 @@
                         </div>
                         <!--=======================================TIME=======================================-->
 
-                        <div uib-dropdown auto-close="outsideClick" is-open="openedTime">
+                        <div uib-dropdown apped-to-body="true" auto-close="outsideClick" is-open="openedTime">
                             <span class="filter-panel"
                                   uib-dropdown-toggle>
                                 Время работы <span class="glyphicon glyphicon-chevron-down"></span>
@@ -78,11 +78,11 @@
                             </div>
                         </div>
 
-                        <div uib-dropdown auto-close="outsideClick" is-open="isOpenRadius">
-                            <span class="filter-panel" uib-dropdown-toggle>
+                        <div uib-dropdown apped-to-body="true" auto-close="outsideClick" is-open="isOpenRadius">
+                            <span class="filter-panel" uib-dropdown-toggle tooltip-append-to-body="true">
                                 Радиус <span class="glyphicon glyphicon-chevron-down"></span>
                             </span>
-                            <div class="popover bottom fade in" style="top: 20px; left: 0; min-width: 250px;" uib-dropdown-menu>
+                            <div tooltip-append-to-body="true" class="popover bottom fade in" style="top: 20px; left: 0; min-width: 250px;" uib-dropdown-menu>
                                 <div class="arrow" style="left: 30px;"></div>
                                 <div class="popover-inner">
                                     <div class="popover-content">
@@ -143,15 +143,15 @@
     </div>
     <!--=======================================CATALOG=======================================-->
 
-    <div class="container" style="min-height: 100vh;">
+    <div class="container" style="min-height: 100vh; position: relative; z-index: 0">
 
         <div class="row" style="display: flex; align-items: stretch;">
             <div class="col-sm-6 col-lg-5 col-xs-12">
 
                 <!--=======================================SORT=======================================-->
-                <div class="row sort">
-                    <div class="col-xs-12" style="user-select: none; ">
-                        <div>
+                <div class="row">
+                    <div class="col-xs-12">
+                        <div style="position: relative;">
                             <label for="sortCatalog">Сортировать по: </label>
                             <div class="input-group">
                                 <select class="form-control" ng-model="activeSort" ng-change="order_event(activeSort)" name="sortCatalog" id="sortCatalog">
@@ -199,12 +199,12 @@
                             <span class="glyphicon glyphicon-time"></span>
                             <span class="text" ng-bind="'Сегодня: c '+ item.work_days[indexDay].start_time+' по '+item.work_days[indexDay].end_time"></span>
 
-                            <span uib-dropdown auto-close="outsideClick" is-open="openedServiceMore">
+                            <span uib-dropdown auto-close="outsideClick">
                             <span style="font-size: 10px; cursor: pointer;" uib-dropdown-toggle>Посмотреть все</span>
-                                <div class="popover bottom fade in" style="top: 20px;" uib-dropdown-menu>
+                                <div class="popover bottom fade in" style="top: 12px;" uib-dropdown-menu>
                                     <div style="left: 20px;" class="arrow"></div>
                                     <div class="popover-inner">
-                                        <div class="popover-content" ng-mouseleave="openedServiceMore = false">
+                                        <div class="popover-content">
                                             <ul>
                                                 <li style="list-style: none;"
                                                     ng-repeat="work in item.work_days"
@@ -225,7 +225,7 @@
                                 <span style="font-weight: 900;">M</span>
                                 <span class="text" ng-bind="item.metro.address"></span>
                             </div>
-                            <a class="btn btn-yellow btn-call" href="/sc/@{{item.id}}">
+                            <a class="btn btn-yellow btn-call" ng-click="sendCallSCCatalog(item.id)">
                                 Заказать
                             </a>
                         </div>
@@ -257,6 +257,21 @@
 
                 <div class="row" ng-if="catalog.length > 0 && catalog.length >= limitCatalog">
                     <div class="col-xs-12 text-center">
+                       {{-- <div class="text-center">
+                            <ul uib-pagination
+                                first-text="<<"
+                                last-text=">>"
+                                previous-text="<"
+                                next-text=">"
+                                total-items="catalog.length"
+                                ng-model="catalogPage"
+                                max-size="4"
+                                class="pagination-sm"
+                                boundary-links="true"
+                                force-ellipses="true"></ul>
+                        </div>--}}
+
+
                         <button ng-click="limitCatalogCount()" style="margin-bottom: 20px;" class="btn btn-yellow">Показать еще</button>
                     </div>
                 </div>
@@ -270,8 +285,7 @@
                 <div style="position: sticky; position: -webkit-sticky;position: -moz-sticky;position: -ms-sticky;position: -o-sticky;top: 0px;">
                     <ng-map id="map"
                         center='current-position'
-                        geo-callback="callbackFunc('you')"
-                        style="">
+                        geo-callback="callbackFunc('you')">
 
                     <info-window id="foo">
                         <div ng-non-bindable="">

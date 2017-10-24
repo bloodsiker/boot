@@ -105,6 +105,7 @@
 <script src="{{ asset('site/js/model/model.js') }}"></script>
 
 <script src="{{ asset('site/js/services/searchService.js') }}"></script>
+<script src="{{ asset('site/js/services/localeStoreService.js') }}"></script>
 <script src="{{ asset('site/js/controllers/IndexCtrl.js') }}"></script>
 <script src="{{ asset('site/js/controllers/DiagnosticCtrl.js') }}"></script>
 

@@ -60,6 +60,11 @@
 
         $rootScope.openScCall = function (sc) {
 
+
+            var client = {
+                auth: document.getElementsByTagName('meta').item(property='auth'),
+            };
+            console.log(client.auth);
             if (client.auth) {
                 $('#call_modal').modal('toggle');
                 $scope.serviceIndex = 0;

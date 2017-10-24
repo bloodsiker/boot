@@ -199,7 +199,7 @@
 <div class="modal fade" id="auth_error" tabindex="-1" role="dialog">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
-            <button type="button" style="position: absolute;right: 10px;z-index: 23;opacity: 1;top: 10px;" class="close" data-dismiss="modal" aria-label="Close"><span
+            <button type="button" style="position: absolute;right: 10px;top: 10px;opacity: 1;z-index: 2;" class="close" data-dismiss="modal" aria-label="Close"><span
                         aria-hidden="true">&times;</span></button>
             <div class="boot-registration__columns form-sign-in" style="margin: 0;">
                 <div class="row">

@@ -44,8 +44,8 @@
                 brand_model: brand_model
             });
 
-            if (window.location.pathname === '/') {
-                window.location.pathname = '/catalog'
+            if (window.location.pathname === '/about') {
+                window.location.pathname = '/'
             }
             console.log(searchService.address_model());
 

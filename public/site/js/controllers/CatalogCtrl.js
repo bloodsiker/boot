@@ -1,8 +1,8 @@
 (function () {
     angular.module('App')
         .controller('CatalogCtrl', CatalogCtrl);
-    CatalogCtrl.$inject = ['$scope', 'NgMap', '$rootScope', 'model', '_', '$timeout', 'searchService', '$filter'];
-    function CatalogCtrl($scope, NgMap, $rootScope, model, _, $timeout, searchService, $filter) {
+    CatalogCtrl.$inject = ['$scope', 'NgMap', '$rootScope', 'model', '_', '$timeout', 'searchService', '$filter', 'localeStore'];
+    function CatalogCtrl($scope, NgMap, $rootScope, model, _, $timeout, searchService, $filter, localeStore) {
 
         // ================= CATALOG ========================
 
@@ -410,7 +410,14 @@
 
 
 
+        };
+
+        $scope.sendCallSCCatalog = sc_id => {
+            localeStore.save('modal_auth', true);
+            window.location.href="/sc/"+sc_id;
         }
+
+        // $scope.catalogPage = 1;
 
     }
 })();

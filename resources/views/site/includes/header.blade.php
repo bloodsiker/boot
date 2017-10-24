@@ -2,6 +2,55 @@
     <div class="container" id="header">
         <div class="row">
             <div class="col-md-12">
+
+                {{--<nav class="navbar navbar-default">
+                    <div class="container-fluid">
+
+                        <div class="navbar-header">
+                            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-mobile" aria-expanded="false">
+                                <span class="sr-only">Меню</span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                            </button>
+                            <a class="navbar-brand" href="/">
+                                <img style="width: 50px;background: #ffca13;padding: 3px;margin-top: -16px;" src="{{ asset('site/img/logo.png') }}" alt="boot">
+                            </a>
+                        </div>
+
+
+                        <div class="collapse navbar-collapse" id="navbar-mobile">
+                            <ul class="nav navbar-nav">
+                                <li class="{{ active('main') }}"><a href="{{ route('main') }}">Главная</a></li>
+                                <li class="{{ active('diagnostics') }}"><a href="{{ route('diagnostics') }}">Диагностика</a></li>
+                                <li class="{{ active('about') }}"><a href="{{ route('about') }}">О проекте</a></li>
+                                <li class="{{ active('support') }}"><a href="{{ route('support') }}">Служба поддержки</a></li>
+                            </ul>
+
+                            <ul class="nav navbar-nav navbar-right">
+
+                                @if(Auth::user())
+                                    @if(Auth::user()->roleSc())
+                                        <li><a href="{{ route('cabinet.dashboard') }}" class="sign-in">В кабинет</a></li>
+                                        <li><a href="{{ route('cabinet.logout') }}" class="registration">Выйти</a></li>
+                                    @elseif(Auth::user()->roleUser())
+                                        <li><a href="{{ route('user.dashboard') }}" class="sign-in">В профиль</a></li>
+                                        <li><a href="{{ route('user.logout') }}" class="registration">Выйти</a></li>
+                                    @elseif(Auth::user()->roleAdmin())
+                                        <li><a href="{{ route('cabinet.admin.user.list') }}" class="sign-in">В кабинет</a></li>
+                                        <li><a href="{{ route('cabinet.logout') }}" class="registration">Выйти</a></li>
+                                    @endif
+                                @else
+                                    <li><a href="{{ route('user.login') }}" class="sign-in">Пользователь</a></li>
+                                    <li><a href="{{ route('service.login') }}" class="registration">Сервисный центр</a></li>
+                                @endif
+
+                            </ul>
+                        </div>
+                    </div>
+                </nav>--}}
+
+
                 <div class="nav-bar">
                     <a href="/">
                         <div class="logo-box">
@@ -37,34 +86,6 @@
                                 @endif
                             </div>
                         </div>
-                        {{--<div class="search-box" ng-controller="TopSearchCtrl">
-                            <div class="form">
-                                <input type="text"
-                                       ng-model="filterTopSearch"
-                                       ng-focus="getSearchData()"
-                                       placeholder="Поиск сервисных центров / неисправностей"
-                                       style="width: 100%;">
-                                <button type="button" class="btn search-button"><span class="glyphicon glyphicon-search"></span></button>
-                                <div ng-show="filterTopSearch" class="searched-box">
-                                    <div class="row">
-                                        <div class="col-sm-6">
-                                            <span style="font-size: 16px;">Сервисные центры</span>
-                                            <div ng-repeat="service in catalog_search | filter: filterTopSearch | limitTo: 10 as filteredCatalog track by $index" style="cursor: pointer;">
-                                                <a ng-href="@{{ '/sc/'+service.id }}" ng-bind="service.service_name"></a>
-                                            </div>
-                                            <div ng-if="filteredCatalog.length <= 0" style="font-size: 14px; color: #666;">Не найдено</div>
-                                        </div>
-                                        <div class="col-sm-6">
-                                            <span style="font-size: 16px;">Неисправности</span>
-                                            <div ng-repeat="service in services_search | filter: filterTopSearch as filteredService track by $index" style="cursor: pointer;">
-                                                <a href ng-click="selectServiceSearch(service)">@{{ service.title }}</a>
-                                            </div>
-                                            <div ng-if="filteredService.length <= 0" style="font-size: 14px; color: #666666;">Не найдено</div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>--}}
                     </div>
 
                 </div>
