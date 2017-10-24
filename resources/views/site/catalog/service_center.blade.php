@@ -13,7 +13,7 @@
     <div class="container page-sc">
 
         <div class="row" style="display: flex; align-items: stretch;">
-            <div class="col-md-6">
+            <div class="col-sm-6 col-lg-5 col-xs-12">
 
                 <div class="row">
                     <div class="col-md-12">
@@ -217,7 +217,7 @@
                     </slick>
                 </div>
             </div>
-            <div class="col-md-6">
+            <div class="col-sm-6 col-lg-7">
                 <div style="position: sticky; position: -webkit-sticky;position: -moz-sticky;position: -ms-sticky;position: -o-sticky;top: 0px;">
                     <ng-map style="height: 100vh;" id="map" center="@{{service_center.c1}}, @{{service_center.c2}}" zoom="17">
                         <marker position="@{{service_center.c1}}, @{{service_center.c2}}" cursor="default" icon="{url:'/site/img/marker-map.png'}">

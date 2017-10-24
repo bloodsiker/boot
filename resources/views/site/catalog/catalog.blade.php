@@ -14,129 +14,142 @@
 @section('content')
 
     <div style="position: relative;z-index: 1;background: #fff;" ng-cloak>
-        <div class="container" style="position: relative;z-index: 1;">
-            <div class="search-catalog">
-                <!--======================================= INCLUDE SEARCH SC =======================================-->
-            @include('site.includes.search')
 
-            <!--=======================================SERVICE=====================================-->
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12 text-center">
+                    <div class="home">
+                        <h1>Мгновенный поиск сервисных центров по <br> ремонту смартфонов в Днепре</h1>
+                        <h2>Наш сервис помогает владельцам смартфонов, сэкономить <br> время и деньги на качественный ремонт устройства, тем, что
+                            <br> позволяет найти ближайший сертифицированный сервис-центр <br> за 3 минуты</h2>
+                        {{--<a href="{{ route('catalog') }}" class="btn btn-yellow">Найти ближайший сервис-центр</a>--}}
 
-                <div>
-                    <div class="filters" style="min-width: 320px;">
-                        <div uib-dropdown auto-close="outsideClick" is-open="isOpenServices">
+                        <div class="row">
+                            <div class="col-sm-10 col-sm-offset-1">
+                                <!--======================================= INCLUDE SEARCH SC =======================================-->
+                                @include('site.includes.search')
+
+                                <div class="text-left" style="user-select: none">
+                                    <div class="filters" style="min-width: 320px;">
+                                        <div uib-dropdown auto-close="outsideClick" is-open="isOpenServices">
                             <span class="filter-panel" uib-dropdown-toggle>
                                 Услуга <span class="glyphicon glyphicon-chevron-down"></span>
                             </span>
-                            <div class="popover bottom fade in" style="top: 20px; left: 0;" uib-dropdown-menu>
-                                <div class="arrow" style="left: 30px;"></div>
-                                <div class="popover-inner">
-                                    <div class="popover-content">
-                                        <div ng-repeat="service in services" ng-click="selectFilterServices(service)" style="cursor: pointer;">
-                                            <div class="checkbox" ng-class="{'active': service.active}"></div>
-                                            @{{ service.title }}
+                                            <div class="popover bottom fade in" style="top: 20px; left: 0;" uib-dropdown-menu>
+                                                <div class="arrow" style="left: 30px;"></div>
+                                                <div class="popover-inner">
+                                                    <div class="popover-content">
+                                                        <div ng-repeat="service in services" ng-click="selectFilterServices(service)" style="cursor: pointer;">
+                                                            <div class="checkbox" ng-class="{'active': service.active}"></div>
+                                                            @{{ service.title }}
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <button type="button" class="btn btn-black" ng-click="clearFilterServices(); isOpenServices = false">Сбросить</button>
+                                                <button class="btn btn-yellow" ng-click="applyFilterServices(); isOpenServices = false">Применить</button>
+                                            </div>
                                         </div>
-                                    </div>
-                                </div>
-                                <button type="button" class="btn btn-black" ng-click="clearFilterServices(); isOpenServices = false">Сбросить</button>
-                                <button class="btn btn-yellow" ng-click="applyFilterServices(); isOpenServices = false">Применить</button>
-                            </div>
-                        </div>
-                        <!--=======================================TIME=======================================-->
+                                        <!--=======================================TIME=======================================-->
 
-                        <div uib-dropdown apped-to-body="true" auto-close="outsideClick" is-open="openedTime">
-                            <span class="filter-panel"
-                                  uib-dropdown-toggle>
-                                Время работы <span class="glyphicon glyphicon-chevron-down"></span>
-                            </span>
+                                        <div uib-dropdown apped-to-body="true" auto-close="outsideClick" is-open="openedTime">
+                                            <span class="filter-panel"
+                                                  uib-dropdown-toggle>
+                                                Время работы <span class="glyphicon glyphicon-chevron-down"></span>
+                                            </span>
 
-                            <div class="popover bottom fade in" style="top: 20px;"uib-dropdown-menu>
-                                <div class="arrow" style="left: 30px;"></div>
-                                <div class="popover-inner">
-                                    <div class="datapicker">
-                                        <div style="float: left;">
-                                            <label>День недели
-                                                <select name="weekDay" class="form-control"  ng-model="_timeFilter.day">
-                                                    <option ng-repeat="(day_key, day) in week_days" value="@{{day}}">@{{day}}</option>
-                                                </select>
-                                            </label>
+                                            <div class="popover bottom fade in" style="top: 20px;"uib-dropdown-menu>
+                                                <div class="arrow" style="left: 30px;"></div>
+                                                <div class="popover-inner">
+                                                    <div class="datapicker">
+                                                        <div style="float: left;">
+                                                            <label>День недели
+                                                                <select name="weekDay" class="form-control"  ng-model="_timeFilter.day">
+                                                                    <option ng-repeat="(day_key, day) in week_days" value="@{{day}}">@{{day}}</option>
+                                                                </select>
+                                                            </label>
+                                                        </div>
+                                                        <div  style="float: left;margin-left: 10px; margin-right: 10px;margin-left: 10px;">
+                                                            <label>Начало дня
+                                                                <div uib-timepicker ng-model="_timeFilter.start_time" show-spinners="false" show-meridian="ismeridian"></div>
+                                                            </label>
+                                                        </div>
+                                                        <div  style="float: left;">
+                                                            <label>Конец дня
+                                                                <div uib-timepicker ng-model="_timeFilter.end_time" show-spinners="false" show-meridian="ismeridian"></div>
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="clearfix"></div>
+                                                    <button type="button" class="btn btn-black" ng-click="clear_time(); openedTime = false">Сбросить</button>
+                                                    <button class="btn btn-yellow" ng-click="applyTime(); openedTime = false">Выбрать</button>
+                                                </div>
+                                            </div>
                                         </div>
-                                        <div  style="float: left;margin-left: 10px; margin-right: 10px;margin-left: 10px;">
-                                            <label>Начало дня
-                                                <div uib-timepicker ng-model="_timeFilter.start_time" show-spinners="false" show-meridian="ismeridian"></div>
-                                            </label>
-                                        </div>
-                                        <div  style="float: left;">
-                                            <label>Конец дня
-                                                <div uib-timepicker ng-model="_timeFilter.end_time" show-spinners="false" show-meridian="ismeridian"></div>
-                                            </label>
-                                        </div>
-                                    </div>
-                                    <div class="clearfix"></div>
-                                    <button type="button" class="btn btn-black" ng-click="clear_time(); openedTime = false">Сбросить</button>
-                                    <button class="btn btn-yellow" ng-click="applyTime(); openedTime = false">Выбрать</button>
-                                </div>
-                            </div>
-                        </div>
 
-                        <div uib-dropdown apped-to-body="true" auto-close="outsideClick" is-open="isOpenRadius">
+                                        <div uib-dropdown apped-to-body="true" auto-close="outsideClick" is-open="isOpenRadius">
                             <span class="filter-panel" uib-dropdown-toggle tooltip-append-to-body="true">
                                 Радиус <span class="glyphicon glyphicon-chevron-down"></span>
                             </span>
-                            <div tooltip-append-to-body="true" class="popover bottom fade in" style="top: 20px; left: 0; min-width: 250px;" uib-dropdown-menu>
-                                <div class="arrow" style="left: 30px;"></div>
-                                <div class="popover-inner">
-                                    <div class="popover-content">
-                                        <div ng-repeat="radius_item in radiuses"
-                                             ng-click="selectFilterRadius(radius_item)" style="cursor: pointer;">
-                                            <div class="checkbox" ng-class="{'active': radius_item.active}"></div>
-                                            @{{ radius_item.title }}
+                                            <div tooltip-append-to-body="true" class="popover bottom fade in" style="top: 20px; left: 0; min-width: 250px;" uib-dropdown-menu>
+                                                <div class="arrow" style="left: 30px;"></div>
+                                                <div class="popover-inner">
+                                                    <div class="popover-content">
+                                                        <div ng-repeat="radius_item in radiuses"
+                                                             ng-click="selectFilterRadius(radius_item)" style="cursor: pointer;">
+                                                            <div class="checkbox" ng-class="{'active': radius_item.active}"></div>
+                                                            @{{ radius_item.title }}
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <button type="button" class="btn btn-black" ng-click="resetRadius(); isOpenRadius = false">Сбросить</button>
+                                                <button class="btn btn-yellow" ng-click="applyRadius(); isOpenRadius = false">Применить</button>
+                                            </div>
                                         </div>
-                                    </div>
-                                </div>
-                                <button type="button" class="btn btn-black" ng-click="resetRadius(); isOpenRadius = false">Сбросить</button>
-                                <button class="btn btn-yellow" ng-click="applyRadius(); isOpenRadius = false">Применить</button>
-                            </div>
-                        </div>
-                        <div ng-if="filterService.length == 1" class="coast-range">
+                                        <div ng-if="filterService.length == 1" class="coast-range">
                             <span class="filter-panel">
                                 Цена: до @{{ filterService[0].price_max }}грн
                             </span>
-                            <input style="display: block;vertical-align: top;"
-                                   type="range"
-                                   ng-if="filterService[0].price_max"
-                                   min="@{{ filterService[0]._price_min+1 }}"
-                                   max="@{{ filterService[0]._price_max }}"
-                                   step="1" ng-model="filterService[0].price_max">
+                                            <input style="display: block;vertical-align: top;"
+                                                   type="range"
+                                                   ng-if="filterService[0].price_max"
+                                                   min="@{{ filterService[0]._price_min+1 }}"
+                                                   max="@{{ filterService[0]._price_max }}"
+                                                   step="1" ng-model="filterService[0].price_max">
 
-                            <div style="width: 200px; margin-top: 5px; vertical-align: bottom;">
-                                <input type="number" style="width: 33%;" step="0.01" ng-model="filterService[0].price_min">
-                                <span style="color: #ffffff;">грн</span>
-                                <input type="number" style="width: 33%; margin-left: 12px;"  step="0.01" ng-model="filterService[0].price_max">
-                                <span style="color: #ffffff;">грн</span>
+                                            <div style="width: 200px; margin-top: 5px; vertical-align: bottom;">
+                                                <input type="number" style="width: 33%;" step="0.01" ng-model="filterService[0].price_min">
+                                                <span style="color: #ffffff;">грн</span>
+                                                <input type="number" style="width: 33%; margin-left: 12px;"  step="0.01" ng-model="filterService[0].price_max">
+                                                <span style="color: #ffffff;">грн</span>
 
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+
+                                    <div style="padding-left: 15px;">
+                                        <div ng-if="filterService.length > 0"
+                                             class="chips btn btn-yellow fade"
+                                             ng-repeat="filter in filterService track by $index"
+                                             ng-click="removeFilterService($index, filter)">
+                                            @{{filter.title}} <span class="glyphicon glyphicon-remove"></span>
+                                        </div>
+                                        <div ng-if="timeFilter"
+                                             class="chips btn btn-yellow fade"
+                                             ng-click="removeFilterTime()">
+                                            @{{_timeFilter.day}} c @{{ _timeFilter.start_time | date: 'HH:mm' }} до @{{ _timeFilter.end_time | date: 'HH:mm' }} <span class="glyphicon glyphicon-remove"></span>
+                                        </div>
+                                    </div>
+
+                                    <div ng-if="catalog.length" style="padding-left: 15px; margin-top: 20px;">
+                                        <span style="color: #ffca13;">Найдено <span class="h4">@{{ catalog.length }}</span> сервисных центров, соответствующих Вашему запросу </span>
+                                    </div>
+                                </div>
                             </div>
-
-                        </div>
-
-                    </div>
-
-                    <div style="padding-left: 15px;">
-                        <div ng-if="filterService.length > 0"
-                             class="chips btn btn-yellow fade"
-                             ng-repeat="filter in filterService track by $index"
-                             ng-click="removeFilterService($index, filter)">
-                            @{{filter.title}} <span class="glyphicon glyphicon-remove"></span>
-                        </div>
-                        <div ng-if="timeFilter"
-                             class="chips btn btn-yellow fade"
-                             ng-click="removeFilterTime()">
-                            @{{_timeFilter.day}} c @{{ _timeFilter.start_time | date: 'HH:mm' }} до @{{ _timeFilter.end_time | date: 'HH:mm' }} <span class="glyphicon glyphicon-remove"></span>
                         </div>
                     </div>
 
-                    <div ng-if="catalog.length" style="padding-left: 15px; margin-top: 20px;">
-                        <span style="color: #ffca13;">Найдено <b><u>@{{ catalog.length }}</u></b> сервисных центров, соответствующих Вашему запросу </span>
-                    </div>
                 </div>
             </div>
         </div>
@@ -149,7 +162,7 @@
             <div class="col-sm-6 col-lg-5 col-xs-12">
 
                 <!--=======================================SORT=======================================-->
-                <div class="row">
+                <div class="row" style="padding-top: 10px;">
                     <div class="col-xs-12">
                         <div style="position: relative;">
                             <label for="sortCatalog">Сортировать по: </label>

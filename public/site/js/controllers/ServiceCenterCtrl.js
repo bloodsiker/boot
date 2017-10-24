@@ -83,10 +83,8 @@
         };
 
         if (localeStore.get('modal_auth')) {
-            console.log(localeStore.get('modal_auth') || false);
             localeStore.remove('modal_auth');
             $('#auth_error').modal('toggle');
-
         }
     }
 })();

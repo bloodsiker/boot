@@ -59,12 +59,19 @@
         // ================= SERVICE CENTER CALL ============================
 
         $rootScope.openScCall = function (sc) {
-
-
+            var authMeta = document.querySelector('meta[name="auth"]').getAttribute("content");
             var client = {
-                auth: document.getElementsByTagName('meta').item(property='auth'),
+                auth: authMeta
             };
-            console.log(client.auth);
+
+            console.log(client);
+            if (authMeta) {
+                client.address = document.querySelector('meta[name="address"]').getAttribute("content");
+                client.name = document.querySelector('meta[name="user"]').getAttribute("content");
+                client.phone = document.querySelector('meta[name="phone"]').getAttribute("content");
+                client.email = document.querySelector('meta[name="email"]').getAttribute("content");
+            }
+            console.log(client);
             if (client.auth) {
                 $('#call_modal').modal('toggle');
                 $scope.serviceIndex = 0;
