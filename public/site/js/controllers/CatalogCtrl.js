@@ -417,7 +417,5 @@
             window.location.href="/sc/"+sc_id;
         }
 
-        // $scope.catalogPage = 1;
-
     }
 })();

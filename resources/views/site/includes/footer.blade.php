@@ -204,14 +204,21 @@
             <div class="boot-registration__columns form-sign-in" style="margin: 0;">
                 <div class="row">
 
-                    <div class="col-md-6 col-xs-12 no-padding boot-registration__column">
+                    <div class="col-md-6 no-padding boot-registration__column">
                         <div class="login-box-sc">
+                            @if(Session::has('message'))
+                                <div class="row">
+                                    <div class="col-md-12 error">
+                                        {{ Session::get('message') }}
+                                    </div>
+                                </div>
+                            @endif
                             <div style="text-align: center">
                                 <h3>Войти</h3>
                                 <div class="btn-group btn-group-justified" role="group" aria-label="...">
-                                    <a href="https://www.boot.com.ua/auth/facebook" class="btn btn-primary">facebook</a>
-                                    <a href="https://www.boot.com.ua/auth/google" class="btn btn-danger">google+</a>
-                                    <a href="https://www.boot.com.ua/auth/linkedin" class="btn btn-primary">linkedin</a>
+                                    <a href="{{ route('auth.facebook') }}" class="btn btn-primary">facebook</a>
+                                    <a href="{{ route('auth.google') }}" class="btn btn-danger">google+</a>
+                                    <a href="{{ route('auth.linkedin') }}" class="btn btn-primary">linkedin</a>
                                 </div>
 
                                 <div class="form-separator">
@@ -219,23 +226,24 @@
                                 </div>
                             </div>
 
-                            <form action="https://www.boot.com.ua/user/login" method="post" class="ng-pristine ng-valid">
-                                <input type="hidden" name="_token" value="W40wq3mc7HcMxjFXmGnzsEw7R1KXMugv7CYKtAGl" autocomplete="off">
+                            <form action="{{ route('user.login') }}" method="post" class="">
+                                {{ csrf_field() }}
                                 <label>
                                     Email:
-                                    <input type="text" name="email" class="form-control" required="">
+                                    <input type="text" name="email" class="form-control" required/>
                                 </label>
                                 <label>
                                     Пароль:
-                                    <input type="password" name="password" class="form-control" required="">
+                                    <input type="password" name="password" class="form-control" required/>
                                 </label>
+                                {{--<a href="{{ route('user.password.recovery') }}">Напомнить пароль?</a>--}}
                                 <button class="btn btn-warning pull-right">Вход</button>
                                 <div class="clearfix"></div>
                             </form>
                         </div>
                     </div>
 
-                    <div class="col-md-6 col-xs-12 no-padding boot-registration__column">
+                    <div class="col-md-6 no-padding boot-registration__column">
                         <div class="login-box-sc login-form-sc" style="min-height: 413px; padding-top: 50px">
                             <h2>Нет аккаунта?</h2>
                             <p>Присоединяйтесь к нам!</p>
@@ -243,7 +251,7 @@
                             <p>Вести диалог с сервисным центром по конкретном заказе</p>
                             <p>Добавлять понравившиеся сервисные центры в избранные</p>
                             <br>
-                            <a href="https://www.boot.com.ua/user/registration" class="btn btn-warning pull-right">Зарегистрировать</a>
+                            <a href="{{ route('user.registration') }}" class="btn btn-warning pull-right">Зарегистрировать</a>
                             <div class="clearfix"></div>
                         </div>
                     </div>
@@ -728,6 +736,57 @@
         </div>
     </div>
 </div>
+
+<div class="modal fade" id="auth_service" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-lg" role="document">
+        <button type="button" style="position: absolute;right: 10px;top: 10px;opacity: 1;z-index: 2;" class="close" data-dismiss="modal" aria-label="Close"><span
+                    aria-hidden="true">&times;</span></button>
+        <div class="row" style="background-color: #fff;">
+
+            <div class="col-md-6 no-padding">
+                <div class="login-box-sc" style="padding-top: 5px;">
+                    <h2>Нет аккаунта?</h2>
+                    <p>Присоединяйтесь к нам!</p>
+                    <p>После регистрации у вас будет возможность отслеживать статусы выполнения выших заказов.</p>
+                    <a href="{{ route('service.registration') }}" class="btn btn-warning">Зарегистрировать</a>
+                    <div class="clearfix"></div>
+                </div>
+            </div>
+
+            <div class="col-md-6 no-padding">
+                <div class="login-form-sc login-box-sc">
+                    @if(Session::has('message'))
+                        <div class="row">
+                            <div class="col-md-12 error">
+                                {{ Session::get('message') }}
+                            </div>
+                        </div>
+                    @endif
+                    <form action="{{ route('service.login') }}" method="post" class="">
+                        <h4>Вход</h4>
+                        {{ csrf_field() }}
+                        <label>
+                            Email:
+                            <input type="text" name="email" class="form-control" required/>
+                        </label>
+                        <label>
+                            Пароль:
+                            <input type="password" name="password" class="form-control" required/>
+                        </label>
+                        <button class="btn btn-warning">Вход</button>
+                        <div class="clearfix"></div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+
+
+
 
 
 <script>

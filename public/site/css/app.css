@@ -256,8 +256,8 @@ img {
       padding: 10px; }
 
 .home {
-  padding-top: 120px;
-  padding-bottom: 100px;
+  padding-top: 50px;
+  padding-bottom: 50px;
   background: url("../img/home.jpg") center center;
   -webkit-background-size: cover;
   background-size: cover; }

@@ -81,8 +81,11 @@
                                         <a href="{{ route('cabinet.logout') }}" class="registration">Выйти</a>
                                     @endif
                                 @else
-                                    <a href="{{ route('user.login') }}" class="sign-in">Пользователь</a> |
-                                    <a href="{{ route('service.login') }}" class="registration">Сервисный центр</a>
+                                    {{--<a href="{{ route('user.login') }}" class="sign-in">Пользователь</a> |
+                                    <a href="{{ route('service.login') }}" data-toggle="modal" class="registration">Сервисный центр</a>--}}
+
+                                    <a data-target="#auth_error" data-toggle="modal" class="sign-in">Пользователь</a> |
+                                    <a data-target="#auth_service" data-toggle="modal" class="registration">Сервисный центр</a>
                                 @endif
                             </div>
                         </div>
