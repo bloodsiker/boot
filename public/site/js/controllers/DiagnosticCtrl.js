@@ -40,6 +40,15 @@
                 $scope.problem_know_select = '';
                 $scope.problem_watching_select = '';
             }
+            if (arg === 'watch') {
+                $scope.problem_know_select = '';
+                $scope.problem_description_select = ''
+            }
+
+            if (arg === 'know') {
+                $scope.problem_watching_select = '';
+                $scope.problem_description_select = ''
+            }
 
             model.post('/diagnostics', {
                 action: 'problem_description',
@@ -53,29 +62,28 @@
 
                         $scope.problems_know = success.data.step.problem_know;
                         $scope.problems_watching = success.data.step.problem_watching;
-
                         $scope.problem_know_select = success.data.step.problem_know[0];
-
                         $scope.problem_watching_select = success.data.step.problem_watching[0];
-
-
 
                         if ($scope.problem_watching_select || $scope.problem_know_select) {
                             $scope.getProblemRezult();
                         }
-
-
                         break;
                     case 'watch' :
-                        $scope.problems_know = success.data.step.problem_know;
-                        $scope.problems_description = success.data.step.problem_description;
+
+
                         if (success.data.step.problem_know) {
+                            $scope.problems_know = success.data.step.problem_know;
                             $scope.problem_know_select = success.data.step.problem_know[0];
                             $scope.getProblemRezult();
                         }
-                        if (success.data.step.problem_description.length === 1) {
-                            $scope.problem_description_select = success.data.step.problem_description[0];
-                            $scope.getProblemRezult('desc');
+                        if (success.data.step.problem_description) {
+                            $scope.problems_description = success.data.step.problem_description;
+                            if (success.data.step.problem_description.length === 1) {
+                                $scope.problem_description_select = success.data.step.problem_description[0];
+                                $scope.getProblemRezult();
+                            }
+
                         }
                         break;
                     case 'know' :
@@ -87,7 +95,7 @@
                         }
                         if (success.data.step.problem_description.length === 1) {
                             $scope.problem_description_select = success.data.step.problem_description[0];
-                            $scope.getProblemRezult('desc');
+                            $scope.getProblemRezult();
                         }
 
                         break;
@@ -104,7 +112,6 @@
         };
 
         $scope.searchService = function (service) {
-            console.log(service);
             service.title = service.services;
             searchService.setService([service]);
             window.location = '/catalog';
